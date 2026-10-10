@@ -48,3 +48,17 @@ One short entry per working session: what was built, the key concept, what's nex
 
 **Next** Phase 3: exploration notebook — price history charts with Ramazan marked, volatile vs sticky items,
 weekly % change distributions; start `known_events.csv` from news.
+
+## 2026-10-10 — Phase 3: exploration
+
+**Built** `notebooks/01_explore.ipynb` (price history with Ramazan bands and documented shocks, volatility
+ranking, change distributions, Ramazan heatmap, biggest moves) and `data/known_events.csv` (8 sourced events).
+
+**Key concepts**
+- *Median absolute change* = "how much does this item normally move in a week", robust to outliers.
+- *Long tails / skew:* a few huge weeks dominate the mean and std, which is why we'll use median and MAD.
+- *Seasonality on two calendars:* vegetables follow the solar year (harvests), Ramazan/Eid follow the lunar one.
+- *Spike vs step:* a spike reverts; a step becomes the new normal.
+
+**Next** Phase 4: L0 baseline (fixed threshold) → L1 rolling robust z-score → L2 relative-to-basket → L3 seasonal +
+Ramazan-aware, with a no-look-ahead backtest against `known_events.csv`.

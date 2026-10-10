@@ -1,0 +1,9 @@
+event_id,item_id,start_week,end_week,direction,description,source_name,source_url
+E01,tomatoes,2022-08-18,2022-09-01,up,"2022 floods destroyed much of the Sindh/Balochistan vegetable crop and cut roads; tomatoes +43% in the week ended 25 Aug",Business Recorder editorial (2022-09-01),https://www.brecorder.com/news/amp/40195029
+E02,onions,2022-08-18,2022-09-01,up,"2022 floods: onions +41% in the week ended 25 Aug; finance minister said onion prices rose more than fivefold",Business Recorder editorial (2022-09-01),https://www.brecorder.com/news/amp/40195029
+E03,wheat_flour,2023-01-05,2023-01-19,up,"January 2023 wheat/flour scarcity after the 2022 floods",The Friday Times (2023-01-12),https://www.thefridaytimes.com/2023/01/12/wheat-scarcity-pakistan-january-2023/
+E04,wheat_flour,2023-03-22,2023-03-30,up,"Record flour price: 20 kg bag +42% to Rs 2586 in the week ended 22 Mar 2023",Geo News,https://www.geo.tv/latest/478390-weekly-inflation-jumps-to-4665-on-record-flour-price
+E05,sugar,2023-08-24,2023-09-07,up,"Sugar crossed Rs 200/kg in several cities; food ministry called the rise artificial",ProPakistani (2023-09-03),https://propakistani.pk/2023/09/03/price-of-sugar-crosses-rs-200-per-kg-in-some-cities/
+E06,wheat_flour,2025-08-21,2025-09-11,up,"2025 floods and wheat transport restrictions: 20 kg bag up as much as Rs 1050 in three weeks",BOL News,https://www.bolnews.com/latest-news/flour-prices-continue-to-surge-across-pakistan/
+E07,onions,2025-10-23,2025-10-30,up,"Short-term onion shortage (slow Sindh kharif supply, lower Iranian imports); onions +59.5% in the week ended 30 Oct 2025",Profit / Pakistan Today,https://profit.pakistantoday.com.pk/?p=216931
+E08,tomatoes,2026-06-25,2026-07-23,up,"Tomatoes +125% in the week ended 2 Jul 2026, then to Rs 350/kg by 23 Jul",PKRevenue,https://pkrevenue.com/pakistan-weekly-inflation-rises-1-4-as-tomato-chicken-prices-surge/

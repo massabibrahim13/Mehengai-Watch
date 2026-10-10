@@ -115,3 +115,22 @@ Known source quirks found while parsing:
 - 1 × weekly jump: Larkana tomatoes Rs 20 → Rs 100 over a 2-week gap (2025-05-29 → 06-12). Looks real
   (seasonal), but it's a single city. Known limit: a fixed ×4 bound can catch real moves in cheap,
   volatile items, especially across a missing week. Revisit only if it starts affecting national rows.
+
+---
+
+## Phase 3 — Exploration (2026-10-10)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Hijri dates | `hijridate` (not `hijri-converter`) | `hijri-converter` is deprecated; `hijridate` is its maintained successor, same API. Matches Pakistan's Ramazan starts within a day. |
+| Known events | Only events with a news link; 8 so far (`data/known_events.csv`) | CLAUDE.md §5: never invent ground truth. Each event's PBS % matched our parsed data to the decimal. |
+| Notebook tooling | `jupyter` + `matplotlib` | Notebook is exploration only; nothing in `src/` imports it. |
+
+Findings that shape Phase 4 (details + charts in `notebooks/01_explore.ipynb`):
+- Typical weekly move (median |Δ%|): tomatoes 12.0, onions 4.5, chicken 4.5, potatoes 2.1, eggs 2.1,
+  wheat flour 0.7, sugar 0.6, ghee 0.2 → **per-item statistics are required**; one threshold can't fit all.
+- Weekly changes are long-tailed (wheat flour skew 5.2) → **median/MAD**, not mean/std.
+- **Ramazan:** tomatoes +10–15 pp the week before / first week, then −29 pp; chicken +5–7 pp around Eid.
+  Staples show no pattern.
+- **Steps vs spikes:** flour/sugar jump to a new level and stay; vegetables spike and revert.
+- **Gaps:** 15 of 353 weekly steps span 2–3 weeks → the detector must account for the gap length.

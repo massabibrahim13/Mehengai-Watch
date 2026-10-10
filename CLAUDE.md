@@ -430,10 +430,13 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phase 0 ✅ done → next is **Phase 1 (Ingestion)**.
-- **Last session (2026-10-10):** repo + venv (Python 3.13) set up, pushed to GitHub. Sample reports from
-  2019/2022/2024/2026 inspected; findings in `docs/decisions.md`. PBS site moved — use media API + Wayback.
-- **Next step:** Phase 1 — `fetch.py` (PBS media API + Wayback CDX), then `parse.py` on **Appendix-A**
-  (fixed item order, clean prices), starting with 06-06-2024 (onions = 133.93).
-- **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore feasible later) ·
-  Gemini free tier · 2015-16 base era only.
+- **Phase:** Phases 0–3 ✅ done → next is **Phase 4 (Detection + evaluation)**.
+- **Last session (2026-10-10):** Phase 1: 378 annex PDFs since 2019 downloaded (PBS media API + Wayback),
+  Appendix-A parsed to `data/interim/`. Phase 2: SQLite `data/mehngai.db` with 354 complete weekly national
+  series per item (2019-09-05 → 2026-10-08), rejected rows explained. Phase 3: `notebooks/01_explore.ipynb`
+  + 8 sourced events in `data/known_events.csv`. 32 tests pass. All pushed to GitHub.
+- **Next step:** Phase 4 — L0 fixed-threshold baseline and `evaluate.py` backtest (no look-ahead), then L1
+  rolling robust z-score. Handle 2–3 week report gaps. Add more known events for the unexplained big moves.
+- **Run order:** `python -m mehngai.ingest.fetch` → `python -m mehngai.ingest.parse` → `python -m mehngai.store.db`.
+- **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
+  Gemini free tier · 2015-16 base era only (from 2019-09-05).
