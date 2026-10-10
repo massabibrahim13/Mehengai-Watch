@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+
+# Data (re-downloadable / regenerable)
+data/raw/
+data/interim/
+data/*.db
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

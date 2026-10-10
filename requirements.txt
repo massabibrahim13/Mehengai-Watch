@@ -1,0 +1,11 @@
+# Phase 0-1: fetch + parse
+requests
+beautifulsoup4
+pdfplumber
+pandas
+numpy
+openpyxl
+pyyaml
+python-dotenv
+pytest
+# Later phases add: statsmodels, scipy, hijri-converter, matplotlib, plotly, streamlit, LLM SDK
