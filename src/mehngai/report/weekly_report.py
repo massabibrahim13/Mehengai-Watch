@@ -16,6 +16,7 @@ import pandas as pd
 
 from mehngai.clean.normalize import load_items
 from mehngai.config import PROJECT_ROOT, load_settings
+from mehngai.detect.changes import price_changes
 from mehngai.detect.series import load_series
 from mehngai.explain.facts import SEVERITY_WORDS, build_facts, label, unit_phrase
 from mehngai.explain.guardrails import fmt, template
@@ -43,18 +44,48 @@ def load_week(conn, week: pd.Timestamp, method: str) -> tuple[pd.DataFrame, dict
 
 
 def all_items_table(wide: pd.DataFrame, week: pd.Timestamp, items: dict, flags: pd.DataFrame,
-                    typical_weeks: int) -> str:
-    """Markdown table: every tracked item's price this week, change, and its usual weekly move."""
+                    changes: pd.DataFrame, typical_weeks: int) -> str:
+    """Markdown table, grouped by category: every item's price this week, change, usual weekly move."""
     i = wide.index.get_loc(week)
     pct = wide.pct_change() * 100
     status = {f.item_id: f"{ARROW[f.direction]} {SEVERITY_WORDS[f.severity]}" for f in flags.itertuples()}
-    rows = ["| Item | Price | Change vs previous report | Typical weekly move | Flag |",
-            "|---|---:|---:|---:|---|"]
-    for item_id, item in items.items():
+    status |= {ch.item_id: ("government change" if ch.price_type == "administered" else "price revision")
+               for ch in changes.itertuples()}
+    rows = ["| Category | Item | Price | Change vs previous report | Typical weekly move | Note |",
+            "|---|---|---:|---:|---:|---|"]
+    for item_id, item in sorted(items.items(), key=lambda kv: (kv[1]["category"], kv[1]["name"])):
         typical = pct[item_id].iloc[max(1, i - typical_weeks):i].abs().median()
-        rows.append(f"| {item['name']} | Rs {wide.at[week, item_id]:,.2f} {unit_phrase(item['unit'])} "
-                    f"| {pct.at[week, item_id]:+.1f}% | {typical:.1f}% | {status.get(item_id, '–')} |")
+        rows.append(f"| {item['category']} | {item['name']} | Rs {wide.at[week, item_id]:,.2f} "
+                    f"{unit_phrase(item['unit'])} | {pct.at[week, item_id]:+.1f}% | {typical:.1f}% "
+                    f"| {status.get(item_id, '–')} |")
     return "\n".join(rows)
+
+
+def changes_table(changes: pd.DataFrame, items: dict) -> str:
+    """Markdown table of set-price changes: item, before → after, %."""
+    rows = ["| Item | Previous | This week | Change |", "|---|---:|---:|---:|"]
+    for ch in changes.itertuples():
+        unit = unit_phrase(items[ch.item_id]["unit"])
+        rows.append(f"| {ARROW['up' if ch.change_pct > 0 else 'down']} {items[ch.item_id]['name']} "
+                    f"| Rs {ch.previous_price:,.2f} | Rs {ch.price:,.2f} {unit} | {ch.change_pct:+.1f}% |")
+    return "\n".join(rows)
+
+
+def news_lines(conn, week: pd.Timestamp, item_ids: set[str]) -> list[str]:
+    """Headlines from the week (published in the 7 days before to 3 days after the week end) that
+    mention items in this report, or inflation. Context only, never presented as causes."""
+    start, end = week - pd.Timedelta(days=7), week + pd.Timedelta(days=3)
+    df = pd.read_sql_query("SELECT * FROM news WHERE published BETWEEN ? AND ? ORDER BY published DESC",
+                           conn, params=(start.isoformat(), end.isoformat()))
+    if df.empty:
+        return []
+    keep = df[df.apply(lambda r: bool(set(r["item_ids"].split(",")) & item_ids)
+                       or "inflation" in r["topics"], axis=1)]
+    return [f"- [{r.title}]({r.link}) ({r.source})" for r in keep.head(8).itertuples()]
+
+
+def plural(n: int, noun: str) -> str:
+    return f"{n} {noun}{'' if n == 1 else 's'}"
 
 
 def write(week: str | None = None) -> Path:
@@ -70,6 +101,11 @@ def write(week: str | None = None) -> Path:
         flags, texts = load_week(conn, target, method)
         history = pd.read_sql_query("SELECT item_id, week_date, direction FROM anomalies WHERE method = ?",
                                     conn, params=(method,), parse_dates=["week_date"])
+        changes = price_changes(wide, items, target, settings["detect"]["price_changes"])
+        news = news_lines(conn, target, set(flags["item_id"]) | set(changes["item_id"]))
+    gov = changes[changes["price_type"] == "administered"]
+    revisions = changes[changes["price_type"] == "fixed"]
+    thresholds = settings["detect"]["price_changes"]
 
     stamp = target.strftime("%Y-%m-%d")
     prev = wide.index[wide.index.get_loc(target) - 1]
@@ -77,16 +113,19 @@ def write(week: str | None = None) -> Path:
     lines = [
         f"# Mehngai Watch — week ending {label(target)}",
         "",
-        f"Unusual weekly price moves in Pakistan's essentials: national average prices from the Pakistan "
-        f"Bureau of Statistics' weekly Sensitive Price Indicator, compared with the previous report "
-        f"({label(prev)}).",
+        f"Pakistan's 51 essentials (PBS weekly Sensitive Price Indicator, national averages), compared "
+        f"with the previous report ({label(prev)}).",
         "",
-        f"## This week: {n} unusual price move{'s' if n != 1 else ''}" if n else
-        "## This week: no unusual price moves",
+        f"**This week:** {plural(n, 'unusual price move')} · {plural(len(gov), 'government price change')} · "
+        f"{plural(len(revisions), 'price revision')}",
+        "",
+        "## 1. Unusual price moves",
+        "",
+        "Market-priced items whose weekly change is far outside their own normal range.",
         "",
     ]
     if not n:
-        lines += ["Every tracked item moved within its normal weekly range.", ""]
+        lines += ["Every market-priced item moved within its normal weekly range.", ""]
     for f in flags.itertuples():
         item = items[f.item_id]
         facts = build_facts(item, target, wide[f.item_id], f.severity, typical_weeks)
@@ -107,9 +146,25 @@ def write(week: str | None = None) -> Path:
             "",
         ]
     lines += [
-        "## All tracked items this week",
+        "## 2. Government price changes", "",
+        "Prices set by the government or regulators (OGRA, NEPRA): policy decisions, not market anomalies. "
+        f"Listed when the national price moved {thresholds['administered']:g}% or more.", "",
+        changes_table(gov, items) if len(gov) else "No government-set price changed this week.", "",
+        "## 3. Price revisions", "",
+        "Packaged, branded and hotel prices stay flat for months, then change in one step. Listed when the "
+        f"national price moved {thresholds['fixed']:g}% or more.", "",
+        changes_table(revisions, items) if len(revisions) else "No price revisions this week.", "",
+    ]
+    if news:
+        lines += ["## Price news this week", "",
+                  "Headlines mentioning the items above, from Pakistani news sites. Possibly related; "
+                  "not presented as causes.", "", *news, ""]
+    lines += [
+        "<details><summary><b>All 51 items this week</b></summary>",
         "",
-        all_items_table(wide, target, items, flags, typical_weeks),
+        all_items_table(wide, target, items, flags, changes, typical_weeks),
+        "",
+        "</details>",
         "",
         "## How to read this",
         "",

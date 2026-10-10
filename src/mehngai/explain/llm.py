@@ -43,15 +43,18 @@ def retry_delay(resp: requests.Response) -> int | None:
     return int(header) if header and header.isdigit() else None
 
 
-def generate(prompt: str, cfg: dict) -> str:
+def generate(prompt: str, cfg: dict, json_mode: bool = False) -> str:
     """Send one prompt, return the model's text. Retries on rate limits (HTTP 429/503).
+    json_mode=True asks the model for a JSON object only (used to read questions into fields).
 
     This is the only function that knows which provider we use.
     """
     if cfg["provider"] != "gemini":
         raise LLMError(f"unknown provider {cfg['provider']!r}")
-    body = {"contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": cfg["temperature"]}}
+    generation = {"temperature": cfg["temperature"]}
+    if json_mode:
+        generation["responseMimeType"] = "application/json"
+    body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": generation}
     for attempt in range(cfg["max_retries_on_rate_limit"] + 1):
         try:
             resp = requests.post(GEMINI_URL.format(model=cfg["model"]), json=body,

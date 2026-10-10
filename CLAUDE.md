@@ -430,7 +430,11 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ done (**v1 = course submission complete**) → next is **Phase 7 (Automation, bonus)**.
+- **Phase:** Phases 0–6 ✅ done (**v1 = course submission complete**) + **v2 extensions** ✅ → next is **Phase 7 (Automation, bonus)**.
+- **v2 (2026-10-10, requested by Massab):** all 51 PBS items in three groups (`price_type`: market → L1 anomalies;
+  fixed → "price revisions" ≥ 2%; administered → "government price changes" ≥ 1%), search (`search.py`, Urdu/Roman
+  Urdu aliases), ask box (`ask.py`; rules first, Gemini only parses), live price news (`news.py`, 6 RSS feeds),
+  3-page dashboard (Home/Explore/Ask), 3-section report. 101 tests pass. See decisions.md "v2".
 - **Phase 6 (2026-10-10):** weekly report (`reports/YYYY-MM-DD.md`), Streamlit dashboard, `python -m mehngai.pipeline`
   (one command, ~7 s with caches), README with screenshots + evaluation. 70 tests pass. Gemini free tier = 20
   requests/day; over-quota → template fallback.

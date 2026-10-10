@@ -122,3 +122,19 @@ Dashboard runs locally. 70 tests pass.
 - *Test the UI without a browser:* Streamlit's `AppTest` runs the page and reports exceptions.
 
 **Next** Phase 7 (bonus): GitHub Actions weekly cron that runs the pipeline and commits the new report.
+
+## 2026-10-10 — v2: all 51 items, search, ask, live news
+
+**Built** all 51 PBS items in three groups (market / fixed / government), `detect/changes.py` for set-price changes,
+`search.py` (English / Roman Urdu / Urdu + typos), `ask.py` (question → structured lookup → answer from the DB),
+`news.py` (Pakistani RSS headlines), a 3-page dashboard (Home with live news, Explore, Ask) and a 3-section report.
+
+**Key concepts**
+- *Profile before you generalise:* the same detector is wrong for set prices; the data showed three behaviours.
+- *Sanity rules need exceptions grounded in reality:* a ×5.8 gas tariff hike was real.
+- *LLM as a parser, not an oracle:* the AI turns a question into fields we validate; the database answers.
+- *Keyword matching needs stop-lists:* "oil" in news is usually crude, "matches" is cricket.
+- *Look at the screenshots:* a stale server, a colliding label and a misleading zero-based bar chart were all
+  caught by viewing the real pages.
+
+**Next** Phase 7 (bonus): GitHub Actions weekly run; optional free hosting on Streamlit Community Cloud.

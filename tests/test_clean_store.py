@@ -30,7 +30,7 @@ def test_name_matches(raw, ok):
 def test_row_rules():
     assert row_reason(100.0, 90.0, 110.0) is None
     assert row_reason(float("nan"), None, None).startswith("blank")
-    assert row_reason(0.0, None, None) == "price not positive"
+    assert row_reason(0.0, None, None).startswith("price is 0")
     assert row_reason(150.0, 90.0, 110.0) == "min/avg/max out of order"
 
 

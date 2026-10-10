@@ -242,3 +242,30 @@ wrote `reports/2026-10-08.md` in 2.5 min (cached PDFs; the explain stage hit the
 back to the template). With caches warm, a run takes ~7 s. A truly empty clone also downloads ~380 PDFs first
 (~1 hour; the download stage itself was verified in Phase 1). The dashboard runs locally (`streamlit run
 src/mehngai/app/dashboard.py`) and is smoke-tested with Streamlit's `AppTest`. 70 tests pass.
+
+---
+
+## v2 — all 51 items, three sections, search, ask, live news (2026-10-10)
+
+Requested after v1: cover every PBS item, a separate section for petrol/diesel etc., search and a question box,
+and a live home page with news. Discussed first; agreed the three-section layout and "search first, then ask".
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Item groups | `price_type` in items.yaml: **market** (25) / **fixed** (20) / **administered** (6) | Profiled all 51 items: fixed-price goods are unchanged 55–98% of weeks then jump in one step; government prices change by notification. One anomaly method for all would mislabel both (all 51 through L1 = 2.6 alerts/wk, petrol + diesel alone ~135 false "anomalies"). |
+| Detector scope | L1 only on market items | Backtest on 25 market items: L1 ≈ 1.0 alerts/week, recall unchanged (0.75), no item > 15% of alerts; L0 still puts 51% on tomatoes. |
+| Fixed / administered | List changes ≥ **2%** (fixed) / ≥ **1%** (administered) | Smaller moves are one city's shop nudging the 17-city average (median non-zero move 0.2–0.9%). ≈ 0.6 revisions + 1.3 government changes listed per week. |
+| ×4 sanity rule | Not applied to administered prices | Gas went Rs 295 → 1,711 (×5.8) on 2023-11-16: a real tariff hike the rule would have rejected. |
+| Zero prices | Rejected with reason "price is 0 (not sold in this city)" | PBS writes 0.00 where an item isn't sold (gas in Khuzdar, IRRI rice in Sialkot): 1,084 rows. National averages unaffected. |
+| Name prefixes | At least 5 letters ("Curd (Dahi)", "LPG 11.67") | Shorter prefixes ("Curd", "LPG") failed the ≥ 5-letter name check: 31,860 false mismatches on the first load. |
+| Search | Aliases per item (English, Roman Urdu, Urdu) + exact / word / prefix / difflib fuzzy scoring | Free, instant, works offline; typos ("onoin") and local names ("cheeni", "ٹماٹر") resolve. Longest match wins in sentences ("gas cylinder" → LPG). |
+| Ask | Rules parse item / city / date / intent; Gemini only if no item found, returning JSON that is validated against the item and city lists | Same principle as explanations: the LLM never supplies numbers. Most questions cost no API quota (20/day). |
+| News | 6 public RSS feeds; keep if a tracked item AND a price word (or inflation/SPI); drop foreign-country headlines; ignore misleading aliases ("oil" = crude, "matches" = cricket, "gram" = gold) | Free; first run kept 15 of 125 headlines, all relevant (OGRA petrol notices, "Flour prices jump by Rs20 per kg in Karachi", SPI stories). Shown as "possibly related", never summarised by AI. |
+| Live home page | Streamlit page; news section is an `st.fragment(run_every="30m")`; stored headlines refetched when > 30 min old | PBS data changes weekly (pipeline); news changes hourly. `MEHNGAI_OFFLINE=1` disables fetching (tests). |
+| Movers chart colours | Rises red `#e34948`, falls blue `#2a78d6` (validated pair, light + dark), always with ▲/▼ and signed % | Polarity encoding; colour never carries meaning alone. Falls drawn left-to-right so labels never collide. |
+| City comparison | Dot plot zoomed to the price range, not bars | City prices are close (petrol Rs 397–401); bars must start at 0 and would hide the spread. |
+| Theme | `.streamlit/config.toml` primary colour = project blue | Streamlit's default red accent clashed with "red = price rise". |
+
+Result: 321,739 price rows (51 items × 18 places × 354 weeks, minus explained rejects); week ending 8 Oct 2026 →
+2 unusual moves (chana daal +4.0%, wheat flour +5.7%), 2 government changes (petrol +2.4%, diesel −1.4%),
+0 revisions. Pipeline incl. news: 37 s with caches. 101 tests pass.

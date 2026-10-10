@@ -63,6 +63,7 @@ def normalize(raw: pd.DataFrame, items: list[dict], series_start: date,
 
     tracked["item_id"] = tracked["sl_no"].map(lambda sl: by_sl[sl]["item_id"])
     tracked["unit"] = tracked["sl_no"].map(lambda sl: by_sl[sl]["unit"])
+    tracked["price_type"] = tracked["sl_no"].map(lambda sl: by_sl[sl]["price_type"])
     ok = [name_matches(r, by_sl[sl]["name_prefix"], min_chars)
           for r, sl in zip(tracked["item_raw"], tracked["sl_no"])]
     tracked["name_ok"] = ok
@@ -74,5 +75,6 @@ def normalize(raw: pd.DataFrame, items: list[dict], series_start: date,
         log.warning("%d rows where the SL number's name didn't match (see rejected_rows)",
                     len(mismatched))
     matched = tracked[tracked["name_ok"]][
-        ["week_date", "item_id", "unit", "city", "price", "price_min", "price_max", "sl_no", "item_raw"]]
+        ["week_date", "item_id", "unit", "price_type", "city", "price", "price_min", "price_max", "sl_no",
+         "item_raw"]]
     return matched.reset_index(drop=True), mismatched[REJECT_COLUMNS].reset_index(drop=True)

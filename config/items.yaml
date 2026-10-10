@@ -1,75 +1,142 @@
-# v1 tracked items (8 market-priced essentials).
+# All 51 items of PBS's weekly Sensitive Price Indicator (SPI), 2015-16 base.
 #
 # How rows are matched (see docs/decisions.md, Phase 2):
 #   Appendix-A lists items in a fixed order, so each item is found by its SL number.
 #   PDF garbling often mangles long names ("Vegetable Ghee DALDA/HABIB or O"), so the name is only
 #   used as a sanity check: the raw name and `name_prefix` must start the same way.
 #
-# SL numbers below are valid for the 2015-16 SPI base (51 items). Its first report is 2019-09-05;
-# earlier weeks used the 2007-08 base with different numbering and units, so they are not loaded.
+# price_type decides which report section an item belongs to (docs/decisions.md, "v2"):
+#   market       — moves a little most weeks → anomaly detection ("unusual price moves")
+#   fixed        — packaged / branded / set-price goods: flat for months, then one jump
+#                  → listed as "price revisions" when the national price moves ≥ threshold
+#   administered — set by the government or a regulator (petrol, power, gas…)
+#                  → listed as "government price changes"; never called an anomaly
+#
+# aliases: search terms (English, Roman Urdu, Urdu). Units: what one price refers to.
+# SL numbers are valid for the 2015-16 SPI base; its first report is 2019-09-05.
 series_start: 2019-09-05
 
 items:
-  - item_id: wheat_flour
-    name: Wheat flour
-    unit: 20 kg bag
-    category: staples
-    price_type: market
-    sl_no: 1
-    name_prefix: Wheat Flour Bag
+  # ── market: staples ──────────────────────────────────────────────────────────────
+  - {item_id: wheat_flour, sl_no: 1, name: Wheat flour, unit: 20 kg bag, category: Staples,
+     price_type: market, name_prefix: Wheat Flour, aliases: [flour, atta, aata, wheat, gandum, آٹا, گندم]}
+  - {item_id: rice_basmati, sl_no: 2, name: "Rice (basmati, broken)", unit: 1 kg, category: Staples,
+     price_type: market, name_prefix: Rice Basmati, aliases: [rice, basmati, chawal, چاول]}
+  - {item_id: rice_irri, sl_no: 3, name: Rice (IRRI-6/9), unit: 1 kg, category: Staples,
+     price_type: market, name_prefix: Rice IRRI, aliases: [irri rice, irri, mota chawal]}
+  - {item_id: sugar, sl_no: 24, name: Sugar (refined), unit: 1 kg, category: Staples,
+     price_type: market, name_prefix: Sugar Refined, aliases: [sugar, cheeni, chini, چینی, شکر]}
+  - {item_id: gur, sl_no: 25, name: Gur (jaggery), unit: 1 kg, category: Staples,
+     price_type: market, name_prefix: Gur (Average, aliases: [gur, jaggery, گڑ]}
 
-  - item_id: sugar
-    name: Sugar (refined)
-    unit: 1 kg
-    category: staples
-    price_type: market
-    sl_no: 24
-    name_prefix: Sugar Refined
+  # ── market: meat, dairy, eggs ────────────────────────────────────────────────────
+  - {item_id: chicken, sl_no: 7, name: "Chicken (farm broiler, live)", unit: 1 kg, category: Meat & poultry,
+     price_type: market, name_prefix: Chicken Farm Broiler, aliases: [chicken, murgi, broiler, poultry, مرغی]}
+  - {item_id: beef, sl_no: 5, name: Beef (with bone), unit: 1 kg, category: Meat & poultry,
+     price_type: market, name_prefix: Beef with Bone, aliases: [beef, gosht, bara gosht, گوشت, بیف]}
+  - {item_id: mutton, sl_no: 6, name: Mutton, unit: 1 kg, category: Meat & poultry,
+     price_type: market, name_prefix: Mutton, aliases: [mutton, bakra, chota gosht, مٹن]}
+  - {item_id: eggs, sl_no: 11, name: Eggs (farm), unit: 1 dozen, category: Dairy & eggs,
+     price_type: market, name_prefix: Eggs Hen, aliases: [eggs, egg, anday, anda, انڈے]}
+  - {item_id: milk, sl_no: 8, name: Milk (fresh), unit: 1 litre, category: Dairy & eggs,
+     price_type: market, name_prefix: Milk fresh, aliases: [milk, doodh, دودھ]}
+  - {item_id: curd, sl_no: 9, name: Curd (dahi), unit: 1 kg, category: Dairy & eggs,
+     price_type: market, name_prefix: Curd (Dahi), aliases: [curd, yogurt, yoghurt, dahi, دہی]}
 
-  - item_id: tomatoes
-    name: Tomatoes
-    unit: 1 kg
-    category: vegetables
-    price_type: market
-    sl_no: 23
-    name_prefix: Tomatoes
+  # ── market: oil & ghee ──────────────────────────────────────────────────────────
+  - {item_id: ghee, sl_no: 15, name: Vegetable ghee (1 kg pouch), unit: 1 kg pouch, category: Oil & ghee,
+     price_type: market, name_prefix: Vegetable Ghee DALDA/HABIB or, aliases: [ghee, banaspati, گھی]}
+  - {item_id: ghee_tin, sl_no: 14, name: Vegetable ghee (2.5 kg tin), unit: 2.5 kg tin, category: Oil & ghee,
+     price_type: market, name_prefix: Vegetable Ghee DALDA/HABIB 2.5, aliases: [ghee tin, ghee 2.5 kg]}
+  - {item_id: cooking_oil, sl_no: 13, name: Cooking oil (5 litre tin), unit: 5 litre tin, category: Oil & ghee,
+     price_type: market, name_prefix: Cooking Oil, aliases: [cooking oil, oil, tel, تیل, کوکنگ آئل]}
+  - {item_id: mustard_oil, sl_no: 12, name: Mustard oil, unit: 1 kg, category: Oil & ghee,
+     price_type: market, name_prefix: Mustard Oil, aliases: [mustard oil, sarson, sarson ka tel, سرسوں]}
 
-  - item_id: onions
-    name: Onions
-    unit: 1 kg
-    category: vegetables
-    price_type: market
-    sl_no: 22
-    name_prefix: Onions
+  # ── market: pulses ──────────────────────────────────────────────────────────────
+  - {item_id: pulse_masoor, sl_no: 17, name: Masoor daal, unit: 1 kg, category: Pulses,
+     price_type: market, name_prefix: Pulse Masoor, aliases: [masoor, masoor daal, red lentils, lentils, مسور]}
+  - {item_id: pulse_moong, sl_no: 18, name: Moong daal, unit: 1 kg, category: Pulses,
+     price_type: market, name_prefix: Pulse Moong, aliases: [moong, mung, moong daal, مونگ]}
+  - {item_id: pulse_mash, sl_no: 19, name: Mash daal, unit: 1 kg, category: Pulses,
+     price_type: market, name_prefix: Pulse Mash, aliases: [mash, maash, urad, mash daal, ماش]}
+  - {item_id: pulse_gram, sl_no: 20, name: Chana daal (gram), unit: 1 kg, category: Pulses,
+     price_type: market, name_prefix: Pulse Gram, aliases: [gram, chana, chana daal, chickpeas, چنے]}
 
-  - item_id: potatoes
-    name: Potatoes
-    unit: 1 kg
-    category: vegetables
-    price_type: market
-    sl_no: 21
-    name_prefix: Potatoes
+  # ── market: vegetables & fruit ──────────────────────────────────────────────────
+  - {item_id: tomatoes, sl_no: 23, name: Tomatoes, unit: 1 kg, category: Vegetables & fruit,
+     price_type: market, name_prefix: Tomatoes, aliases: [tomato, tomatoes, tamatar, ٹماٹر]}
+  - {item_id: onions, sl_no: 22, name: Onions, unit: 1 kg, category: Vegetables & fruit,
+     price_type: market, name_prefix: Onions, aliases: [onion, onions, pyaz, piyaz, پیاز]}
+  - {item_id: potatoes, sl_no: 21, name: Potatoes, unit: 1 kg, category: Vegetables & fruit,
+     price_type: market, name_prefix: Potatoes, aliases: [potato, potatoes, aloo, alu, آلو]}
+  - {item_id: garlic, sl_no: 28, name: Garlic, unit: 1 kg, category: Vegetables & fruit,
+     price_type: market, name_prefix: Garlic, aliases: [garlic, lehsun, lahsan, لہسن]}
+  - {item_id: bananas, sl_no: 16, name: Bananas, unit: 1 dozen, category: Vegetables & fruit,
+     price_type: market, name_prefix: Bananas, aliases: [banana, bananas, kela, کیلا]}
 
-  - item_id: chicken
-    name: Chicken (farm broiler, live)
-    unit: 1 kg
-    category: protein
-    price_type: market
-    sl_no: 7
-    name_prefix: Chicken Farm Broiler
+  # ── market: household fuel ──────────────────────────────────────────────────────
+  - {item_id: firewood, sl_no: 43, name: Firewood, unit: 40 kg, category: Household,
+     price_type: market, name_prefix: Firewood, aliases: [firewood, wood, lakri, لکڑی]}
 
-  - item_id: eggs
-    name: Eggs (farm)
-    unit: 1 dozen
-    category: protein
-    price_type: market
-    sl_no: 11
-    name_prefix: Eggs Hen
+  # ── fixed: packaged & branded goods ─────────────────────────────────────────────
+  - {item_id: bread, sl_no: 4, name: Bread (plain, small), unit: loaf, category: Packaged food,
+     price_type: fixed, name_prefix: Bread, aliases: [bread, double roti, ڈبل روٹی]}
+  - {item_id: powdered_milk, sl_no: 10, name: Powdered milk (NIDO 390 g), unit: 390 g pack, category: Packaged food,
+     price_type: fixed, name_prefix: Powdered Milk, aliases: [powdered milk, milk powder, nido]}
+  - {item_id: salt, sl_no: 26, name: Salt (800 g pack), unit: 800 g pack, category: Packaged food,
+     price_type: fixed, name_prefix: Salt Powdered, aliases: [salt, namak, نمک]}
+  - {item_id: chilli_powder, sl_no: 27, name: Chilli powder (200 g), unit: 200 g pack, category: Packaged food,
+     price_type: fixed, name_prefix: Chilies, aliases: [chilli, chili, chillies, red chilli, mirch, lal mirch, مرچ]}
+  - {item_id: tea_leaves, sl_no: 29, name: Tea leaves (Lipton 190 g), unit: 190 g pack, category: Packaged food,
+     price_type: fixed, name_prefix: Tea Lipton, aliases: [tea, chai, chai patti, lipton, چائے, پتی]}
 
-  - item_id: ghee
-    name: Vegetable ghee (1 kg pouch)
-    unit: 1 kg pouch
-    category: cooking fat
-    price_type: market
-    sl_no: 15
-    name_prefix: Vegetable Ghee DALDA/HABIB or
+  # ── fixed: prepared food (hotel prices) ─────────────────────────────────────────
+  - {item_id: cooked_beef, sl_no: 30, name: Cooked beef (hotel plate), unit: plate, category: Prepared food,
+     price_type: fixed, name_prefix: Cooked Beef, aliases: [cooked beef, beef plate, salan, hotel food]}
+  - {item_id: cooked_daal, sl_no: 31, name: Cooked daal (hotel plate), unit: plate, category: Prepared food,
+     price_type: fixed, name_prefix: Cooked Daal, aliases: [cooked daal, daal plate, dal plate]}
+  - {item_id: tea_cup, sl_no: 32, name: Tea (hotel cup), unit: cup, category: Prepared food,
+     price_type: fixed, name_prefix: Tea Prepared, aliases: [cup of tea, tea cup, chai cup, dhaba chai]}
+
+  # ── fixed: clothing & footwear ──────────────────────────────────────────────────
+  - {item_id: long_cloth, sl_no: 34, name: Long cloth, unit: 1 metre, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Long Cloth, aliases: [long cloth, latha, cloth, kapra, کپڑا]}
+  - {item_id: shirting, sl_no: 35, name: Shirting cloth, unit: 1 metre, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Shirting, aliases: [shirting, shirt cloth]}
+  - {item_id: lawn, sl_no: 36, name: Lawn (printed), unit: 1 metre, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Lawn Printed, aliases: [lawn, lawn cloth]}
+  - {item_id: georgette, sl_no: 37, name: Georgette, unit: 1 metre, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Georgette, aliases: [georgette]}
+  - {item_id: gents_sandal, sl_no: 38, name: Gents sandal (Bata), unit: pair, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Gents Sandal, aliases: [gents sandal, sandal, shoes, joota, جوتا]}
+  - {item_id: gents_chappal, sl_no: 39, name: Gents sponge chappal (Bata), unit: pair, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Gents Sponge, aliases: [chappal, slippers, چپل]}
+  - {item_id: ladies_sandal, sl_no: 40, name: Ladies sandal (Bata), unit: pair, category: Clothing & footwear,
+     price_type: fixed, name_prefix: Ladies Sandal, aliases: [ladies sandal]}
+
+  # ── fixed: household goods ─────────────────────────────────────────────────────
+  - {item_id: cigarettes, sl_no: 33, name: Cigarettes (Capstan, 20), unit: packet of 20, category: Household,
+     price_type: fixed, name_prefix: Cigarettes, aliases: [cigarettes, cigarette, capstan, سگریٹ]}
+  - {item_id: energy_saver, sl_no: 44, name: Energy saver bulb (Philips 14 W), unit: bulb, category: Household,
+     price_type: fixed, name_prefix: Energy Saver, aliases: [energy saver, bulb, light bulb]}
+  - {item_id: washing_soap, sl_no: 45, name: Washing soap (Sufi 250 g), unit: 250 g cake, category: Household,
+     price_type: fixed, name_prefix: Sufi Washing, aliases: [washing soap, laundry soap, kapre ka sabun]}
+  - {item_id: toilet_soap, sl_no: 51, name: Bath soap (Lifebuoy 115 g), unit: 115 g bar, category: Household,
+     price_type: fixed, name_prefix: Toilet Soap, aliases: [soap, bath soap, lifebuoy, sabun, صابن]}
+  - {item_id: matchbox, sl_no: 46, name: Matchbox, unit: box, category: Household,
+     price_type: fixed, name_prefix: Match Box, aliases: [matchbox, matches, machis, ماچس]}
+
+  # ── administered: set by the government / regulators ───────────────────────────
+  - {item_id: petrol, sl_no: 47, name: Petrol (super), unit: litre, category: Energy & utilities,
+     price_type: administered, name_prefix: Petrol, aliases: [petrol, gasoline, pertol, پٹرول, پیٹرول]}
+  - {item_id: diesel, sl_no: 48, name: Diesel (high-speed), unit: litre, category: Energy & utilities,
+     price_type: administered, name_prefix: Hi-Speed Diesel, aliases: [diesel, hsd, ڈیزل]}
+  - {item_id: lpg, sl_no: 49, name: LPG (11.67 kg cylinder), unit: 11.67 kg cylinder, category: Energy & utilities,
+     price_type: administered, name_prefix: LPG 11.67, aliases: [lpg, gas cylinder, cylinder, ایل پی جی]}
+  - {item_id: electricity, sl_no: 41, name: Electricity (lowest-use households), unit: unit (kWh), category: Energy & utilities,
+     price_type: administered, name_prefix: Electricity, aliases: [electricity, bijli, power tariff, بجلی]}
+  - {item_id: gas, sl_no: 42, name: Gas (lowest-use households), unit: MMBTU, category: Energy & utilities,
+     price_type: administered, name_prefix: Gas Charges, aliases: [gas, sui gas, natural gas, gas bill, گیس]}
+  - {item_id: telephone, sl_no: 50, name: Telephone call charges, unit: minute, category: Energy & utilities,
+     price_type: administered, name_prefix: Telephone, aliases: [telephone, phone call, call rate, landline]}

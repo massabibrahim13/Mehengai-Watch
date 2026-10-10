@@ -22,7 +22,7 @@ def run() -> int:
     cfg = load_settings()["detect"]
     method = cfg["production_method"]
     with connect() as conn:
-        wide, basket = load_series(conn)
+        wide, basket = load_series(conn, ("market",))   # anomalies only for market-priced items
         scores = METHODS[method](wide, basket, cfg)
         flags = to_anomalies(scores, wide.pct_change() * 100, method, cfg[method])
         flags["week_date"] = flags["week_date"].dt.strftime("%Y-%m-%d")

@@ -81,6 +81,20 @@ CREATE TABLE IF NOT EXISTS explanations (
     created_at TEXT NOT NULL,
     PRIMARY KEY (item_id, week_date, method)
 );
+CREATE TABLE IF NOT EXISTS news (
+    -- Price-related headlines from Pakistani RSS feeds (see news.py). Context only, kept across loads.
+    link       TEXT PRIMARY KEY,
+    title      TEXT NOT NULL,
+    source     TEXT NOT NULL,
+    published  TEXT NOT NULL,               -- UTC ISO time
+    item_ids   TEXT NOT NULL,               -- comma-separated tracked items mentioned ('' = none)
+    topics     TEXT NOT NULL,               -- comma-separated: inflation, energy, food & goods
+    fetched_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS meta (
+    key   TEXT PRIMARY KEY,
+    value TEXT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS rejected_rows (
     week_date TEXT NOT NULL,
     item_id   TEXT NOT NULL,
@@ -201,7 +215,9 @@ def load() -> None:
         load_items_table(conn, items)
         accepted, rejected = validate(rows, [i["item_id"] for i in items], report_dates,
                                       settings["max_weekly_ratio"])
-        rejected = pd.concat([rejected, name_rejects], ignore_index=True)
+        # one reason per row: a name mismatch also shows up as a "missing national price"
+        rejected = pd.concat([name_rejects, rejected], ignore_index=True).drop_duplicates(
+            subset=["week_date", "item_id", "city"])
         insert_prices(conn, accepted, rejected)
         basket = basket_changes(raw, report_dates)
         conn.executemany("INSERT INTO basket (week_date, log_change, n_items) VALUES (?, ?, ?)",

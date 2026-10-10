@@ -1,13 +1,15 @@
 # Mehngai Watch (مہنگائی واچ)
 
-**An early-warning tool for unusual price spikes in Pakistan's everyday essentials.**
-Every week it reads the government's price data, works out which moves are *abnormal for that item*,
-and writes a short plain-language alert.
+**An early-warning tool for unusual price moves in Pakistan's essentials.**
+Every week it reads the government's price data for 51 essentials, works out which moves are *abnormal for
+that item*, lists government price changes separately, and explains it all in plain language, alongside the
+latest price news.
 
-![Mehngai Watch dashboard](docs/img/dashboard.png)
+![Mehngai Watch home page](docs/img/dashboard.png)
 
-> **This week (8 Oct 2026):** The price of wheat flour rose to Rs 2,851.04 per 20 kg bag from Rs 2,697.45
-> per 20 kg bag this week. This was a notable increase of 5.7%, about 6.3 times its typical weekly change of 0.9%.
+> **Week ending 8 Oct 2026:** The price of chana daal (gram) rose 4.0% to Rs 286.06 per kg this week from
+> Rs 275.08 per kg. This move is unusual, about 7.8 times its typical weekly change of 0.5%.
+> Government price changes: petrol +2.4% (Rs 398.87 per litre), diesel −1.4%.
 >
 > — [full weekly report](reports/2026-10-08.md)
 
@@ -24,37 +26,55 @@ normally behaves, and if so, what happened in plain words?"**
 
 ## What it does
 
-- Tracks **8 essentials** (wheat flour, sugar, tomatoes, onions, potatoes, chicken, eggs, ghee), national
-  average prices, every week since **Sep 2019** (354 weeks).
-- Flags a week when an item's change is far outside **its own** normal range. A 10% week is ordinary for
-  tomatoes but extreme for sugar.
-- An LLM turns each flag into 1–2 sentences, **using only numbers computed by the code**, and every sentence
-  is checked automatically before it is shown.
-- Produces a weekly Markdown report and a local dashboard.
+- Tracks **all 51 items** of PBS's weekly Sensitive Price Indicator, every week since **Sep 2019** (354 weeks),
+  for the national average and 17 cities.
+- Sorts them into three groups, because their prices behave differently. Each group gets its own section:
+
+  | Section | Items | What's shown |
+  |---|---|---|
+  | **1. Unusual price moves** | 25 market-priced items: flour, rice, sugar, vegetables, meat, milk, eggs, oil, pulses… | A week is flagged when the change is far outside the item's **own** normal range. A 10% week is ordinary for tomatoes but extreme for sugar. |
+  | **2. Government price changes** | Petrol, diesel, LPG, electricity, gas, phone charges | Every change of 1% or more, framed as a policy decision, never as an "anomaly". |
+  | **3. Price revisions** | 20 packaged, branded and hotel prices: tea, salt, soap, Bata shoes, cloth… | Every step of 2% or more. These prices stay flat for months, then jump once. |
+
+- An LLM turns each unusual move into 1–2 sentences, **using only numbers computed by the code**. Every
+  sentence is checked automatically before it is shown.
+- **Search** any item by English, Roman Urdu or Urdu name (aata, cheeni, ٹماٹر, bijli…).
+- **Ask** questions such as "cheapest city for sugar" or "how much has petrol gone up since last year?".
+  Answers come straight from PBS data.
+- **Live price news:** headlines from Pakistani news sites, matched to the items they mention, refreshed every
+  30 minutes.
+- A weekly Markdown report and a three-page dashboard (Home · Explore · Ask).
+
+| Explore any item | Ask a question |
+|---|---|
+| ![Explore page](docs/img/explore.png) | ![Ask page](docs/img/ask.png) |
 
 ## How it works
 
 ```
  PBS weekly SPI PDFs ─► 1. fetch ─► 2. parse ─► 3. clean & validate ─► 4. SQLite ─► 5. detect ─► 6. explain ─► 7. report
  (live site + Wayback)     PDFs      tables       reject misreads        prices      robust z     LLM + checks    .md + dashboard
+                                                                                     + set-price   + news RSS
+                                                                                       changes     headlines
 ```
 
 | Stage | What happens | Key idea |
 |---|---|---|
 | Fetch | Finds report links through the PBS site's file API and, for older years, the Internet Archive | PBS redesigned its website and old links died; history survives on the Wayback Machine. Truncated archive copies are detected and replaced. |
 | Parse | Extracts the city-wise price table (Appendix-A) with `pdfplumber` | That table keeps prices clean even where long item names garble other tables. |
-| Clean & validate | Maps items, rejects impossible values (blank, ≤ 0, min/avg/max out of order, > ×4 jump) | A misread number looks exactly like a price spike, so it must never reach the detector. |
+| Clean & validate | Maps 51 items, rejects impossible values (blank, 0, min/avg/max out of order, > ×4 jump) | A misread number looks exactly like a price spike, so it must never reach the detector. Government prices are exempt from the ×4 rule: gas really went Rs 295 → 1,711 in Nov 2023. |
 | Store | One SQLite file; rebuilt idempotently | The database is the single source of truth. |
-| Detect | **Rolling robust z-score**: this week's change vs the item's previous 52 weeks, using median and MAD | Per-item scale; one past spike can't hide the next; no look-ahead. |
+| Detect | **Rolling robust z-score** for market items: this week's change vs the item's previous 52 weeks, using median and MAD. Fixed and government prices: list changes above a threshold. | Per-item scale; one past spike can't hide the next; no look-ahead. Policy changes are never called anomalies. |
 | Explain | Gemini (free tier) writes the alert from a small facts JSON | Guardrails: every number must come from the facts; no causes or blame; retry once, then a template. |
-| Report | `reports/YYYY-MM-DD.md` + Streamlit dashboard | A quiet week still gets a report: "no unusual moves", plus all prices. |
+| News | Public RSS feeds (Dawn, Business Recorder, Express Tribune, ProPakistani, ARY, APP), kept when a headline names a tracked item and a price word | Shown as "possibly related" with links. No AI summary, so no invented causes. |
+| Search & ask | Alias matching (English / Roman Urdu / Urdu, typos); questions read by rules, with AI only as a fallback that may return a structured question and nothing else | Every number in an answer comes from the database. |
 
 ## Does it work? (evaluation)
 
 There's no labelled list of "true anomalies", so I built one from news coverage: **8 documented price
 shocks** (2022 floods, the record flour price of Mar 2023, the sugar surge of Aug 2023, and others), each with a
 source link in [`data/known_events.csv`](data/known_events.csv). Every detector was **backtested week by week
-with no look-ahead** over Sep 2021 – Oct 2026.
+with no look-ahead** over Sep 2021 – Oct 2026. The detector was chosen on the original 8 items:
 
 | Detector | Alerts / week | Recall (8 events) | Event precision* | Share of alerts on the noisiest item |
 |---|---|---|---|---|
@@ -67,6 +87,8 @@ with no look-ahead** over Sep 2021 – Oct 2026.
 
 - **L1 was chosen.** Same recall as the baseline with **60% fewer alerts**. The baseline spends half its alerts
   on routine tomato swings and almost never flags sugar, flour or ghee.
+- **Extended to all 25 market items**, L1 gives about **1 alert per week**, spread evenly (no item gets more
+  than 15% of alerts), with the same recall.
 - **Spot check:** in 14 L1 alerts checked against the news, 13 were real reported price moves and 7 had a
   stated cause (for example: flour mills raised prices by Rs 330 per bag in Sep 2022; palm-oil containers were
   stuck at Karachi port in Feb 2023).
@@ -90,12 +112,12 @@ pip install -e .
 
 copy .env.example .env          # then put your key in .env:  LLM_API_KEY=...
 
-python -m mehngai.pipeline      # fetch → parse → store → detect → explain → report
+python -m mehngai.pipeline      # fetch → parse → store → detect → explain → news → report
 streamlit run src/mehngai/app/dashboard.py
 ```
 
-The **first run downloads about 380 PDFs** (roughly an hour, mostly from the Internet Archive, with polite delays).
-After that a weekly run takes seconds: downloads, parsed tables and explanations are all cached.
+The **first run downloads about 380 PDFs** (roughly an hour, mostly from the Internet Archive, with polite
+delays). After that a weekly run takes under a minute: downloads, parsed tables and explanations are all cached.
 Without an API key, or once the free quota (20 requests/day) is used up, alerts fall back to a checked template
 sentence, so the report still works.
 
@@ -103,24 +125,28 @@ Other commands:
 
 | Command | What it does |
 |---|---|
-| `python -m mehngai.detect.evaluate` | Full backtest of all four detectors (~3 min) |
+| `python -m mehngai.detect.evaluate` | Full backtest of all four detectors on the 25 market items (~10 min) |
 | `python -m mehngai.explain --sample 10` | Explain 10 varied historical alerts (guardrail check) |
-| `python -m mehngai.report.weekly_report --week 2023-03-22` | Report for any past week |
-| `pytest` | 70 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, report, dashboard |
+| `python -m mehngai.news` | Fetch the latest price headlines now |
+| `python -m mehngai.report.weekly_report --week 2023-11-16` | Report for any past week |
+| `pytest` | 101 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, search, ask, news, report, dashboard pages |
 
 ## Project structure
 
 ```
-config/           items.yaml (tracked items) · settings.yaml (thresholds, windows, model)
+config/           items.yaml (51 items: group, unit, aliases) · settings.yaml (thresholds, model, news feeds)
 data/             known_events.csv (evaluation ground truth); raw PDFs, CSVs and the DB are generated, not committed
 src/mehngai/
   ingest/         fetch.py · parse.py
   clean/          normalize.py · validate.py
   store/          db.py
-  detect/         baseline.py (L0) · zscore.py (L1) · relative.py (L2) · seasonal.py (L3) · evaluate.py · run.py
+  detect/         baseline.py (L0) · zscore.py (L1) · relative.py (L2) · seasonal.py (L3) · changes.py · evaluate.py · run.py
   explain/        facts.py · llm.py · guardrails.py · prompts/
   report/         weekly_report.py · charts.py
-  app/            dashboard.py (Streamlit)
+  app/            dashboard.py · home.py · explore.py · ask_page.py · common.py (Streamlit)
+  search.py       item search (English / Roman Urdu / Urdu, typos)
+  ask.py          question → structured lookup → answer from the database
+  news.py         price headlines from Pakistani RSS feeds
   pipeline.py     runs everything with one command
 notebooks/        01_explore.ipynb (exploration, charts)
 reports/          generated weekly reports
@@ -131,9 +157,10 @@ tests/
 ## Important
 
 - Flags are **statistical signals, not accusations**. They say a price moved unusually, not why or who is
-  responsible. The explanations are not allowed to state causes or blame anyone.
-- This is an independent student project, **not an official PBS product**. Prices are PBS national averages
-  across 17 cities. Always check the [original PBS data](https://www.pbs.gov.pk/price-statistics/).
+  responsible. The explanations are not allowed to state causes or blame anyone, and news headlines are shown
+  only as possibly related.
+- This is an independent student project, **not an official PBS product**. Prices are PBS averages across
+  17 cities. Always check the [original PBS data](https://www.pbs.gov.pk/price-statistics/).
 
 ## Credits
 
@@ -142,4 +169,4 @@ Built by **Massab Ibrahim** as the course project for the **Edversity AI Solutio
 public-interest problem.
 
 Data: Pakistan Bureau of Statistics, weekly Sensitive Price Indicator. Historical files via the Internet
-Archive's Wayback Machine.
+Archive's Wayback Machine. Headlines link to their publishers.

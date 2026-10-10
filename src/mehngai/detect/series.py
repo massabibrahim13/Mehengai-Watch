@@ -22,9 +22,16 @@ SEVERITIES = ("watch", "unusual", "extreme")
 MAD_TO_SD = 1.4826   # MAD × 1.4826 ≈ standard deviation, for normally distributed data
 
 
-def load_series(conn: sqlite3.Connection) -> tuple[pd.DataFrame, pd.Series]:
-    """National weekly prices (rows = weeks, columns = items) and the basket log change per week."""
+def load_series(conn: sqlite3.Connection,
+                price_types: tuple[str, ...] | None = None) -> tuple[pd.DataFrame, pd.Series]:
+    """National weekly prices (rows = weeks, columns = items) and the basket log change per week.
+    `price_types` keeps only items of those groups, e.g. ("market",) for anomaly detection."""
     wide = read_prices(conn).pivot(index="week_date", columns="item_id", values="price").sort_index()
+    if price_types:
+        keep = [i for (i,) in conn.execute(
+            f"SELECT item_id FROM items WHERE price_type IN ({','.join('?' * len(price_types))})",
+            price_types)]
+        wide = wide[[c for c in wide.columns if c in keep]]
     basket = pd.read_sql_query("SELECT week_date, log_change FROM basket", conn,
                                parse_dates=["week_date"]).set_index("week_date")["log_change"]
     return wide, basket.reindex(wide.index)

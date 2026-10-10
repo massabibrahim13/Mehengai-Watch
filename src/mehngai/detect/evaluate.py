@@ -108,7 +108,7 @@ def main() -> None:
     cfg = settings["detect"]
     cuts = {m: cfg[m] for m in METHODS}
     with connect() as conn:
-        wide, basket = load_series(conn)
+        wide, basket = load_series(conn, ("market",))   # anomalies only for market-priced items
         all_scores = {m: fn(wide, basket, cfg) for m, fn in METHODS.items()}
         change_pct = wide.pct_change() * 100
 

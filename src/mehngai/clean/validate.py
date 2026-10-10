@@ -9,7 +9,8 @@ Rules (in order):
   2. price > 0
   3. min <= avg <= max    — a misread digit usually breaks this ordering
   4. weekly sanity bound  — price within ×max_ratio / ÷max_ratio of the last accepted price
-                            for the same item + city
+                            for the same item + city. Not applied to government-set prices:
+                            a policy change can really be ×5 (gas, Nov 2023: Rs 295 → 1,711).
   5. completeness         — every tracked item has a National price in every report
                             (a missing one is logged; there is nothing to insert)
 """
@@ -29,7 +30,7 @@ def row_reason(price: float, pmin: float, pmax: float) -> str | None:
     if pd.isna(price):
         return "blank price (N.A. or garbled cell)"
     if price <= 0:
-        return "price not positive"
+        return "price is 0 (PBS reports 0 where an item isn't sold in a city, e.g. gas in Khuzdar)"
     if pd.notna(pmin) and pd.notna(pmax) and not (pmin <= price <= pmax):
         return "min/avg/max out of order"
     return None
@@ -58,10 +59,12 @@ def validate(rows: pd.DataFrame, item_ids: list[str], report_dates: list[str],
                       zip(rows["price"], rows["price_min"], rows["price_max"])]
 
     passed = rows["reason"].isna()
+    if "price_type" in rows:
+        passed &= rows["price_type"] != "administered"
     for _, idx in rows[passed].groupby(["item_id", "city"]).groups.items():
         rows.loc[idx, "reason"] = weekly_jump_reasons(rows.loc[idx, "price"], max_ratio)
 
-    accepted = rows[rows["reason"].isna()].drop(columns="reason")
+    accepted = rows[rows["reason"].isna()].drop(columns=["reason", "price_type"], errors="ignore")
     rejected = rows[rows["reason"].notna()]
 
     # Rule 5: completeness of the national series.

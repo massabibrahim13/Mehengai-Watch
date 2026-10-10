@@ -7,6 +7,7 @@
   3–4. store  normalise, validate, rebuild the SQLite database          → data/mehngai.db
   5. detect   production detector only (seconds; the full L0–L3 backtest is detect.evaluate)
   6. explain  this week's anomalies (LLM + guardrails, cached)
+  6b. news    price headlines from Pakistani news RSS feeds (context; failure is not fatal)
   7. report   reports/<week>.md
 
 Each stage reads the previous stage's output from disk/DB, so a failed run can simply be re-run:
@@ -20,12 +21,14 @@ import logging
 import time
 from datetime import date
 
+from mehngai import news
 from mehngai.config import load_settings
 from mehngai.detect import run as detect
 from mehngai.explain import run as explain
 from mehngai.ingest import fetch, parse
 from mehngai.report import weekly_report
 from mehngai.store import db
+from mehngai.store.db import connect
 
 log = logging.getLogger("mehngai.pipeline")
 
@@ -55,6 +58,11 @@ def main() -> None:
     stage("3-4. clean, validate, store", db.load)
     stage("5. detect", detect.run)
     results = stage("6. explain", explain.run)
+    try:                                   # news is context only: a failure must not stop the report
+        with connect() as conn:
+            stage("6b. news", news.refresh, conn)
+    except Exception:
+        log.warning("news refresh failed; the report will use the headlines already stored")
     path = stage("7. report", weekly_report.write)
     log.info("finished: %s (%d flagged this week)", path.name, len(results))
 

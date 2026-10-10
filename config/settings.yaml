@@ -22,7 +22,13 @@ store:
 
 detect:
   # The detector used for the weekly report (chosen in Phase 4 — see docs/decisions.md).
+  # It only scores price_type "market" items; fixed/administered items are listed as price changes.
   production_method: L1_zscore
+  # Minimum national % change to list a fixed-price revision / a government price change.
+  # Smaller moves are mostly one city's shop nudging the 17-city average (see decisions.md, v2).
+  price_changes:
+    fixed: 2.0
+    administered: 1.0
   # Severity cut-offs per method. Scores are signed (+ = up); cut-offs apply to |score|.
   L0_baseline:            # score = raw weekly % change
     watch: 10
@@ -71,3 +77,38 @@ explain:
   banned_phrases: [hoard, mafia, cartel, profiteer, manipulat, gouging, smuggl, black market, greed,
                    due to, because, caused by, driven by, as a result, owing to, amid, triggered by,
                    blamed, thanks to, fuelled by, fueled by]
+
+news:
+  refresh_minutes: 30             # re-fetch feeds when the stored headlines are older than this
+  keep_days: 45                   # headlines older than this aren't shown
+  timeout_seconds: 20
+  feeds:                          # public RSS feeds (free), tested 2026-10-10
+    Dawn: https://www.dawn.com/feeds/business
+    Business Recorder: https://www.brecorder.com/feeds/latest-news
+    Express Tribune: https://tribune.com.pk/feed/business
+    ProPakistani: https://propakistani.pk/feed/
+    ARY News: https://arynews.tv/category/business/feed/
+    APP: https://www.app.com.pk/business/feed/
+  # A headline counts if it mentions a tracked item AND a price word, or is about inflation/SPI.
+  price_words: [price, prices, priced, rate, rates, rupee, rupees, "rs", costlier, cheaper, expensive,
+                hike, hiked, hikes, surge, surges, soar, soars, jump, jumps, increase, increased, decrease,
+                decreased, cut, cuts, slash, slashed, reduce, reduced, tariff, tariffs, notified, shortage,
+                inflation, mehngai, per kg, per litre, per maund]
+  inflation_words: [inflation, spi, sensitive price, cpi, mehngai, price indicator]
+  # Item aliases that mislead in headlines ("oil" = crude, "matches" = cricket, "gram" = gold per 10 g).
+  ignore_aliases: [oil, tel, wood, cloth, matches, match, gram, cylinder, mash, lawn, tea, soap, bulb,
+                   gasoline]
+  # Headlines about other countries are dropped unless they also mention Pakistan.
+  foreign_words: [america, american, americans, us, usa, uk, britain, india, indian, china, chinese,
+                  europe, european, global, world, saudi, gulf, bangladesh, sri lanka]
+  # Extra headline words that point to tracked items.
+  extra_aliases:
+    petroleum: [petrol, diesel]
+    pol: [petrol, diesel]
+    fuel prices: [petrol, diesel]
+    nepra: [electricity]
+    power tariff: [electricity]
+    electricity tariff: [electricity]
+    sngpl: [gas]
+    ssgc: [gas]
+    ogra: [lpg, gas]

@@ -1,0 +1,6 @@
+[theme]
+# Project accent (validated palette blue) instead of Streamlit red. Light/dark follows the viewer.
+primaryColor = "#2a78d6"
+
+[browser]
+gatherUsageStats = false
