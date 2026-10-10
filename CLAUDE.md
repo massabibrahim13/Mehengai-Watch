@@ -20,7 +20,8 @@ behaves — and if so, what is a plain-language explanation?"**
 - **Core technique:** time-series **anomaly detection** (statistics, not an LLM).
 - **Supporting technique:** an LLM turns the detected anomalies into short, plain-language
   explanations. The LLM never decides *what* is anomalous — the math does.
-- **Output:** a weekly report + a simple dashboard.
+- **Output:** a weekly report + a **public, interactive website** (React front end fed by JSON
+  files that the Python pipeline exports). A local Streamlit app remains as a private analysis tool.
 
 **Context:** This is my project for the **Edversity AI Solutions Engineers course (Cohort 1)**.
 It is a course/portfolio project, credited to Edversity. It is based on idea #7 ("Market and
@@ -94,11 +95,24 @@ can be re-run or debugged on its own.
                          │  6. EXPLAIN     LLM writes plain-language│
                          │       │         note from the numbers    │
                          │       ▼                                  │
-                         │  7. REPORT      weekly report + dashboard│
+                         │  7. REPORT      weekly report (Markdown) │
+                         │       │                                  │
+                         │       ▼                                  │
+                         │  8. EXPORT      small JSON files for the │
+                         │       │         website (derived from DB)│
+                         └───────┼──────────────────────────────────┘
+                                 ▼
+                         ┌──────────────────────────────────────────┐
+                         │  9. WEBSITE     React app (web/): reads  │
+                         │                 only the exported JSON;  │
+                         │                 static, hosted for free  │
                          └──────────────────────────────────────────┘
-                                         ▲
-                     8. SCHEDULE: GitHub Actions runs 1→7 once a week
+          SCHEDULE: GitHub Actions runs 1→8 weekly (+ news every 30 min) and redeploys the site
 ```
+
+**Two halves, one rule.** The Python half is the "brain" (data, statistics, AI, guardrails) — the
+part this AI-engineering course is about. The website is only the presentation layer: it never
+computes anomalies or calls the LLM's explanation step itself; it displays what the pipeline exported.
 
 ### Stage by stage
 
@@ -189,15 +203,37 @@ Details that matter:
   link** — or say "no clear cause found".
 
 **7. Report (`src/mehngai/report/`, `src/mehngai/app/`)**
-- **Weekly report**: a Markdown/HTML file — "This week's unusual prices" table + explanations
-  + a small chart per flagged item. Saved to `reports/YYYY-MM-DD.md`.
-- **Dashboard**: Streamlit app — pick an item → see its price history with anomalies marked,
-  this week's flags, and the explanations. Runs locally (`streamlit run`).
+- **Weekly report**: a Markdown file — three sections (unusual moves / government price changes /
+  price revisions) + explanations + a small chart per flagged item + that week's price news.
+  Saved to `reports/YYYY-MM-DD.md`.
+- **Streamlit app** (`src/mehngai/app/`): kept as a **private analysis tool** (runs locally). Not the
+  public face of the project any more; retire it once the website covers everything.
 
-**8. Schedule (`.github/workflows/weekly.yml`)**
-- GitHub Actions cron job runs the whole pipeline once a week after PBS publishes, commits
-  the new report. Free for public repos. API key stored as a GitHub secret.
-- Phase 7 only — until then, everything runs manually with one command.
+**8. Export (`src/mehngai/export.py`)** — new in v3
+- Writes small JSON files into `web/public/data/`: this week's summary (flags + explanations,
+  government changes, revisions, movers), the 51 items with latest prices and sparklines, city
+  prices, per-item history files (loaded on demand), and the latest price news.
+- Derived from the database only; the website reads nothing else. Keep files small (no 300k-row
+  dumps): split per item so a page loads only what it shows.
+
+**9. Website (`web/`)** — new in v3
+- React + TypeScript app built with Vite; Tailwind CSS for styling; Motion (Framer Motion) for
+  animation; ECharts for interactive charts and the Pakistan city bubble map.
+- **Static**: no server of its own. Hosted free (GitHub Pages or Cloudflare Pages). Search and the
+  rule-based part of "Ask" run in the browser on the exported JSON.
+- The Ask box's AI fallback needs the Gemini key, which must never reach the browser → one tiny
+  free serverless function (e.g. Cloudflare Worker) holds the key. Optional; rules work without it.
+- Design brief (agreed with Massab): pleasant, interactive and **professional — not the generic
+  "AI dashboard" look**. Identity = market rate-board / newspaper: serif headlines, monospace
+  prices, the validated palette (blue accent, red = price up, blue = price down). Motion only where
+  it carries information (tickers, transitions, hover); respect `prefers-reduced-motion`; light +
+  dark mode; mobile-friendly.
+
+**Schedule (`.github/workflows/`)**
+- GitHub Actions: weekly run of the pipeline after PBS publishes (export + rebuild + redeploy the
+  site, commit the new report), and a light job every ~30–60 min that refreshes news JSON only.
+  Free for public repos. API key stored as a GitHub secret.
+- Phase 7 — until then, everything runs manually.
 
 ---
 
@@ -214,8 +250,13 @@ Details that matter:
 | Forecast (stretch) | prophet or statsmodels SARIMAX | forecast intervals |
 | LLM | Gemini API or Groq (free tier) | explanation layer |
 | Hijri dates | `hijri-converter` (or similar) | Ramazan/Eid calendar feature |
-| Charts | matplotlib / plotly | report + dashboard charts |
-| Dashboard | Streamlit | quick Python-only UI |
+| Charts (Python) | matplotlib / plotly | report charts + Streamlit tool |
+| Analysis app | Streamlit | private local analysis tool (no longer the public UI) |
+| Website | React + TypeScript, built with Vite (Node.js) | full control over look and interaction; most common front-end skill |
+| Styling / motion | Tailwind CSS · Motion (Framer Motion) | consistent design system; smooth, restrained animation |
+| Web charts / map | Apache ECharts | interactive charts + Pakistan city bubble map |
+| Fonts | self-hosted via `@fontsource` (Fraunces, IBM Plex Sans/Mono) | no Google Fonts dependency, works offline |
+| Hosting | GitHub Pages or Cloudflare Pages (static) + optional Cloudflare Worker | free; Worker keeps the Gemini key off the browser |
 | Config | YAML (`pyyaml`), `.env` (`python-dotenv`) | settings + secrets |
 | Tests | pytest | parsing + detection tests |
 | Automation | GitHub Actions | free weekly scheduler |
@@ -285,15 +326,20 @@ mehngai-watch/
 │   ├── detect/   baseline.py, zscore.py, relative.py, seasonal.py, evaluate.py
 │   ├── explain/  llm.py, guardrails.py, prompts/
 │   ├── report/   weekly_report.py
-│   ├── app/      dashboard.py (Streamlit)
-│   └── pipeline.py           ← runs stages 1→7 in order (one command)
+│   ├── app/      dashboard.py … (Streamlit, private analysis tool)
+│   ├── export.py             ← stage 8: JSON for the website
+│   └── pipeline.py           ← runs stages 1→8 in order (one command)
+├── web/                      ← stage 9: the website (React + TypeScript + Vite)
+│   ├── public/data/          ← JSON exported by the pipeline (generated, gitignored)
+│   ├── src/                  ← components, pages, styles
+│   └── package.json
 ├── notebooks/                ← exploration only, never imported by src/
 ├── reports/                  ← generated weekly reports
 ├── tests/
 ├── docs/
 │   ├── decisions.md          ← why we chose X over Y
 │   └── learning-log.md       ← what I learned each session
-└── .github/workflows/weekly.yml
+└── .github/workflows/          ← weekly pipeline + news refresh + deploy
 ```
 
 Create folders only when the phase that needs them begins.
@@ -367,6 +413,24 @@ previous one's done-when is met.
 - **Learn:** CI/CD basics, cron syntax, secrets management.
 - **Done when:** one scheduled run commits a new report on its own.
 
+### v2 — all 51 items, three sections, search, ask, live news ✅ (2026-10-10/11)
+Requested after v1. Details in `docs/decisions.md` ("v2", "v2.1").
+
+### Phase 8 — Website (v3, requested 2026-10-11)
+Streamlit is too limited for the look and interaction Massab wants, so the presentation layer
+moves to a React website. The Python pipeline is unchanged.
+- **8a Prototype:** export JSON + a one-page interactive home in `web/` (ticker, this week's
+  story, Pakistan city bubble map, movers, set-price boards, headlines, item quick-view, Ctrl+K
+  search) on real data. Massab reviews the look before we continue.
+- **8b Full site:** item pages (history chart, cities, flags/changes, news), Explore/browse, Ask
+  (rules in the browser; optional serverless AI fallback), about/method page with the evaluation.
+- **8c Deploy:** free static hosting + GitHub Actions (with Phase 7): weekly data + rebuild, news
+  refresh. Needs the repo to be public for free GitHub Pages — **ask Massab first**.
+- **Learn:** components and props, state, effects, TypeScript types, CSS layout (grid/flex),
+  animation, static sites vs servers, build tools, deployment, keeping secrets out of front ends.
+- **Done when:** the public URL shows this week's data, updates on its own, works on a phone,
+  passes a Lighthouse accessibility check, and every number on it comes from the exported JSON.
+
 ### Stretch ideas (only after v1 is done)
 News-context layer · city-level detection and "which city is most out of line" · Prophet
 forecast intervals (L4) · Urdu / Roman Urdu output · weekly email or Telegram alert.
@@ -389,6 +453,11 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   hand-made series where I know the right answer.
 - Log with the `logging` module, not `print`, inside `src/`.
 - Commit after each working step with a clear message (e.g. `parse: handle 2022 table layout`).
+- **Website (`web/`):** TypeScript, small function components, one component per file; data
+  types in one `types.ts` that mirrors the exported JSON. Styling with Tailwind classes; shared
+  colours/fonts as design tokens in one place. No business logic in the front end — if a number
+  needs computing, compute it in Python and export it. Escape/never inject outside text as HTML.
+  Check every visual change with screenshots in light + dark mode and at phone width.
 
 ---
 
@@ -405,6 +474,12 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 - **Precision / recall** — of my alerts, how many were real / of the real events, how many did I catch.
 - **Grounding (LLM)** — making the model answer only from data you give it, then checking it did.
 - **Idempotent** — running the same step twice gives the same result (no duplicates).
+- **Static site** — a website made only of files (HTML, JS, JSON); no server runs code per visit.
+- **Component (React)** — a reusable piece of UI written as a function (like a small class that
+  renders itself); **props** are its inputs, **state** is what it remembers.
+- **Build (Vite)** — turning TypeScript/React source into plain files a browser can load.
+- **Serverless function** — a tiny piece of backend code the host runs on demand (used to keep
+  the API key secret).
 
 ---
 
@@ -430,7 +505,11 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ done (**v1 = course submission complete**) + **v2 extensions** ✅ → next is **Phase 7 (Automation, bonus)**.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ → **now: Phase 8a (website prototype)**,
+  then 8b (full site), then 8c deploy together with Phase 7 (automation).
+- **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
+  (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
+  tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
 - **v2 (2026-10-10, requested by Massab):** all 51 PBS items in three groups (`price_type`: market → L1 anomalies;
   fixed → "price revisions" ≥ 2%; administered → "government price changes" ≥ 1%), search (`search.py`, Urdu/Roman
   Urdu aliases), ask box (`ask.py`; rules first, Gemini only parses), live price news (`news.py`, 6 RSS feeds),
@@ -447,9 +526,9 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   + 8 sourced events in `data/known_events.csv`. Phase 4: L0–L3 built + backtest; **production detector =
   L1 rolling robust z-score, 52-week window** (same recall as L0 with 60% fewer alerts; L2/L3 didn't beat it —
   see decisions.md). All layers' flags are in the `anomalies` table. 47 tests pass. All pushed to GitHub.
-- **Next step:** Phase 7 (bonus) — `.github/workflows/weekly.yml`: weekly cron (after PBS publishes, Fri/Sat),
-  `LLM_API_KEY` as a GitHub secret, run the pipeline, commit `reports/`. Note: CI starts with no cached PDFs/DB,
-  so it needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
+- **Next step:** Phase 8a — `src/mehngai/export.py` (JSON into `web/public/data/`) + `web/` prototype home page.
+  Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
+  needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
