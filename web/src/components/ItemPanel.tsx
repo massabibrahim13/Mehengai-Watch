@@ -6,7 +6,8 @@ import { Chart, cssVar, useDarkMode, type EChartsOption } from "../lib/charts";
 import { useSeries } from "../lib/data";
 import { dateLabel, moneyExact, pct, timeAgo } from "../lib/format";
 import type { CitiesFile, Item, NewsItem, Series } from "../types";
-import { ChangePill, Price, Skeleton } from "./ui";
+import { X } from "lucide-react";
+import { Change, ItemIcon, Price, Skeleton } from "./ui";
 
 const GROUP = { market: "Market price", fixed: "Fixed / packaged price", administered: "Government-set price" };
 
@@ -24,7 +25,7 @@ function historyOption(series: Series, item: Item, dark: boolean): EChartsOption
   return {
     grid: { left: 8, right: 8, top: 16, bottom: 56, containLabel: true },
     tooltip: {
-      trigger: "axis", backgroundColor: cssVar("--color-surface"), borderColor: line, textStyle: { color: ink },
+      trigger: "axis", backgroundColor: cssVar("--color-panel"), borderColor: line, textStyle: { color: ink },
       valueFormatter: (v: number) => moneyExact(v),
     },
     xAxis: { type: "time", axisLine: { lineStyle: { color: line } }, axisLabel: { color: muted }, splitLine: { show: false } },
@@ -71,14 +72,17 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
           <motion.div key="backdrop" className="fixed inset-0 z-40 bg-ink/30" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />
           <motion.aside key="panel" role="dialog" aria-modal="true" aria-label={item.name}
             initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 36 }}
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl overflow-y-auto border-l border-line bg-paper shadow-2xl">
-            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-paper/95 px-6 py-5">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">{item.category} · {GROUP[item.price_type]}</p>
-                <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight">{item.name}</h2>
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl overflow-y-auto border-l border-line bg-bg shadow-2xl">
+            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-panel/95 px-6 py-5">
+              <div className="flex items-center gap-3">
+                <ItemIcon item={item} size="lg" />
+                <div>
+                  <p className="text-sm font-semibold text-muted">{item.category} · {GROUP[item.price_type]}</p>
+                  <h2 className="text-2xl font-bold tracking-tight md:text-3xl">{item.name}</h2>
+                </div>
               </div>
               <button ref={closeRef} type="button" onClick={onClose} aria-label="Close"
-                className="bubble rounded-full border border-line px-3 py-1.5 text-sm hover:border-accent">Close ✕</button>
+                className="chip flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel text-muted hover:text-ink"><X size={18} /></button>
             </div>
 
             <div className="space-y-8 px-6 py-6">
@@ -87,23 +91,23 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                   <p className="text-sm text-muted">National average, {dateLabel(cities.week)}</p>
                   <p className="mt-1 flex items-baseline gap-2">
                     <Price value={item.price} className="text-4xl" />
-                    <ChangePill value={item.change_pct} />
+                    <Change soft value={item.change_pct} />
                   </p>
                   <p className="text-sm text-muted">{item.unit}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted">vs a year ago</p>
-                  <p className="mt-1 font-mono text-2xl tabular">{item.yoy_pct === null ? "–" : pct(item.yoy_pct)}</p>
+                  <p className="mt-1 text-2xl font-bold">{item.yoy_pct === null ? "–" : pct(item.yoy_pct)}</p>
                   {item.year_ago_price && <p className="text-xs text-muted">was {moneyExact(item.year_ago_price)}</p>}
                 </div>
                 <div>
                   <p className="text-sm text-muted">Typical weekly move</p>
-                  <p className="mt-1 font-mono text-2xl tabular">{item.typical_move_pct ?? "–"}%</p>
+                  <p className="mt-1 text-2xl font-bold">{item.typical_move_pct ?? "–"}%</p>
                   <p className="text-xs text-muted">over the past year</p>
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-line bg-surface p-3">
+              <div className="rounded-2xl border border-line bg-panel p-3">
                 {option ? <Chart option={option} className="h-72 w-full" /> : <Skeleton className="h-72" />}
                 <p className="px-2 pb-1 text-xs text-muted">
                   Weekly national average since {series ? dateLabel(series.weeks[0]) : "…"}. Drag the bar to zoom.
@@ -117,7 +121,7 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                   <div className="flex flex-wrap gap-2">
                     {cityRows.map(([city, price], i) => (
                       <span key={city} className={`rounded-full border px-3 py-1 text-sm ${i === 0 ? "border-down/40 bg-down/10" : i === cityRows.length - 1 ? "border-up/40 bg-up/10" : "border-line"}`}>
-                        {city} <span className="font-mono tabular">{moneyExact(price!)}</span>
+                        {city} <span className="tabular">{moneyExact(price!)}</span>
                       </span>
                     ))}
                   </div>
@@ -130,10 +134,10 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                   <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-muted">Recent unusual weeks ({series?.flags?.length} since 2019)</h3>
                   <ol className="space-y-3">
                     {history.map((f) => (
-                      <li key={f.week} className="rounded-2xl border border-line bg-surface p-4">
+                      <li key={f.week} className="rounded-2xl border border-line bg-panel p-4">
                         <div className="flex items-center justify-between gap-2">
                           <span className="text-sm font-medium">{dateLabel(f.week)}</span>
-                          <ChangePill value={f.change_pct} />
+                          <Change soft value={f.change_pct} />
                         </div>
                         <p className="mt-2 text-sm leading-relaxed text-ink/85">{f.explanation}</p>
                       </li>
@@ -145,12 +149,12 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
               {changes.length > 0 && (
                 <div>
                   <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.1em] text-muted">Recent price changes ({series?.changes?.length} since 2019)</h3>
-                  <ul className="divide-y divide-line rounded-2xl border border-line bg-surface">
+                  <ul className="divide-y divide-line rounded-2xl border border-line bg-panel">
                     {changes.map((c) => (
                       <li key={c.week} className="flex items-center justify-between gap-3 px-4 py-3 text-sm">
                         <span>{dateLabel(c.week)}</span>
-                        <span className="font-mono tabular"><span className="text-muted">{moneyExact(c.before)} → </span>{moneyExact(c.after)}</span>
-                        <ChangePill value={c.change_pct} />
+                        <span className="tabular"><span className="text-muted">{moneyExact(c.before)} → </span>{moneyExact(c.after)}</span>
+                        <Change soft value={c.change_pct} />
                       </li>
                     ))}
                   </ul>
@@ -164,7 +168,7 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                     {related.map((n) => (
                       <li key={n.link}>
                         <a href={n.link} target="_blank" rel="noopener noreferrer" className="group block rounded-xl p-2 hover:bg-ink/5">
-                          <span className="font-serif group-hover:text-accent">{n.title}</span>
+                          <span className="group-hover:text-accent">{n.title}</span>
                           <span className="block text-xs text-muted">{n.source} · {timeAgo(n.published)}</span>
                         </a>
                       </li>
@@ -177,7 +181,7 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                 <span className="text-sm text-muted">Also in {item.category}:</span>
                 {items.filter((i) => i.category === item.category && i.item_id !== item.item_id).map((i) => (
                   <button key={i.item_id} type="button" onClick={() => onOpen(i.item_id)}
-                    className="bubble rounded-full border border-line px-3 py-0.5 text-sm hover:border-accent hover:text-accent">{i.name}</button>
+                    className="chip rounded-full border border-line px-3 py-0.5 text-sm hover:border-accent hover:text-accent">{i.name}</button>
                 ))}
               </div>
             </div>

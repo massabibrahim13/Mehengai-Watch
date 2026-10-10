@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { money } from "../lib/format";
 import { findItems } from "../lib/search";
 import type { Item } from "../types";
-import { ChangePill } from "./ui";
+import { Change } from "./ui";
 
 const SUGGESTIONS = ["aata", "cheeni", "petrol", "tamatar", "doodh", "bijli"];
 
@@ -39,7 +39,7 @@ export function SearchPalette({ open, items, onClose, onOpen }: {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
           <motion.div role="dialog" aria-modal="true" aria-label="Search items" onClick={(e) => e.stopPropagation()}
             initial={{ y: -12, scale: 0.98 }} animate={{ y: 0, scale: 1 }} exit={{ y: -12, scale: 0.98 }}
-            className="w-full max-w-xl overflow-hidden rounded-3xl border border-line bg-surface shadow-2xl">
+            className="w-full max-w-xl overflow-hidden rounded-3xl border border-line bg-panel shadow-2xl">
             <input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={onKeyDown}
               placeholder="Search 51 items: aata, cheeni, petrol, ٹماٹر …" aria-label="Search items"
               className="w-full border-b border-line bg-transparent px-6 py-4 text-lg outline-none placeholder:text-muted" />
@@ -50,7 +50,7 @@ export function SearchPalette({ open, items, onClose, onOpen }: {
               <div className="flex flex-wrap gap-2 px-6 py-5">
                 <span className="text-sm text-muted">Try:</span>
                 {SUGGESTIONS.map((s) => (
-                  <button key={s} type="button" onClick={() => setQuery(s)} className="bubble rounded-full border border-line px-3 py-0.5 text-sm hover:border-accent">{s}</button>
+                  <button key={s} type="button" onClick={() => setQuery(s)} className="chip rounded-full border border-line px-3 py-0.5 text-sm hover:border-accent">{s}</button>
                 ))}
               </div>
             )}
@@ -58,13 +58,13 @@ export function SearchPalette({ open, items, onClose, onOpen }: {
               {results.map((item, i) => (
                 <li key={item.item_id} role="option" aria-selected={i === active}>
                   <button type="button" onMouseEnter={() => setActive(i)} onClick={() => choose(item)}
-                    className={`grid w-full grid-cols-[1fr_auto_auto] items-center gap-3 px-6 py-2.5 text-left ${i === active ? "bg-accent/10" : ""}`}>
+                    className={`grid w-full grid-cols-[1fr_auto_auto] items-center gap-3 px-6 py-2.5 text-left ${i === active ? "bg-soft" : ""}`}>
                     <span>
                       <span className="font-medium">{item.name}</span>
                       <span className="block text-xs text-muted">{item.category} · {item.unit}</span>
                     </span>
-                    <span className="font-mono text-sm tabular">{money(item.price)}</span>
-                    <ChangePill value={item.change_pct} />
+                    <span className="text-sm">{money(item.price)}</span>
+                    <Change soft value={item.change_pct} />
                   </button>
                 </li>
               ))}

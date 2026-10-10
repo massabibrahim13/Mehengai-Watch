@@ -114,9 +114,21 @@ export interface Series {
   changes?: SeriesChange[];
 }
 
+/** "Essentials index": weekly typical change of all 51 items, chained from 100 (our calculation). */
+export interface IndexFile {
+  weeks: string[];
+  values: number[];
+  base_week: string;
+  latest: number;
+  change_1w_pct: number;
+  change_1y_pct: number | null;
+  change_all_pct: number;
+}
+
 export interface HomeData {
   summary: Summary;
   items: Item[];
   cities: CitiesFile;
   news: NewsItem[];
+  index: IndexFile;
 }

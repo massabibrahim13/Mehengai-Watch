@@ -1,5 +1,5 @@
 // ECharts, imported piece by piece so the site only ships what it uses, plus a small React wrapper.
-import { BarChart, LineChart, ScatterChart } from "echarts/charts";
+import { BarChart, LineChart, ScatterChart, TreemapChart } from "echarts/charts";
 import {
   DataZoomComponent,
   GeoComponent,
@@ -9,9 +9,10 @@ import {
 } from "echarts/components";
 import * as echarts from "echarts/core";
 import { SVGRenderer } from "echarts/renderers";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useTheme } from "./theme";
 
-echarts.use([BarChart, LineChart, ScatterChart, GeoComponent, GridComponent, TooltipComponent,
+echarts.use([BarChart, LineChart, ScatterChart, TreemapChart, GeoComponent, GridComponent, TooltipComponent,
   DataZoomComponent, MarkLineComponent, SVGRenderer]);
 
 export { echarts };
@@ -21,18 +22,8 @@ export type EChartsOption = echarts.EChartsCoreOption;
 export const cssVar = (name: string): string =>
   getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-/** True while the viewer's system is in dark mode (charts re-colour when it changes). */
-export function useDarkMode(): boolean {
-  const query = "(prefers-color-scheme: dark)";
-  const [dark, setDark] = useState(() => window.matchMedia(query).matches);
-  useEffect(() => {
-    const mq = window.matchMedia(query);
-    const onChange = () => setDark(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return dark;
-}
+/** True while the site is in dark mode (charts re-colour when the theme changes). */
+export const useDarkMode = (): boolean => useTheme().theme === "dark";
 
 export const reducedMotion = (): boolean => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

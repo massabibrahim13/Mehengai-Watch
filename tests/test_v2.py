@@ -19,6 +19,14 @@ CITIES = ["National", "Lahore", "Karachi", "Quetta", "Islamabad"]
 
 # --- the item list ---
 
+def test_item_entries_are_well_formed():
+    # an unquoted comma inside a YAML flow mapping silently splits a name ("Bread (plain" + key "small)")
+    expected = {"item_id", "sl_no", "name", "unit", "category", "price_type", "name_prefix", "aliases"}
+    for item in ITEMS.values():
+        assert set(item) == expected, item["item_id"]
+        assert item["name"].count("(") == item["name"].count(")"), item["name"]
+
+
 def test_all_51_items_in_three_groups():
     assert len(ITEMS) == 51
     assert len({i["sl_no"] for i in ITEMS.values()}) == 51

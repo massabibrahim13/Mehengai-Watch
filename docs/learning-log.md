@@ -166,3 +166,20 @@ map, biggest movers, set-price boards, headline cards with filter, item quick-vi
 - *Accessibility and motion:* keyboard paths (Ctrl+K, Esc, arrows), reduced-motion support, colour never alone (▲▼).
 
 **Next** Massab reviews the prototype → Phase 8b (item pages, browse, Ask, code-splitting) → 8c deploy with Phase 7.
+
+## 2026-10-11 — Phase 8a: fintech redesign
+
+**Built** a new home page modelled on fintech sites: dark hero with ticker tape and the Essentials index line,
+Market summary (index chart with ranges, this week's signals, category cards), heatmap of all 51 items, sortable
+watchlist, city map, news cards with live price strips, set prices, method band, light/dark toggle. New `index.json`.
+
+**Key concepts**
+- *Learn from references, don't copy:* list what the good sites have in common (dark hero, calm panels, one font,
+  aligned numbers), then apply it to our own data.
+- *An index:* chain each week's typical % change onto a starting value of 100 to get one number for "the basket".
+- *Treemap:* nested rectangles; here every item gets equal area and colour carries the weekly change.
+- *Scroll events vs IntersectionObserver:* the observer only fires when crossing a line, so a quick scroll left the
+  top bar transparent; reading the hero's position on each scroll is simpler and always right.
+- *YAML gotcha:* in `{ name: Bread (plain, small) }` the comma ends the value, so quote strings with commas.
+
+**Next** Massab reviews the redesign → Phase 8b (item pages, browse, Ask, code-splitting) → 8c deploy with Phase 7.

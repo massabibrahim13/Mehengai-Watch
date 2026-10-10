@@ -1,77 +1,85 @@
 @import "tailwindcss";
-@import "@fontsource-variable/fraunces";
-@import "@fontsource/ibm-plex-sans/400.css";
-@import "@fontsource/ibm-plex-sans/500.css";
-@import "@fontsource/ibm-plex-sans/600.css";
-@import "@fontsource/ibm-plex-mono/400.css";
-@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource-variable/manrope";
 
-/* Design tokens. Identity: market rate-board / newspaper. Palette = the validated project palette
-   (blue accent, red = price up, blue = price down). Dark mode re-steps the same hues below. */
+/* Theme is chosen on <html data-theme="light|dark"> (toggle in the top bar, remembered per browser). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Design tokens — a calm fintech look: one sans family, neutral surfaces, colour only for data.
+   Price up = red, price down = blue (validated colour-blind-safe pair); ▲▼ always accompany colour. */
 @theme {
-  --font-serif: "Fraunces Variable", Georgia, serif;
-  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "Manrope Variable", "Segoe UI", system-ui, sans-serif;
 
-  --color-paper: #f6f4ef;
-  --color-surface: #ffffff;
-  --color-ink: #16181b;
-  --color-muted: #5d6167;
-  --color-line: rgb(22 24 27 / 0.1);
+  --color-bg: #f3f4f6;
+  --color-panel: #ffffff;
+  --color-soft: #f1f3f6;
+  --color-ink: #131722;
+  --color-muted: #6a6f7c;
+  --color-line: #e3e6ec;
   --color-accent: #2a78d6;
   --color-up: #e34948;
   --color-down: #2a78d6;
-  --color-live: #0ca30c;
+  --color-live: #12a150;
 
-  --animate-ticker: ticker var(--ticker-speed, 140s) linear infinite;
-  --animate-pulse-ring: pulse-ring 2.2s ease-out infinite;
+  /* the hero is always dark */
+  --color-night: #07090e;
+  --color-night-ink: #f4f6fb;
+  --color-night-muted: #9aa3b5;
+  --color-night-line: rgb(255 255 255 / 0.1);
+
+  --animate-ticker: ticker var(--ticker-speed, 150s) linear infinite;
+  --animate-live: live 2.2s ease-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-paper: #101215;
-    --color-surface: #181b20;
-    --color-ink: #ecebe7;
-    --color-muted: #9ba1a8;
-    --color-line: rgb(255 255 255 / 0.1);
-    --color-accent: #3987e5;
-    --color-up: #e66767;
-    --color-down: #3987e5;
-  }
+[data-theme="dark"] {
+  --color-bg: #0b0e14;
+  --color-panel: #131722;
+  --color-soft: #1b202c;
+  --color-ink: #e2e5ec;
+  --color-muted: #8c93a3;
+  --color-line: #252b38;
+  --color-accent: #4c8fe6;
+  --color-up: #ec6766;
+  --color-down: #4c8fe6;
 }
 
 @keyframes ticker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgb(12 163 12 / 0.5); }
-  70%, 100% { box-shadow: 0 0 0 7px rgb(12 163 12 / 0); }
+@keyframes live {
+  0% { box-shadow: 0 0 0 0 rgb(18 161 80 / 0.55); }
+  70%, 100% { box-shadow: 0 0 0 8px rgb(18 161 80 / 0); }
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--color-night); }
 body {
-  background: var(--color-paper);
+  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: "tnum" 1; /* aligned numbers everywhere */
 }
-.tabular { font-variant-numeric: tabular-nums; }
 
-/* tickers pause while you read them */
 .ticker:hover .ticker-track,
 .ticker:focus-within .ticker-track { animation-play-state: paused; }
-.ticker {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+.fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* the "bubble": a soft ring + tiny lift on hover / keyboard focus */
-@utility bubble {
-  transition: transform 160ms ease, box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease;
-  &:hover { transform: translateY(-1px); box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-accent) 16%, transparent); }
+/* cards lift a little and get a soft ring on hover / keyboard focus */
+@utility lift {
+  transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  &:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -12px rgb(16 24 40 / 0.18), 0 0 0 4px color-mix(in srgb, var(--color-accent) 14%, transparent); }
   &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-accent); }
-  &:active { transform: scale(0.98); }
+}
+/* pill buttons / chips */
+@utility chip {
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 200ms ease, color 160ms ease;
+  &:hover { box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 14%, transparent); }
+  &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-accent); }
 }
 
 @media (prefers-reduced-motion: reduce) {

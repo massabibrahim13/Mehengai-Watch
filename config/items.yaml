@@ -80,7 +80,7 @@ items:
      price_type: market, name_prefix: Firewood, aliases: [firewood, wood, lakri, لکڑی]}
 
   # ── fixed: packaged & branded goods ─────────────────────────────────────────────
-  - {item_id: bread, sl_no: 4, name: Bread (plain, small), unit: loaf, category: Packaged food,
+  - {item_id: bread, sl_no: 4, name: "Bread (plain, small)", unit: loaf, category: Packaged food,
      price_type: fixed, name_prefix: Bread, aliases: [bread, double roti, ڈبل روٹی]}
   - {item_id: powdered_milk, sl_no: 10, name: Powdered milk (NIDO 390 g), unit: 390 g pack, category: Packaged food,
      price_type: fixed, name_prefix: Powdered Milk, aliases: [powdered milk, milk powder, nido]}
@@ -116,7 +116,7 @@ items:
      price_type: fixed, name_prefix: Ladies Sandal, aliases: [ladies sandal]}
 
   # ── fixed: household goods ─────────────────────────────────────────────────────
-  - {item_id: cigarettes, sl_no: 33, name: Cigarettes (Capstan, 20), unit: packet of 20, category: Household,
+  - {item_id: cigarettes, sl_no: 33, name: "Cigarettes (Capstan, 20)", unit: packet of 20, category: Household,
      price_type: fixed, name_prefix: Cigarettes, aliases: [cigarettes, cigarette, capstan, سگریٹ]}
   - {item_id: energy_saver, sl_no: 44, name: Energy saver bulb (Philips 14 W), unit: bulb, category: Household,
      price_type: fixed, name_prefix: Energy Saver, aliases: [energy saver, bulb, light bulb]}

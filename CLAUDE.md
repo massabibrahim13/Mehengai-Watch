@@ -223,11 +223,13 @@ Details that matter:
   rule-based part of "Ask" run in the browser on the exported JSON.
 - The Ask box's AI fallback needs the Gemini key, which must never reach the browser → one tiny
   free serverless function (e.g. Cloudflare Worker) holds the key. Optional; rules work without it.
-- Design brief (agreed with Massab): pleasant, interactive and **professional — not the generic
-  "AI dashboard" look**. Identity = market rate-board / newspaper: serif headlines, monospace
-  prices, the validated palette (blue accent, red = price up, blue = price down). Motion only where
-  it carries information (tickers, transitions, hover); respect `prefers-reduced-motion`; light +
-  dark mode; mobile-friendly.
+- Design brief (agreed with Massab, revised 2026-10-11): pleasant, interactive, **professional and
+  not "tech-y"**, modelled on fintech sites (fiscal.ai, TradingView, Koyfin, TrendSpider): dark hero
+  with one big headline + search, then calm rounded light panels; one clean sans font (Manrope),
+  tabular numbers; the validated palette (blue accent, red = price up, blue = price down, ▲▼ always).
+  Market summary + Essentials index chart, heatmap, sortable watchlist, city map, interactive news
+  cards that show the price of the item they mention. Motion only where it carries information;
+  respect `prefers-reduced-motion`; light + dark mode (toggle); mobile-friendly.
 
 **Schedule (`.github/workflows/`)**
 - GitHub Actions: weekly run of the pipeline after PBS publishes (export + rebuild + redeploy the
@@ -255,7 +257,7 @@ Details that matter:
 | Website | React + TypeScript, built with Vite (Node.js) | full control over look and interaction; most common front-end skill |
 | Styling / motion | Tailwind CSS · Motion (Framer Motion) | consistent design system; smooth, restrained animation |
 | Web charts / map | Apache ECharts | interactive charts + Pakistan city bubble map |
-| Fonts | self-hosted via `@fontsource` (Fraunces, IBM Plex Sans/Mono) | no Google Fonts dependency, works offline |
+| Fonts / icons | self-hosted via `@fontsource` (Manrope) · lucide-react icons | no Google Fonts dependency, works offline; one calm icon set |
 | Hosting | GitHub Pages or Cloudflare Pages (static) + optional Cloudflare Worker | free; Worker keeps the Gemini key off the browser |
 | Config | YAML (`pyyaml`), `.env` (`python-dotenv`) | settings + secrets |
 | Tests | pytest | parsing + detection tests |
@@ -505,7 +507,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ → **now: Phase 8a (website prototype)**,
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ → **now: Phase 8a (website prototype, redesigned)**,
   then 8b (full site), then 8c deploy together with Phase 7 (automation).
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
@@ -529,7 +531,13 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 - **Phase 8a done (2026-10-11):** `export.py` (stage 8) + `web/` prototype home page (React/TS/Vite/Tailwind/Motion/
   ECharts): story headline, tickers, cards, city bubble map, movers, set prices, headlines, item quick-view, Ctrl+K
   search. Run: `python -m mehngai.export` then `cd web && npm install && npm run dev` → http://localhost:5173.
-- **Next step:** Massab reviews the prototype → Phase 8b (item pages, browse, Ask in the browser, code-split charts).
+- **Phase 8a redesign (2026-10-11):** Massab found the first prototype too close to Streamlit → fintech-style
+  redesign: dark hero (ticker tape, headline, search, Essentials index line), Market summary (index chart with
+  3M/1Y/3Y/All, this week's signals, 4 category cards), heatmap of all 51 items, sortable watchlist, city map,
+  news cards with live price strips, set prices, method band; light/dark toggle. New export `index.json`
+  (Essentials index = chained basket change, our calculation, not the official SPI). Fixed 2 item names split by
+  unquoted YAML commas (+ test). 112 tests pass.
+- **Next step:** Massab reviews the redesign → Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·

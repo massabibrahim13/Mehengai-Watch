@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { CitiesFile, HomeData, Item, NewsItem, Series, Summary } from "../types";
+import type { CitiesFile, HomeData, IndexFile, Item, NewsItem, Series, Summary } from "../types";
 
 // All data comes from the JSON files the Python pipeline exports into public/data/.
 const BASE = import.meta.env.BASE_URL;
@@ -10,7 +10,7 @@ export async function getJSON<T>(path: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-/** Everything the home page needs, loaded in parallel (~60 KB). */
+/** Everything the home page needs, loaded in parallel (~70 KB). */
 export function useHomeData(): { data: HomeData | null; error: string | null } {
   const [data, setData] = useState<HomeData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -20,8 +20,9 @@ export function useHomeData(): { data: HomeData | null; error: string | null } {
       getJSON<Item[]>("data/items.json"),
       getJSON<CitiesFile>("data/cities.json"),
       getJSON<NewsItem[]>("data/news.json"),
+      getJSON<IndexFile>("data/index.json"),
     ])
-      .then(([summary, items, cities, news]) => setData({ summary, items, cities, news }))
+      .then(([summary, items, cities, news, index]) => setData({ summary, items, cities, news, index }))
       .catch((e: Error) => setError(e.message));
   }, []);
   return { data, error };

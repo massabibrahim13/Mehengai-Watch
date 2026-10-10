@@ -21,6 +21,16 @@ export const arrow = (t: Trend): string => (t === "up" ? "▲" : t === "down" ? 
 export const trendText = (t: Trend): string =>
   t === "up" ? "text-up" : t === "down" ? "text-down" : "text-muted";
 
+// Names whose plain short form would clash with another item, or would read oddly.
+const SHORT: Record<string, string> = {
+  "Rice (basmati, broken)": "Basmati rice", "Rice (IRRI-6/9)": "IRRI rice",
+  "Vegetable ghee (1 kg pouch)": "Ghee (1 kg)", "Vegetable ghee (2.5 kg tin)": "Ghee (2.5 kg)",
+  "Tea (hotel cup)": "Tea (cup)", "Telephone call charges": "Phone calls", "Gents sponge chappal (Bata)": "Sponge chappal",
+};
+
+/** "Chicken (farm broiler, live)" → "Chicken" for tight spaces; still unique across all 51 items. */
+export const shortName = (name: string): string => SHORT[name] ?? name.replace(/\s*\(.*\)$/, "");
+
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 /** "2026-10-08" → "8 Oct 2026" */
 export const dateLabel = (iso: string): string => {

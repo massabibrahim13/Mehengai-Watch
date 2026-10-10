@@ -1,77 +1,111 @@
-// The week's story in one headline + four count-up tiles. The headline is assembled from the data
-// with fixed rules (not by an AI), so every number in it is exactly what the pipeline exported.
-import { animate, motion } from "motion/react";
-import { useEffect, useState } from "react";
+// Dark hero: headline, big search, quick picks, ticker tape, and the real Essentials index drawn across
+// the bottom. Every number comes from the exported JSON.
+import { Search } from "lucide-react";
+import { motion } from "motion/react";
+import { useMemo } from "react";
 import { reducedMotion } from "../lib/charts";
-import { dateLabel, joinNames, pct } from "../lib/format";
-import type { Item, NewsItem, Summary } from "../types";
-import { NewsStrip } from "./Tickers";
+import { arrow, dateLabel, money, pct, trend } from "../lib/format";
+import type { IndexFile, Item, Summary } from "../types";
 
-const short = (name: string) => name.replace(/\s*\(.*\)$/, "");
+const QUICK = [["Aata", "wheat_flour"], ["Cheeni", "sugar"], ["Petrol", "petrol"], ["Tamatar", "tomatoes"], ["Chicken", "chicken"], ["Doodh", "milk"]];
 
-function CountUp({ value, decimals = 0, prefix = "", suffix = "" }: { value: number; decimals?: number; prefix?: string; suffix?: string }) {
-  const [shown, setShown] = useState(reducedMotion() ? value : 0);
-  useEffect(() => {
-    if (reducedMotion()) return setShown(value);
-    const controls = animate(0, value, { duration: 1.1, ease: [0.16, 1, 0.3, 1], onUpdate: setShown });
-    return () => controls.stop();
-  }, [value]);
-  const sign = prefix === "±" ? (value > 0 ? "+" : value < 0 ? "−" : "") : prefix;
-  return <span className="font-mono tabular">{sign}{Math.abs(shown).toFixed(decimals)}{suffix}</span>;
-}
-
-function Tile({ label, children, note, href }: { label: string; children: React.ReactNode; note: string; href: string }) {
+function TickerTape({ items, onOpen }: { items: Item[]; onOpen: (id: string) => void }) {
+  const sorted = [...items].sort((a, b) => Math.abs(b.change_pct) - Math.abs(a.change_pct));
+  const row = (copy: number) =>
+    sorted.map((it) => {
+      const t = trend(it.change_pct);
+      return (
+        <button key={`${copy}-${it.item_id}`} type="button" onClick={() => onOpen(it.item_id)} tabIndex={copy ? -1 : 0} aria-hidden={copy === 1}
+          className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-1 text-[13px] transition-colors hover:bg-white/5">
+          <span className="font-semibold text-night-ink">{it.name}</span>
+          <span className="text-night-muted">{money(it.price)}</span>
+          <span className={t === "up" ? "text-[#ff7b7a]" : t === "down" ? "text-[#6aa8f2]" : "text-night-muted"}>
+            {arrow(t)} {pct(Math.abs(it.change_pct)).slice(1)}
+          </span>
+        </button>
+      );
+    });
   return (
-    <a href={href} className="bubble block rounded-2xl border border-line bg-surface p-4 hover:border-accent/50">
-      <p className="text-sm text-muted">{label}</p>
-      <p className="mt-1 text-4xl font-medium tracking-tight">{children}</p>
-      <p className="mt-1 text-xs text-muted">{note}</p>
-    </a>
+    <div className="ticker fade-x overflow-hidden border-y border-night-line" aria-label="This week's prices of all 51 items">
+      <div className="ticker-track flex w-max animate-ticker py-1.5">{row(0)}{row(1)}</div>
+    </div>
   );
 }
 
-export function Hero({ summary, items, news }: { summary: Summary; items: Item[]; news: NewsItem[] }) {
-  const byId = Object.fromEntries(items.map((i) => [i.item_id, i]));
-  const unusual = summary.unusual.map((u) => short(byId[u.item_id].name));
-  const headline = unusual.length
-    ? `${joinNames(unusual.map((n, i) => (i ? n.toLowerCase() : n)))} moved unusually this week.`
-    : "A calm week: no unusual price moves.";
-  const gov = summary.government.slice(0, 2).map((g) => `${short(byId[g.item_id].name).toLowerCase()} ${g.change_pct > 0 ? "rose" : "fell"} ${pct(Math.abs(g.change_pct)).slice(1)}`);
-  const b = summary.basket_change_pct;
-  const dek = [
-    gov.length ? `Government-set prices: ${joinNames(gov)}.` : "No government-set price changed.",
-    `Across all 51 essentials, the typical price ${b > 0 ? "rose" : b < 0 ? "fell" : "held"} ${Math.abs(b).toFixed(2)}%: ${summary.counts.up} items up, ${summary.counts.down} down, ${summary.counts.unchanged} unchanged.`,
-  ].join(" ");
-
+function IndexLine({ index }: { index: IndexFile }) {
+  const { line, area } = useMemo(() => {
+    const v = index.values;
+    const lo = Math.min(...v), hi = Math.max(...v);
+    const pts = v.map((y, i) => [(i / (v.length - 1)) * 1000, 190 - ((y - lo) / (hi - lo)) * 160]);
+    const d = pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+    return { line: d, area: `${d} L1000,220 L0,220 Z` };
+  }, [index]);
+  const animate = !reducedMotion();
   return (
-    <section id="top" className="pt-10 md:pt-14">
-      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-          Week ending {dateLabel(summary.week)} · compared with {summary.previous_label} · PBS weekly price survey
-        </p>
-        <h1 className="mt-3 max-w-4xl font-serif text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl">
-          {headline}
-        </h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-ink/80">{dek}</p>
-      </motion.div>
+    <svg viewBox="0 0 1000 220" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-56 w-full md:h-72" aria-hidden="true">
+      <defs>
+        <linearGradient id="hero-fill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stopColor="#4c8fe6" stopOpacity="0.32" />
+          <stop offset="100%" stopColor="#4c8fe6" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <motion.path d={area} fill="url(#hero-fill)" initial={{ opacity: animate ? 0 : 1 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: 0.6 }} />
+      <motion.path d={line} fill="none" stroke="#6aa8f2" strokeWidth={1.6}
+        style={{ filter: "drop-shadow(0 0 6px rgb(106 168 242 / 0.7))" }}
+        initial={{ pathLength: animate ? 0 : 1 }} animate={{ pathLength: 1 }} transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }} />
+    </svg>
+  );
+}
 
-      <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Tile label="Unusual price moves" note="far outside the item's own normal range" href="#this-week">
-          <CountUp value={summary.unusual.length} />
-        </Tile>
-        <Tile label="Government price changes" note={`petrol, power, gas… (≥ ${summary.thresholds.administered}%)`} href="#set-prices">
-          <CountUp value={summary.government.length} />
-        </Tile>
-        <Tile label="Price revisions" note={`packaged & fixed prices (≥ ${summary.thresholds.fixed}%)`} href="#set-prices">
-          <CountUp value={summary.revisions.length} />
-        </Tile>
-        <Tile label="All 51 items, typical change" note={`${summary.counts.up} up · ${summary.counts.down} down · ${summary.counts.unchanged} unchanged`} href="#movers">
-          <CountUp value={b} decimals={2} prefix="±" suffix="%" />
-        </Tile>
+export function Hero({ summary, items, index, onOpen, onSearch }: {
+  summary: Summary; items: Item[]; index: IndexFile; onOpen: (id: string) => void; onSearch: () => void;
+}) {
+  return (
+    <section id="top" className="relative overflow-hidden bg-night pt-16 text-night-ink">
+      {/* soft light from below — calm, no neon */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_70%_100%,rgb(76_143_230/0.22),transparent_70%)]" />
+      <TickerTape items={items} onOpen={onOpen} />
+
+      <div className="relative mx-auto max-w-7xl px-4 pb-64 pt-16 md:px-8 md:pb-80 md:pt-24">
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <span className="inline-flex items-center gap-2 rounded-full border border-night-line bg-white/5 px-3 py-1.5 text-[13px] font-semibold text-night-muted">
+            <span className="h-2 w-2 animate-live rounded-full bg-live" />
+            Week ending {dateLabel(summary.week)} · from PBS weekly price data
+          </span>
+          <h1 className="mt-6 max-w-5xl text-[40px] font-extrabold leading-[1.05] tracking-[-0.03em] md:text-[64px]">
+            Pakistan's essential prices,<br />
+            <span className="text-night-muted">decoded every week.</span>
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-night-muted">
+            Track 51 everyday items across 17 cities. See which prices moved unusually this week, explained in plain words.
+          </p>
+
+          <button type="button" onClick={onSearch}
+            className="mt-8 flex w-full max-w-xl items-center gap-3 rounded-2xl border border-white/15 bg-white/[0.06] px-5 py-4 text-left text-night-muted shadow-[0_8px_40px_-12px_rgb(0_0_0/0.6)] backdrop-blur transition hover:border-white/30 hover:bg-white/[0.09]">
+            <Search size={20} aria-hidden="true" />
+            <span className="flex-1">Search aata, cheeni, petrol, ٹماٹر…</span>
+            <kbd className="hidden rounded-md border border-white/20 px-2 py-0.5 text-xs font-semibold sm:inline">Ctrl K</kbd>
+          </button>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <span className="text-sm text-night-muted">Popular:</span>
+            {QUICK.map(([label, id]) => (
+              <button key={id} type="button" onClick={() => onOpen(id)}
+                className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-sm font-semibold text-night-ink transition hover:border-white/30 hover:bg-white/10">
+                {label}
+              </button>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
-      <div className="mt-6">
-        <NewsStrip news={news} />
+      <IndexLine index={index} />
+      <div className="pointer-events-none absolute bottom-24 right-4 text-right md:bottom-32 md:right-8">
+        <p className="text-xs font-semibold uppercase tracking-wider text-night-muted">Essentials index</p>
+        <p className="text-3xl font-bold tracking-tight">{index.latest.toFixed(1)}</p>
+        <p className="text-sm text-night-muted">
+          <span className={index.change_1w_pct > 0 ? "text-[#ff7b7a]" : "text-[#6aa8f2]"}>{index.change_1w_pct > 0 ? "▲" : "▼"} {Math.abs(index.change_1w_pct).toFixed(2)}%</span> this week
+          {index.change_1y_pct !== null && <> · {index.change_1y_pct > 0 ? "+" : ""}{index.change_1y_pct}% in a year</>}
+        </p>
       </div>
     </section>
   );

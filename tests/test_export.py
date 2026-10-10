@@ -22,7 +22,7 @@ def load(out, name):
 
 
 def test_all_files_written(out):
-    assert {"summary.json", "items.json", "cities.json", "news.json"} <= {p.name for p in out.iterdir()}
+    assert {"summary.json", "items.json", "cities.json", "news.json", "index.json"} <= {p.name for p in out.iterdir()}
     assert len(list((out / "series").glob("*.json"))) == 51
 
 
@@ -57,3 +57,10 @@ def test_series_aligned(out):
 def test_no_nan_anywhere(out):
     for p in out.rglob("*.json"):
         assert "NaN" not in p.read_text(encoding="utf-8"), p.name
+
+
+def test_index_starts_at_100_and_matches_weeks(out):
+    idx = load(out, "index.json")
+    assert idx["values"][0] == 100 and len(idx["values"]) == len(idx["weeks"])
+    assert idx["weeks"][-1] == load(out, "summary.json")["week"]
+    assert idx["latest"] == idx["values"][-1]

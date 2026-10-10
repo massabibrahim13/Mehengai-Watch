@@ -17,15 +17,22 @@ latest price news.
 
 ## The website (new, in progress)
 
-A React website is replacing the Streamlit dashboard as the public face of the project: a newsroom-style home page
-with this week's story, a moving price ticker and live headlines, a Pakistan map with a bubble per city, and a
-quick-view for every item. The Python pipeline exports small JSON files; the site only displays them.
+A React website is replacing the Streamlit dashboard as the public face of the project, styled like a market-data
+site: a price ticker and search, a market summary with our Essentials index and this week's unusual moves, a heatmap
+of all 51 items, a sortable watchlist, a Pakistan city map, and news cards that show the live price of the item they
+mention. The Python pipeline exports small JSON files; the site only displays them.
 
 ![Website home page](docs/img/web_home.png)
 
-| City bubble map | Item quick-view |
+| Market summary | Heatmap |
 |---|---|
-| ![Where it costs more](docs/img/web_map.png) | ![Item panel](docs/img/web_item.png) |
+| ![Market summary](docs/img/web_overview.png) | ![Heatmap of all 51 items](docs/img/web_heatmap.png) |
+
+| News with live prices | Where it costs more |
+|---|---|
+| ![Price news cards](docs/img/web_news.png) | ![City map](docs/img/web_map.png) |
+
+![Item quick-view](docs/img/web_item.png)
 
 Run it locally (needs Node.js): `python -m mehngai.export`, then `cd web`, `npm install`, `npm run dev`, and open
 http://localhost:5173.

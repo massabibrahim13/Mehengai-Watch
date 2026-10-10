@@ -304,3 +304,24 @@ Python pipeline, export JSON, build a React website (CLAUDE.md §3 stages 8–9,
 | Known follow-up | JS bundle 350 KB gzip (ECharts) | Phase 8b: code-split the charts (load after first paint). |
 
 Prototype checked with screenshots: light, dark, 390 px phone, map hover, item panel, search; no console errors.
+
+---
+
+## v3 / Phase 8a — fintech redesign (2026-10-11)
+
+Massab: the prototype "still feels dull and almost the same as Streamlit"; wanted something more professional and
+less "tech-y", like fiscal.ai, TrendSpider, TradingView and Koyfin, with interactive news cards. Common thread of
+those sites (studied from screenshots): a dark hero with one big plain headline and a search box, then calm, rounded
+light panels; one clean sans font; numbers in neat columns; small round logos beside each name.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Look | Dark hero → light rounded "market summary" panel → dark method band; Manrope (one sans font), tabular numbers; lucide icons in round badges | Matches the references; replaces the serif/monospace newspaper look, which read as "tech-y". |
+| Hero | Ticker tape of all 51 items, headline, search + popular picks, the Essentials index drawn as a line along the bottom | First screen says what the site does and shows real data, not decoration. |
+| Essentials index | New `index.json`: trimmed-mean weekly log change of the basket, chained from 100 at Sep 2019 (188.0 now; +0.23% this week, +3.1% in a year) | Gives the market summary one headline number, like an index on a trading site. Labelled "our calculation, not the official SPI". |
+| Heatmap | ECharts treemap of all 51 items grouped by category; diverging blue–grey–red saturating at ±5% weekly change | TradingView-style overview of the whole basket at a glance. |
+| Watchlist | Koyfin-style sortable table (price, 1 week, 1 year, 6-month sparkline, type) with category tabs; 10 rows, then "Show all 51" | Comparable list without a wall of rows. On phones: item, price and 1 week only. |
+| News cards | Featured + 2 side cards + scrollable rail; each card shows the live price, change and sparkline of the item it mentions (click opens the item) | Ties news to the numbers; still labelled "possibly related, not causes". |
+| Names | `shortName()` with overrides (Basmati rice / IRRI rice, Ghee 1 kg / 2.5 kg, …) | Plain short names collided ("Rice" twice). |
+| Theme | Light/dark toggle in the top bar (remembers the choice), follows the system by default | Both modes checked in screenshots, plus 390 px phone width. |
+| Data fix | Quoted two item names in `items.yaml` ("Bread (plain, small)", "Cigarettes (Capstan, 20)") + a test | Unquoted commas in YAML flow mappings had silently split the names. |

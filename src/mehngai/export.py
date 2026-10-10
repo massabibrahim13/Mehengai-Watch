@@ -9,6 +9,8 @@ is prepared here from the database, by the same code the report uses.
                         typical weekly move, 26-week sparkline, this week's flag
   cities.json           the 17 survey cities (coordinates) + this week's price of every item in each
   news.json             latest price headlines (already filtered and item-tagged by news.py)
+  index.json            "Essentials index": the weekly typical change across all 51 items (the L2 basket),
+                        chained from 100 at the first report — our calculation, not the official SPI
   series/<item>.json    full weekly history (national + 17 cities) + flagged weeks with explanations,
                         or set-price changes. One file per item, loaded only when an item is opened.
 
@@ -191,6 +193,18 @@ class Exporter:
                                "change_pct": num(v, 1)} for d, v in hits.items()]
         return out
 
+    def index_file(self) -> dict:
+        """Chain the weekly basket change (trimmed-mean log change of all 51 items) into an index."""
+        changes = self.basket.fillna(0.0)
+        changes.iloc[0] = 0.0                                   # first report = base 100
+        index = 100 * np.exp(changes.cumsum())
+        base_1y = year_ago(index, self.week)
+        return {"weeks": [iso(d) for d in index.index], "values": [num(v) for v in index],
+                "base_week": iso(index.index[0]), "latest": num(index.iloc[-1]),
+                "change_1w_pct": num((index.iloc[-1] / index.iloc[-2] - 1) * 100, 2),
+                "change_1y_pct": num((index.iloc[-1] / base_1y - 1) * 100, 1) if base_1y else None,
+                "change_all_pct": num(index.iloc[-1] - 100, 1)}
+
     def news_list(self) -> list[dict]:
         return [{"title": r.title, "link": r.link, "source": r.source, "published": r.published,
                  "item_ids": [i for i in r.item_ids.split(",") if i],
@@ -201,6 +215,7 @@ class Exporter:
         write_json(out_dir / "items.json", self.items_list())
         write_json(out_dir / "cities.json", self.cities_file())
         write_json(out_dir / "news.json", self.news_list())
+        write_json(out_dir / "index.json", self.index_file())
         for item_id in self.items:
             write_json(out_dir / "series" / f"{item_id}.json", self.series_file(item_id))
         sizes = {p.relative_to(out_dir).as_posix(): p.stat().st_size for p in out_dir.rglob("*.json")}
