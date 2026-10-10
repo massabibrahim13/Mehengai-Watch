@@ -66,6 +66,21 @@ CREATE TABLE IF NOT EXISTS anomalies (
     change_pct REAL NOT NULL,               -- raw % change vs previous report
     PRIMARY KEY (item_id, week_date, method)
 );
+CREATE TABLE IF NOT EXISTS explanations (
+    -- A cache, deliberately without a foreign key: anomalies are rebuilt on every detector run, and
+    -- explanations must survive that so we don't pay for the same LLM call twice. A row is reused
+    -- only while its facts_json is unchanged.
+    item_id    TEXT NOT NULL,
+    week_date  TEXT NOT NULL,
+    method     TEXT NOT NULL,
+    text       TEXT NOT NULL,
+    source     TEXT NOT NULL,               -- 'llm' or 'template' (guardrail fallback)
+    model      TEXT,                        -- LLM model name; NULL for template
+    attempts   INTEGER NOT NULL,            -- LLM calls made (0 = template without trying)
+    facts_json TEXT NOT NULL,               -- exactly what the LLM was given
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (item_id, week_date, method)
+);
 CREATE TABLE IF NOT EXISTS rejected_rows (
     week_date TEXT NOT NULL,
     item_id   TEXT NOT NULL,

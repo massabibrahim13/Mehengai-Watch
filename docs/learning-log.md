@@ -86,3 +86,21 @@ tests, including no-look-ahead.
 
 **Next** Phase 5: explanation layer — facts JSON per anomaly, prompt file, Gemini call, number-check guardrail,
 template fallback.
+
+## 2026-10-10 — Phase 5: explanation layer
+
+**Built** `explain/`: `facts.py` (facts JSON per anomaly), `prompts/explain_anomaly.txt`, `llm.py` (Gemini REST call,
+rate-limit retries), `guardrails.py` (number + wording checks, template fallback), `__main__.py` (retry once →
+fallback, cached in the `explanations` table). 19 tests, no network needed (the LLM is faked in tests).
+
+**Result** 10/10 historical anomalies got an LLM explanation that passed every check first time. This week's alert:
+wheat flour +5.7% (Rs 2,851.04 per 20 kg bag), about 6.3 times its typical weekly change.
+
+**Key concepts**
+- *Grounding:* the model may only use facts we hand it, and code checks every number afterwards.
+- *Separation of duties:* statistics decide what's unusual; the LLM only phrases it.
+- *Guardrail → retry → fallback:* never show unchecked LLM output; the report still works if the API is down.
+- *Secrets:* the key lives in `.env` (gitignored), is read at call time and never logged.
+- *Testing an LLM feature without the LLM:* swap the call for a fake (monkeypatch) and test our logic.
+
+**Next** Phase 6: weekly report generator, Streamlit dashboard, `pipeline.py` single command, README.

@@ -56,3 +56,17 @@ detect:
 evaluate:
   # Fair comparison: give every method the same number of alerts (per week, all items together).
   alert_budget_per_week: 0.5
+
+explain:
+  provider: gemini
+  model: gemini-3.8-flash         # pinned (not "latest") so results are reproducible
+  temperature: 0.2                # low = consistent, factual wording
+  timeout_seconds: 60
+  request_delay_seconds: 6        # free tier allows ~10 requests/minute
+  max_retries_on_rate_limit: 3
+  max_words: 60                   # explanations longer than this are rejected
+  typical_move_weeks: 52          # window for "the item's typical weekly move" (same as the detector)
+  # Words that would accuse someone or claim a cause we were never given. Any hit → regenerate/fallback.
+  banned_phrases: [hoard, mafia, cartel, profiteer, manipulat, gouging, smuggl, black market, greed,
+                   due to, because, caused by, driven by, as a result, owing to, amid, triggered by,
+                   blamed, thanks to, fuelled by, fueled by]

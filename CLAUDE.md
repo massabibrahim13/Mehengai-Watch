@@ -430,17 +430,20 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–4 ✅ done → next is **Phase 5 (Explanation layer)**.
+- **Phase:** Phases 0–5 ✅ done → next is **Phase 6 (Report + dashboard + README)**.
+- **Phase 5 (2026-10-10):** `explain/` — facts JSON → Gemini `gemini-3.8-flash` (REST, key in `.env`) →
+  guardrails (numbers must come from facts; no causes/accusations) → retry once → template fallback; cached in
+  `explanations`. 10/10 historical anomalies passed first time. 66 tests pass.
 - **Last session (2026-10-10):** Phase 1: 378 annex PDFs since 2019 downloaded (PBS media API + Wayback),
   Appendix-A parsed to `data/interim/`. Phase 2: SQLite `data/mehngai.db` with 354 complete weekly national
   series per item (2019-09-05 → 2026-10-08), rejected rows explained. Phase 3: `notebooks/01_explore.ipynb`
   + 8 sourced events in `data/known_events.csv`. Phase 4: L0–L3 built + backtest; **production detector =
   L1 rolling robust z-score, 52-week window** (same recall as L0 with 60% fewer alerts; L2/L3 didn't beat it —
   see decisions.md). All layers' flags are in the `anomalies` table. 47 tests pass. All pushed to GitHub.
-- **Next step:** Phase 5 — facts-JSON builder from `anomalies` (method = `production_method` in settings),
-  prompt file, Gemini free-tier call behind one function, number-check guardrail, template fallback.
-  Needs a Gemini API key in `.env` (Massab to create).
+- **Next step:** Phase 6 — `report/weekly_report.py` (reports/YYYY-MM-DD.md: this week's flags + explanations +
+  small chart per flagged item), Streamlit dashboard, `pipeline.py` running stages 1→7 with one command
+  (production detector only, so it doesn't need the 3-min L3 backtest), README with screenshots + evaluation.
 - **Run order:** `python -m mehngai.ingest.fetch` → `python -m mehngai.ingest.parse` → `python -m mehngai.store.db`
-  → `python -m mehngai.detect.evaluate` (~3 min, mostly L3's STL fits).
+  → `python -m mehngai.detect.evaluate` (~3 min, mostly L3's STL fits) → `python -m mehngai.explain`.
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
   Gemini free tier · 2015-16 base era only (from 2019-09-05).

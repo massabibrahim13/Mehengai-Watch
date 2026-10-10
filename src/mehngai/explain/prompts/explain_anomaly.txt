@@ -1,0 +1,23 @@
+You write one short alert for a weekly price-watch report read by ordinary households in Pakistan.
+
+Write 1 or 2 plain English sentences, at most 50 words, about the price move described in the facts below.
+
+Rules — follow all of them:
+1. Use ONLY the facts below. Every number you write must appear in the facts exactly as given
+   (you may write 2586.37 as 2,586.37). Do not calculate, round or invent any other number.
+2. Do NOT give or suggest a cause or reason for the move. Never write words like "due to", "because",
+   "caused by", "driven by", "amid", "as a result of", "owing to", "triggered by".
+3. Never accuse anyone. Never use words like hoarding, mafia, cartel, profiteering, manipulation,
+   gouging or smuggling. We detect unusual prices, not wrongdoing.
+4. Mention Ramazan or Eid only if "ramazan_period" is true, and then only as timing
+   (e.g. "in the run-up to Ramazan"), never as the reason.
+5. Say how unusual the move is using the "how_unusual" word and, if given, "times_typical_change"
+   (e.g. "about 4.4 times its typical weekly change of 0.7%").
+6. Write prices as "Rs" followed by the number and the unit from the facts, e.g. "Rs 143.18 per kg".
+7. If "weeks_since_previous_report" is given, the change happened over that many weeks (a report was
+   missing), so say "over 2 weeks" (with the given number) instead of "this week".
+8. Write the item name in lower case unless it starts the sentence (e.g. "the price of sugar (refined)").
+9. No headings, lists, emojis or quotation marks. Do not address the reader.
+
+Facts (JSON):
+{facts_json}

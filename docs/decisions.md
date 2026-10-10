@@ -194,3 +194,24 @@ No look-ahead anywhere (unit-tested: changing future prices leaves past scores u
 - **Only 8 known events**, so recall moves in 12.5-point steps; a one-event difference isn't significant.
   The events were partly found by looking at big moves, which favours L0, and L0 still lost.
 - **The Ramazan adjustment** lives only in L3 (not in production). Only 5–6 usable Ramazans so far.
+
+---
+
+## Phase 5 — Explanation layer (2026-10-10)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Model | **`gemini-3.8-flash`**, pinned (not `gemini-flash-latest`) | Available on the free tier for this key (tested); `gemini-2.5-flash` is closed to new users. Pinning keeps output reproducible. |
+| Client | Plain REST with `requests` (no SDK) | `requests` is already a dependency; one function (`llm.generate`) is the only provider-specific code, so swapping to Groq is one function. |
+| What the LLM sees | A facts JSON only: item, unit, human dates, this/previous price, % change, direction, severity word, typical weekly change (median of the previous 52 weeks), × typical, "biggest move since", year-ago price, price_type, Ramazan flag, gap weeks | The detector decides *what* is anomalous; code computes *every* number; the LLM only phrases. No z-scores (jargon for households). |
+| Number guardrail | Every number in the text must be in the facts (rounding to 1 or 0 decimals allowed) | Grounding: catches invented or miscalculated numbers. |
+| Wording guardrail | Banned phrases (cause words like "due to"/"because"/"amid", accusations like "hoarding"/"mafia"), Ramazan only if flagged, direction verbs must match, ≤ 60 words | CLAUDE.md: never claim a cause we weren't given; detect anomalies, not wrongdoing. |
+| Failure path | Retry once with the problems listed → template sentence | The report never shows unchecked LLM text and never breaks if the API is down (also on HTTP errors, rate limits after 3 waits). |
+| Cache | `explanations` table keyed by anomaly, reused only while `facts_json` is identical; no FK | Detector runs rebuild `anomalies`; explanations must survive so we don't pay twice. |
+| Rate limit | 6 s between calls; on 429 wait (Retry-After or 20/40/60 s) | Free tier ≈ 10 requests/min. Observed one 429 → recovered after 20 s. |
+
+**Done-when check:** 10 varied historical anomalies (the strongest per item + strongest drops) →
+**10/10 LLM answers passed every guardrail on the first attempt**; 0 template fallbacks. Ramazan was mentioned
+only for the 3 anomalies inside Ramazan season (sugar Apr-23, potatoes Mar-24, flour Apr-22), and only as timing.
+The guardrail itself is unit-tested with deliberately bad sentences (invented number, "due to", "hoarders",
+Ramazan out of season, wrong direction, too long) and with a fake LLM for the retry and fallback paths.

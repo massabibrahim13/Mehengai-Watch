@@ -1,0 +1,61 @@
+"""Stage 6b — the LLM call, behind one small function so the provider can be swapped.
+
+Provider: Google Gemini (free tier) over its REST API with `requests` — no extra SDK needed.
+The API key is read from .env (LLM_API_KEY) and never logged.
+"""
+from __future__ import annotations
+
+import logging
+import os
+import time
+
+import requests
+from dotenv import load_dotenv
+
+from mehngai.config import PROJECT_ROOT
+
+log = logging.getLogger(__name__)
+
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+
+
+class LLMError(RuntimeError):
+    """The LLM could not produce an answer (network, quota, blocked, empty)."""
+
+
+def api_key() -> str:
+    load_dotenv(PROJECT_ROOT / ".env")
+    key = os.getenv("LLM_API_KEY")
+    if not key:
+        raise LLMError("LLM_API_KEY missing — add it to .env (see .env.example)")
+    return key
+
+
+def generate(prompt: str, cfg: dict) -> str:
+    """Send one prompt, return the model's text. Retries on rate limits (HTTP 429/503).
+
+    This is the only function that knows which provider we use.
+    """
+    if cfg["provider"] != "gemini":
+        raise LLMError(f"unknown provider {cfg['provider']!r}")
+    body = {"contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"temperature": cfg["temperature"]}}
+    for attempt in range(cfg["max_retries_on_rate_limit"] + 1):
+        try:
+            resp = requests.post(GEMINI_URL.format(model=cfg["model"]), json=body,
+                                 headers={"x-goog-api-key": api_key()}, timeout=cfg["timeout_seconds"])
+        except requests.RequestException as exc:
+            raise LLMError(f"network error: {exc}") from exc
+        if resp.status_code in (429, 503) and attempt < cfg["max_retries_on_rate_limit"]:
+            wait = int(resp.headers.get("Retry-After", 20 * (attempt + 1)))
+            log.warning("rate limited (HTTP %d), waiting %ds", resp.status_code, wait)
+            time.sleep(wait)
+            continue
+        if not resp.ok:
+            raise LLMError(f"HTTP {resp.status_code}: {resp.text[:200]}")
+        parts = (resp.json().get("candidates") or [{}])[0].get("content", {}).get("parts", [])
+        text = " ".join(p["text"] for p in parts if "text" in p and not p.get("thought")).strip()
+        if not text:
+            raise LLMError("empty response (blocked or no candidates)")
+        return text
+    raise LLMError("still rate limited after retries")
