@@ -1,6 +1,10 @@
-[theme]
-# Project accent (validated palette blue) instead of Streamlit red. Light/dark follows the viewer.
+# Project accent (validated palette blue) instead of Streamlit red, for both light and dark mode.
+# Setting only [theme] would silently force light mode; the per-mode sections keep the viewer choice.
+[theme.light]
 primaryColor = "#2a78d6"
+
+[theme.dark]
+primaryColor = "#3987e5"
 
 [browser]
 gatherUsageStats = false

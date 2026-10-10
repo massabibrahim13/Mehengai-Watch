@@ -138,3 +138,15 @@ Dashboard runs locally. 70 tests pass.
   caught by viewing the real pages.
 
 **Next** Phase 7 (bonus): GitHub Actions weekly run; optional free hosting on Streamlit Community Cloud.
+
+## 2026-10-11 — v2.1: home page look and feel
+
+**Built** `app/style.py` (one stylesheet + HTML builders): price ticker, live headline strip, unusual-move cards with
+sparklines, set-price boards, headline cards with clickable item tags; light + dark mode; reduced-motion support.
+
+**Key concepts**
+- *CSS animation without JavaScript:* a ticker is a duplicated row moved by `translateX(-50%)` in a loop.
+- *Sanitised HTML:* Streamlit strips `<svg>` and scripts from `st.html`, so the sparkline is an image (data URI).
+- *Escape anything from outside:* news titles are text, never markup; links must be http(s).
+- *Theme config gotcha:* setting one theme option creates a custom (light) theme; per-mode sections keep dark mode.
+- *Verify visually, in both modes:* stale servers, stripped SVGs and forced light mode were all found in screenshots.

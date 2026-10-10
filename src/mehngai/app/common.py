@@ -5,6 +5,8 @@ report (written by the pipeline) shows up without restarting the app.
 """
 from __future__ import annotations
 
+from datetime import datetime, timezone
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -144,6 +146,16 @@ def move_bars(df: pd.DataFrame, title: str) -> go.Figure:
     fig.update_layout(height=60 + 34 * len(df), margin=dict(l=10, r=70, t=36, b=10), title=title,
                       xaxis=dict(ticksuffix="%", rangemode="tozero"), showlegend=False, bargap=0.35)
     return fig
+
+
+def time_ago(iso: str) -> str:
+    delta = datetime.now(timezone.utc) - datetime.fromisoformat(iso)
+    hours = delta.total_seconds() / 3600
+    if hours < 1:
+        return f"{int(delta.total_seconds() // 60)} min ago"
+    if hours < 48:
+        return f"{int(hours)} h ago"
+    return f"{int(hours // 24)} days ago"
 
 
 def week_label(week: pd.Timestamp) -> str:

@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from mehngai.app import common as c
+from mehngai.app import style
 from mehngai.news import read_news
 from mehngai.search import find_items
 from mehngai.store.db import connect
@@ -94,14 +95,17 @@ def item_view(item_id: str) -> None:
         news = read_news(conn, item_id=item_id, limit=8)
     if len(news):
         st.subheader("Recent news mentioning this item")
-        for row in news.itertuples():
-            st.markdown(f"- [{row.title}]({row.link}) <span style='opacity:0.7'>· {row.source}</span>",
-                        unsafe_allow_html=True)
+        st.html(style.news_cards(news, {i: c.name(i) for i in c.ITEMS}, c.time_ago))
 
 
 def render() -> None:
     wide, _ = c.load_national()
     st.title("Explore prices")
+    # links from the home page (ticker, cards, news tags) arrive as /explore?q=<item_id>
+    linked = st.query_params.get("q")
+    if linked and st.session_state.get("linked_q") != linked:
+        st.session_state["linked_q"] = linked
+        st.session_state["query"] = c.name(linked) if linked in c.ITEMS else linked
     query = st.text_input("Search any of the 51 items", value=st.session_state.get("query", ""),
                           placeholder="aata, cheeni, petrol, tamatar, دودھ, bijli …")
     st.session_state["query"] = query

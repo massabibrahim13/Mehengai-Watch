@@ -45,9 +45,15 @@ normally behaves, and if so, what happened in plain words?"**
   30 minutes.
 - A weekly Markdown report and a three-page dashboard (Home · Explore · Ask).
 
-| Explore any item | Ask a question |
+| This week's sections + headlines | Dark mode |
 |---|---|
+| ![Unusual moves, government prices, headlines](docs/img/home_sections.png) | ![Home page in dark mode](docs/img/dashboard_dark.png) |
+| **Explore any item** | **Ask a question** |
 | ![Explore page](docs/img/explore.png) | ![Ask page](docs/img/ask.png) |
+
+The home page has a slow-scrolling price ticker (all 51 items) and a live headline strip, both pausing on hover.
+Cards, news and buttons react to the mouse, and every item name, ticker entry and news tag opens that item's
+page. It works in light and dark mode, and motion stops if the computer's "reduce motion" setting is on.
 
 ## How it works
 
@@ -129,7 +135,7 @@ Other commands:
 | `python -m mehngai.explain --sample 10` | Explain 10 varied historical alerts (guardrail check) |
 | `python -m mehngai.news` | Fetch the latest price headlines now |
 | `python -m mehngai.report.weekly_report --week 2023-11-16` | Report for any past week |
-| `pytest` | 101 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, search, ask, news, report, dashboard pages |
+| `pytest` | 105 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, search, ask, news, report, dashboard pages |
 
 ## Project structure
 
@@ -143,7 +149,7 @@ src/mehngai/
   detect/         baseline.py (L0) · zscore.py (L1) · relative.py (L2) · seasonal.py (L3) · changes.py · evaluate.py · run.py
   explain/        facts.py · llm.py · guardrails.py · prompts/
   report/         weekly_report.py · charts.py
-  app/            dashboard.py · home.py · explore.py · ask_page.py · common.py (Streamlit)
+  app/            dashboard.py · home.py · explore.py · ask_page.py · common.py · style.py (Streamlit)
   search.py       item search (English / Roman Urdu / Urdu, typos)
   ask.py          question → structured lookup → answer from the database
   news.py         price headlines from Pakistani RSS feeds

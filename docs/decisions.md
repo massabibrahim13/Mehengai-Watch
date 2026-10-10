@@ -269,3 +269,18 @@ and a live home page with news. Discussed first; agreed the three-section layout
 Result: 321,739 price rows (51 items × 18 places × 354 weeks, minus explained rejects); week ending 8 Oct 2026 →
 2 unusual moves (chana daal +4.0%, wheat flour +5.7%), 2 government changes (petrol +2.4%, diesel −1.4%),
 0 revisions. Pipeline incl. news: 37 s with caches. 101 tests pass.
+
+### v2.1 — home page look and feel (2026-10-11)
+
+Brief: dynamic and interactive, clean and professional, unique, not the generic "AI dashboard" look; bubbles
+around buttons and news; moving news; a headlines section.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Visual direction | Market rate-board / newspaper: serif headlines (Fraunces), tabular monospace prices (IBM Plex Mono), project palette only | Fits the subject (bazaar rate boards, news), distinct from the usual gradient/glass/emoji dashboards. |
+| Motion | Two slow CSS tickers (prices 140 s loop, headlines 90 s), pause on hover; 0.45 s card fade-in; pulsing LIVE dot. All off under `prefers-reduced-motion` | "Dynamic but not overdone": motion only where it carries information. |
+| "Bubbles" | Pills for buttons, search, source/item tags; soft blue ring + 1–2 px lift on hover; cards lift with a ring | Interactive feel without decoration that means nothing. |
+| Navigation from HTML | Every ticker entry, card title and news tag links to `/explore?q=<item_id>`; Explore reads the query param | Makes the moving parts useful, not just decorative. |
+| Sparklines | Tiny SVG trend (last 26 weeks) embedded as an `<img>` data URI | Streamlit's HTML sanitiser strips inline `<svg>` (found by inspecting the DOM). |
+| Theme | `[theme.light]` / `[theme.dark]` in `.streamlit/config.toml`; CSS neutrals are semi-transparent | A plain `[theme]` section silently forced light mode; per-mode sections keep the viewer's choice. |
+| Safety | All feed text HTML-escaped, only http(s) links emitted (`style.py`, tested) | Headlines come from outside sites and are rendered as HTML. |

@@ -11,9 +11,10 @@ database reads from repeating. Three pages:
 """
 import streamlit as st
 
-from mehngai.app import ask_page, explore, home
+from mehngai.app import ask_page, explore, home, style
 
 st.set_page_config(page_title="Mehngai Watch", page_icon="📈", layout="wide")
+st.html(style.CSS)                         # one stylesheet for every page
 
 pages = {
     "home": st.Page(home.render, title="Home", icon="🏠", default=True),
