@@ -85,3 +85,33 @@ Findings that drive Phase 1 parsing:
 
 Known source quirks found while parsing:
 - 2019-07-18: PBS's PDF omits item 53 on page 1 (cities 1–7). A source gap, not a parse error.
+
+### Phase 1 follow-up: truncated Wayback captures (found in Phase 2)
+
+- 11 annexes (Jan–Mar 2023, Sep–Oct 2024) downloaded as exactly 1 MB: the *first* Wayback capture of those
+  URLs was cut off. Later captures are complete (~3.8 MB).
+- **Fix:** list every capture (no `collapse=urlkey`), keep the largest; reject any download that doesn't end
+  with `%%EOF`; files on disk that fail this check are re-downloaded on the next run.
+- PDF date beats filename date, confirmed twice: `…_01072022.pdf` is the week ended 2022-06-30, and
+  `…_13062023.pdf` is really the week ended **2023-04-13** (PBS typo) — it fills an apparent gap.
+
+---
+
+## Phase 2 — Clean, validate, store (2026-10-10)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Item matching | By **SL number** (fixed within the 2015-16 base) + name-prefix check (letters and digits, ≥ 5 chars) | Garbling spells the same item ~20 ways (`kEga cThin`, `Chicken F`), so exact name aliases would be fragile. Digits are kept so the 2.5 kg ghee tin can't pass as the 1 kg pouch. |
+| Series start | **2019-09-05** (`series_start` in `items.yaml`) | Last 53-item (2007-08 base) report: 2019-08-22; first 51-item report: 2019-09-05. Older weeks have other SL numbers and units (wheat flour 10 kg vs 20 kg). |
+| Stored data | 8 tracked items × 17 cities + National | Cheap (≈50k rows) and Lahore/city detection is a stretch goal. Detection v1 uses National only. |
+| National row | `city = 'National'`, not NULL | In SQLite, NULLs in a PRIMARY KEY count as distinct values, so NULL would let duplicate national rows in. |
+| Sanity bound | ×4 / ÷4 vs the **last accepted** price for that item + city (`max_weekly_ratio: 4.0`) | The ±300% rule. Comparing to the last *accepted* price means one misread week doesn't also get the next (correct) week rejected. |
+| Loading | Rebuild `reports`, `prices`, `rejected_rows` in one transaction; upsert `items` | Idempotent by construction, no stale rows (an upsert-only version left one), and rule changes apply to old weeks. PKs make duplicates impossible. |
+| L2 basket (later) | Not stored yet | Phase 4 can compute it from the interim CSVs (all 51 items) or the published SPI index. Decide then. |
+
+**Result:** 354 weekly reports (2019-09-05 → 2026-10-08), every tracked item present every week nationally,
+49,913 price rows, 0 duplicates. 1,063 rejected rows, all explained:
+- 1,062 × blank price: the known garbled ghee-pouch cells (Islamabad, Multan, Bannu × 354 weeks).
+- 1 × weekly jump: Larkana tomatoes Rs 20 → Rs 100 over a 2-week gap (2025-05-29 → 06-12). Looks real
+  (seasonal), but it's a single city. Known limit: a fixed ×4 bound can catch real moves in cheap,
+  volatile items, especially across a missing week. Revisit only if it starts affecting national rows.

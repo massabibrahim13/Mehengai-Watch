@@ -5,7 +5,8 @@ from pathlib import Path
 import pytest
 
 from mehngai.config import RAW_DIR
-from mehngai.ingest.fetch import date_from_filename, kind_from_filename, pick_one_per_week, to_link
+from mehngai.ingest.fetch import (date_from_filename, is_complete_pdf, kind_from_filename,
+                                  pick_one_per_week, to_link)
 from mehngai.ingest.parse import city_columns, parse_annex, to_float
 
 KNOWN_REPORT = RAW_DIR / "2024-06-06_annex.pdf"
@@ -42,10 +43,25 @@ def test_kind_from_filename(name, expected):
 
 def test_live_pbs_copy_wins_over_wayback():
     url = "https://www.pbs.gov.pk/x/Annex_08.10.2026.pdf"
-    wayback = to_link(url, "wayback", "https://web.archive.org/...")
+    wayback = to_link(url, "wayback", "https://web.archive.org/...", size=9_999_999)
     pbs = to_link(url, "pbs", url)
     chosen = pick_one_per_week([pbs, wayback])
     assert chosen[(date(2026, 10, 8), "annex")].source == "pbs"
+
+
+def test_largest_wayback_capture_wins():
+    # Early Wayback captures of some 2023 annexes were cut off at 1 MB.
+    url = "https://www.pbs.gov.pk/x/SPI_Annex%26USCP_12012023.pdf"
+    truncated = to_link(url, "wayback", "capture-1", size=1_036_107)
+    complete = to_link(url, "wayback", "capture-2", size=3_651_742)
+    chosen = pick_one_per_week([complete, truncated])
+    assert chosen[(date(2023, 1, 12), "annex")].download_url == "capture-2"
+
+
+def test_truncated_pdf_is_detected():
+    assert is_complete_pdf(b"%PDF-1.5 ... %%EOF\n")
+    assert not is_complete_pdf(b"%PDF-1.5 ... cut off mid-stream")
+    assert not is_complete_pdf(b"<html>404</html>")
 
 
 # --- parse: pure helpers ---

@@ -1,4 +1,4 @@
-# Phase 0-1: fetch + parse
+# Phase 0-3: fetch, parse, store, explore
 requests
 beautifulsoup4
 pdfplumber
@@ -8,4 +8,7 @@ openpyxl
 pyyaml
 python-dotenv
 pytest
-# Later phases add: statsmodels, scipy, hijri-converter, matplotlib, plotly, streamlit, LLM SDK
+matplotlib
+jupyter
+hijridate        # Ramazan/Eid dates (maintained successor of hijri-converter)
+# Later phases add: statsmodels, scipy, plotly, streamlit, LLM SDK

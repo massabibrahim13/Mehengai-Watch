@@ -49,6 +49,7 @@ class ReportLink:
     source: str        # "pbs" | "wayback"
     url: str           # original file URL on pbs.gov.pk
     download_url: str  # where we actually fetch it from
+    size: int = 0      # Wayback capture size; bigger = complete (some captures were cut at 1 MB)
 
 
 def date_from_filename(name: str) -> date | None:
@@ -76,14 +77,29 @@ def kind_from_filename(name: str) -> str | None:
     return None
 
 
-def to_link(url: str, source: str, download_url: str) -> ReportLink | None:
+def to_link(url: str, source: str, download_url: str, size: int = 0) -> ReportLink | None:
     """Turn a raw URL into a ReportLink, or None if it isn't a dated SPI PDF."""
     name = unquote(url.rsplit("/", 1)[-1])
     kind = kind_from_filename(name)
     report_date = date_from_filename(name)
     if kind is None or report_date is None:
         return None
-    return ReportLink(report_date, kind, source, url, download_url)
+    return ReportLink(report_date, kind, source, url, download_url, size)
+
+
+def is_complete_pdf(content: bytes) -> bool:
+    """A whole PDF starts with %PDF and ends with an %%EOF marker; truncated captures don't."""
+    return content.startswith(b"%PDF") and b"%%EOF" in content[-2048:]
+
+
+def file_is_complete(path: Path) -> bool:
+    """is_complete_pdf() for a file on disk, reading only its first and last bytes."""
+    if not path.exists() or path.stat().st_size < 2048:
+        return False
+    with open(path, "rb") as f:
+        head = f.read(8)
+        f.seek(-2048, 2)
+        return is_complete_pdf(head + f.read())
 
 
 def get_with_retry(session: requests.Session, url: str, timeout: int, retries: int,
@@ -119,28 +135,34 @@ def list_pbs_links(session: requests.Session, timeout: int, retries: int) -> lis
 
 
 def list_wayback_links(session: requests.Session, timeout: int, retries: int) -> list[ReportLink]:
-    """All SPI PDFs the Wayback Machine archived from the old PBS file folder."""
+    """All SPI PDFs the Wayback Machine archived from the old PBS file folder.
+
+    Every capture is listed (not just the first per URL): early captures of some 2023 files were
+    cut off at 1 MB, and pick_one_per_week() then keeps the largest capture.
+    """
     resp = get_with_retry(session, WAYBACK_CDX, timeout, retries, params={
-        "url": OLD_PBS_PREFIX, "matchType": "prefix", "fl": "timestamp,original",
-        "filter": "statuscode:200", "collapse": "urlkey"})
+        "url": OLD_PBS_PREFIX, "matchType": "prefix", "fl": "timestamp,original,length",
+        "filter": "statuscode:200"})
     if resp.text.lstrip().startswith("<"):
         raise RuntimeError("Wayback CDX returned HTML (archive.org temporarily offline?)")
     links = []
     for line in resp.text.splitlines():
         parts = line.split()
-        if len(parts) != 2:
+        if len(parts) != 3 or not parts[2].isdigit():
             continue
-        timestamp, original = parts
-        link = to_link(original, "wayback", f"https://web.archive.org/web/{timestamp}id_/{original}")
+        timestamp, original, length = parts
+        link = to_link(original, "wayback", f"https://web.archive.org/web/{timestamp}id_/{original}",
+                       int(length))
         if link:
             links.append(link)
     return links
 
 
 def pick_one_per_week(links: list[ReportLink]) -> dict[tuple[date, str], ReportLink]:
-    """Keep one link per (date, kind), preferring the live PBS copy over Wayback."""
+    """Keep one link per (date, kind): the live PBS copy if there is one, else the largest
+    Wayback capture (the most likely to be complete)."""
     chosen: dict[tuple[date, str], ReportLink] = {}
-    for link in sorted(links, key=lambda l: l.source == "pbs"):  # pbs sorted last → wins
+    for link in sorted(links, key=lambda l: (l.source == "pbs", l.size)):  # best sorted last → wins
         chosen[(link.report_date, link.kind)] = link
     return chosen
 
@@ -167,8 +189,8 @@ def download(session: requests.Session, link: ReportLink, timeout: int, retries:
     """Download one PDF into data/raw/, record it in the manifest, return its path."""
     resp = get_with_retry(session, link.download_url, timeout, retries)
     content = resp.content
-    if not content.startswith(b"%PDF"):
-        raise ValueError(f"not a PDF ({len(content)} bytes): {link.download_url}")
+    if not is_complete_pdf(content):
+        raise ValueError(f"not a complete PDF ({len(content)} bytes): {link.download_url}")
     dest = RAW_DIR / f"{link.report_date.isoformat()}_{link.kind}.pdf"
     dest.write_bytes(content)
     append_manifest({
@@ -212,7 +234,8 @@ def main() -> None:
     log.info("%d reports in range %s → %s", len(wanted), args.start, args.end)
     log_gaps(sorted({l.report_date for l in wanted}))
 
-    have = read_manifest()
+    # Files that are missing or truncated on disk get downloaded again.
+    have = {key for key, row in read_manifest().items() if file_is_complete(RAW_DIR / row["file"])}
     todo = [l for l in wanted if (l.report_date.isoformat(), l.kind) not in have]
     log.info("%d already downloaded, %d to fetch", len(wanted) - len(todo), len(todo))
     if args.dry_run:

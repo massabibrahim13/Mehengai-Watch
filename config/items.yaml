@@ -1,0 +1,75 @@
+# v1 tracked items (8 market-priced essentials).
+#
+# How rows are matched (see docs/decisions.md, Phase 2):
+#   Appendix-A lists items in a fixed order, so each item is found by its SL number.
+#   PDF garbling often mangles long names ("Vegetable Ghee DALDA/HABIB or O"), so the name is only
+#   used as a sanity check: the raw name and `name_prefix` must start the same way.
+#
+# SL numbers below are valid for the 2015-16 SPI base (51 items). Its first report is 2019-09-05;
+# earlier weeks used the 2007-08 base with different numbering and units, so they are not loaded.
+series_start: 2019-09-05
+
+items:
+  - item_id: wheat_flour
+    name: Wheat flour
+    unit: 20 kg bag
+    category: staples
+    price_type: market
+    sl_no: 1
+    name_prefix: Wheat Flour Bag
+
+  - item_id: sugar
+    name: Sugar (refined)
+    unit: 1 kg
+    category: staples
+    price_type: market
+    sl_no: 24
+    name_prefix: Sugar Refined
+
+  - item_id: tomatoes
+    name: Tomatoes
+    unit: 1 kg
+    category: vegetables
+    price_type: market
+    sl_no: 23
+    name_prefix: Tomatoes
+
+  - item_id: onions
+    name: Onions
+    unit: 1 kg
+    category: vegetables
+    price_type: market
+    sl_no: 22
+    name_prefix: Onions
+
+  - item_id: potatoes
+    name: Potatoes
+    unit: 1 kg
+    category: vegetables
+    price_type: market
+    sl_no: 21
+    name_prefix: Potatoes
+
+  - item_id: chicken
+    name: Chicken (farm broiler, live)
+    unit: 1 kg
+    category: protein
+    price_type: market
+    sl_no: 7
+    name_prefix: Chicken Farm Broiler
+
+  - item_id: eggs
+    name: Eggs (farm)
+    unit: 1 dozen
+    category: protein
+    price_type: market
+    sl_no: 11
+    name_prefix: Eggs Hen
+
+  - item_id: ghee
+    name: Vegetable ghee (1 kg pouch)
+    unit: 1 kg pouch
+    category: cooking fat
+    price_type: market
+    sl_no: 15
+    name_prefix: Vegetable Ghee DALDA/HABIB or
