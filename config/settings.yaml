@@ -1,0 +1,21 @@
+# Mehngai Watch settings. Thresholds and window sizes get added here in later phases.
+
+ingest:
+  # First report week to download (inclusive). 2019 still includes some old-base (2007-08) weeks;
+  # the parser handles both and Phase 2 decides where the usable series starts.
+  start_date: 2019-01-01
+  # Which PDF to download per week: "annex" = Appendix-A city-wise prices (our parse target).
+  kinds: [annex]
+  request_delay_seconds: 1.5
+  timeout_seconds: 120
+  max_retries: 3
+
+clean:
+  # Reject a price if it is more than this many times (or less than 1/this) the last accepted
+  # price for the same item + city. 4.0 = the "±300%" sanity bound from CLAUDE.md.
+  max_weekly_ratio: 4.0
+  # Characters that must match between a raw item name and its name_prefix (garbled names are short).
+  min_name_match_chars: 5
+
+store:
+  db_file: mehngai.db   # inside data/

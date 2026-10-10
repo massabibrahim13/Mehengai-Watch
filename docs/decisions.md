@@ -67,3 +67,21 @@ Findings that drive Phase 1 parsing:
 ### Libraries
 
 - `openpyxl` added: pandas needs it to read the PBS `.xlsx` reports (cross-check source from 2025 on).
+
+---
+
+## Phase 1 — Ingestion (2026-10-10)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Download tracking | `data/raw/manifest.csv` (date, kind, source, url, sha256) | The SQLite DB arrives in Phase 2; the manifest gives "never re-download" now and gets loaded into the `reports` table later. |
+| Which PDF per week | Annex only (`kinds: [annex]` in settings) | Appendix-A is our parse target. The Report PDF can be added later for cross-checks. |
+| Live vs Wayback copy | Live PBS copy wins when both exist | Original source beats the archive copy. |
+| Backfill start | 2019-01-01 (`config/settings.yaml`) | Covers the 2007-08 → 2015-16 base switch so Phase 2 can locate it; ~378 weekly reports. |
+| Report date | Taken from the filename, cross-checked against "PRICES ON dd-mm-yyyy" in the PDF | Filenames are inconsistent; the PDF text is the authority (mismatches are logged). |
+| Interim format | One long CSV per report: `report_date, sl_no, item_raw, unit_raw, city, price_min/avg/max` | Long format (one row per item × city) loads straight into the `prices` table. |
+| Garbled cells | Left blank, never guessed | Two long item names (cooking oil 5 L tin, ghee 1 kg pouch) are printed across the first city's cells on each page (Islamabad, Multan, Bannu). Those cells fail number parsing → blank. National + Lahore unaffected. |
+| Packaging | `pyproject.toml` + `pip install -e .` | So `python -m mehngai...`, tests and later notebooks all import `mehngai` the same way. |
+
+Known source quirks found while parsing:
+- 2019-07-18: PBS's PDF omits item 53 on page 1 (cities 1–7). A source gap, not a parse error.
