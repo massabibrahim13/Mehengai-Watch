@@ -31,6 +31,18 @@ def api_key() -> str:
     return key
 
 
+def retry_delay(resp: requests.Response) -> int | None:
+    """Seconds the API asks us to wait: Gemini puts it in error.details[RetryInfo].retryDelay ("36s")."""
+    try:
+        for detail in resp.json().get("error", {}).get("details", []):
+            if detail.get("@type", "").endswith("RetryInfo"):
+                return int(float(detail["retryDelay"].rstrip("s"))) + 1
+    except (ValueError, KeyError, AttributeError):
+        pass
+    header = resp.headers.get("Retry-After")
+    return int(header) if header and header.isdigit() else None
+
+
 def generate(prompt: str, cfg: dict) -> str:
     """Send one prompt, return the model's text. Retries on rate limits (HTTP 429/503).
 
@@ -47,7 +59,10 @@ def generate(prompt: str, cfg: dict) -> str:
         except requests.RequestException as exc:
             raise LLMError(f"network error: {exc}") from exc
         if resp.status_code in (429, 503) and attempt < cfg["max_retries_on_rate_limit"]:
-            wait = int(resp.headers.get("Retry-After", 20 * (attempt + 1)))
+            wait = retry_delay(resp) or 20 * (attempt + 1)
+            if wait > cfg["max_wait_seconds"]:
+                # e.g. the free tier's daily request cap (20/day): waiting hours is pointless
+                raise LLMError(f"quota exhausted; API says retry in {wait}s")
             log.warning("rate limited (HTTP %d), waiting %ds", resp.status_code, wait)
             time.sleep(wait)
             continue

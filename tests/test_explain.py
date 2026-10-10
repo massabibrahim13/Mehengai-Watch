@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 
 from mehngai.config import load_settings
-from mehngai.explain import __main__ as explain_main
+from mehngai.explain import run as explain_main
 from mehngai.explain.facts import biggest_since, build_facts, unit_phrase
 from mehngai.explain.guardrails import allowed_numbers, check, numbers_in, template
 from mehngai.explain.llm import LLMError
@@ -118,3 +118,42 @@ def test_llm_down_uses_template(facts, monkeypatch):
         raise LLMError("HTTP 500")
     monkeypatch.setattr(explain_main, "generate", down)
     assert explain_main.explain(facts, CFG) == (template(facts), "template", 0)
+
+
+# --- rate limits: wait for short per-minute limits, give up on the daily quota ---
+
+class FakeResponse:
+    def __init__(self, status: int, delay: str | None = None, text: str = "OK"):
+        self.status_code, self.ok, self.headers, self.text = status, status == 200, {}, ""
+        details = [{"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": delay}] if delay else []
+        self._json = ({"candidates": [{"content": {"parts": [{"text": text}]}}]} if status == 200
+                      else {"error": {"details": details}})
+
+    def json(self):
+        return self._json
+
+
+def fake_post(responses, waits):
+    from mehngai.explain import llm
+    replies = iter(responses)
+    return (lambda *a, **k: next(replies)), (lambda s: waits.append(s)), llm
+
+
+def test_short_rate_limit_waits_then_succeeds(monkeypatch):
+    waits = []
+    post, sleep, llm = fake_post([FakeResponse(429, "12s"), FakeResponse(200, text="fine")], waits)
+    monkeypatch.setattr(llm.requests, "post", post)
+    monkeypatch.setattr(llm.time, "sleep", sleep)
+    monkeypatch.setattr(llm, "api_key", lambda: "test")
+    assert llm.generate("hi", CFG) == "fine" and waits == [13]
+
+
+def test_daily_quota_gives_up_immediately(monkeypatch):
+    waits = []
+    post, sleep, llm = fake_post([FakeResponse(429, "23207s")], waits)
+    monkeypatch.setattr(llm.requests, "post", post)
+    monkeypatch.setattr(llm.time, "sleep", sleep)
+    monkeypatch.setattr(llm, "api_key", lambda: "test")
+    with pytest.raises(LLMError, match="quota exhausted"):
+        llm.generate("hi", CFG)
+    assert waits == []

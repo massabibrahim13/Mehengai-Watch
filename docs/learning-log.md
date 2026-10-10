@@ -104,3 +104,21 @@ wheat flour +5.7% (Rs 2,851.04 per 20 kg bag), about 6.3 times its typical weekl
 - *Testing an LLM feature without the LLM:* swap the call for a fake (monkeypatch) and test our logic.
 
 **Next** Phase 6: weekly report generator, Streamlit dashboard, `pipeline.py` single command, README.
+
+## 2026-10-10 — Phase 6: report, dashboard, pipeline, README
+
+**Built** `report/weekly_report.py` (+ `charts.py`), `app/dashboard.py` (Streamlit), `detect/run.py` (production
+detector only), `pipeline.py` (stages 1→7, one command), README with screenshots and the evaluation table.
+Each stage now has a callable `run()` and a thin `main()`.
+
+**Result** `python -m mehngai.pipeline` rebuilds the DB and writes `reports/2026-10-08.md` (wheat flour +5.7%, notable).
+Dashboard runs locally. 70 tests pass.
+
+**Key concepts**
+- *Separate "what a stage does" from "how it's called":* a `run()` function for code, `main()` for the command line.
+- *Caching makes pipelines cheap to re-run:* downloads, parsed CSVs and LLM answers are reused; only new work runs.
+- *Degrade gracefully:* no Wayback → live site only; no LLM quota → template sentence. The report always appears.
+- *Streamlit:* a script that re-runs top to bottom on every click; `@st.cache_data` stops repeated DB reads.
+- *Test the UI without a browser:* Streamlit's `AppTest` runs the page and reports exceptions.
+
+**Next** Phase 7 (bonus): GitHub Actions weekly cron that runs the pipeline and commits the new report.

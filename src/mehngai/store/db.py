@@ -187,7 +187,8 @@ def read_prices(conn: sqlite3.Connection, city: str = "National") -> pd.DataFram
         conn, params=(city,), parse_dates=["week_date"])
 
 
-def main() -> None:
+def load() -> None:
+    """Rebuild the database from the manifest, items.yaml and the interim CSVs."""
     settings = load_settings()["clean"]
     series_start, items = load_items()
 
@@ -214,6 +215,10 @@ def main() -> None:
              len(report_dates))
     for item_id, weeks, first, last in summary:
         log.info("  %-12s %3d weeks  %s → %s", item_id, weeks, first, last)
+
+
+def main() -> None:
+    load()
 
 
 if __name__ == "__main__":

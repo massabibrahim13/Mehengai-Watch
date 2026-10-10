@@ -215,3 +215,30 @@ No look-ahead anywhere (unit-tested: changing future prices leaves past scores u
 only for the 3 anomalies inside Ramazan season (sugar Apr-23, potatoes Mar-24, flour Apr-22), and only as timing.
 The guardrail itself is unit-tested with deliberately bad sentences (invented number, "due to", "hoarders",
 Ramazan out of season, wrong direction, too long) and with a fake LLM for the retry and fallback paths.
+
+**Free-tier quota (found in Phase 6):** `gemini-3.8-flash` allows **20 requests/day** per project. A 429 now reads
+Gemini's `RetryInfo.retryDelay`: short waits (per-minute limit) are honoured; anything over `max_wait_seconds`
+(90 s — e.g. the daily cap, which asked for 23,207 s) gives up at once and the template is used. A normal week
+needs 0–3 calls, so the cap only matters while testing.
+
+---
+
+## Phase 6 — Report, dashboard, pipeline, README (2026-10-10)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Pipeline detector | `detect/run.py` runs only `production_method` (L1) | Seconds instead of the 3-min L0–L3 backtest; replaces only L1's rows in `anomalies`. |
+| Stage functions | Each stage has a plain `run()`/`load()`/`write()`; `main()` only parses CLI args | `pipeline.py` can call stages directly (calling `main()` would read the pipeline's own CLI args). |
+| Wayback in weekly runs | Optional: if the CDX listing fails, continue with the live PBS site | Wayback is only needed for history and is sometimes offline; new reports come from the live site. |
+| Report format | Markdown in `reports/` (+ PNG chart per flag), committed | GitHub renders it; quiet weeks still get a report with all 8 prices. |
+| Missing explanation | Report/dashboard use the guardrail template (no LLM call) | The dashboard never spends API quota; older flags without a cached LLM text still read well. |
+| Dashboard | Streamlit + Plotly (hover tooltips); flags in orange with ▲/▼ shape; theme follows the user's light/dark setting | Colour never carries meaning alone; same palette as the notebook and report. |
+| "Typical weekly move" | Median |% change| over the 52 weeks **before** the week shown, everywhere | The dashboard first included the current week (1.0% vs the report's 0.9% for flour); now one definition. |
+| Screenshots | Playwright driving the installed Chrome (one-off, not in requirements) | Plain headless Chrome captured Streamlit's loading skeleton; Playwright waits for the chart to render. |
+| Dropped dependency | `beautifulsoup4` | Never used: links come from PBS's JSON media API, not HTML scraping. |
+
+**Done-when check:** with the database and `reports/` deleted, `python -m mehngai.pipeline` rebuilt everything and
+wrote `reports/2026-10-08.md` in 2.5 min (cached PDFs; the explain stage hit the daily LLM quota and correctly fell
+back to the template). With caches warm, a run takes ~7 s. A truly empty clone also downloads ~380 PDFs first
+(~1 hour; the download stage itself was verified in Phase 1). The dashboard runs locally (`streamlit run
+src/mehngai/app/dashboard.py`) and is smoke-tested with Streamlit's `AppTest`. 70 tests pass.

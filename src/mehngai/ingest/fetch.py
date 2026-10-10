@@ -202,21 +202,17 @@ def download(session: requests.Session, link: ReportLink, timeout: int, retries:
 
 
 def log_gaps(dates: list[date]) -> None:
-    """Warn about missing weeks (gaps longer than 10 days between consecutive reports)."""
+    """Report missing weeks (gaps longer than 10 days between consecutive reports)."""
     gaps = [(a, b) for a, b in zip(dates, dates[1:]) if (b - a).days > 10]
+    log.info("%d gaps (missing weeks) in range; details at debug level", len(gaps))
     for a, b in gaps:
-        log.warning("gap: no report between %s and %s (%d days)", a, b, (b - a).days)
+        log.debug("gap: no report between %s and %s (%d days)", a, b, (b - a).days)
 
 
-def main() -> None:
+def run(start: date, end: date, kinds: list[str], dry_run: bool = False) -> int:
+    """Download every SPI PDF of the given kinds between start and end that we don't have yet.
+    Returns how many files were downloaded."""
     settings = load_settings()["ingest"]
-    parser = argparse.ArgumentParser(description="Download weekly SPI PDFs into data/raw/.")
-    parser.add_argument("--start", type=date.fromisoformat, default=settings["start_date"])
-    parser.add_argument("--end", type=date.fromisoformat, default=date.today())
-    parser.add_argument("--kinds", nargs="+", default=settings["kinds"])
-    parser.add_argument("--dry-run", action="store_true", help="list what would be downloaded")
-    args = parser.parse_args()
-
     timeout, retries = settings["timeout_seconds"], settings["max_retries"]
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
@@ -224,24 +220,29 @@ def main() -> None:
 
     links = list_pbs_links(session, timeout, retries)
     log.info("PBS live site: %d SPI PDFs", len(links))
-    wayback = list_wayback_links(session, timeout, retries)
-    log.info("Wayback Machine: %d SPI PDFs", len(wayback))
+    try:
+        wayback = list_wayback_links(session, timeout, retries)
+        log.info("Wayback Machine: %d SPI PDFs", len(wayback))
+    except (requests.RequestException, RuntimeError) as exc:
+        # Wayback only matters for history; a weekly run gets new reports from the live site.
+        log.warning("Wayback Machine unavailable (%s) — continuing with the live PBS site only", exc)
+        wayback = []
 
     chosen = pick_one_per_week(links + wayback)
     wanted = sorted((link for (d, kind), link in chosen.items()
-                     if kind in args.kinds and args.start <= d <= args.end),
+                     if kind in kinds and start <= d <= end),
                     key=lambda l: (l.report_date, l.kind))
-    log.info("%d reports in range %s → %s", len(wanted), args.start, args.end)
+    log.info("%d reports in range %s → %s", len(wanted), start, end)
     log_gaps(sorted({l.report_date for l in wanted}))
 
     # Files that are missing or truncated on disk get downloaded again.
     have = {key for key, row in read_manifest().items() if file_is_complete(RAW_DIR / row["file"])}
     todo = [l for l in wanted if (l.report_date.isoformat(), l.kind) not in have]
     log.info("%d already downloaded, %d to fetch", len(wanted) - len(todo), len(todo))
-    if args.dry_run:
+    if dry_run:
         for link in todo:
             log.info("would fetch %s %s from %s", link.report_date, link.kind, link.source)
-        return
+        return 0
 
     failed = 0
     for i, link in enumerate(todo, 1):
@@ -254,6 +255,18 @@ def main() -> None:
             log.error("[%d/%d] failed %s %s: %s", i, len(todo), link.report_date, link.kind, exc)
         time.sleep(settings["request_delay_seconds"])
     log.info("done: %d downloaded, %d failed", len(todo) - failed, failed)
+    return len(todo) - failed
+
+
+def main() -> None:
+    settings = load_settings()["ingest"]
+    parser = argparse.ArgumentParser(description="Download weekly SPI PDFs into data/raw/.")
+    parser.add_argument("--start", type=date.fromisoformat, default=settings["start_date"])
+    parser.add_argument("--end", type=date.fromisoformat, default=date.today())
+    parser.add_argument("--kinds", nargs="+", default=settings["kinds"])
+    parser.add_argument("--dry-run", action="store_true", help="list what would be downloaded")
+    args = parser.parse_args()
+    run(args.start, args.end, args.kinds, args.dry_run)
 
 
 if __name__ == "__main__":

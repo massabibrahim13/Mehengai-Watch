@@ -430,7 +430,10 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–5 ✅ done → next is **Phase 6 (Report + dashboard + README)**.
+- **Phase:** Phases 0–6 ✅ done (**v1 = course submission complete**) → next is **Phase 7 (Automation, bonus)**.
+- **Phase 6 (2026-10-10):** weekly report (`reports/YYYY-MM-DD.md`), Streamlit dashboard, `python -m mehngai.pipeline`
+  (one command, ~7 s with caches), README with screenshots + evaluation. 70 tests pass. Gemini free tier = 20
+  requests/day; over-quota → template fallback.
 - **Phase 5 (2026-10-10):** `explain/` — facts JSON → Gemini `gemini-3.8-flash` (REST, key in `.env`) →
   guardrails (numbers must come from facts; no causes/accusations) → retry once → template fallback; cached in
   `explanations`. 10/10 historical anomalies passed first time. 66 tests pass.
@@ -440,10 +443,10 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   + 8 sourced events in `data/known_events.csv`. Phase 4: L0–L3 built + backtest; **production detector =
   L1 rolling robust z-score, 52-week window** (same recall as L0 with 60% fewer alerts; L2/L3 didn't beat it —
   see decisions.md). All layers' flags are in the `anomalies` table. 47 tests pass. All pushed to GitHub.
-- **Next step:** Phase 6 — `report/weekly_report.py` (reports/YYYY-MM-DD.md: this week's flags + explanations +
-  small chart per flagged item), Streamlit dashboard, `pipeline.py` running stages 1→7 with one command
-  (production detector only, so it doesn't need the 3-min L3 backtest), README with screenshots + evaluation.
-- **Run order:** `python -m mehngai.ingest.fetch` → `python -m mehngai.ingest.parse` → `python -m mehngai.store.db`
-  → `python -m mehngai.detect.evaluate` (~3 min, mostly L3's STL fits) → `python -m mehngai.explain`.
+- **Next step:** Phase 7 (bonus) — `.github/workflows/weekly.yml`: weekly cron (after PBS publishes, Fri/Sat),
+  `LLM_API_KEY` as a GitHub secret, run the pipeline, commit `reports/`. Note: CI starts with no cached PDFs/DB,
+  so it needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
+- **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
+  `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
   Gemini free tier · 2015-16 base era only (from 2019-09-05).

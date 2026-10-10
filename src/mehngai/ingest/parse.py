@@ -144,17 +144,14 @@ def date_from_raw_name(path: Path) -> str:
     return path.name.split("_", 1)[0]
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Parse Appendix-A from data/raw/*_annex.pdf.")
-    parser.add_argument("--force", action="store_true", help="re-parse even if the CSV exists")
-    args = parser.parse_args()
-
+def run(force: bool = False) -> int:
+    """Parse every data/raw/*_annex.pdf that has no CSV yet (or all, with force). Returns # parsed."""
     INTERIM_DIR.mkdir(parents=True, exist_ok=True)
     pdfs = sorted(RAW_DIR.glob("*_annex.pdf"))
     ok = skipped = failed = 0
     for pdf_path in pdfs:
         out = INTERIM_DIR / pdf_path.with_suffix(".csv").name
-        if out.exists() and not args.force:
+        if out.exists() and not force:
             skipped += 1
             continue
         try:
@@ -168,6 +165,13 @@ def main() -> None:
             log.error("%s: %s", pdf_path.name, exc)
     log.info("parsed %d, skipped %d (already done), failed %d — of %d PDFs",
              ok, skipped, failed, len(pdfs))
+    return ok
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Parse Appendix-A from data/raw/*_annex.pdf.")
+    parser.add_argument("--force", action="store_true", help="re-parse even if the CSV exists")
+    run(parser.parse_args().force)
 
 
 if __name__ == "__main__":
