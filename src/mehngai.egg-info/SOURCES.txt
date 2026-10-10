@@ -1,8 +1,0 @@
-pyproject.toml
-src/mehngai/__init__.py
-src/mehngai/config.py
-src/mehngai.egg-info/PKG-INFO
-src/mehngai.egg-info/SOURCES.txt
-src/mehngai.egg-info/dependency_links.txt
-src/mehngai.egg-info/top_level.txt
-src/mehngai/ingest/__init__.py

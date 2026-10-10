@@ -17,3 +17,6 @@ data/*.db
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Build artifacts
+*.egg-info/
