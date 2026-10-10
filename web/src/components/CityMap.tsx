@@ -34,7 +34,8 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
   const option: EChartsOption | null = useMemo(() => {
     if (!geo) return null;
     if (!echarts.getMap("pakistan")) echarts.registerMap("pakistan", geo as never);
-    const lo = Math.min(...rows.map((r) => r.price)), hi = Math.max(...rows.map((r) => r.price));
+    // label just the cheapest and the dearest city (none if every city pays the same — labels would pile up)
+    const labelled = rows.length && rows[0].price !== rows[rows.length - 1].price ? [rows[0].city, rows[rows.length - 1].city] : [];
     // Honest scales: colour saturates at ±10% (or the real spread if wider), so near-identical prices
     // stay grey; size follows price ÷ national average, so equal prices draw equal bubbles.
     const spread = Math.max(...rows.map((r) => Math.abs(r.dev)), 10);
@@ -61,7 +62,7 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
         type: "scatter", coordinateSystem: "geo", universalTransition: true,
         data: rows.map((r) => ({
           name: r.city, value: [r.lon, r.lat, r.price, r.dev],
-          label: { show: r.price === lo || r.price === hi },
+          label: { show: labelled.includes(r.city) },
         })),
         symbolSize: (v: number[]) => Math.min(44, Math.max(8, 20 * (v[2] / current.price) ** 3)),
         itemStyle: { borderColor: surface, borderWidth: 2, opacity: 0.92 },
@@ -147,6 +148,7 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
               </li>
             ))}
           </ol>
+          {rows.length > 0 && span === 0 && <p className="mt-2 text-xs text-muted">Same price in every city this week (a nationally set price).</p>}
           {rows.length < 17 && <p className="mt-2 text-xs text-muted">{17 - rows.length} cities have no price for this item this week.</p>}
         </div>
       </Card>

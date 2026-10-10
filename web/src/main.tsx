@@ -1,3 +1,4 @@
+import { MotionConfig } from "motion/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
@@ -10,7 +11,10 @@ document.documentElement.dataset.theme = initialTheme();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <App />
+      {/* honour the visitor's "reduce motion" setting for every Motion animation */}
+      <MotionConfig reducedMotion="user">
+        <App />
+      </MotionConfig>
     </ThemeProvider>
   </StrictMode>,
 );

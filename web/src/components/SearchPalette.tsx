@@ -15,9 +15,18 @@ export function SearchPalette({ open, items, onClose, onOpen }: {
   const [active, setActive] = useState(0);
   const results = useMemo(() => findItems(query, items), [query, items]);
 
-  useEffect(() => {
-    if (open) { setQuery(""); setActive(0); }
-  }, [open]);
+  // Every opening starts empty and gets a fresh box (`session` is its key). Reopening while the previous box
+  // is still fading out would otherwise reuse that box, old text and all.
+  const [session, setSession] = useState(0);
+  const [wasOpen, setWasOpen] = useState(open);
+  if (open !== wasOpen) {
+    setWasOpen(open);
+    if (open) {
+      setSession((s) => s + 1);
+      setQuery("");
+      setActive(0);
+    }
+  }
   useEffect(() => setActive(0), [query]);
 
   const choose = (item: Item | undefined) => {
@@ -28,14 +37,21 @@ export function SearchPalette({ open, items, onClose, onOpen }: {
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => Math.min(a + 1, results.length - 1)); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); }
-    else if (e.key === "Enter") choose(results[active]);
-    else if (e.key === "Escape") onClose();
+    else if (e.key === "Enter") {
+      // Without preventDefault the same Enter press reaches the item panel's close button (which takes focus
+      // as the panel opens) and closes the panel straight away.
+      e.preventDefault();
+      choose(results[active]);
+    } else if (e.key === "Escape") {
+      e.stopPropagation(); // close only the search, not an item panel open underneath
+      onClose();
+    }
   };
 
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-50 flex items-start justify-center bg-ink/30 px-4 pt-[12vh]"
+        <motion.div key={session} className="fixed inset-0 z-50 flex items-start justify-center bg-ink/30 px-4 pt-[12vh]"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
           <motion.div role="dialog" aria-modal="true" aria-label="Search items" onClick={(e) => e.stopPropagation()}
             initial={{ y: -12, scale: 0.98 }} animate={{ y: 0, scale: 1 }} exit={{ y: -12, scale: 0.98 }}

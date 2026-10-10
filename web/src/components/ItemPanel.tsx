@@ -23,7 +23,7 @@ function historyOption(series: Series, item: Item, dark: boolean): EChartsOption
   }));
   const start = series.weeks[Math.max(0, series.weeks.length - 104)];
   return {
-    grid: { left: 8, right: 8, top: 16, bottom: 56, containLabel: true },
+    grid: { left: 8, right: 8, top: 16, bottom: 56, outerBoundsMode: "same", outerBoundsContain: "axisLabel" }, // = the old containLabel
     tooltip: {
       trigger: "axis", backgroundColor: cssVar("--color-panel"), borderColor: line, textStyle: { color: ink },
       valueFormatter: (v: number) => moneyExact(v),
@@ -47,17 +47,26 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
   itemId: string | null; items: Item[]; cities: CitiesFile; news: NewsItem[]; onClose: () => void; onOpen: (id: string) => void;
 }) {
   const item = items.find((i) => i.item_id === itemId) ?? null;
-  const series = useSeries(itemId);
+  const { series, failed } = useSeries(itemId);
   const dark = useDarkMode();
   const closeRef = useRef<HTMLButtonElement>(null);
+  const opener = useRef<HTMLElement | null>(null);
 
+  // On open: remember what had focus, move focus into the panel, close on Esc.
+  // On close: give focus back to whatever opened the panel (keyboard users stay where they were).
   useEffect(() => {
     if (!itemId) return;
+    opener.current ??= document.activeElement as HTMLElement | null;
     closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [itemId, onClose]);
+  useEffect(() => {
+    if (itemId || !opener.current) return;
+    opener.current.focus?.();
+    opener.current = null;
+  }, [itemId]);
 
   const option = useMemo(() => (series && item ? historyOption(series, item, dark) : null), [series, item, dark]);
   const cityRows = item ? Object.entries(cities.prices[item.item_id] ?? {}).filter(([, p]) => p != null).sort((a, b) => a[1]! - b[1]!) : [];
@@ -72,7 +81,7 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
           <motion.div key="backdrop" className="fixed inset-0 z-40 bg-ink/30" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />
           <motion.aside key="panel" role="dialog" aria-modal="true" aria-label={item.name}
             initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 36 }}
-            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl overflow-y-auto border-l border-line bg-bg shadow-2xl">
+            className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl overflow-y-auto overscroll-contain border-l border-line bg-bg shadow-2xl">
             <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-panel/95 px-6 py-5">
               <div className="flex items-center gap-3">
                 <ItemIcon item={item} size="lg" />
@@ -102,13 +111,15 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                 </div>
                 <div>
                   <p className="text-sm text-muted">Typical weekly move</p>
-                  <p className="mt-1 text-2xl font-bold">{item.typical_move_pct ?? "–"}%</p>
-                  <p className="text-xs text-muted">over the past year</p>
+                  <p className="mt-1 text-2xl font-bold">{item.typical_move_pct === null ? "–" : `${item.typical_move_pct}%`}</p>
+                  <p className="text-xs text-muted">{item.typical_move_pct === null ? "not enough data" : "over the past year"}</p>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-line bg-panel p-3">
-                {option ? <Chart option={option} className="h-72 w-full" /> : <Skeleton className="h-72" />}
+                {option ? <Chart option={option} className="h-72 w-full" />
+                  : failed ? <p className="flex h-72 items-center justify-center text-sm text-muted">Couldn't load this item's history. Try again later.</p>
+                  : <Skeleton className="h-72" />}
                 <p className="px-2 pb-1 text-xs text-muted">
                   Weekly national average since {series ? dateLabel(series.weeks[0]) : "…"}. Drag the bar to zoom.
                   {item.price_type === "market" && " Triangles mark unusual weeks."}

@@ -1,32 +1,51 @@
-// Light / dark theme: starts from the system setting, remembers the visitor's choice in this browser.
+// Light / dark theme: follows the system setting until the visitor picks one with the toggle; that choice is
+// remembered in this browser.
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type Theme = "light" | "dark";
 const KEY = "mw-theme";
 
-export function initialTheme(): Theme {
+function savedTheme(): Theme | null {
   try {
     const saved = localStorage.getItem(KEY);
-    if (saved === "light" || saved === "dark") return saved;
+    return saved === "light" || saved === "dark" ? saved : null;
   } catch {
-    /* storage blocked (private mode etc.): fall back to the system setting */
+    return null; // storage blocked (private mode etc.)
   }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
+
+const systemTheme = (): Theme => (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+export const initialTheme = (): Theme => savedTheme() ?? systemTheme();
 
 const ThemeContext = createContext<{ theme: Theme; toggle: () => void }>({ theme: "light", toggle: () => {} });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => (document.documentElement.dataset.theme as Theme) || initialTheme());
+
+  // Switch the attribute *before* React re-renders: charts read their colours from CSS variables while
+  // rendering, so they'd otherwise pick up the old theme's colours.
+  const apply = (t: Theme) => {
+    document.documentElement.dataset.theme = t;
+    setTheme(t);
+  };
+
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => !savedTheme() && apply(systemTheme());
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  const toggle = () => {
+    const next: Theme = theme === "dark" ? "light" : "dark";
     try {
-      localStorage.setItem(KEY, theme);
+      localStorage.setItem(KEY, next);
     } catch {
-      /* not critical */
+      /* not critical: the choice just won't be remembered */
     }
-  }, [theme]);
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+    apply(next);
+  };
   return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }
 

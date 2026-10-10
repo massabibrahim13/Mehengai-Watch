@@ -325,3 +325,14 @@ light panels; one clean sans font; numbers in neat columns; small round logos be
 | Names | `shortName()` with overrides (Basmati rice / IRRI rice, Ghee 1 kg / 2.5 kg, …) | Plain short names collided ("Rice" twice). |
 | Theme | Light/dark toggle in the top bar (remembers the choice), follows the system by default | Both modes checked in screenshots, plus 390 px phone width. |
 | Data fix | Quoted two item names in `items.yaml` ("Bread (plain, small)", "Cigarettes (Capstan, 20)") + a test | Unquoted commas in YAML flow mappings had silently split the names. |
+
+### Theme fix + bug sweep (2026-10-11)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Theme | The hero and method band use `hero` colour tokens that switch with the theme (white in light mode, near-black in dark) | They were always dark, so the toggle seemed broken (Massab: "light and dark mode doesn't work"). |
+| Theme switching | Set `data-theme` on `<html>` *before* React re-renders; save the choice only when the visitor clicks; until then follow the system setting, live | Charts read CSS colour variables while rendering, so they picked up the previous theme's colours. |
+| Search keys | Enter calls `preventDefault()`; Esc stops propagation; every opening of the search gets a fresh box (`key`) | The Enter press reached the item panel's close button (focused as the panel opened) and closed it; Esc closed the panel underneath too; a quick reopen reused the fading box with its old text. |
+| Failure states | History or map files that fail to load show a message (or just the city list) instead of loading forever | A missing file must not leave a spinner on screen. |
+| Map labels | Label only the single cheapest and dearest city, none when all prices are equal; note "Same price in every city" | For nationally set prices all 17 labels piled on top of each other. |
+| Motion | `MotionConfig reducedMotion="user"` | Motion animations ignored the "reduce motion" setting (CSS ones already honoured it). |

@@ -20,11 +20,11 @@
   --color-down: #2a78d6;
   --color-live: #12a150;
 
-  /* the hero is always dark */
-  --color-night: #07090e;
-  --color-night-ink: #f4f6fb;
-  --color-night-muted: #9aa3b5;
-  --color-night-line: rgb(255 255 255 / 0.1);
+  /* hero + method band: white in light mode, near-black in dark mode */
+  --color-hero: #ffffff;
+  --color-hero-ink: #131722;
+  --color-hero-muted: #5d6474;
+  --color-hero-line: rgb(19 23 34 / 0.1);
 
   --animate-ticker: ticker var(--ticker-speed, 150s) linear infinite;
   --animate-live: live 2.2s ease-out infinite;
@@ -40,7 +40,16 @@
   --color-accent: #4c8fe6;
   --color-up: #ec6766;
   --color-down: #4c8fe6;
+
+  --color-hero: #07090e;
+  --color-hero-ink: #f4f6fb;
+  --color-hero-muted: #9aa3b5;
+  --color-hero-line: rgb(255 255 255 / 0.1);
 }
+
+/* native controls (selects, scrollbars) follow the theme too */
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
 
 @keyframes ticker {
   from { transform: translateX(0); }
@@ -51,7 +60,7 @@
   70%, 100% { box-shadow: 0 0 0 8px rgb(18 161 80 / 0); }
 }
 
-html { scroll-behavior: smooth; background: var(--color-night); }
+html { scroll-behavior: smooth; background: var(--color-hero); }
 body {
   background: var(--color-bg);
   color: var(--color-ink);

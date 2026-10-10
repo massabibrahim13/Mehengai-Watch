@@ -1,4 +1,4 @@
-// The home page: dark hero, then a rounded "market summary" panel with the sections, then the method
+// The home page: hero, then a rounded "market summary" panel with the sections, then the method
 // band. Holds "which item is open" and "is search open". Every number comes from public/data/.
 import { useCallback, useEffect, useState } from "react";
 import { CityMap } from "./components/CityMap";
@@ -67,11 +67,11 @@ export default function App() {
   }
   if (!data) {
     return (
-      <div className="min-h-screen bg-night px-4 pt-32 md:px-8" aria-busy="true">
+      <div className="min-h-screen bg-hero px-4 pt-32 md:px-8" aria-busy="true">
         <div className="mx-auto max-w-7xl space-y-5">
-          <div className="h-12 w-2/3 animate-pulse rounded-2xl bg-white/5" />
-          <div className="h-6 w-1/2 animate-pulse rounded-2xl bg-white/5" />
-          <Skeleton className="h-14 w-full max-w-xl bg-white/5" />
+          <div className="h-12 w-2/3 animate-pulse rounded-2xl bg-hero-ink/5" />
+          <div className="h-6 w-1/2 animate-pulse rounded-2xl bg-hero-ink/5" />
+          <Skeleton className="h-14 w-full max-w-xl bg-hero-ink/5" />
         </div>
       </div>
     );
@@ -84,7 +84,7 @@ export default function App() {
     <>
       <TopBar overHero={overHero} onSearch={() => setSearchOpen(true)} />
       <Hero summary={summary} items={items} index={index} onOpen={open} onSearch={() => setSearchOpen(true)} />
-      <main className="relative -mt-10 rounded-t-[32px] bg-bg">
+      <main className="relative -mt-10 rounded-t-[32px] bg-bg shadow-[0_-12px_32px_-18px_rgb(16_24_40/0.18)]">
         <div className="mx-auto max-w-7xl space-y-16 px-4 pb-24 pt-12 md:space-y-24 md:px-8 md:pt-16">
           <Overview summary={summary} items={items} index={index} onOpen={open} />
           <Heatmap items={items} onOpen={open} />

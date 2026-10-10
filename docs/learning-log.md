@@ -183,3 +183,18 @@ watchlist, city map, news cards with live price strips, set prices, method band,
 - *YAML gotcha:* in `{ name: Bread (plain, small) }` the comma ends the value, so quote strings with commas.
 
 **Next** Massab reviews the redesign → Phase 8b (item pages, browse, Ask, code-splitting) → 8c deploy with Phase 7.
+
+## 2026-10-11 — theme fix + bug sweep
+
+**Built** a working light/dark switch for the whole page and fixed nine bugs found by a click-through test
+(search with Enter/Esc, quick reopen, failed loads, map labels, clipped hover, reduced motion, chart colours).
+
+**Key concepts**
+- *Design tokens:* colours are named variables (`--color-hero`); switching theme changes the variables, not the
+  components. Hard-coded colours are what broke the switch.
+- *Order of events:* the charts read colours during React's render, so the theme attribute must change first.
+- *Keyboard events travel:* one Enter press is delivered again to whatever has focus next (keypress), so moving
+  focus mid-keystroke can "click" a button. `preventDefault()` ends the keystroke where it was handled.
+- *Test like a user:* a script that presses keys and clicks (Playwright) found bugs that reading the code missed.
+
+**Next** Phase 8b (item pages, browse, Ask in the browser, code-splitting) → 8c deploy with Phase 7.

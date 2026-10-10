@@ -224,8 +224,9 @@ Details that matter:
 - The Ask box's AI fallback needs the Gemini key, which must never reach the browser → one tiny
   free serverless function (e.g. Cloudflare Worker) holds the key. Optional; rules work without it.
 - Design brief (agreed with Massab, revised 2026-10-11): pleasant, interactive, **professional and
-  not "tech-y"**, modelled on fintech sites (fiscal.ai, TradingView, Koyfin, TrendSpider): dark hero
-  with one big headline + search, then calm rounded light panels; one clean sans font (Manrope),
+  not "tech-y"**, modelled on fintech sites (fiscal.ai, TradingView, Koyfin, TrendSpider): a hero
+  with one big headline + search, then calm rounded panels; the **whole page follows the light/dark
+  toggle** (no always-dark sections); one clean sans font (Manrope),
   tabular numbers; the validated palette (blue accent, red = price up, blue = price down, ▲▼ always).
   Market summary + Essentials index chart, heatmap, sortable watchlist, city map, interactive news
   cards that show the price of the item they mention. Motion only where it carries information;
@@ -537,7 +538,13 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   news cards with live price strips, set prices, method band; light/dark toggle. New export `index.json`
   (Essentials index = chained basket change, our calculation, not the official SPI). Fixed 2 item names split by
   unquoted YAML commas (+ test). 112 tests pass.
-- **Next step:** Massab reviews the redesign → Phase 8b (item pages, browse, Ask in the browser, code-split charts).
+- **Theme fix + bug sweep (2026-10-11):** Massab kept the interface; the light/dark toggle now switches the whole
+  page (hero and method band were hard-coded dark). Fixed: charts kept the old theme's colours after a toggle;
+  Enter in search didn't open the item; Esc in search also closed the item panel; reopening search quickly kept
+  the old text; endless loading if a history file fails; "–%" in the panel; map labels piling up when every city
+  has the same price; clipped hover on news cards; reduced-motion ignored by animations; deprecated chart option.
+  A click-through browser test (20 checks) passes with no console errors.
+- **Next step:** Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·

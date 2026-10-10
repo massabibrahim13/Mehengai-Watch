@@ -49,7 +49,7 @@ function NewsCard({ n, items, onOpen, featured = false }: { n: NewsItem; items: 
     <article className={`lift group flex h-full flex-col rounded-2xl border border-line bg-panel p-5 ${featured ? "md:p-7" : ""}`}>
       <div className="flex items-center justify-between gap-2">
         <Source n={n} />
-        {n.topics[0] && <span className="rounded-md bg-soft px-2 py-0.5 text-[11px] font-semibold capitalize text-muted">{n.topics[0]}</span>}
+        {n.topics[0] && <span className="rounded-md bg-soft px-2 py-0.5 text-[11px] font-semibold text-muted">{n.topics[0][0].toUpperCase() + n.topics[0].slice(1)}</span>}
       </div>
       <a href={n.link} target="_blank" rel="noopener noreferrer"
         className={`mt-3 block font-bold leading-snug tracking-tight group-hover:text-accent ${featured ? "text-2xl md:text-[28px]" : "text-[17px]"}`}>
@@ -95,7 +95,8 @@ export function News({ news, items, onOpen }: { news: NewsItem[]; items: Item[];
           </div>
           {rest.length > 0 && (
             <div className="relative mt-4">
-              <div ref={rail} className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-2">
+              {/* padding inside the scroller leaves room for the hover lift + ring, which would otherwise be clipped */}
+              <div ref={rail} className="no-scrollbar -mx-1.5 -mt-2 flex snap-x snap-mandatory scroll-px-1.5 gap-4 overflow-x-auto scroll-smooth px-1.5 pb-3 pt-2">
                 {rest.map((n) => (
                   <div key={n.link} className="w-[300px] shrink-0 snap-start md:w-[340px]">
                     <NewsCard n={n} items={byId} onOpen={onOpen} />

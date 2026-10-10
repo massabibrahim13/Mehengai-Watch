@@ -1,4 +1,4 @@
-// Fixed top bar: transparent over the dark hero, solid once you scroll past it.
+// Fixed top bar: transparent over the hero, solid once you scroll past it.
 import { Moon, Search, Sun } from "lucide-react";
 import { useTheme } from "../lib/theme";
 
@@ -14,10 +14,10 @@ const LINKS = [
 export function TopBar({ overHero, onSearch }: { overHero: boolean; onSearch: () => void }) {
   const { theme, toggle } = useTheme();
   const shell = overHero
-    ? "border-transparent bg-transparent text-night-ink"
+    ? "border-transparent bg-transparent text-hero-ink"
     : "border-line bg-panel/90 text-ink shadow-[0_1px_0_0_var(--color-line)] backdrop-blur-md";
-  const muted = overHero ? "text-night-muted hover:text-night-ink hover:bg-white/5" : "text-muted hover:text-ink hover:bg-soft";
-  const field = overHero ? "border-white/15 bg-white/5 text-night-muted hover:border-white/30" : "border-line bg-soft text-muted hover:border-accent";
+  const muted = overHero ? "text-hero-muted hover:text-hero-ink hover:bg-hero-ink/5" : "text-muted hover:text-ink hover:bg-soft";
+  const field = overHero ? "border-hero-ink/15 bg-hero-ink/5 text-hero-muted hover:border-hero-ink/30" : "border-line bg-soft text-muted hover:border-accent";
 
   return (
     <header className={`fixed inset-x-0 top-0 z-40 border-b transition-colors duration-300 ${shell}`}>
