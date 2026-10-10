@@ -134,3 +134,63 @@ Findings that shape Phase 4 (details + charts in `notebooks/01_explore.ipynb`):
   Staples show no pattern.
 - **Steps vs spikes:** flour/sugar jump to a new level and stay; vegetables spike and revert.
 - **Gaps:** 15 of 353 weekly steps span 2–3 weeks → the detector must account for the gap length.
+
+---
+
+## Phase 4 — Detection + evaluation (2026-10-10)
+
+### Final backtest (`python -m mehngai.detect.evaluate`)
+
+254 weeks (2021-09-16 → 2026-10-08, the weeks where every layer has a score), 8 items, 8 known events.
+No look-ahead anywhere (unit-tested: changing future prices leaves past scores unchanged).
+
+| Layer | Alerts | Alerts / week | Recall | Event precision (lower bound) | Recall @ 0.5 alerts/wk | Top item's share of alerts | Missed |
+|---|---|---|---|---|---|---|---|
+| L0 fixed 10% threshold | 287 | 1.13 | 0.75 | 0.04 | 0.75 | **53%** (tomatoes) | E03 flour Jan-23, E05 sugar Aug-23 |
+| **L1 robust z, 52-wk window** | **114** | **0.45** | **0.75** | **0.10** | 0.75 | 32% (flour) | E01 tomatoes Aug-22, E08 tomatoes Jul-26 |
+| L2 relative to basket | 113 | 0.44 | 0.75 | 0.09 | 0.75 | 35% | E01, E08 |
+| L3 seasonal + Ramazan | 149 | 0.59 | 0.75 | 0.07 | 0.75 | 26% | E01, E08 |
+
+**Precision spot-check (L1).** News search for (a) the 8 strongest L1 alerts not already in the event list and
+(b) 6 random "watch"-level L1 alerts:
+- 13 / 14 matched a real, news-reported price move that week; 7 / 14 had a stated cause (flour mill price
+  hike Sep-22, wheat quota stopped May-22, sugar Ramazan demand + hoarding reports Apr-23, ghee palm-oil
+  containers stuck at port Feb-23, flour smuggling ban Jul-24, chicken holiday demand Dec-24, sugar Aug-23 = E05).
+- 1 / 14 looked like a false alarm: wheat flour +3.6% on 2024-10-03 (official data: only a slight rise).
+- Caveat: "reported in the news" is partly circular, because PBS's weekly release names the biggest movers and
+  the press repeats it. The stricter "has a stated cause" figure (7/14) is the honest precision estimate.
+
+### Decision: **L1 (rolling robust z-score, 52-week window) is the production detector**
+
+- **vs L0:** same recall with **60% fewer alerts** and 2.5× the event precision. L0 spends 53% of its alerts on
+  tomatoes (it fires in 60% of tomato weeks) and almost never alerts on sugar (1), ghee (0) or flour (6). It
+  "catches" tomato events only because it fires on tomatoes nearly every other week.
+- **L2 not kept:** indistinguishable from L1 (113 vs 114 alerts, same events). Weekly item moves are much larger
+  than the weekly general-inflation drift (trimmed-mean basket ≈ 0.2%/week), so subtracting it changes little.
+  Rule: a layer must beat the previous one, so the simpler one wins.
+- **L3 not kept:** same recall as L1 with 30% more alerts. With only ~5 years of weekly data, STL can't tell a
+  one-off step from a season. Before gating, it learned flour's +42% step of Mar-2023 as "seasonal" and then
+  flagged flat weeks in Mar-2024 as abnormal drops (282 alerts, 54 of them ghee "drops" averaging 0.46%).
+  A seasonal-strength gate (≥ 0.4) halved that, but L3 still doesn't beat L1. Revisit when more years exist.
+  A unit test confirms it works on clean data: a gradual 6-week yearly rise that L1 calls "unusual" stays below
+  "unusual" in L3 (the first week of the rise can still reach "watch").
+
+### How we got here (tuning log)
+
+| Change | Why | Effect |
+|---|---|---|
+| L1 window 12 → **52 weeks** | 12 weeks adapted too fast: during a sustained surge (sugar 2023) the rising weeks *became* normal | L1 recall 0.62 → 0.75, alerts 0.58 → 0.45/wk (sweep: 12 / 26 / 52) |
+| Basket = **trimmed mean**, not median | More than half of the 51 items don't move in a typical week, so the median was 0 | Basket tracks inflation (≈20%/yr 2022, ≈18% 2023, ≈1–5% 2024–25) |
+| L3: smooth seasonal (5 wk), same adjustment for history and current week | Seasonal shape from few years is jagged week to week; in-sample spread vs out-of-sample change inflated z | L3 alerts 3.0 → 1.1/wk |
+| L3: seasonal-strength gate 0.4 | Steps in sticky items were learned as "seasons" | L3 alerts 1.1 → 0.59/wk |
+| L3: refit STL every 4 weeks | Robust STL ≈ 0.5 s per fit × ~2,000 fits | Backtest 10+ min → 3 min; still no look-ahead |
+| Bug fix: `nanmedian` in rolling MAD | The first week (no previous price) made the whole first year's MAD NaN | L1/L2 now score from week 13 (2019-12-05), not week 53 |
+
+### Known limitations (honest list for the demo)
+
+- **Tomato swings are "normal" to L1 by design.** +43% (Aug-22 floods, z = 1.7) and +125% (Jul-26, z = 2.6)
+  are within tomatoes' own typical range. If users want these, add an absolute guardrail (e.g. also flag any
+  move ≥ 75%). Not done now: tuning a rule to catch one known event is overfitting.
+- **Only 8 known events**, so recall moves in 12.5-point steps; a one-event difference isn't significant.
+  The events were partly found by looking at big moves, which favours L0, and L0 still lost.
+- **The Ramazan adjustment** lives only in L3 (not in production). Only 5–6 usable Ramazans so far.

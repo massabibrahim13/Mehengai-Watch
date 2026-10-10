@@ -1,4 +1,4 @@
-# Phase 0-3: fetch, parse, store, explore
+# Phase 0-4: fetch, parse, store, explore, detect
 requests
 beautifulsoup4
 pdfplumber
@@ -11,4 +11,7 @@ pytest
 matplotlib
 jupyter
 hijridate        # Ramazan/Eid dates (maintained successor of hijri-converter)
-# Later phases add: statsmodels, scipy, plotly, streamlit, LLM SDK
+statsmodels      # STL decomposition (L3)
+scipy            # trimmed mean for the basket
+tabulate         # markdown tables in the backtest output
+# Later phases add: plotly, streamlit, LLM SDK

@@ -62,3 +62,27 @@ ranking, change distributions, Ramazan heatmap, biggest moves) and `data/known_e
 
 **Next** Phase 4: L0 baseline (fixed threshold) → L1 rolling robust z-score → L2 relative-to-basket → L3 seasonal +
 Ramazan-aware, with a no-look-ahead backtest against `known_events.csv`.
+
+## 2026-10-10 — Phase 4: detection + evaluation
+
+**Built** `detect/`: L0 fixed threshold, L1 rolling robust z, L2 relative-to-basket, L3 STL + Ramazan, and
+`evaluate.py`, a backtest (recall, alerts/week, event precision, recall at a fixed alert budget) that writes all
+flags to the `anomalies` table. Added a `basket` table (trimmed-mean weekly change of all 51 items). 15 detector
+tests, including no-look-ahead.
+
+**Result** L1 with a 52-week window is the production detector: same recall as L0 (0.75) with 60% fewer alerts;
+13/14 spot-checked alerts were real news-reported moves. L2 and L3 didn't beat L1, so they're not kept.
+
+**Key concepts**
+- *Backtesting without look-ahead:* score week t using only data up to t. Tested by changing the future and
+  checking that past scores don't move.
+- *Fair comparison:* give every method the same alert budget, then compare recall.
+- *A metric can be flattered by noise:* L0's recall looked fine because it fires on tomatoes every other week.
+  The alert distribution and precision exposed it.
+- *More complex isn't automatically better:* STL needs many years to separate seasons from one-off steps; with
+  5 years it hurt.
+- *Negative results are results:* "L2/L3 didn't help, and here's why" is a valid, defensible conclusion.
+- *Tests find real bugs:* the "flat series" test exposed that one missing value blanked a whole year of scores.
+
+**Next** Phase 5: explanation layer — facts JSON per anomaly, prompt file, Gemini call, number-check guardrail,
+template fallback.

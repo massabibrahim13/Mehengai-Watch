@@ -17,7 +17,9 @@ import logging
 import sqlite3
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
+from scipy.stats import trim_mean
 
 from mehngai.clean.normalize import load_items, normalize, read_interim
 from mehngai.clean.validate import validate
@@ -48,6 +50,21 @@ CREATE TABLE IF NOT EXISTS prices (
     price_min REAL,
     price_max REAL,
     PRIMARY KEY (item_id, week_date, city)
+);
+CREATE TABLE IF NOT EXISTS basket (
+    week_date  TEXT PRIMARY KEY REFERENCES reports(report_date),
+    log_change REAL NOT NULL,               -- trimmed-mean log price change of all SPI items vs previous report
+    n_items    INTEGER NOT NULL             -- how many items had a price in both reports
+);
+CREATE TABLE IF NOT EXISTS anomalies (
+    item_id    TEXT NOT NULL REFERENCES items(item_id),
+    week_date  TEXT NOT NULL REFERENCES reports(report_date),
+    method     TEXT NOT NULL,               -- 'L0_baseline', 'L1_zscore', 'L2_relative', 'L3_seasonal'
+    score      REAL NOT NULL,               -- signed: + = price up
+    severity   TEXT NOT NULL,               -- 'watch' | 'unusual' | 'extreme'
+    direction  TEXT NOT NULL,               -- 'up' | 'down'
+    change_pct REAL NOT NULL,               -- raw % change vs previous report
+    PRIMARY KEY (item_id, week_date, method)
 );
 CREATE TABLE IF NOT EXISTS rejected_rows (
     week_date TEXT NOT NULL,
@@ -89,9 +106,27 @@ def report_date_of(manifest_date: str) -> tuple[str, int]:
 
 
 def clear_derived(conn: sqlite3.Connection) -> None:
-    """Empty the tables that are rebuilt on every load (children before parents, for the FKs)."""
-    for table in ("prices", "rejected_rows", "reports"):
+    """Empty the tables that are rebuilt on every load (children before parents, for the FKs).
+    Anomalies are derived from prices, so they go too; the detectors rebuild them."""
+    for table in ("anomalies", "basket", "prices", "rejected_rows", "reports"):
         conn.execute(f"DELETE FROM {table}")
+
+
+def basket_changes(raw: pd.DataFrame, report_dates: list[str]) -> pd.DataFrame:
+    """Weekly "general inflation": trimmed-mean log change across ALL 51 SPI items (national).
+    Used by the L2 detector.
+
+    Trimmed mean = drop the 10% biggest and 10% smallest changes, average the rest. One item
+    spiking can't move it. (A plain median doesn't work: most weeks over half the items don't
+    change at all, so the median is 0.) Items are matched by SL number, stable within the base.
+    """
+    nat = raw[(raw["city"] == "National") & raw["report_date"].isin(report_dates)
+              & (raw["price_avg"] > 0)]
+    wide = nat.pivot_table(index="report_date", columns="sl_no", values="price_avg").sort_index()
+    log_changes = np.log(wide).diff().iloc[1:]
+    return pd.DataFrame({"week_date": log_changes.index,
+                         "log_change": trim_mean(log_changes, 0.1, axis=1, nan_policy="omit"),
+                         "n_items": log_changes.notna().sum(axis=1).values})
 
 
 def load_reports(conn: sqlite3.Connection) -> list[str]:
@@ -152,6 +187,9 @@ def main() -> None:
                                       settings["max_weekly_ratio"])
         rejected = pd.concat([rejected, name_rejects], ignore_index=True)
         insert_prices(conn, accepted, rejected)
+        basket = basket_changes(raw, report_dates)
+        conn.executemany("INSERT INTO basket (week_date, log_change, n_items) VALUES (?, ?, ?)",
+                         basket.itertuples(index=False))
 
         summary = conn.execute("""
             SELECT item_id, COUNT(*) AS weeks, MIN(week_date), MAX(week_date)

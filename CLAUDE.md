@@ -430,13 +430,17 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–3 ✅ done → next is **Phase 4 (Detection + evaluation)**.
+- **Phase:** Phases 0–4 ✅ done → next is **Phase 5 (Explanation layer)**.
 - **Last session (2026-10-10):** Phase 1: 378 annex PDFs since 2019 downloaded (PBS media API + Wayback),
   Appendix-A parsed to `data/interim/`. Phase 2: SQLite `data/mehngai.db` with 354 complete weekly national
   series per item (2019-09-05 → 2026-10-08), rejected rows explained. Phase 3: `notebooks/01_explore.ipynb`
-  + 8 sourced events in `data/known_events.csv`. 32 tests pass. All pushed to GitHub.
-- **Next step:** Phase 4 — L0 fixed-threshold baseline and `evaluate.py` backtest (no look-ahead), then L1
-  rolling robust z-score. Handle 2–3 week report gaps. Add more known events for the unexplained big moves.
-- **Run order:** `python -m mehngai.ingest.fetch` → `python -m mehngai.ingest.parse` → `python -m mehngai.store.db`.
+  + 8 sourced events in `data/known_events.csv`. Phase 4: L0–L3 built + backtest; **production detector =
+  L1 rolling robust z-score, 52-week window** (same recall as L0 with 60% fewer alerts; L2/L3 didn't beat it —
+  see decisions.md). All layers' flags are in the `anomalies` table. 47 tests pass. All pushed to GitHub.
+- **Next step:** Phase 5 — facts-JSON builder from `anomalies` (method = `production_method` in settings),
+  prompt file, Gemini free-tier call behind one function, number-check guardrail, template fallback.
+  Needs a Gemini API key in `.env` (Massab to create).
+- **Run order:** `python -m mehngai.ingest.fetch` → `python -m mehngai.ingest.parse` → `python -m mehngai.store.db`
+  → `python -m mehngai.detect.evaluate` (~3 min, mostly L3's STL fits).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
   Gemini free tier · 2015-16 base era only (from 2019-09-05).

@@ -19,3 +19,40 @@ clean:
 
 store:
   db_file: mehngai.db   # inside data/
+
+detect:
+  # The detector used for the weekly report (chosen in Phase 4 — see docs/decisions.md).
+  production_method: L1_zscore
+  # Severity cut-offs per method. Scores are signed (+ = up); cut-offs apply to |score|.
+  L0_baseline:            # score = raw weekly % change
+    watch: 10
+    unusual: 20
+    extreme: 35
+  L1_zscore:              # score = robust z of this week's change vs the item's last `window` weeks
+    window: 52            # weeks of "normal behaviour" (12 adapted too fast to ongoing surges; see decisions.md)
+    min_periods: 12
+    watch: 3.5
+    unusual: 5
+    extreme: 8
+  L2_relative:            # same as L1, on (item change − basket change)
+    watch: 3.5
+    unusual: 5
+    extreme: 8
+  L3_seasonal:            # same as L1, on change after removing yearly seasonality + Ramazan effect
+    watch: 3.5
+    unusual: 5
+    extreme: 8
+    period: 52            # weeks in a seasonal cycle
+    min_history: 104      # weeks of history before STL is fitted (2 full years)
+    ramazan_weeks: [-2, 5]  # weeks around 1 Ramazan that get a Ramazan adjustment (covers Eid)
+    min_ramazans: 2       # past Ramazans needed before the adjustment is used
+    refit_every: 4        # refit STL every N weeks (robust fit is slow; seasonal shape changes slowly)
+    seasonal_smooth_weeks: 5  # moving average over the fitted seasonal shape (removes week-to-week jaggedness)
+    min_seasonal_strength: 0.4  # below this, the item is treated as non-seasonal (no seasonal adjustment)
+  # Floor for the robust spread (log change per week): stops a flat item (e.g. ghee unchanged for
+  # 12 weeks → MAD = 0) from turning a tiny move into an infinite z-score.
+  mad_floor: 0.005
+
+evaluate:
+  # Fair comparison: give every method the same number of alerts (per week, all items together).
+  alert_budget_per_week: 0.5
