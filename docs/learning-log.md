@@ -150,3 +150,19 @@ sparklines, set-price boards, headline cards with clickable item tags; light + d
 - *Escape anything from outside:* news titles are text, never markup; links must be http(s).
 - *Theme config gotcha:* setting one theme option creates a custom (light) theme; per-mode sections keep dark mode.
 - *Verify visually, in both modes:* stale servers, stripped SVGs and forced light mode were all found in screenshots.
+
+## 2026-10-11 — Phase 8a: website prototype (React)
+
+**Built** `src/mehngai/export.py` (stage 8: JSON for the site, 5 tests) and `web/` — a React + TypeScript site: story
+headline, count-up tiles, price ticker, live headline strip, unusual-move cards with sparklines, Pakistan city bubble
+map, biggest movers, set-price boards, headline cards with filter, item quick-view, Ctrl+K search, method section.
+
+**Key concepts**
+- *Separation of concerns:* Python decides and computes; the website only presents exported JSON.
+- *React components, props, state:* each section is a function that receives data (props); "which item is open"
+  is state held in `App` and passed down as a callback.
+- *Static site + build step:* Vite turns TypeScript/JSX into plain files; no server needed.
+- *Honest visual encodings:* a min→max scale made a 0.6% spread look huge; scales must be anchored to meaning.
+- *Accessibility and motion:* keyboard paths (Ctrl+K, Esc, arrows), reduced-motion support, colour never alone (▲▼).
+
+**Next** Massab reviews the prototype → Phase 8b (item pages, browse, Ask, code-splitting) → 8c deploy with Phase 7.

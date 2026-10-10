@@ -1,0 +1,20 @@
+# The 17 cities in PBS's weekly price survey, with approximate city-centre coordinates for the
+# website's map (decimal degrees, WGS84). Names match the city names in the PBS tables.
+cities:
+  - {name: Islamabad,  province: Islamabad,           lat: 33.684, lon: 73.048}
+  - {name: Rawalpindi, province: Punjab,              lat: 33.565, lon: 73.017}
+  - {name: Gujranwala, province: Punjab,              lat: 32.188, lon: 74.195}
+  - {name: Sialkot,    province: Punjab,              lat: 32.495, lon: 74.523}
+  - {name: Lahore,     province: Punjab,              lat: 31.520, lon: 74.359}
+  - {name: Faisalabad, province: Punjab,              lat: 31.450, lon: 73.135}
+  - {name: Sargodha,   province: Punjab,              lat: 32.074, lon: 72.686}
+  - {name: Multan,     province: Punjab,              lat: 30.158, lon: 71.525}
+  - {name: Bahawalpur, province: Punjab,              lat: 29.354, lon: 71.691}
+  - {name: Karachi,    province: Sindh,               lat: 24.861, lon: 67.001}
+  - {name: Hyderabad,  province: Sindh,               lat: 25.396, lon: 68.358}
+  - {name: Sukkur,     province: Sindh,               lat: 27.705, lon: 68.857}
+  - {name: Larkana,    province: Sindh,               lat: 27.557, lon: 68.226}
+  - {name: Peshawar,   province: Khyber Pakhtunkhwa,  lat: 34.015, lon: 71.525}
+  - {name: Bannu,      province: Khyber Pakhtunkhwa,  lat: 32.989, lon: 70.606}
+  - {name: Quetta,     province: Balochistan,         lat: 30.180, lon: 66.975}
+  - {name: Khuzdar,    province: Balochistan,         lat: 27.800, lon: 66.617}

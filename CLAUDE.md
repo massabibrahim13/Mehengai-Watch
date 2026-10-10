@@ -526,7 +526,10 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   + 8 sourced events in `data/known_events.csv`. Phase 4: L0–L3 built + backtest; **production detector =
   L1 rolling robust z-score, 52-week window** (same recall as L0 with 60% fewer alerts; L2/L3 didn't beat it —
   see decisions.md). All layers' flags are in the `anomalies` table. 47 tests pass. All pushed to GitHub.
-- **Next step:** Phase 8a — `src/mehngai/export.py` (JSON into `web/public/data/`) + `web/` prototype home page.
+- **Phase 8a done (2026-10-11):** `export.py` (stage 8) + `web/` prototype home page (React/TS/Vite/Tailwind/Motion/
+  ECharts): story headline, tickers, cards, city bubble map, movers, set prices, headlines, item quick-view, Ctrl+K
+  search. Run: `python -m mehngai.export` then `cd web && npm install && npm run dev` → http://localhost:5173.
+- **Next step:** Massab reviews the prototype → Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·

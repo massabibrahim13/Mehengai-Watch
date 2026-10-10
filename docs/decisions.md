@@ -284,3 +284,23 @@ around buttons and news; moving news; a headlines section.
 | Sparklines | Tiny SVG trend (last 26 weeks) embedded as an `<img>` data URI | Streamlit's HTML sanitiser strips inline `<svg>` (found by inspecting the DOM). |
 | Theme | `[theme.light]` / `[theme.dark]` in `.streamlit/config.toml`; CSS neutrals are semi-transparent | A plain `[theme]` section silently forced light mode; per-mode sections keep the viewer's choice. |
 | Safety | All feed text HTML-escaped, only http(s) links emitted (`style.py`, tested) | Headlines come from outside sites and are rendered as HTML. |
+
+---
+
+## v3 / Phase 8a — website prototype (2026-10-11)
+
+Massab: Streamlit is too dull and limited for a really good-looking, interactive app. Agreed plan: keep the
+Python pipeline, export JSON, build a React website (CLAUDE.md §3 stages 8–9, Phase 8).
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Architecture | Python pipeline → `export.py` → JSON in `web/public/data/` → static React site | The AI/statistics stay in Python (the course focus); the site only displays exported values; static = free hosting, no server to run. |
+| Stack | React 19 + TypeScript + Vite 8, Tailwind 4, Motion (Framer Motion), ECharts 6 (modular import, SVG renderer), fonts via `@fontsource` | Full control over layout and motion; TypeScript mirrors the JSON shapes (`types.ts`); self-hosted fonts work offline. |
+| Data files | `summary.json`, `items.json`, `cities.json`, `news.json` (~60 KB, home page) + `series/<item>.json` (~50 KB each, loaded on demand) | The home page loads fast; full history only when an item is opened. `allow_nan=False` so browsers can always parse it. |
+| Map | Natural Earth 1:50m Pakistan outline (public domain, 571 points, 9 KB) + `config/cities.yaml` coordinates; ECharts geo with `aspectScale` 0.87 (≈ cos 30°N) | Correct shape at Pakistan's latitude. Labelled "for orientation only; not an authoritative boundary". |
+| Map encodings | Colour = % vs national average on a diverging blue–grey–red scale that saturates at **±10% or the real spread**; size = (price ÷ national)³, clamped | First version scaled min→max, so petrol's Rs 4 spread (±0.6%) looked dramatic. Now near-identical prices look identical. |
+| Story headline | Built from the data by fixed rules ("Chana daal and wheat flour moved unusually this week.") | Newsroom feel without letting an LLM write numbers or claims. |
+| Interaction | Price ticker + LIVE headline strip (pause on hover), count-up tiles, item quick-view panel (history chart with zoom, cities, flags, news), Ctrl+K search (alias + typo matching ported from `search.py`), map ↔ list hover linking, animated topic filter | Everything clickable leads to the item; motion only where it carries information; `prefers-reduced-motion` respected. |
+| Known follow-up | JS bundle 350 KB gzip (ECharts) | Phase 8b: code-split the charts (load after first paint). |
+
+Prototype checked with screenshots: light, dark, 390 px phone, map hover, item panel, search; no console errors.

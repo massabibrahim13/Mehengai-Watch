@@ -9,6 +9,7 @@
   6. explain  this week's anomalies (LLM + guardrails, cached)
   6b. news    price headlines from Pakistani news RSS feeds (context; failure is not fatal)
   7. report   reports/<week>.md
+  8. export   JSON for the website                                       → web/public/data/
 
 Each stage reads the previous stage's output from disk/DB, so a failed run can simply be re-run:
 downloads, parsed CSVs and explanations are cached, and the database rebuild is idempotent.
@@ -21,7 +22,7 @@ import logging
 import time
 from datetime import date
 
-from mehngai import news
+from mehngai import export, news
 from mehngai.config import load_settings
 from mehngai.detect import run as detect
 from mehngai.explain import run as explain
@@ -64,6 +65,7 @@ def main() -> None:
     except Exception:
         log.warning("news refresh failed; the report will use the headlines already stored")
     path = stage("7. report", weekly_report.write)
+    stage("8. export", export.run)
     log.info("finished: %s (%d flagged this week)", path.name, len(results))
 
 

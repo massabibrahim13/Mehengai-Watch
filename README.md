@@ -15,6 +15,21 @@ latest price news.
 
 ---
 
+## The website (new, in progress)
+
+A React website is replacing the Streamlit dashboard as the public face of the project: a newsroom-style home page
+with this week's story, a moving price ticker and live headlines, a Pakistan map with a bubble per city, and a
+quick-view for every item. The Python pipeline exports small JSON files; the site only displays them.
+
+![Website home page](docs/img/web_home.png)
+
+| City bubble map | Item quick-view |
+|---|---|
+| ![Where it costs more](docs/img/web_map.png) | ![Item panel](docs/img/web_item.png) |
+
+Run it locally (needs Node.js): `python -m mehngai.export`, then `cd web`, `npm install`, `npm run dev`, and open
+http://localhost:5173.
+
 ## The problem
 
 Prices rise every week in Pakistan, so "the price went up" is not news. Households and small shopkeepers
