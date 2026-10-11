@@ -46,7 +46,7 @@ function MoveCards({ summary, items, onOpen }: { summary: Summary; items: Item[]
           <motion.div key={item.item_id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 + i * 0.12, ease: [0.2, 0.7, 0.2, 1] }} className={i % 2 ? "sm:translate-y-8" : ""}>
             <button type="button" onClick={() => onOpen(item.item_id)} style={{ animationDelay: `${i * 1.4}s` }}
-              className="drift lift block w-full rounded-2xl border border-glass-line bg-glass p-4 text-left text-hero-ink shadow-[0_24px_60px_-24px_rgb(0_0_0/0.5)] backdrop-blur-xl">
+              className="drift lift block w-full rounded-2xl border border-glass-line bg-glass p-4 text-left text-hero-ink shadow-[0_24px_60px_-24px_rgb(0_0_0/0.5)] backdrop-blur-md">
               <span className="flex items-start justify-between gap-2">
                 <span className={`text-[11px] font-bold uppercase leading-tight tracking-[0.1em] ${TONE[tone]}`}>{label}</span>
                 <Change value={item.change_pct} className="text-xs" />

@@ -229,3 +229,13 @@ pieces that copied the reference sites.
 - *Respect the device:* pause when off screen, cap the pixel ratio, and draw a still frame for "reduce motion".
 
 **Next** Phase 8b (item pages, browse, Ask in the browser, code-splitting) → 8c deploy with Phase 7.
+
+## 2026-10-11 — making the hero animation smooth
+
+**Fixed** the laggy hero: from ~10 to ~50 frames per second on a deliberately slowed CPU.
+
+**Key concepts**
+- *Measure before fixing:* switching parts off one at a time (blur, canvas) showed the real cost was painting lines.
+- *Pixels cost time:* drawing at a lower resolution and letting the browser scale it up is a big, almost invisible win.
+- *Adaptive quality:* watch how long frames take and lower the resolution only on machines that need it.
+- *Do maths once:* values that depend only on the column (not the strand) are computed once per frame, not 58 times.

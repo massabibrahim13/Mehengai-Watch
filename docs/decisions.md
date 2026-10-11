@@ -367,3 +367,15 @@ quicker and interactive when the visitor moves or clicks.
 | Layout | Left: headline, subtitle, buttons. Right: one "This week's moves" card (two unusual moves, a government change, the biggest fall) | Replaces the centred TradingView composition and scattered floating cards with our own composition. |
 | Removed copies | Slanted buttons, red TrendSpider-style alert bar (now a red count badge on "This week"), Koyfin-style floating pill (now a round search button whose label slides out), Koyfin-style circle icons (now line-art in the wave style), the orbit scene | Massab asked for no direct replication. |
 | Hero cards | The four "this week" cards (unusual rise, notable rise, government price, biggest fall) return as a 2×2 group of floating glass cards with sparklines, right column offset lower | Massab liked them; grouped beside the headline instead of scattered around it. |
+
+### Hero speed (2026-10-11)
+
+Massab: the animated hero felt laggy. Measured with the CPU slowed 4× at 1880×1000, 1.25× pixel density: ~10 fps.
+Hiding the canvas gave 57 fps and removing the glass blur changed nothing, so the cost was painting the lines.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Resolution | Draw the canvas at ≤ 1 canvas px per CSS px (not the screen's 1.25–2×) and let the browser scale it; if 20 frames run slow, step down by 0.15 (to 0.5), step back up after 300 fast frames | Painting cost grows with pixel count; fine glowing lines look the same. Adapts to slow and fast machines. |
+| Frame rate | Idle drift redrawn every other frame (30 fps); full 60 fps while the pointer moves or a ripple runs | The idle drift is too slow for the eye to notice the difference. |
+| Work per frame | 58 strands (was 74); sine/cosine computed once per column and combined per strand (sin(a+b) = sin a·cos b + cos a·sin b); pointer/ripple maths skipped far from the disturbance | Same look, a fraction of the maths. |
+| Result | ~50 fps with the CPU slowed 4× (idle and while moving); a steady 60 fps expected on a normal machine | Measured with `perf_hero.py` (Playwright + Chrome CPU throttling). |

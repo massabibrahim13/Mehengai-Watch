@@ -555,6 +555,9 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   flowing line waves like his reference images. Now: two-column hero (headline + "This week's moves" card), canvas
   waves (idle drift / pointer bend / click ripple, 60 fps, paused off-screen, still frame with reduced motion), normal
   buttons, the four "this week" cards back as a 2×2 floating group (Massab liked them), no red alert bar (count badge on "This week"), round floating search button, line-art icons.
+- **Hero speed fix (2026-10-11):** Massab found the hero laggy. Measured (CPU slowed 4×, 1880×1000 @1.25x): ~10 fps →
+  ~50 fps. Canvas drawn at ≤1 px per CSS px and steps down to 0.5 by itself if frames run slow; idle drift redrawn at
+  30 fps; 58 strands instead of 74; sine maths once per column; lighter blur on the hero cards.
 - **Next step:** Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
