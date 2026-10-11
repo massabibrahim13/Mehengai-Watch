@@ -1,0 +1,919 @@
+report_date,sl_no,item_raw,unit_raw,city,price_min,price_avg,price_max
+2020-12-24,1,Wheat Flour Bag,20 Kg,Islamabad,860.0,864.15,870.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Rawalpindi,860.0,860.0,860.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Gujranwala,860.0,860.0,860.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Sialkot,855.0,855.0,855.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Lahore,860.0,860.0,860.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Faisalabad,860.0,860.0,860.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Sargodha,860.0,860.0,860.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Islamabad,100.0,106.56,110.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Rawalpindi,90.0,98.54,110.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Gujranwala,80.0,80.0,80.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Sialkot,80.0,80.0,80.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Lahore,75.0,76.87,80.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Faisalabad,90.0,90.0,90.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Sargodha,90.0,90.0,90.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Islamabad,70.0,76.52,80.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Rawalpindi,70.0,78.03,90.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Gujranwala,60.0,60.0,60.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Sialkot,0.0,0.0,0.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Lahore,60.0,60.0,60.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Faisalabad,60.0,60.0,60.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Sargodha,90.0,90.0,90.0
+2020-12-24,4,Bread plain (Small Size),Each,Islamabad,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Rawalpindi,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Gujranwala,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Sialkot,70.0,70.0,70.0
+2020-12-24,4,Bread plain (Small Size),Each,Lahore,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Faisalabad,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Sargodha,60.0,60.0,60.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Islamabad,550.0,558.03,600.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Rawalpindi,530.0,554.5,580.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Gujranwala,500.0,500.0,500.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Sialkot,500.0,500.0,500.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Lahore,500.0,504.56,550.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Faisalabad,400.0,430.89,500.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Sargodha,450.0,450.0,450.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Islamabad,1100.0,1166.08,1250.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Rawalpindi,1100.0,1171.61,1200.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Gujranwala,1000.0,1032.28,1100.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Sialkot,1050.0,1050.0,1050.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Lahore,1000.0,1051.19,1100.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Faisalabad,1000.0,1000.0,1000.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Sargodha,1000.0,1000.0,1000.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Islamabad,210.0,216.09,230.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Rawalpindi,210.0,212.91,230.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Gujranwala,197.0,197.0,197.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Sialkot,207.0,207.0,207.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Lahore,196.0,196.0,196.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Faisalabad,202.0,202.0,202.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Sargodha,200.0,200.0,200.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Islamabad,120.0,120.41,125.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Rawalpindi,110.0,119.83,130.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Gujranwala,110.0,110.0,110.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Sialkot,90.0,90.0,90.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Lahore,100.0,100.0,100.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Faisalabad,100.0,103.23,110.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Sargodha,80.0,80.0,80.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Islamabad,120.0,130.74,140.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Rawalpindi,120.0,132.49,140.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Gujranwala,120.0,120.0,120.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Sialkot,100.0,100.0,100.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Lahore,120.0,120.0,120.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Faisalabad,110.0,110.0,110.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Sargodha,110.0,110.0,110.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Islamabad,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Rawalpindi,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Gujranwala,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Sialkot,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Lahore,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Faisalabad,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Sargodha,480.0,480.0,480.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Islamabad,202.0,207.81,210.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Rawalpindi,199.0,201.76,210.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Gujranwala,200.0,200.0,200.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Sialkot,210.0,210.0,210.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Lahore,201.0,201.0,201.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Faisalabad,200.0,200.5,201.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Sargodha,200.0,200.0,200.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Islamabad,300.0,331.91,360.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Rawalpindi,280.0,316.64,350.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Gujranwala,220.0,220.0,220.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Sialkot,220.0,220.0,220.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Lahore,220.0,231.79,240.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Faisalabad,220.0,226.47,240.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Sargodha,240.0,240.0,240.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Islamabad,,,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Rawalpindi,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Gujranwala,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Sialkot,1265.0,1265.0,1265.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Lahore,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Faisalabad,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Sargodha,1295.0,1295.0,1295.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Islamabad,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Rawalpindi,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Gujranwala,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Sialkot,635.0,635.0,635.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Lahore,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Faisalabad,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Sargodha,655.0,655.0,655.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Islamabad,,,
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Rawalpindi,255.0,255.0,255.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Gujranwala,254.0,254.0,254.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Sialkot,254.0,254.0,254.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Lahore,255.0,255.0,255.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Faisalabad,255.0,255.0,255.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Sargodha,255.0,255.0,255.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Islamabad,120.0,140.38,170.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Rawalpindi,80.0,109.28,120.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Gujranwala,80.0,86.18,100.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Sialkot,80.0,80.0,80.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Lahore,70.0,74.6,80.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Faisalabad,60.0,63.16,70.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Sargodha,60.0,60.0,60.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Islamabad,170.0,178.2,190.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Rawalpindi,150.0,161.57,170.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Gujranwala,140.0,143.26,150.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Sialkot,140.0,140.0,140.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Lahore,130.0,141.92,160.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Faisalabad,160.0,163.27,170.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Sargodha,170.0,176.6,180.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Islamabad,230.0,248.17,260.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Rawalpindi,220.0,234.47,250.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Gujranwala,220.0,220.0,220.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Sialkot,190.0,190.0,190.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Lahore,200.0,219.12,240.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Faisalabad,200.0,206.46,220.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Sargodha,230.0,233.29,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Islamabad,240.0,256.46,270.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Rawalpindi,240.0,250.52,270.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Gujranwala,250.0,250.0,250.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Sialkot,240.0,240.0,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Lahore,240.0,246.56,260.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Faisalabad,260.0,263.29,270.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Sargodha,260.0,260.0,260.0
+2020-12-24,20,Pulse Gram,1 Kg,Islamabad,150.0,164.62,180.0
+2020-12-24,20,Pulse Gram,1 Kg,Rawalpindi,150.0,153.6,160.0
+2020-12-24,20,Pulse Gram,1 Kg,Gujranwala,130.0,130.0,130.0
+2020-12-24,20,Pulse Gram,1 Kg,Sialkot,120.0,120.0,120.0
+2020-12-24,20,Pulse Gram,1 Kg,Lahore,110.0,121.3,130.0
+2020-12-24,20,Pulse Gram,1 Kg,Faisalabad,140.0,140.0,140.0
+2020-12-24,20,Pulse Gram,1 Kg,Sargodha,120.0,120.0,120.0
+2020-12-24,21,Potatoes,1 Kg,Islamabad,50.0,60.39,80.0
+2020-12-24,21,Potatoes,1 Kg,Rawalpindi,50.0,56.5,70.0
+2020-12-24,21,Potatoes,1 Kg,Gujranwala,50.0,50.0,50.0
+2020-12-24,21,Potatoes,1 Kg,Sialkot,50.0,56.46,60.0
+2020-12-24,21,Potatoes,1 Kg,Lahore,40.0,45.44,50.0
+2020-12-24,21,Potatoes,1 Kg,Faisalabad,40.0,46.42,50.0
+2020-12-24,21,Potatoes,1 Kg,Sargodha,40.0,40.0,40.0
+2020-12-24,22,Onions,1 Kg,Islamabad,50.0,61.71,80.0
+2020-12-24,22,Onions,1 Kg,Rawalpindi,50.0,57.89,70.0
+2020-12-24,22,Onions,1 Kg,Gujranwala,50.0,50.0,50.0
+2020-12-24,22,Onions,1 Kg,Sialkot,60.0,60.0,60.0
+2020-12-24,22,Onions,1 Kg,Lahore,40.0,48.43,50.0
+2020-12-24,22,Onions,1 Kg,Faisalabad,40.0,40.0,40.0
+2020-12-24,22,Onions,1 Kg,Sargodha,40.0,43.09,50.0
+2020-12-24,23,Tomatoes,1 Kg,Islamabad,100.0,107.89,120.0
+2020-12-24,23,Tomatoes,1 Kg,Rawalpindi,80.0,101.02,130.0
+2020-12-24,23,Tomatoes,1 Kg,Gujranwala,120.0,120.0,120.0
+2020-12-24,23,Tomatoes,1 Kg,Sialkot,100.0,103.23,110.0
+2020-12-24,23,Tomatoes,1 Kg,Lahore,100.0,105.08,120.0
+2020-12-24,23,Tomatoes,1 Kg,Faisalabad,100.0,103.09,120.0
+2020-12-24,23,Tomatoes,1 Kg,Sargodha,100.0,100.0,100.0
+2020-12-24,24,Sugar Refined,1 Kg,Islamabad,85.0,85.0,85.0
+2020-12-24,24,Sugar Refined,1 Kg,Rawalpindi,80.0,83.7,90.0
+2020-12-24,24,Sugar Refined,1 Kg,Gujranwala,82.0,82.0,82.0
+2020-12-24,24,Sugar Refined,1 Kg,Sialkot,80.0,81.33,82.0
+2020-12-24,24,Sugar Refined,1 Kg,Lahore,80.0,83.06,85.0
+2020-12-24,24,Sugar Refined,1 Kg,Faisalabad,79.0,79.5,80.0
+2020-12-24,24,Sugar Refined,1 Kg,Sargodha,80.0,80.0,80.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Islamabad,140.0,144.91,150.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Rawalpindi,130.0,142.93,160.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Gujranwala,120.0,120.0,120.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Sialkot,130.0,130.0,130.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Lahore,120.0,124.66,130.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Faisalabad,140.0,143.26,150.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Sargodha,110.0,110.0,110.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Islamabad,,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Rawalpindi,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Gujranwala,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Sialkot,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Lahore,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Faisalabad,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Sargodha,30.0,30.0,30.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Islamabad,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Rawalpindi,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Gujranwala,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Sialkot,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Lahore,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Faisalabad,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Sargodha,280.0,280.0,280.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Islamabad,250.0,279.01,320.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Rawalpindi,200.0,231.4,260.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Gujranwala,200.0,200.0,200.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Sialkot,200.0,206.46,220.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Lahore,230.0,265.88,350.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Faisalabad,220.0,226.47,240.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Sargodha,200.0,206.46,220.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Islamabad,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Rawalpindi,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Gujranwala,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Sialkot,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Lahore,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Faisalabad,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Sargodha,230.0,230.0,230.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Islamabad,150.0,154.92,160.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Rawalpindi,120.0,139.5,150.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Gujranwala,180.0,186.43,200.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Sialkot,160.0,160.0,160.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Lahore,130.0,130.92,140.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Faisalabad,200.0,200.0,200.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Sargodha,140.0,140.0,140.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Islamabad,100.0,103.98,120.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Rawalpindi,80.0,92.91,100.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Gujranwala,60.0,66.04,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Sialkot,60.0,60.0,60.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Lahore,80.0,80.0,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Faisalabad,70.0,73.19,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Sargodha,70.0,70.0,70.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Islamabad,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Rawalpindi,25.0,29.28,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Gujranwala,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Sialkot,25.0,25.0,25.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Lahore,25.0,26.8,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Faisalabad,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Sargodha,30.0,30.0,30.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Islamabad,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Rawalpindi,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Gujranwala,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Sialkot,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Lahore,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Faisalabad,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Sargodha,80.0,80.0,80.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Islamabad,320.0,333.18,350.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Rawalpindi,320.0,325.96,330.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Gujranwala,220.0,220.0,220.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Sialkot,250.0,250.0,250.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Lahore,290.0,293.3,300.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Faisalabad,300.0,315.82,350.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Sargodha,400.0,400.0,400.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Islamabad,320.0,340.58,360.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Rawalpindi,300.0,327.14,340.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Gujranwala,225.0,225.0,225.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Sialkot,270.0,270.0,270.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Lahore,160.0,163.27,170.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Faisalabad,130.0,133.25,140.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Sargodha,220.0,220.0,220.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Islamabad,280.0,319.11,350.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Rawalpindi,260.0,298.11,330.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Gujranwala,240.0,243.29,250.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Sialkot,300.0,300.0,300.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Lahore,325.0,333.13,350.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Faisalabad,300.0,315.82,350.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Sargodha,470.0,470.0,470.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Islamabad,200.0,212.26,230.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Rawalpindi,200.0,205.27,210.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Gujranwala,200.0,200.0,200.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Sialkot,200.0,200.0,200.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Lahore,175.0,184.63,200.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Faisalabad,150.0,159.4,180.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Sargodha,200.0,200.0,200.0
+2020-12-24,38,Gents Sandal Bata,Pair,Islamabad,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Rawalpindi,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Gujranwala,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Sialkot,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Lahore,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Faisalabad,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Sargodha,899.0,899.0,899.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Islamabad,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Rawalpindi,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Gujranwala,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Sialkot,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Lahore,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Faisalabad,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Sargodha,199.0,199.0,199.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Islamabad,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Rawalpindi,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Gujranwala,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Sialkot,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Lahore,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Faisalabad,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Sargodha,599.0,599.0,599.0
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Islamabad,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Rawalpindi,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Gujranwala,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Sialkot,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Lahore,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Faisalabad,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Sargodha,4.05,4.05,4.05
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Islamabad,,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Rawalpindi,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Gujranwala,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Sialkot,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Lahore,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Faisalabad,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Sargodha,141.57,141.57,141.57
+2020-12-24,43,Firewood Whole,40 Kg,Islamabad,1200.0,1274.24,1300.0
+2020-12-24,43,Firewood Whole,40 Kg,Rawalpindi,900.0,994.01,1050.0
+2020-12-24,43,Firewood Whole,40 Kg,Gujranwala,850.0,850.0,850.0
+2020-12-24,43,Firewood Whole,40 Kg,Sialkot,700.0,700.0,700.0
+2020-12-24,43,Firewood Whole,40 Kg,Lahore,850.0,906.47,1000.0
+2020-12-24,43,Firewood Whole,40 Kg,Faisalabad,700.0,731.86,800.0
+2020-12-24,43,Firewood Whole,40 Kg,Sargodha,650.0,650.0,650.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Islamabad,170.0,176.6,180.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Rawalpindi,170.0,175.26,180.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Gujranwala,225.0,225.0,225.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Sialkot,220.0,220.0,220.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Lahore,210.0,210.0,210.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Faisalabad,165.0,165.0,165.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Sargodha,240.0,240.0,240.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Islamabad,60.0,60.0,60.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Rawalpindi,60.0,60.0,60.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Gujranwala,50.0,50.0,50.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Sialkot,50.0,50.0,50.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Lahore,52.0,52.0,52.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Faisalabad,55.0,55.0,55.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Sargodha,55.0,55.0,55.0
+2020-12-24,46,Match Box,Each,Islamabad,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Rawalpindi,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Gujranwala,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Sialkot,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Lahore,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Faisalabad,2.0,2.29,3.0
+2020-12-24,46,Match Box,Each,Sargodha,3.0,3.0,3.0
+2020-12-24,47,Petrol Super,Per Litre,Islamabad,104.19,104.19,104.19
+2020-12-24,47,Petrol Super,Per Litre,Rawalpindi,104.19,104.2,104.21
+2020-12-24,47,Petrol Super,Per Litre,Gujranwala,104.2,104.2,104.2
+2020-12-24,47,Petrol Super,Per Litre,Sialkot,104.8,104.8,104.8
+2020-12-24,47,Petrol Super,Per Litre,Lahore,104.2,104.21,104.5
+2020-12-24,47,Petrol Super,Per Litre,Faisalabad,104.2,104.2,104.2
+2020-12-24,47,Petrol Super,Per Litre,Sargodha,104.4,104.4,104.4
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Islamabad,108.9,108.93,108.94
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Rawalpindi,108.9,108.93,109.1
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Gujranwala,109.0,109.0,109.0
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Sialkot,108.55,108.55,108.55
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Lahore,108.9,108.9,108.9
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Faisalabad,108.9,108.9,108.9
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Sargodha,109.1,109.1,109.1
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Islamabad,1450.0,1474.79,1500.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Rawalpindi,1450.0,1496.61,1500.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Gujranwala,1400.0,1439.72,1460.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Sialkot,1480.0,1480.0,1480.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Lahore,1342.05,1363.99,1400.4
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Faisalabad,1350.0,1366.47,1400.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Sargodha,1400.0,1400.0,1400.0
+2020-12-24,50,Telephone Call Charges,Per Minu,Islamabad,,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Rawalpindi,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Gujranwala,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Sialkot,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Lahore,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Faisalabad,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Sargodha,1.55,1.55,1.55
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Islamabad,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Rawalpindi,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Gujranwala,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Sialkot,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Lahore,43.0,45.73,46.2
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Faisalabad,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Sargodha,45.0,45.0,45.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Multan,860.0,951.96,1200.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Bahawalpur,860.0,860.0,860.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Karachi,1080.0,1208.79,1340.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Hyderabad,1200.0,1219.84,1240.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Sukkur,836.6,943.49,1200.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Larkana,836.6,943.49,1200.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Peshawar,860.0,1079.04,1330.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Multan,85.0,93.75,100.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Bahawalpur,80.0,80.0,80.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Karachi,90.0,99.43,110.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Hyderabad,90.0,92.4,100.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Sukkur,100.0,100.0,100.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Larkana,90.0,96.55,100.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Peshawar,80.0,80.0,80.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Multan,55.0,62.08,70.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Bahawalpur,65.0,66.63,70.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Karachi,70.0,74.72,85.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Hyderabad,75.0,77.88,80.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Sukkur,60.0,60.0,60.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Larkana,60.0,61.33,62.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Peshawar,70.0,70.0,70.0
+2020-12-24,4,Bread plain (Small Size),Each,Multan,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Bahawalpur,40.0,40.0,40.0
+2020-12-24,4,Bread plain (Small Size),Each,Karachi,40.0,40.0,40.0
+2020-12-24,4,Bread plain (Small Size),Each,Hyderabad,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Sukkur,70.0,70.0,70.0
+2020-12-24,4,Bread plain (Small Size),Each,Larkana,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Peshawar,60.0,60.0,60.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Multan,450.0,480.91,500.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Bahawalpur,400.0,416.02,450.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Karachi,550.0,587.81,650.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Hyderabad,480.0,486.58,500.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Sukkur,450.0,450.0,450.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Larkana,400.0,424.51,450.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Peshawar,400.0,400.0,400.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Multan,1000.0,1000.0,1000.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Bahawalpur,800.0,816.33,850.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Karachi,900.0,1081.51,1200.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Hyderabad,1000.0,1040.51,1100.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Sukkur,900.0,900.0,900.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Larkana,900.0,924.77,950.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Peshawar,810.0,868.94,1000.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Multan,220.0,221.1,225.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Bahawalpur,196.0,196.0,196.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Karachi,230.0,245.65,260.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Hyderabad,235.0,238.32,240.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Sukkur,235.0,235.0,235.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Larkana,225.0,225.0,225.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Peshawar,211.0,211.0,211.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Multan,90.0,94.31,100.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Bahawalpur,80.0,81.63,85.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Karachi,120.0,120.0,120.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Hyderabad,110.0,110.0,110.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Sukkur,110.0,110.0,110.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Larkana,110.0,114.93,120.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Peshawar,100.0,122.94,130.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Multan,110.0,111.07,120.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Bahawalpur,90.0,93.22,100.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Karachi,180.0,180.0,180.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Hyderabad,140.0,148.01,160.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Sukkur,120.0,120.0,120.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Larkana,120.0,123.24,130.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Peshawar,110.0,127.36,140.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Multan,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Bahawalpur,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Karachi,460.0,475.41,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Hyderabad,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Sukkur,470.0,473.31,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Larkana,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Peshawar,480.0,480.0,480.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Multan,195.0,198.88,200.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Bahawalpur,196.0,196.0,196.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Karachi,200.0,204.04,210.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Hyderabad,200.0,208.3,210.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Sukkur,200.0,200.0,200.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Larkana,200.0,200.0,200.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Peshawar,210.0,215.5,220.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Multan,220.0,234.29,240.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Bahawalpur,240.0,240.0,240.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Karachi,220.0,228.02,240.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Hyderabad,230.0,231.64,240.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Sukkur,220.0,220.0,220.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Larkana,240.0,246.62,250.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Peshawar,260.0,266.5,280.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Multan,,,1265.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Bahawalpur,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Karachi,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Hyderabad,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Sukkur,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Larkana,1265.0,1265.0,1265.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Peshawar,1295.0,1295.0,1295.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Multan,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Bahawalpur,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Karachi,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Hyderabad,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Sukkur,635.0,635.0,635.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Larkana,635.0,635.0,635.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Peshawar,630.0,630.0,630.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Multan,,,
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Bahawalpur,267.0,267.0,267.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Karachi,255.0,255.0,255.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Hyderabad,255.0,255.0,255.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Sukkur,255.0,255.0,255.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Larkana,244.0,244.0,244.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Peshawar,255.0,255.0,255.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Multan,70.0,77.66,80.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Bahawalpur,60.0,63.16,70.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Karachi,50.0,57.61,80.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Hyderabad,50.0,53.95,60.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Sukkur,70.0,73.19,80.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Larkana,50.0,50.0,50.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Peshawar,70.0,77.53,90.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Multan,140.0,148.71,160.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Bahawalpur,150.0,150.0,150.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Karachi,150.0,157.46,170.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Hyderabad,140.0,146.59,150.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Sukkur,140.0,143.26,150.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Larkana,140.0,140.0,140.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Peshawar,156.0,158.66,160.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Multan,200.0,205.39,220.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Bahawalpur,200.0,213.12,220.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Karachi,230.0,247.06,260.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Hyderabad,220.0,226.55,240.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Sukkur,230.0,233.29,240.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Larkana,240.0,240.0,240.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Peshawar,200.0,200.0,200.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Multan,220.0,228.72,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Bahawalpur,250.0,253.29,260.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Karachi,220.0,244.08,260.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Hyderabad,220.0,229.89,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Sukkur,230.0,233.29,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Larkana,240.0,240.0,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Peshawar,230.0,230.0,230.0
+2020-12-24,20,Pulse Gram,1 Kg,Multan,120.0,126.58,130.0
+2020-12-24,20,Pulse Gram,1 Kg,Bahawalpur,140.0,146.59,150.0
+2020-12-24,20,Pulse Gram,1 Kg,Karachi,140.0,157.42,170.0
+2020-12-24,20,Pulse Gram,1 Kg,Hyderabad,140.0,141.62,150.0
+2020-12-24,20,Pulse Gram,1 Kg,Sukkur,140.0,140.0,140.0
+2020-12-24,20,Pulse Gram,1 Kg,Larkana,140.0,140.0,140.0
+2020-12-24,20,Pulse Gram,1 Kg,Peshawar,147.0,148.99,150.0
+2020-12-24,21,Potatoes,1 Kg,Multan,50.0,53.13,60.0
+2020-12-24,21,Potatoes,1 Kg,Bahawalpur,50.0,50.0,50.0
+2020-12-24,21,Potatoes,1 Kg,Karachi,40.0,45.68,60.0
+2020-12-24,21,Potatoes,1 Kg,Hyderabad,35.0,38.69,40.0
+2020-12-24,21,Potatoes,1 Kg,Sukkur,40.0,40.0,40.0
+2020-12-24,21,Potatoes,1 Kg,Larkana,40.0,40.0,40.0
+2020-12-24,21,Potatoes,1 Kg,Peshawar,50.0,54.22,60.0
+2020-12-24,22,Onions,1 Kg,Multan,40.0,46.42,50.0
+2020-12-24,22,Onions,1 Kg,Bahawalpur,50.0,50.0,50.0
+2020-12-24,22,Onions,1 Kg,Karachi,40.0,44.9,60.0
+2020-12-24,22,Onions,1 Kg,Hyderabad,40.0,40.0,40.0
+2020-12-24,22,Onions,1 Kg,Sukkur,40.0,40.0,40.0
+2020-12-24,22,Onions,1 Kg,Larkana,40.0,46.42,50.0
+2020-12-24,22,Onions,1 Kg,Peshawar,50.0,59.81,70.0
+2020-12-24,23,Tomatoes,1 Kg,Multan,100.0,100.0,100.0
+2020-12-24,23,Tomatoes,1 Kg,Bahawalpur,100.0,106.27,120.0
+2020-12-24,23,Tomatoes,1 Kg,Karachi,80.0,96.66,120.0
+2020-12-24,23,Tomatoes,1 Kg,Hyderabad,80.0,94.57,100.0
+2020-12-24,23,Tomatoes,1 Kg,Sukkur,70.0,73.19,80.0
+2020-12-24,23,Tomatoes,1 Kg,Larkana,80.0,83.2,90.0
+2020-12-24,23,Tomatoes,1 Kg,Peshawar,70.0,78.82,80.0
+2020-12-24,24,Sugar Refined,1 Kg,Multan,80.0,80.44,82.0
+2020-12-24,24,Sugar Refined,1 Kg,Bahawalpur,82.0,83.33,84.0
+2020-12-24,24,Sugar Refined,1 Kg,Karachi,80.0,81.88,85.0
+2020-12-24,24,Sugar Refined,1 Kg,Hyderabad,80.0,80.0,80.0
+2020-12-24,24,Sugar Refined,1 Kg,Sukkur,78.0,78.66,80.0
+2020-12-24,24,Sugar Refined,1 Kg,Larkana,85.0,85.0,85.0
+2020-12-24,24,Sugar Refined,1 Kg,Peshawar,85.0,86.64,90.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Multan,100.0,102.14,110.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Bahawalpur,120.0,120.0,120.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Karachi,120.0,133.96,150.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Hyderabad,120.0,131.29,140.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Sukkur,110.0,113.24,120.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Larkana,100.0,101.64,105.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Peshawar,130.0,133.25,140.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Multan,,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Bahawalpur,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Karachi,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Hyderabad,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Sukkur,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Larkana,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Peshawar,30.0,30.0,30.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Multan,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Bahawalpur,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Karachi,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Hyderabad,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Sukkur,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Larkana,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Peshawar,280.0,280.0,280.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Multan,240.0,240.0,240.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Bahawalpur,240.0,240.0,240.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Karachi,320.0,371.31,440.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Hyderabad,360.0,383.17,400.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Sukkur,200.0,200.0,200.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Larkana,200.0,200.0,200.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Peshawar,200.0,232.43,250.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Multan,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Bahawalpur,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Karachi,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Hyderabad,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Sukkur,225.0,227.49,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Larkana,242.0,242.0,242.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Peshawar,230.0,230.0,230.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Multan,100.0,115.24,120.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Bahawalpur,160.0,166.41,180.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Karachi,130.0,138.33,150.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Hyderabad,120.0,122.36,140.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Sukkur,140.0,140.0,140.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Larkana,150.0,165.1,200.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Peshawar,140.0,146.59,150.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Multan,60.0,61.04,70.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Bahawalpur,80.0,80.0,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Karachi,70.0,79.36,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Hyderabad,70.0,71.58,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Sukkur,80.0,80.0,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Larkana,60.0,67.82,80.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Peshawar,70.0,73.19,80.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Multan,25.0,27.11,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Bahawalpur,25.0,26.57,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Karachi,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Hyderabad,35.0,35.0,35.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Sukkur,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Larkana,30.0,31.58,35.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Peshawar,20.0,22.44,30.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Multan,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Bahawalpur,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Karachi,80.0,89.68,90.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Hyderabad,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Sukkur,80.0,80.0,80.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Larkana,90.0,90.0,90.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Peshawar,90.0,90.0,90.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Multan,394.0,394.0,394.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Bahawalpur,380.0,381.33,384.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Karachi,300.0,300.0,300.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Hyderabad,350.0,350.0,350.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Sukkur,375.0,375.0,375.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Larkana,350.0,350.0,350.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Peshawar,450.0,450.0,450.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Multan,250.0,250.0,250.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Bahawalpur,300.0,300.0,300.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Karachi,250.0,257.0,300.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Hyderabad,170.0,173.27,180.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Sukkur,150.0,173.21,200.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Larkana,200.0,224.07,250.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Peshawar,425.0,427.71,450.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Multan,428.0,428.0,428.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Bahawalpur,411.0,417.24,430.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Karachi,400.0,427.73,430.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Hyderabad,350.0,350.0,350.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Sukkur,393.0,393.0,393.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Larkana,500.0,500.0,500.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Peshawar,430.0,430.0,430.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Multan,130.0,141.5,150.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Bahawalpur,100.0,106.27,120.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Karachi,120.0,151.94,180.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Hyderabad,130.0,130.0,130.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Sukkur,150.0,150.0,150.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Larkana,200.0,200.0,200.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Peshawar,130.0,176.09,210.0
+2020-12-24,38,Gents Sandal Bata,Pair,Multan,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Bahawalpur,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Karachi,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Hyderabad,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Sukkur,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Larkana,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Peshawar,899.0,899.0,899.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Multan,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Bahawalpur,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Karachi,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Hyderabad,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Sukkur,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Larkana,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Peshawar,199.0,199.0,199.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Multan,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Bahawalpur,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Karachi,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Hyderabad,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Sukkur,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Larkana,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Peshawar,599.0,599.0,599.0
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Multan,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Bahawalpur,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Karachi,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Hyderabad,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Sukkur,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Larkana,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Peshawar,4.05,4.05,4.05
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Multan,,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Bahawalpur,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Karachi,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Hyderabad,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Sukkur,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Larkana,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Peshawar,141.57,141.57,141.57
+2020-12-24,43,Firewood Whole,40 Kg,Multan,750.0,774.6,800.0
+2020-12-24,43,Firewood Whole,40 Kg,Bahawalpur,700.0,700.0,700.0
+2020-12-24,43,Firewood Whole,40 Kg,Karachi,650.0,692.18,700.0
+2020-12-24,43,Firewood Whole,40 Kg,Hyderabad,650.0,666.26,700.0
+2020-12-24,43,Firewood Whole,40 Kg,Sukkur,500.0,500.0,500.0
+2020-12-24,43,Firewood Whole,40 Kg,Larkana,600.0,600.0,600.0
+2020-12-24,43,Firewood Whole,40 Kg,Peshawar,750.0,774.09,850.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Multan,200.0,200.0,200.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Bahawalpur,200.0,200.0,200.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Karachi,180.0,180.0,180.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Hyderabad,230.0,230.0,230.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Sukkur,160.0,160.0,160.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Larkana,230.0,230.0,230.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Peshawar,190.0,190.0,190.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Multan,55.0,55.0,55.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Bahawalpur,55.0,55.0,55.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Karachi,50.0,50.0,50.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Hyderabad,50.0,50.0,50.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Sukkur,55.0,55.0,55.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Larkana,50.0,50.0,50.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Peshawar,55.0,55.0,55.0
+2020-12-24,46,Match Box,Each,Multan,4.0,4.0,4.0
+2020-12-24,46,Match Box,Each,Bahawalpur,3.0,3.63,4.0
+2020-12-24,46,Match Box,Each,Karachi,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Hyderabad,3.0,3.56,5.0
+2020-12-24,46,Match Box,Each,Sukkur,4.0,4.0,4.0
+2020-12-24,46,Match Box,Each,Larkana,4.0,4.0,4.0
+2020-12-24,46,Match Box,Each,Peshawar,3.0,3.0,3.0
+2020-12-24,47,Petrol Super,Per Litre,Multan,104.2,104.27,104.3
+2020-12-24,47,Petrol Super,Per Litre,Bahawalpur,104.4,105.01,105.35
+2020-12-24,47,Petrol Super,Per Litre,Karachi,104.21,104.21,104.21
+2020-12-24,47,Petrol Super,Per Litre,Hyderabad,104.99,105.09,105.3
+2020-12-24,47,Petrol Super,Per Litre,Sukkur,104.2,104.2,104.2
+2020-12-24,47,Petrol Super,Per Litre,Larkana,104.4,104.4,104.4
+2020-12-24,47,Petrol Super,Per Litre,Peshawar,104.19,104.19,104.19
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Multan,108.9,108.91,108.96
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Bahawalpur,109.2,109.81,110.2
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Karachi,108.96,108.96,108.96
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Hyderabad,109.7,109.71,109.72
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Sukkur,108.9,108.9,108.9
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Larkana,109.2,109.2,109.2
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Peshawar,108.94,108.94,108.94
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Multan,1510.0,1510.0,1510.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Bahawalpur,1430.0,1430.0,1430.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Karachi,1320.0,1329.64,1430.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Hyderabad,1400.4,1438.27,1517.1
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Sukkur,1517.0,1517.0,1517.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Larkana,1380.0,1380.0,1380.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Peshawar,1517.1,1593.94,1633.8
+2020-12-24,50,Telephone Call Charges,Per Minu,Multan,,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Bahawalpur,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Karachi,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Hyderabad,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Sukkur,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Larkana,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Peshawar,1.55,1.55,1.55
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Multan,46.2,46.2,46.2
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Bahawalpur,46.2,46.2,46.2
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Karachi,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Hyderabad,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Sukkur,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Larkana,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Peshawar,45.0,45.0,45.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Bannu,860.0,1012.66,1150.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Quetta,1255.0,1260.0,1265.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,Khuzdar,1200.0,1200.0,1200.0
+2020-12-24,1,Wheat Flour Bag,20 Kg,National,836.6,972.0,1340.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Bannu,60.0,66.49,70.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Quetta,100.0,104.92,110.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,Khuzdar,90.0,90.0,90.0
+2020-12-24,2,Rice Basmati Broken (Average Qua,li1ty K)g,National,60.0,89.07,110.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Bannu,70.0,70.0,70.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Quetta,85.0,89.91,95.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,Khuzdar,80.0,80.0,80.0
+2020-12-24,3,Rice IRRI-6/9 (Sindh/Punjab),1 Kg,National,55.0,70.38,95.0
+2020-12-24,4,Bread plain (Small Size),Each,Bannu,40.0,40.0,40.0
+2020-12-24,4,Bread plain (Small Size),Each,Quetta,60.0,60.0,60.0
+2020-12-24,4,Bread plain (Small Size),Each,Khuzdar,40.0,40.0,40.0
+2020-12-24,4,Bread plain (Small Size),Each,National,40.0,55.54,70.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Bannu,400.0,400.0,400.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Quetta,470.0,474.98,480.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,Khuzdar,450.0,466.08,500.0
+2020-12-24,5,Beef with Bone (Average Quality),1 Kg,National,400.0,472.63,650.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Bannu,700.0,706.6,720.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Quetta,1000.0,1096.96,1200.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,Khuzdar,1000.0,1000.0,1000.0
+2020-12-24,6,Mutton (Average Quality),1 Kg,National,700.0,987.07,1250.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Bannu,225.0,225.0,225.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Quetta,220.0,224.96,230.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,Khuzdar,270.0,270.0,270.0
+2020-12-24,7,Chicken Farm Broiler (Live),1 Kg,National,196.0,218.17,270.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Bannu,100.0,106.56,110.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Quetta,120.0,120.0,120.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,Khuzdar,100.0,100.0,100.0
+2020-12-24,8,Milk fresh (Un-boiled),1 Ltr,National,80.0,105.24,130.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Bannu,120.0,120.0,120.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Quetta,130.0,134.94,140.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,Khuzdar,110.0,110.0,110.0
+2020-12-24,9,Curd (Dahi) Loose,1 Kg,National,90.0,121.64,180.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Bannu,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Quetta,500.0,500.0,500.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,Khuzdar,480.0,480.0,480.0
+2020-12-24,10,Powdered Milk NIDO 390 gm Polyba,Egach,National,460.0,480.49,500.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Bannu,210.0,213.32,215.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Quetta,220.0,224.96,230.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,Khuzdar,220.0,220.0,220.0
+2020-12-24,11,Eggs Hen (Farm),1 Dozen,National,195.0,205.85,230.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Bannu,220.0,220.0,220.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Quetta,230.0,239.86,250.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,Khuzdar,250.0,250.0,250.0
+2020-12-24,12,Mustard Oil (Average Quality),1 Kg,National,220.0,243.15,360.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Bannu,,,1265.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Quetta,1295.0,1295.0,1295.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,Khuzdar,1265.0,1265.0,1265.0
+2020-12-24,13,Cooking Oil DALDA or Other Similar,EBaracnhd (S,National,1265.0,1286.1,1295.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Bannu,625.0,625.0,625.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Quetta,660.0,660.0,660.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,Khuzdar,635.0,635.0,635.0
+2020-12-24,14,Vegetable Ghee DALDA/HABIB 2.5,kEga Tchin,National,625.0,649.87,660.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Bannu,,,
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Quetta,260.0,264.97,270.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,Khuzdar,254.0,254.0,254.0
+2020-12-24,15,Vegetable Ghee DALDA/HABIB or,OEthaecrh sup,National,240.0,254.52,270.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Bannu,60.0,63.16,70.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Quetta,60.0,69.52,80.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,Khuzdar,60.0,60.0,60.0
+2020-12-24,16,Bananas (Kela) Local,1 Dozen,National,50.0,71.59,170.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Bannu,150.0,150.0,150.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Quetta,155.0,159.95,165.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,Khuzdar,150.0,150.0,150.0
+2020-12-24,17,Pulse Masoor (Washed),1 Kg,National,130.0,153.09,190.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Bannu,200.0,200.0,200.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Quetta,250.0,254.97,260.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,Khuzdar,260.0,260.0,260.0
+2020-12-24,18,Pulse Moong (Washed),1 Kg,National,190.0,224.49,260.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Bannu,220.0,236.33,250.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Quetta,260.0,264.97,270.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,Khuzdar,240.0,240.0,240.0
+2020-12-24,19,Pulse Mash (Washed),1 Kg,National,220.0,244.88,270.0
+2020-12-24,20,Pulse Gram,1 Kg,Bannu,120.0,129.74,140.0
+2020-12-24,20,Pulse Gram,1 Kg,Quetta,165.0,169.95,175.0
+2020-12-24,20,Pulse Gram,1 Kg,Khuzdar,150.0,150.0,150.0
+2020-12-24,20,Pulse Gram,1 Kg,National,110.0,140.43,180.0
+2020-12-24,21,Potatoes,1 Kg,Bannu,50.0,50.0,50.0
+2020-12-24,21,Potatoes,1 Kg,Quetta,60.0,64.87,70.0
+2020-12-24,21,Potatoes,1 Kg,Khuzdar,50.0,50.0,50.0
+2020-12-24,21,Potatoes,1 Kg,National,35.0,48.98,80.0
+2020-12-24,22,Onions,1 Kg,Bannu,50.0,50.0,50.0
+2020-12-24,22,Onions,1 Kg,Quetta,50.0,54.85,60.0
+2020-12-24,22,Onions,1 Kg,Khuzdar,50.0,50.0,50.0
+2020-12-24,22,Onions,1 Kg,National,40.0,49.14,80.0
+2020-12-24,23,Tomatoes,1 Kg,Bannu,60.0,72.68,80.0
+2020-12-24,23,Tomatoes,1 Kg,Quetta,80.0,84.9,90.0
+2020-12-24,23,Tomatoes,1 Kg,Khuzdar,110.0,110.0,110.0
+2020-12-24,23,Tomatoes,1 Kg,National,60.0,95.57,130.0
+2020-12-24,24,Sugar Refined,1 Kg,Bannu,80.0,80.0,80.0
+2020-12-24,24,Sugar Refined,1 Kg,Quetta,84.0,85.0,86.0
+2020-12-24,24,Sugar Refined,1 Kg,Khuzdar,80.0,80.0,80.0
+2020-12-24,24,Sugar Refined,1 Kg,National,78.0,82.06,90.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Bannu,100.0,112.92,120.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Quetta,140.0,149.78,160.0
+2020-12-24,25,Gur (Average Quality),1 Kg,Khuzdar,130.0,133.25,140.0
+2020-12-24,25,Gur (Average Quality),1 Kg,National,100.0,125.46,160.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Bannu,,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Quetta,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,Khuzdar,30.0,30.0,30.0
+2020-12-24,26,Salt Powdered (NATIONAL/SHAN),8E0a0c ghm P,National,30.0,30.0,30.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Bannu,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Quetta,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,Khuzdar,280.0,280.0,280.0
+2020-12-24,27,Chilies Powder NATIONAL 200 gm,PEaacckhet,National,280.0,280.0,280.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Bannu,220.0,223.28,230.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Quetta,280.0,289.89,300.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,Khuzdar,280.0,280.0,280.0
+2020-12-24,28,Garlic (Lehsun),1 Kg,National,200.0,246.49,440.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Bannu,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Quetta,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,Khuzdar,230.0,230.0,230.0
+2020-12-24,29,Tea Lipton Yellow Label 190 gm Pac,Ekeatch,National,225.0,230.54,242.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Bannu,110.0,110.0,110.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Quetta,170.0,174.95,180.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,Khuzdar,190.0,196.61,200.0
+2020-12-24,30,Cooked Beef at Average Hotel,Per Plate,National,100.0,149.98,200.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Bannu,60.0,60.0,60.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Quetta,90.0,94.91,100.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,Khuzdar,90.0,90.0,90.0
+2020-12-24,31,Cooked Daal at Average Hotel,Per Plate,National,60.0,75.73,120.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Bannu,20.0,21.54,25.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Quetta,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,Khuzdar,30.0,30.0,30.0
+2020-12-24,32,Tea Prepared Ordinary,Per Cup,National,20.0,28.36,35.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Bannu,90.0,90.0,90.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Quetta,90.0,90.0,90.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,Khuzdar,90.0,90.0,90.0
+2020-12-24,33,Cigarettes Capstan 20'S Packet,Each,National,80.0,83.38,90.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Bannu,450.0,453.31,460.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Quetta,500.0,548.48,600.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,Khuzdar,350.0,350.0,350.0
+2020-12-24,34,"Long Cloth 57"" Gul Ahmed/Al Karam",1 mtr,National,220.0,350.23,600.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Bannu,250.0,250.0,250.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Quetta,160.0,164.95,170.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,Khuzdar,200.0,200.0,200.0
+2020-12-24,35,Shirting (Average Quality),1 mtr,National,130.0,230.66,450.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Bannu,490.0,499.8,520.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Quetta,450.0,498.33,550.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,Khuzdar,350.0,350.0,350.0
+2020-12-24,36,Lawn Printed Gul Ahmed/Al Karam,1 mtr,National,240.0,378.65,550.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Bannu,120.0,120.0,120.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Quetta,130.0,134.94,140.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,Khuzdar,200.0,200.0,200.0
+2020-12-24,37,Georgette (Average Quality),1 mtr,National,100.0,165.44,230.0
+2020-12-24,38,Gents Sandal Bata,Pair,Bannu,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Quetta,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,Khuzdar,899.0,899.0,899.0
+2020-12-24,38,Gents Sandal Bata,Pair,National,899.0,899.0,899.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Bannu,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Quetta,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,Khuzdar,199.0,199.0,199.0
+2020-12-24,39,Gents Sponge Chappal Bata,Pair,National,199.0,199.0,199.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Bannu,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Quetta,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,Khuzdar,599.0,599.0,599.0
+2020-12-24,40,Ladies Sandal Bata,Pair,National,599.0,599.0,599.0
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Bannu,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Quetta,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,Khuzdar,4.05,4.05,4.05
+2020-12-24,41,Electricity Charges for Q1*,Per Unit,National,4.05,4.05,4.05
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Bannu,,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Quetta,141.57,141.57,141.57
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,Khuzdar,0.0,0.0,0.0
+2020-12-24,42,Gas Charges upto 3.3719 MMBTU,M M B T U,National,141.57,141.57,141.57
+2020-12-24,43,Firewood Whole,40 Kg,Bannu,520.0,520.0,520.0
+2020-12-24,43,Firewood Whole,40 Kg,Quetta,650.0,674.69,700.0
+2020-12-24,43,Firewood Whole,40 Kg,Khuzdar,700.0,700.0,700.0
+2020-12-24,43,Firewood Whole,40 Kg,National,500.0,728.96,1300.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Bannu,190.0,190.0,190.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Quetta,220.0,220.0,220.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,Khuzdar,230.0,230.0,230.0
+2020-12-24,44,Energy Saver Philips 14 Watt,Each,National,160.0,200.93,240.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Bannu,50.0,50.0,50.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Quetta,55.0,55.0,55.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,Khuzdar,55.0,55.0,55.0
+2020-12-24,45,Sufi Washing Soap 250 gm Cake,Each,National,50.0,53.55,60.0
+2020-12-24,46,Match Box,Each,Bannu,3.0,3.0,3.0
+2020-12-24,46,Match Box,Each,Quetta,3.0,3.15,4.0
+2020-12-24,46,Match Box,Each,Khuzdar,2.0,2.0,2.0
+2020-12-24,46,Match Box,Each,National,2.0,3.11,5.0
+2020-12-24,47,Petrol Super,Per Litre,Bannu,106.5,106.6,106.8
+2020-12-24,47,Petrol Super,Per Litre,Quetta,104.16,104.18,104.2
+2020-12-24,47,Petrol Super,Per Litre,Khuzdar,107.32,107.32,107.32
+2020-12-24,47,Petrol Super,Per Litre,National,104.16,104.68,107.32
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Bannu,111.6,111.6,111.6
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Quetta,108.87,108.88,108.9
+2020-12-24,48,Hi-Speed Diesel,Per Litre,Khuzdar,112.09,112.09,112.09
+2020-12-24,48,Hi-Speed Diesel,Per Litre,National,108.55,109.37,112.09
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Bannu,1250.0,1256.63,1270.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Quetta,1550.0,1599.67,1650.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,Khuzdar,1430.0,1430.0,1430.0
+2020-12-24,49,LPG 11.67 kg Cylinder,Each,National,1250.0,1438.94,1650.0
+2020-12-24,50,Telephone Call Charges,Per Minu,Bannu,,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Quetta,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,Khuzdar,1.55,1.55,1.55
+2020-12-24,50,Telephone Call Charges,Per Minu,National,1.55,1.55,1.55
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Bannu,45.0,45.0,45.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Quetta,46.2,46.2,46.2
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,Khuzdar,55.0,55.0,55.0
+2020-12-24,51,Toilet Soap LIFEBUOY 115 gm,Each,National,43.0,45.79,55.0

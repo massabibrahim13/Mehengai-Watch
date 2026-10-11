@@ -1,0 +1,955 @@
+report_date,sl_no,item_raw,unit_raw,city,price_min,price_avg,price_max
+2019-05-30,1,Wheat,10 Kg,Islamabad,360.0,362.5,365.0
+2019-05-30,1,Wheat,10 Kg,Rawalpindi,360.0,362.5,365.0
+2019-05-30,1,Wheat,10 Kg,Gujranwala,375.0,375.0,375.0
+2019-05-30,1,Wheat,10 Kg,Sialkot,337.5,337.5,337.5
+2019-05-30,1,Wheat,10 Kg,Lahore,345.0,347.5,350.0
+2019-05-30,1,Wheat,10 Kg,Faisalabad,355.0,355.0,355.0
+2019-05-30,1,Wheat,10 Kg,Sargodha,312.5,312.5,312.5
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Islamabad,415.0,417.5,420.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Rawalpindi,400.0,413.33,425.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Gujranwala,400.0,400.0,400.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Sialkot,390.0,390.0,390.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Lahore,400.0,400.0,400.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Faisalabad,400.0,407.5,415.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Sargodha,365.0,367.5,370.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Islamabad,90.0,96.88,100.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Rawalpindi,85.0,89.38,100.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Gujranwala,70.0,70.0,70.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Sialkot,70.0,70.0,70.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Lahore,70.0,74.82,80.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Faisalabad,90.0,90.0,90.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Sargodha,65.0,67.5,70.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Islamabad,60.0,66.25,70.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Rawalpindi,60.0,65.0,70.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Gujranwala,60.0,60.0,60.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Sialkot,45.0,47.5,50.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Lahore,56.0,57.0,58.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Faisalabad,60.0,65.0,70.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Sargodha,70.0,70.0,70.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Islamabad,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Rawalpindi,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Gujranwala,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Sialkot,40.0,40.0,40.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Lahore,40.0,44.29,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Faisalabad,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Sargodha,45.0,45.0,45.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Islamabad,480.0,485.0,500.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Rawalpindi,450.0,474.58,500.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Gujranwala,350.0,375.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Sialkot,450.0,450.0,450.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Lahore,400.0,423.21,450.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Faisalabad,350.0,375.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Sargodha,400.0,400.0,400.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Islamabad,980.0,992.5,1000.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Rawalpindi,950.0,973.75,1000.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Gujranwala,800.0,800.0,800.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Sialkot,900.0,900.0,900.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Lahore,900.0,923.21,950.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Faisalabad,900.0,950.0,1000.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Sargodha,850.0,875.0,900.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Islamabad,180.0,185.0,200.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Rawalpindi,175.0,175.0,175.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Gujranwala,175.0,175.0,175.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Sialkot,181.0,181.0,181.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Lahore,172.0,172.0,172.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Faisalabad,176.0,176.0,176.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Sargodha,175.0,175.0,175.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Islamabad,100.0,102.5,110.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Rawalpindi,100.0,100.83,110.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Gujranwala,90.0,90.0,90.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Sialkot,80.0,80.0,80.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Lahore,76.0,78.0,80.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Faisalabad,80.0,90.0,100.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Sargodha,70.0,70.0,70.0
+2019-05-30,10,Curd (Dahi),1 Kg,Islamabad,110.0,116.25,120.0
+2019-05-30,10,Curd (Dahi),1 Kg,Rawalpindi,110.0,112.92,120.0
+2019-05-30,10,Curd (Dahi),1 Kg,Gujranwala,100.0,100.0,100.0
+2019-05-30,10,Curd (Dahi),1 Kg,Sialkot,90.0,90.0,90.0
+2019-05-30,10,Curd (Dahi),1 Kg,Lahore,90.0,92.5,95.0
+2019-05-30,10,Curd (Dahi),1 Kg,Faisalabad,90.0,97.5,100.0
+2019-05-30,10,Curd (Dahi),1 Kg,Sargodha,90.0,90.0,90.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Islamabad,410.26,410.26,410.26
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Rawalpindi,410.26,410.26,410.26
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Gujranwala,410.26,410.26,410.26
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Sialkot,410.26,410.26,410.26
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Lahore,410.0,410.0,410.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Faisalabad,405.0,405.0,405.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Sargodha,416.0,416.0,416.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Islamabad,87.0,90.25,95.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Rawalpindi,84.0,84.5,85.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Gujranwala,80.0,83.0,86.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Sialkot,90.0,90.0,90.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Lahore,86.0,86.0,86.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Faisalabad,84.0,84.0,84.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Sargodha,88.0,88.0,88.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Islamabad,240.0,246.25,260.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Rawalpindi,230.0,241.67,250.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Gujranwala,170.0,170.0,170.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Sialkot,160.0,160.0,160.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Lahore,180.0,187.86,200.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Faisalabad,200.0,220.0,240.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Sargodha,190.0,190.0,190.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Islamabad,535.0,535.0,535.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Rawalpindi,535.0,535.0,535.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Gujranwala,550.0,550.0,550.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Sialkot,520.0,520.0,520.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Lahore,530.0,530.0,530.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Faisalabad,520.0,520.0,520.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Sargodha,520.0,520.0,520.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Islamabad,505.0,505.0,505.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Rawalpindi,505.0,505.0,505.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Gujranwala,520.0,520.0,520.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Sialkot,495.0,495.0,495.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Lahore,520.0,520.0,520.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Faisalabad,495.0,495.0,495.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Sargodha,495.0,495.0,495.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Islamabad,160.0,162.5,170.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Rawalpindi,160.0,162.08,165.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Gujranwala,155.0,155.0,155.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Sialkot,155.0,155.0,155.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Lahore,160.0,160.0,160.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Faisalabad,150.0,150.5,152.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Sargodha,152.0,152.0,152.0
+2019-05-30,17,Bananas,Dozen,Islamabad,160.0,171.88,190.0
+2019-05-30,17,Bananas,Dozen,Rawalpindi,150.0,157.5,180.0
+2019-05-30,17,Bananas,Dozen,Gujranwala,150.0,155.0,160.0
+2019-05-30,17,Bananas,Dozen,Sialkot,140.0,140.0,140.0
+2019-05-30,17,Bananas,Dozen,Lahore,130.0,137.86,150.0
+2019-05-30,17,Bananas,Dozen,Faisalabad,100.0,120.0,140.0
+2019-05-30,17,Bananas,Dozen,Sargodha,100.0,105.0,110.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Islamabad,120.0,133.75,150.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Rawalpindi,92.0,112.58,130.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Gujranwala,150.0,150.0,150.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Sialkot,150.0,150.0,150.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Lahore,130.0,133.93,140.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Faisalabad,130.0,135.0,140.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Sargodha,140.0,140.0,140.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Islamabad,160.0,166.25,180.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Rawalpindi,152.0,156.75,170.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Gujranwala,150.0,152.5,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Sialkot,165.0,165.0,165.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Lahore,150.0,157.86,170.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Faisalabad,150.0,155.0,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Sargodha,160.0,165.0,170.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Islamabad,160.0,177.5,200.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Rawalpindi,152.0,161.33,180.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Gujranwala,170.0,175.0,180.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Sialkot,180.0,180.0,180.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Lahore,160.0,166.43,170.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Faisalabad,170.0,175.0,180.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Sargodha,190.0,190.0,190.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Islamabad,130.0,143.13,160.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Rawalpindi,120.0,130.58,150.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Gujranwala,115.0,115.0,115.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Sialkot,110.0,110.0,110.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Lahore,120.0,120.71,125.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Faisalabad,120.0,120.0,120.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Sargodha,110.0,115.0,120.0
+2019-05-30,22,Potatoes,1 Kg,Islamabad,30.0,38.13,50.0
+2019-05-30,22,Potatoes,1 Kg,Rawalpindi,30.0,33.33,40.0
+2019-05-30,22,Potatoes,1 Kg,Gujranwala,30.0,30.0,30.0
+2019-05-30,22,Potatoes,1 Kg,Sialkot,30.0,30.0,30.0
+2019-05-30,22,Potatoes,1 Kg,Lahore,25.0,29.11,30.0
+2019-05-30,22,Potatoes,1 Kg,Faisalabad,25.0,27.5,30.0
+2019-05-30,22,Potatoes,1 Kg,Sargodha,20.0,20.0,20.0
+2019-05-30,23,Onions,1 Kg,Islamabad,55.0,63.75,80.0
+2019-05-30,23,Onions,1 Kg,Rawalpindi,50.0,61.25,70.0
+2019-05-30,23,Onions,1 Kg,Gujranwala,55.0,57.5,60.0
+2019-05-30,23,Onions,1 Kg,Sialkot,50.0,50.0,50.0
+2019-05-30,23,Onions,1 Kg,Lahore,50.0,53.93,60.0
+2019-05-30,23,Onions,1 Kg,Faisalabad,50.0,55.0,60.0
+2019-05-30,23,Onions,1 Kg,Sargodha,50.0,50.0,50.0
+2019-05-30,24,Tomatoes,1 Kg,Islamabad,40.0,51.88,70.0
+2019-05-30,24,Tomatoes,1 Kg,Rawalpindi,40.0,42.5,50.0
+2019-05-30,24,Tomatoes,1 Kg,Gujranwala,40.0,40.0,40.0
+2019-05-30,24,Tomatoes,1 Kg,Sialkot,30.0,35.0,40.0
+2019-05-30,24,Tomatoes,1 Kg,Lahore,30.0,38.21,40.0
+2019-05-30,24,Tomatoes,1 Kg,Faisalabad,30.0,32.5,40.0
+2019-05-30,24,Tomatoes,1 Kg,Sargodha,30.0,30.0,30.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Islamabad,70.0,72.31,80.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Rawalpindi,68.0,69.25,70.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Gujranwala,70.0,70.0,70.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Sialkot,68.0,68.0,68.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Lahore,68.0,68.29,70.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Faisalabad,67.0,67.75,68.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Sargodha,68.0,68.0,68.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Islamabad,110.0,118.75,120.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Rawalpindi,100.0,102.5,120.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Gujranwala,110.0,110.0,110.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Sialkot,110.0,110.0,110.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Lahore,100.0,105.71,110.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Faisalabad,100.0,105.0,110.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Sargodha,90.0,90.0,90.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Islamabad,12.0,12.0,12.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Rawalpindi,12.0,12.0,12.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Gujranwala,15.0,15.0,15.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Sialkot,15.0,15.0,15.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Lahore,20.0,20.54,25.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Faisalabad,10.0,10.0,10.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Sargodha,10.0,10.0,10.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Islamabad,380.0,397.5,420.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Rawalpindi,340.0,355.0,380.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Gujranwala,320.0,330.0,340.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Sialkot,320.0,320.0,320.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Lahore,320.0,327.86,340.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Faisalabad,350.0,365.0,380.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Sargodha,400.0,400.0,400.0
+2019-05-30,29,Garlic,1 Kg,Islamabad,240.0,268.75,320.0
+2019-05-30,29,Garlic,1 Kg,Rawalpindi,220.0,234.58,260.0
+2019-05-30,29,Garlic,1 Kg,Gujranwala,230.0,235.0,240.0
+2019-05-30,29,Garlic,1 Kg,Sialkot,260.0,260.0,260.0
+2019-05-30,29,Garlic,1 Kg,Lahore,150.0,197.86,220.0
+2019-05-30,29,Garlic,1 Kg,Faisalabad,180.0,190.0,200.0
+2019-05-30,29,Garlic,1 Kg,Sargodha,140.0,145.0,150.0
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Islamabad,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Rawalpindi,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Gujranwala,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Sialkot,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Lahore,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Faisalabad,221.05,221.05,221.08
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Sargodha,221.05,221.05,221.05
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Islamabad,110.0,128.13,150.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Rawalpindi,100.0,117.5,130.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Gujranwala,140.0,145.0,150.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Sialkot,150.0,150.0,150.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Lahore,130.0,131.43,140.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Faisalabad,150.0,155.0,160.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Sargodha,120.0,120.0,120.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Islamabad,80.0,85.0,100.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Rawalpindi,70.0,75.83,80.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Gujranwala,50.0,55.0,60.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Sialkot,60.0,60.0,60.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Lahore,65.0,67.32,70.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Faisalabad,60.0,60.0,60.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Sargodha,50.0,50.0,50.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Islamabad,25.0,25.31,30.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Rawalpindi,25.0,25.0,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Gujranwala,25.0,25.0,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Sialkot,20.0,20.0,20.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Lahore,20.0,24.11,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Faisalabad,25.0,25.0,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Sargodha,25.0,25.0,25.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Islamabad,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Rawalpindi,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Gujranwala,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Sialkot,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Lahore,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Faisalabad,70.0,70.0,70.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Sargodha,60.0,60.0,60.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Islamabad,240.0,245.0,250.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Rawalpindi,230.0,235.0,240.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Gujranwala,180.0,180.0,180.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Sialkot,180.0,180.0,180.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Lahore,290.0,295.0,300.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Faisalabad,225.0,237.5,250.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Sargodha,275.0,275.0,275.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Islamabad,220.0,235.63,250.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Rawalpindi,220.0,225.0,230.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Gujranwala,200.0,200.0,200.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Sialkot,200.0,200.0,200.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Lahore,160.0,165.0,170.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Faisalabad,130.0,135.0,140.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Sargodha,170.0,170.0,170.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Islamabad,190.0,260.0,350.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Rawalpindi,180.0,240.0,320.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Gujranwala,240.0,245.0,250.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Sialkot,250.0,250.0,250.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Lahore,325.0,337.5,350.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Faisalabad,260.0,280.0,300.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Sargodha,393.34,393.34,393.34
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Islamabad,170.0,175.0,180.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Rawalpindi,170.0,173.75,180.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Gujranwala,170.0,175.0,180.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Sialkot,160.0,160.0,160.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Lahore,140.0,145.0,150.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Faisalabad,150.0,165.0,180.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Sargodha,150.0,150.0,150.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Islamabad,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Rawalpindi,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Gujranwala,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Sialkot,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Lahore,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Faisalabad,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Sargodha,699.0,699.0,699.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Islamabad,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Rawalpindi,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Gujranwala,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Sialkot,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Lahore,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Faisalabad,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Sargodha,199.0,199.0,199.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Islamabad,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Rawalpindi,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Gujranwala,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Sialkot,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Lahore,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Faisalabad,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Sargodha,599.0,599.0,599.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Islamabad,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Rawalpindi,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Gujranwala,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Sialkot,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Lahore,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Faisalabad,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Sargodha,2.0,2.0,2.0
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Islamabad,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Rawalpindi,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Gujranwala,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Sialkot,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Lahore,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Faisalabad,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Sargodha,145.08,145.08,145.08
+2019-05-30,44,Kerosene Oil,1 Ltr,Islamabad,150.0,151.25,155.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Rawalpindi,140.0,143.75,150.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Gujranwala,135.0,135.0,135.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Sialkot,142.0,142.0,142.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Lahore,130.0,130.0,130.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Faisalabad,130.0,130.0,130.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Sargodha,120.0,120.0,120.0
+2019-05-30,45,Firewood Whole,40 Kg,Islamabad,750.0,787.5,800.0
+2019-05-30,45,Firewood Whole,40 Kg,Rawalpindi,650.0,741.67,800.0
+2019-05-30,45,Firewood Whole,40 Kg,Gujranwala,750.0,775.0,800.0
+2019-05-30,45,Firewood Whole,40 Kg,Sialkot,700.0,700.0,700.0
+2019-05-30,45,Firewood Whole,40 Kg,Lahore,800.0,810.71,850.0
+2019-05-30,45,Firewood Whole,40 Kg,Faisalabad,600.0,600.0,600.0
+2019-05-30,45,Firewood Whole,40 Kg,Sargodha,550.0,550.0,550.0
+2019-05-30,46,Energy Saver,Each,Islamabad,165.0,167.5,170.0
+2019-05-30,46,Energy Saver,Each,Rawalpindi,165.0,167.5,170.0
+2019-05-30,46,Energy Saver,Each,Gujranwala,170.0,170.0,170.0
+2019-05-30,46,Energy Saver,Each,Sialkot,155.0,155.0,155.0
+2019-05-30,46,Energy Saver,Each,Lahore,170.0,170.0,170.0
+2019-05-30,46,Energy Saver,Each,Faisalabad,165.0,165.0,165.0
+2019-05-30,46,Energy Saver,Each,Sargodha,180.0,180.0,180.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Islamabad,30.0,30.0,30.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Rawalpindi,30.0,30.0,30.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Gujranwala,40.0,40.0,40.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Sialkot,45.0,45.0,45.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Lahore,45.0,45.0,45.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Faisalabad,30.0,30.0,30.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Sargodha,45.0,45.0,45.0
+2019-05-30,48,"Match Box, Regular",Each,Islamabad,2.0,2.0,2.0
+2019-05-30,48,"Match Box, Regular",Each,Rawalpindi,2.0,2.0,2.0
+2019-05-30,48,"Match Box, Regular",Each,Gujranwala,2.0,2.0,2.0
+2019-05-30,48,"Match Box, Regular",Each,Sialkot,2.0,2.0,2.0
+2019-05-30,48,"Match Box, Regular",Each,Lahore,3.0,3.0,3.0
+2019-05-30,48,"Match Box, Regular",Each,Faisalabad,2.0,2.5,3.0
+2019-05-30,48,"Match Box, Regular",Each,Sargodha,3.0,3.0,3.0
+2019-05-30,49,"Petrol, Super",1 Ltr,Islamabad,108.88,108.9,108.9
+2019-05-30,49,"Petrol, Super",1 Ltr,Rawalpindi,108.76,108.87,108.9
+2019-05-30,49,"Petrol, Super",1 Ltr,Gujranwala,108.9,108.9,108.9
+2019-05-30,49,"Petrol, Super",1 Ltr,Sialkot,110.5,110.5,110.5
+2019-05-30,49,"Petrol, Super",1 Ltr,Lahore,108.75,108.75,108.75
+2019-05-30,49,"Petrol, Super",1 Ltr,Faisalabad,108.87,108.87,108.87
+2019-05-30,49,"Petrol, Super",1 Ltr,Sargodha,109.3,109.3,109.3
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Islamabad,122.79,122.8,122.8
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Rawalpindi,122.8,122.8,122.8
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Gujranwala,122.8,122.8,122.8
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Sialkot,124.0,124.0,124.0
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Lahore,122.67,122.67,122.67
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Faisalabad,122.8,122.8,122.8
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Sargodha,122.9,122.9,122.9
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Islamabad,1430.0,1430.0,1430.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Rawalpindi,1420.0,1420.0,1420.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Gujranwala,1210.0,1210.0,1210.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Sialkot,1225.0,1225.0,1225.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Lahore,1155.0,1182.5,1210.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Faisalabad,1200.0,1200.0,1200.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Sargodha,1150.0,1150.0,1150.0
+2019-05-30,52,Telephone Local Call,P/Call,Islamabad,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Rawalpindi,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Gujranwala,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Sialkot,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Lahore,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Faisalabad,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Sargodha,4.65,4.65,4.65
+2019-05-30,53,"Soap, LifeBuoy",Each,Islamabad,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Rawalpindi,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Gujranwala,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Sialkot,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Lahore,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Faisalabad,42.0,42.0,42.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Sargodha,42.0,42.0,42.0
+2019-05-30,1,Wheat,10 Kg,Multan,332.5,332.5,332.5
+2019-05-30,1,Wheat,10 Kg,Bahawalpur,347.5,348.75,350.0
+2019-05-30,1,Wheat,10 Kg,Karachi,380.0,385.0,390.0
+2019-05-30,1,Wheat,10 Kg,Hyderabad,345.0,347.5,350.0
+2019-05-30,1,Wheat,10 Kg,Sukkur,325.0,337.5,350.0
+2019-05-30,1,Wheat,10 Kg,Larkana,320.0,325.0,330.0
+2019-05-30,1,Wheat,10 Kg,Peshawar,380.0,390.0,400.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Multan,375.0,378.33,380.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Bahawalpur,400.0,400.0,400.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Karachi,430.0,444.42,450.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Hyderabad,410.0,416.25,420.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Sukkur,390.0,390.0,390.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Larkana,370.0,375.0,380.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Peshawar,390.0,415.0,425.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Multan,85.0,88.33,90.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Bahawalpur,60.0,60.0,60.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Karachi,80.0,85.77,100.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Hyderabad,80.0,85.0,90.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Sukkur,60.0,65.0,70.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Larkana,80.0,85.0,90.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Peshawar,75.0,84.17,90.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Multan,50.0,50.0,50.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Bahawalpur,45.0,47.5,50.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Karachi,58.0,60.4,70.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Hyderabad,50.0,51.0,52.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Sukkur,50.0,55.0,60.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Larkana,40.0,42.5,45.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Peshawar,55.0,58.75,60.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Multan,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Bahawalpur,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Karachi,45.0,48.46,50.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Hyderabad,50.0,50.0,50.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Sukkur,50.0,50.0,50.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Larkana,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Peshawar,45.0,45.0,45.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Multan,380.0,396.67,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Bahawalpur,350.0,365.0,380.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Karachi,450.0,487.69,550.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Hyderabad,400.0,400.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Sukkur,400.0,400.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Larkana,400.0,400.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Peshawar,350.0,384.17,400.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Multan,800.0,850.0,900.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Bahawalpur,700.0,725.0,750.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Karachi,800.0,911.54,1100.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Hyderabad,800.0,800.0,800.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Sukkur,750.0,750.0,750.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Larkana,800.0,825.0,850.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Peshawar,800.0,825.0,850.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Multan,185.0,185.83,190.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Bahawalpur,170.0,170.0,170.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Karachi,170.0,181.31,190.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Hyderabad,180.0,182.5,185.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Sukkur,190.0,190.0,190.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Larkana,200.0,200.0,200.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Peshawar,191.0,191.0,191.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Multan,75.0,83.33,90.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Bahawalpur,65.0,67.5,70.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Karachi,94.0,94.88,100.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Hyderabad,94.0,94.0,94.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Sukkur,90.0,90.0,90.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Larkana,90.0,95.0,100.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Peshawar,80.0,98.33,110.0
+2019-05-30,10,Curd (Dahi),1 Kg,Multan,95.0,99.17,100.0
+2019-05-30,10,Curd (Dahi),1 Kg,Bahawalpur,80.0,80.0,80.0
+2019-05-30,10,Curd (Dahi),1 Kg,Karachi,140.0,142.69,160.0
+2019-05-30,10,Curd (Dahi),1 Kg,Hyderabad,130.0,135.0,140.0
+2019-05-30,10,Curd (Dahi),1 Kg,Sukkur,100.0,100.0,100.0
+2019-05-30,10,Curd (Dahi),1 Kg,Larkana,100.0,100.0,100.0
+2019-05-30,10,Curd (Dahi),1 Kg,Peshawar,90.0,110.0,120.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Multan,410.25,410.25,410.25
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Bahawalpur,410.0,410.0,410.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Karachi,400.0,400.0,400.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Hyderabad,430.76,430.76,430.76
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Sukkur,410.25,410.25,410.25
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Larkana,425.0,425.0,425.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Peshawar,400.0,403.33,420.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Multan,70.0,75.83,80.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Bahawalpur,84.0,84.0,84.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Karachi,85.0,89.35,90.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Hyderabad,80.0,85.0,90.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Sukkur,84.0,84.0,84.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Larkana,70.0,70.0,70.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Peshawar,85.0,89.17,90.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Multan,180.0,184.17,190.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Bahawalpur,160.0,170.0,180.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Karachi,180.0,185.77,200.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Hyderabad,160.0,163.75,170.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Sukkur,150.0,150.0,150.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Larkana,200.0,215.0,230.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Peshawar,220.0,233.33,240.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Multan,545.0,545.0,545.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Bahawalpur,545.0,545.0,545.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Karachi,545.0,545.0,545.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Hyderabad,525.0,525.0,525.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Sukkur,510.0,510.0,510.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Larkana,530.0,535.0,540.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Peshawar,513.0,513.0,513.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Multan,515.0,515.0,515.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Bahawalpur,515.0,515.0,515.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Karachi,515.0,515.0,515.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Hyderabad,515.0,515.0,515.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Sukkur,490.0,490.0,490.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Larkana,515.0,520.0,525.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Peshawar,495.0,495.0,495.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Multan,165.0,165.0,165.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Bahawalpur,165.0,165.0,165.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Karachi,150.0,166.35,210.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Hyderabad,195.0,195.0,195.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Sukkur,130.0,145.0,160.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Larkana,140.0,142.5,145.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Peshawar,170.0,174.17,180.0
+2019-05-30,17,Bananas,Dozen,Multan,120.0,138.33,160.0
+2019-05-30,17,Bananas,Dozen,Bahawalpur,140.0,140.0,140.0
+2019-05-30,17,Bananas,Dozen,Karachi,80.0,102.12,120.0
+2019-05-30,17,Bananas,Dozen,Hyderabad,100.0,110.0,120.0
+2019-05-30,17,Bananas,Dozen,Sukkur,100.0,100.0,100.0
+2019-05-30,17,Bananas,Dozen,Larkana,120.0,120.0,120.0
+2019-05-30,17,Bananas,Dozen,Peshawar,80.0,100.0,120.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Multan,100.0,111.67,120.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Bahawalpur,120.0,120.0,120.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Karachi,100.0,110.58,140.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Hyderabad,100.0,103.13,110.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Sukkur,100.0,110.0,120.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Larkana,110.0,110.0,110.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Peshawar,80.0,91.67,100.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Multan,160.0,161.67,170.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Bahawalpur,160.0,160.0,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Karachi,150.0,162.88,180.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Hyderabad,150.0,157.5,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Sukkur,140.0,150.0,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Larkana,140.0,145.0,150.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Peshawar,140.0,150.0,160.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Multan,150.0,160.0,170.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Bahawalpur,160.0,160.0,160.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Karachi,140.0,157.88,180.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Hyderabad,150.0,156.88,160.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Sukkur,140.0,150.0,160.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Larkana,160.0,160.0,160.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Peshawar,170.0,178.33,180.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Multan,110.0,118.33,120.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Bahawalpur,130.0,130.0,130.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Karachi,120.0,130.77,140.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Hyderabad,120.0,121.88,130.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Sukkur,120.0,125.0,130.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Larkana,120.0,130.0,140.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Peshawar,120.0,128.33,130.0
+2019-05-30,22,Potatoes,1 Kg,Multan,25.0,28.33,30.0
+2019-05-30,22,Potatoes,1 Kg,Bahawalpur,20.0,22.5,25.0
+2019-05-30,22,Potatoes,1 Kg,Karachi,30.0,30.87,40.0
+2019-05-30,22,Potatoes,1 Kg,Hyderabad,25.0,26.25,30.0
+2019-05-30,22,Potatoes,1 Kg,Sukkur,30.0,30.0,30.0
+2019-05-30,22,Potatoes,1 Kg,Larkana,25.0,27.5,30.0
+2019-05-30,22,Potatoes,1 Kg,Peshawar,20.0,28.33,30.0
+2019-05-30,23,Onions,1 Kg,Multan,50.0,50.0,50.0
+2019-05-30,23,Onions,1 Kg,Bahawalpur,40.0,40.0,40.0
+2019-05-30,23,Onions,1 Kg,Karachi,50.0,56.73,60.0
+2019-05-30,23,Onions,1 Kg,Hyderabad,50.0,55.63,60.0
+2019-05-30,23,Onions,1 Kg,Sukkur,50.0,55.0,60.0
+2019-05-30,23,Onions,1 Kg,Larkana,40.0,45.0,50.0
+2019-05-30,23,Onions,1 Kg,Peshawar,40.0,48.33,50.0
+2019-05-30,24,Tomatoes,1 Kg,Multan,30.0,32.5,40.0
+2019-05-30,24,Tomatoes,1 Kg,Bahawalpur,30.0,30.0,30.0
+2019-05-30,24,Tomatoes,1 Kg,Karachi,40.0,53.08,60.0
+2019-05-30,24,Tomatoes,1 Kg,Hyderabad,40.0,42.5,50.0
+2019-05-30,24,Tomatoes,1 Kg,Sukkur,40.0,40.0,40.0
+2019-05-30,24,Tomatoes,1 Kg,Larkana,40.0,40.0,40.0
+2019-05-30,24,Tomatoes,1 Kg,Peshawar,30.0,43.33,50.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Multan,66.0,66.0,66.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Bahawalpur,67.0,67.5,68.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Karachi,66.0,68.96,70.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Hyderabad,65.0,65.5,66.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Sukkur,65.0,65.0,65.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Larkana,65.0,65.0,65.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Peshawar,68.0,68.67,70.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Multan,90.0,100.0,110.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Bahawalpur,90.0,90.0,90.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Karachi,90.0,105.96,120.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Hyderabad,100.0,110.0,120.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Sukkur,90.0,90.0,90.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Larkana,90.0,90.0,90.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Peshawar,90.0,98.33,100.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Multan,10.0,10.0,10.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Bahawalpur,12.0,12.0,12.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Karachi,12.0,12.62,20.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Hyderabad,15.0,15.0,15.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Sukkur,10.0,10.0,10.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Larkana,10.0,10.0,10.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Peshawar,15.0,15.0,15.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Multan,320.0,323.33,340.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Bahawalpur,300.0,310.0,320.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Karachi,350.0,392.31,440.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Hyderabad,380.0,385.0,400.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Sukkur,350.0,365.0,380.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Larkana,280.0,290.0,300.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Peshawar,350.0,356.67,360.0
+2019-05-30,29,Garlic,1 Kg,Multan,200.0,211.67,240.0
+2019-05-30,29,Garlic,1 Kg,Bahawalpur,160.0,160.0,160.0
+2019-05-30,29,Garlic,1 Kg,Karachi,180.0,211.15,240.0
+2019-05-30,29,Garlic,1 Kg,Hyderabad,180.0,197.5,200.0
+2019-05-30,29,Garlic,1 Kg,Sukkur,220.0,220.0,220.0
+2019-05-30,29,Garlic,1 Kg,Larkana,160.0,160.0,160.0
+2019-05-30,29,Garlic,1 Kg,Peshawar,240.0,243.33,250.0
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Multan,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Bahawalpur,221.0,221.0,221.0
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Karachi,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Hyderabad,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Sukkur,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Larkana,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Peshawar,221.05,221.05,221.05
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Multan,100.0,105.0,120.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Bahawalpur,120.0,125.0,130.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Karachi,90.0,99.23,120.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Hyderabad,80.0,95.0,100.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Sukkur,100.0,100.0,100.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Larkana,100.0,100.0,100.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Peshawar,120.0,120.0,120.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Multan,40.0,46.25,50.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Bahawalpur,50.0,60.0,70.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Karachi,60.0,64.31,70.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Hyderabad,60.0,60.0,60.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Sukkur,70.0,70.0,70.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Larkana,50.0,65.0,80.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Peshawar,60.0,60.0,60.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Multan,20.0,23.33,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Bahawalpur,20.0,22.5,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Karachi,20.0,24.42,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Hyderabad,30.0,30.0,30.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Sukkur,25.0,25.0,25.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Larkana,30.0,30.0,30.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Peshawar,20.0,20.0,20.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Multan,50.0,50.0,50.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Bahawalpur,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Karachi,60.0,60.19,65.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Hyderabad,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Sukkur,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Larkana,50.0,50.0,50.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Peshawar,65.0,65.0,65.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Multan,300.0,300.0,300.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Bahawalpur,250.0,260.0,270.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Karachi,200.0,200.0,200.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Hyderabad,300.0,300.0,300.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Sukkur,375.0,375.0,375.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Larkana,300.0,300.0,300.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Peshawar,325.0,350.0,375.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Multan,250.0,250.0,250.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Bahawalpur,120.0,125.0,130.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Karachi,180.0,183.85,200.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Hyderabad,140.0,140.0,140.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Sukkur,150.0,175.0,200.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Larkana,200.0,200.0,200.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Peshawar,300.0,321.0,338.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Multan,200.0,200.0,200.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Bahawalpur,367.0,383.5,400.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Karachi,400.0,421.54,500.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Hyderabad,280.0,280.0,280.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Sukkur,393.0,393.0,393.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Larkana,366.0,366.0,366.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Peshawar,393.0,393.0,393.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Multan,100.0,105.0,110.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Bahawalpur,100.0,110.0,120.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Karachi,120.0,123.85,150.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Hyderabad,120.0,120.0,120.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Sukkur,150.0,150.0,150.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Larkana,160.0,160.0,160.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Peshawar,120.0,123.33,130.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Multan,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Bahawalpur,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Karachi,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Hyderabad,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Sukkur,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Larkana,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Peshawar,699.0,699.0,699.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Multan,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Bahawalpur,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Karachi,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Hyderabad,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Sukkur,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Larkana,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Peshawar,199.0,199.0,199.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Multan,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Bahawalpur,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Karachi,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Hyderabad,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Sukkur,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Larkana,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Peshawar,599.0,599.0,599.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Multan,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Bahawalpur,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Karachi,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Hyderabad,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Sukkur,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Larkana,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Peshawar,2.0,2.0,2.0
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Multan,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Bahawalpur,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Karachi,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Hyderabad,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Sukkur,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Larkana,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Peshawar,145.08,145.08,145.08
+2019-05-30,44,Kerosene Oil,1 Ltr,Multan,125.0,125.0,125.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Bahawalpur,138.0,138.0,138.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Karachi,135.0,139.33,145.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Hyderabad,130.0,130.0,130.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Sukkur,125.0,125.0,125.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Larkana,145.0,147.5,150.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Peshawar,115.0,131.67,140.0
+2019-05-30,45,Firewood Whole,40 Kg,Multan,650.0,708.33,750.0
+2019-05-30,45,Firewood Whole,40 Kg,Bahawalpur,650.0,650.0,650.0
+2019-05-30,45,Firewood Whole,40 Kg,Karachi,600.0,661.54,700.0
+2019-05-30,45,Firewood Whole,40 Kg,Hyderabad,600.0,600.0,600.0
+2019-05-30,45,Firewood Whole,40 Kg,Sukkur,400.0,400.0,400.0
+2019-05-30,45,Firewood Whole,40 Kg,Larkana,500.0,500.0,500.0
+2019-05-30,45,Firewood Whole,40 Kg,Peshawar,700.0,729.17,800.0
+2019-05-30,46,Energy Saver,Each,Multan,165.0,165.0,165.0
+2019-05-30,46,Energy Saver,Each,Bahawalpur,175.0,175.0,175.0
+2019-05-30,46,Energy Saver,Each,Karachi,180.0,180.0,180.0
+2019-05-30,46,Energy Saver,Each,Hyderabad,200.0,200.0,200.0
+2019-05-30,46,Energy Saver,Each,Sukkur,155.0,155.0,155.0
+2019-05-30,46,Energy Saver,Each,Larkana,180.0,180.0,180.0
+2019-05-30,46,Energy Saver,Each,Peshawar,190.0,190.0,190.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Multan,22.0,22.0,22.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Bahawalpur,20.0,20.0,20.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Karachi,14.0,14.0,14.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Hyderabad,30.0,30.0,30.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Sukkur,28.0,28.0,28.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Larkana,30.0,30.0,30.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Peshawar,20.0,20.0,20.0
+2019-05-30,48,"Match Box, Regular",Each,Multan,3.0,3.0,3.0
+2019-05-30,48,"Match Box, Regular",Each,Bahawalpur,2.0,2.5,3.0
+2019-05-30,48,"Match Box, Regular",Each,Karachi,3.0,3.0,3.0
+2019-05-30,48,"Match Box, Regular",Each,Hyderabad,3.0,3.0,3.0
+2019-05-30,48,"Match Box, Regular",Each,Sukkur,2.0,2.5,3.0
+2019-05-30,48,"Match Box, Regular",Each,Larkana,3.0,3.0,3.0
+2019-05-30,48,"Match Box, Regular",Each,Peshawar,2.0,2.0,2.0
+2019-05-30,49,"Petrol, Super",1 Ltr,Multan,108.9,108.92,108.99
+2019-05-30,49,"Petrol, Super",1 Ltr,Bahawalpur,109.8,109.8,109.8
+2019-05-30,49,"Petrol, Super",1 Ltr,Karachi,108.88,108.88,108.88
+2019-05-30,49,"Petrol, Super",1 Ltr,Hyderabad,109.6,109.9,110.5
+2019-05-30,49,"Petrol, Super",1 Ltr,Sukkur,108.9,108.9,108.9
+2019-05-30,49,"Petrol, Super",1 Ltr,Larkana,109.1,109.1,109.1
+2019-05-30,49,"Petrol, Super",1 Ltr,Peshawar,108.9,108.9,108.9
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Multan,122.8,122.98,123.9
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Bahawalpur,124.1,124.1,124.1
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Karachi,122.8,122.8,122.8
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Hyderabad,123.55,123.56,123.6
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Sukkur,122.8,122.8,122.8
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Larkana,123.0,123.0,123.0
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Peshawar,122.8,122.8,122.8
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Multan,1100.0,1175.83,1200.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Bahawalpur,1320.0,1320.0,1320.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Karachi,1210.0,1262.88,1320.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Hyderabad,1320.0,1375.0,1430.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Sukkur,1430.0,1430.0,1430.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Larkana,1430.0,1430.0,1430.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Peshawar,1320.0,1320.0,1320.0
+2019-05-30,52,Telephone Local Call,P/Call,Multan,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Bahawalpur,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Karachi,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Hyderabad,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Sukkur,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Larkana,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Peshawar,4.65,4.65,4.65
+2019-05-30,53,"Soap, LifeBuoy",Each,Multan,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Bahawalpur,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Karachi,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Hyderabad,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Sukkur,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Larkana,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Peshawar,40.0,40.0,40.0
+2019-05-30,1,Wheat,10 Kg,Bannu,380.0,380.0,380.0
+2019-05-30,1,Wheat,10 Kg,Quetta,350.0,360.0,370.0
+2019-05-30,1,Wheat,10 Kg,Khuzdar,350.0,350.0,350.0
+2019-05-30,1,Wheat,10 Kg,National,312.5,353.46,400.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Bannu,410.0,410.0,410.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Quetta,400.0,405.0,410.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,Khuzdar,380.0,382.5,390.0
+2019-05-30,2,"Wheat Flour, Bag",10 Kg,National,365.0,400.73,450.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Bannu,50.0,53.75,60.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Quetta,100.0,105.0,110.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,Khuzdar,80.0,80.0,80.0
+2019-05-30,3,"Rice Basmati Broken, (AQ)",1 Kg,National,50.0,79.45,110.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Bannu,60.0,62.5,65.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Quetta,80.0,85.0,90.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,Khuzdar,55.0,56.25,60.0
+2019-05-30,4,Rice Irri-6 (Punjab/Sindh),1 Kg,National,40.0,58.8,90.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Bannu,35.0,35.0,35.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Quetta,45.0,45.0,45.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,Khuzdar,40.0,40.0,40.0
+2019-05-30,5,"Bread Plain, Medium Size",Each,National,35.0,44.57,50.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Bannu,350.0,350.0,350.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Quetta,380.0,390.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,Khuzdar,400.0,400.0,400.0
+2019-05-30,6,"Beef With Bone, (AQ)",1 Kg,National,350.0,409.2,550.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Bannu,700.0,700.0,700.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Quetta,840.0,850.0,860.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,Khuzdar,750.0,750.0,750.0
+2019-05-30,7,"Mutton, Average Quality",1 Kg,National,700.0,847.12,1100.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Bannu,193.0,193.0,193.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Quetta,220.0,225.0,230.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,Khuzdar,240.0,240.0,240.0
+2019-05-30,8,"Chicken Farm, Broiler, Live",1 Kg,National,170.0,188.1,240.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Bannu,80.0,85.0,90.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Quetta,110.0,110.0,110.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,Khuzdar,80.0,80.0,80.0
+2019-05-30,9,"Milk, Fresh, Unboiled",1 Ltr,National,65.0,88.79,110.0
+2019-05-30,10,Curd (Dahi),1 Kg,Bannu,100.0,100.0,100.0
+2019-05-30,10,Curd (Dahi),1 Kg,Quetta,120.0,120.0,120.0
+2019-05-30,10,Curd (Dahi),1 Kg,Khuzdar,90.0,90.0,90.0
+2019-05-30,10,Curd (Dahi),1 Kg,National,80.0,104.47,160.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Bannu,410.25,410.25,410.25
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Quetta,420.0,420.0,420.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,Khuzdar,400.0,400.0,400.0
+2019-05-30,11,"Powdered Milk, Nido, Polybag",400 gm,National,400.0,411.29,430.76
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Bannu,100.0,100.0,100.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Quetta,100.0,105.0,110.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,Khuzdar,120.0,120.0,120.0
+2019-05-30,12,"Eggs Hen, Farm",Dozen,National,70.0,88.71,120.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Bannu,175.0,177.5,180.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Quetta,200.0,210.0,220.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,Khuzdar,200.0,200.0,200.0
+2019-05-30,13,"Mustard Oil, Average Quality",1 Kg,National,150.0,194.43,260.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Bannu,515.0,515.0,515.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Quetta,525.0,525.0,525.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,Khuzdar,460.0,460.0,460.0
+2019-05-30,14,"Cooking Oil, Tin, (SN)",2.5 Ltr,National,460.0,525.18,550.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Bannu,490.0,490.0,490.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Quetta,520.0,520.0,520.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,Khuzdar,455.0,455.0,455.0
+2019-05-30,15,"Vegetable Ghee, Tin, (SN)",2.5 Kg,National,455.0,503.82,525.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Bannu,175.0,175.0,175.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Quetta,190.0,195.0,200.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,Khuzdar,120.0,125.0,130.0
+2019-05-30,16,"Veg. Ghee, Loose/Pouch, (SN)",1 Kg,National,120.0,161.48,210.0
+2019-05-30,17,Bananas,Dozen,Bannu,160.0,170.0,180.0
+2019-05-30,17,Bananas,Dozen,Quetta,130.0,140.0,150.0
+2019-05-30,17,Bananas,Dozen,Khuzdar,80.0,85.0,90.0
+2019-05-30,17,Bananas,Dozen,National,80.0,128.98,190.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Bannu,110.0,115.0,120.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Quetta,140.0,150.0,160.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,Khuzdar,120.0,120.0,120.0
+2019-05-30,18,"Pulse Masoor, Washed",1 Kg,National,80.0,123.37,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Bannu,150.0,155.0,160.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Quetta,170.0,180.0,190.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,Khuzdar,140.0,145.0,150.0
+2019-05-30,19,"Pulse Moong, Washed",1 Kg,National,140.0,157.97,190.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Bannu,160.0,160.0,160.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Quetta,210.0,220.0,230.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,Khuzdar,120.0,125.0,130.0
+2019-05-30,20,"Pulse Mash, Washed",1 Kg,National,120.0,167.84,230.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Bannu,120.0,120.0,120.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Quetta,150.0,155.0,160.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,Khuzdar,140.0,140.0,140.0
+2019-05-30,21,"Pulse Gram, Washed",1 Kg,National,110.0,126.69,160.0
+2019-05-30,22,Potatoes,1 Kg,Bannu,30.0,30.0,30.0
+2019-05-30,22,Potatoes,1 Kg,Quetta,25.0,30.0,35.0
+2019-05-30,22,Potatoes,1 Kg,Khuzdar,30.0,30.0,30.0
+2019-05-30,22,Potatoes,1 Kg,National,20.0,28.93,50.0
+2019-05-30,23,Onions,1 Kg,Bannu,60.0,60.0,60.0
+2019-05-30,23,Onions,1 Kg,Quetta,50.0,60.0,70.0
+2019-05-30,23,Onions,1 Kg,Khuzdar,60.0,60.0,60.0
+2019-05-30,23,Onions,1 Kg,National,40.0,54.24,80.0
+2019-05-30,24,Tomatoes,1 Kg,Bannu,40.0,40.0,40.0
+2019-05-30,24,Tomatoes,1 Kg,Quetta,40.0,45.0,50.0
+2019-05-30,24,Tomatoes,1 Kg,Khuzdar,50.0,50.0,50.0
+2019-05-30,24,Tomatoes,1 Kg,National,30.0,40.38,70.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Bannu,70.0,70.0,70.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Quetta,69.0,70.0,71.0
+2019-05-30,25,"Sugar, Refined",1 Kg,Khuzdar,66.0,66.0,66.0
+2019-05-30,25,"Sugar, Refined",1 Kg,National,65.0,68.01,80.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Bannu,80.0,86.25,90.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Quetta,90.0,100.0,110.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,Khuzdar,80.0,87.5,90.0
+2019-05-30,26,"Gur, Average Quality",1 Kg,National,80.0,100.0,120.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Bannu,12.0,12.0,12.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Quetta,10.0,10.0,10.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,Khuzdar,10.0,10.0,10.0
+2019-05-30,27,"Salt Powder, Loose, Lahori",1 Kg,National,10.0,12.42,25.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Bannu,320.0,330.0,340.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Quetta,380.0,390.0,400.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,Khuzdar,280.0,290.0,300.0
+2019-05-30,28,"Red Chilly Powder, Loose",1 Kg,National,280.0,348.69,440.0
+2019-05-30,29,Garlic,1 Kg,Bannu,180.0,190.0,200.0
+2019-05-30,29,Garlic,1 Kg,Quetta,210.0,215.0,220.0
+2019-05-30,29,Garlic,1 Kg,Khuzdar,240.0,240.0,240.0
+2019-05-30,29,Garlic,1 Kg,National,140.0,210.58,320.0
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Bannu,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Quetta,221.05,221.05,221.05
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,Khuzdar,195.0,195.0,195.0
+2019-05-30,30,"Tea, Lipton Yellow Label, Packet",200 gm,National,195.0,219.51,221.08
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Bannu,100.0,105.0,110.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Quetta,80.0,90.0,100.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,Khuzdar,180.0,185.0,190.0
+2019-05-30,31,"Cooked Beef, Average Hotel",Plate,National,80.0,121.84,190.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Bannu,50.0,50.0,50.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Quetta,70.0,75.0,80.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,Khuzdar,80.0,87.5,90.0
+2019-05-30,32,"Cooked Daal, Average Hotel",Plate,National,40.0,64.19,100.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Bannu,20.0,20.0,20.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Quetta,20.0,21.0,22.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,Khuzdar,20.0,20.0,20.0
+2019-05-30,33,"Tea Prepared, Average Hotel",Cup,National,20.0,23.86,30.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Bannu,70.0,70.0,70.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Quetta,50.0,50.0,50.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,Khuzdar,60.0,60.0,60.0
+2019-05-30,34,"Cigarettes, K-2/Similar brands, 20's",Packet,National,50.0,59.72,70.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Bannu,400.0,422.5,445.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Quetta,500.0,550.0,600.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,Khuzdar,250.0,250.0,250.0
+2019-05-30,35,"Long Cloth, 57"", (SN)",1 mtr,National,180.0,291.47,600.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Bannu,180.0,180.0,180.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Quetta,155.0,160.0,165.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,Khuzdar,170.0,170.0,170.0
+2019-05-30,36,"Shirting, (AQ), (SN)",1 mtr,National,120.0,190.32,338.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Bannu,412.0,463.0,500.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Quetta,450.0,500.0,550.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,Khuzdar,250.0,250.0,250.0
+2019-05-30,37,"Lawn Printed, (SN)",1 mtr,National,180.0,332.7,550.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Bannu,100.0,100.0,100.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Quetta,100.0,105.0,110.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,Khuzdar,150.0,150.0,150.0
+2019-05-30,38,"Georgette, (AQ), (SN)",1 mtr,National,100.0,140.64,180.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Bannu,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Quetta,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,Khuzdar,699.0,699.0,699.0
+2019-05-30,39,"Gents Sandal, Bata",Pair,National,699.0,699.0,699.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Bannu,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Quetta,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,Khuzdar,199.0,199.0,199.0
+2019-05-30,40,"Gents Chappal Spng, Bata",Pair,National,199.0,199.0,199.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Bannu,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Quetta,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,Khuzdar,599.0,599.0,599.0
+2019-05-30,41,"Ladies Sandal, Bata",Pair,National,599.0,599.0,599.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Bannu,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Quetta,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,Khuzdar,2.0,2.0,2.0
+2019-05-30,42,"Elec. Charges, Upto 50 Units",Unit,National,2.0,2.0,2.0
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Bannu,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Quetta,145.08,145.08,145.08
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,Khuzdar,0.0,0.0,0.0
+2019-05-30,43,"Gas Charges, Upto 3.3719 MMBTU",MMBTU,National,145.08,145.08,145.08
+2019-05-30,44,Kerosene Oil,1 Ltr,Bannu,120.0,120.0,120.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Quetta,108.0,109.0,110.0
+2019-05-30,44,Kerosene Oil,1 Ltr,Khuzdar,90.0,90.0,90.0
+2019-05-30,44,Kerosene Oil,1 Ltr,National,90.0,129.85,155.0
+2019-05-30,45,Firewood Whole,40 Kg,Bannu,500.0,500.0,500.0
+2019-05-30,45,Firewood Whole,40 Kg,Quetta,625.0,650.0,675.0
+2019-05-30,45,Firewood Whole,40 Kg,Khuzdar,600.0,625.0,650.0
+2019-05-30,45,Firewood Whole,40 Kg,National,400.0,646.41,850.0
+2019-05-30,46,Energy Saver,Each,Bannu,170.0,170.0,170.0
+2019-05-30,46,Energy Saver,Each,Quetta,180.0,180.0,180.0
+2019-05-30,46,Energy Saver,Each,Khuzdar,150.0,150.0,150.0
+2019-05-30,46,Energy Saver,Each,National,150.0,171.76,200.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Bannu,25.0,25.0,25.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Quetta,35.0,40.0,45.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,Khuzdar,40.0,40.0,40.0
+2019-05-30,47,"Washing Soap, (Nylon), (SN)",Cake,National,14.0,31.41,45.0
+2019-05-30,48,"Match Box, Regular",Each,Bannu,3.0,3.0,3.0
+2019-05-30,48,"Match Box, Regular",Each,Quetta,2.0,2.0,2.0
+2019-05-30,48,"Match Box, Regular",Each,Khuzdar,1.0,1.5,2.0
+2019-05-30,48,"Match Box, Regular",Each,National,1.0,2.47,3.0
+2019-05-30,49,"Petrol, Super",1 Ltr,Bannu,111.2,111.2,111.2
+2019-05-30,49,"Petrol, Super",1 Ltr,Quetta,108.61,108.61,108.61
+2019-05-30,49,"Petrol, Super",1 Ltr,Khuzdar,108.61,108.61,108.61
+2019-05-30,49,"Petrol, Super",1 Ltr,National,108.61,109.23,111.2
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Bannu,125.4,125.4,125.4
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Quetta,122.62,122.62,122.62
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,Khuzdar,122.62,122.62,122.62
+2019-05-30,50,Hi Speed Diesel (HSD),1 Ltr,National,122.62,123.14,125.4
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Bannu,1200.0,1200.0,1200.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Quetta,1250.0,1275.0,1300.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,Khuzdar,1400.0,1400.0,1400.0
+2019-05-30,51,"LPG Cylinder, 11kg",Each,National,1100.0,1294.48,1430.0
+2019-05-30,52,Telephone Local Call,P/Call,Bannu,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Quetta,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,Khuzdar,4.65,4.65,4.65
+2019-05-30,52,Telephone Local Call,P/Call,National,4.65,4.65,4.65
+2019-05-30,53,"Soap, LifeBuoy",Each,Bannu,40.0,40.0,40.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Quetta,42.0,42.0,42.0
+2019-05-30,53,"Soap, LifeBuoy",Each,Khuzdar,42.0,42.0,42.0
+2019-05-30,53,"Soap, LifeBuoy",Each,National,40.0,40.47,42.0

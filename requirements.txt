@@ -1,18 +1,7 @@
 # Mehngai Watch — all stages (install with: pip install -r requirements.txt && pip install -e .)
-requests
-pdfplumber
-pandas
-numpy
+-r requirements-pipeline.txt
 openpyxl
-pyyaml
-python-dotenv
-pytest
-matplotlib
 jupyter
-hijridate        # Ramazan/Eid dates (maintained successor of hijri-converter)
-statsmodels      # STL decomposition (L3)
-scipy            # trimmed mean for the basket
-tabulate         # markdown tables in the backtest output
-streamlit        # dashboard
+streamlit        # private analysis dashboard
 plotly           # interactive dashboard charts
 # LLM: Gemini via plain REST (requests) — no SDK needed

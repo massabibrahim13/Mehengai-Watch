@@ -34,7 +34,7 @@ def test_weekly_report_flags_record_flour_week(tmp_path, monkeypatch):
 
 
 def test_home_page():
-    from streamlit.testing.v1 import AppTest
+    AppTest = pytest.importorskip("streamlit.testing.v1").AppTest
     app = AppTest.from_file(str(PROJECT_ROOT / "src" / "mehngai" / "app" / "dashboard.py"),
                             default_timeout=120).run()
     assert not app.exception, app.exception
@@ -59,14 +59,14 @@ def ask_cheapest_flour():
 
 
 def test_explore_page_finds_item_from_urdu_name():
-    from streamlit.testing.v1 import AppTest
+    AppTest = pytest.importorskip("streamlit.testing.v1").AppTest
     app = AppTest.from_function(explore_sugar, default_timeout=120).run()
     assert not app.exception, app.exception
     assert app.header[0].value == "Sugar (refined)"
 
 
 def test_ask_page_answers_from_data():
-    from streamlit.testing.v1 import AppTest
+    AppTest = pytest.importorskip("streamlit.testing.v1").AppTest
     app = AppTest.from_function(ask_cheapest_flour, default_timeout=120).run()
     assert not app.exception, app.exception
     assert "cheapest in" in app.info[0].value and "Wheat flour" in app.info[0].value

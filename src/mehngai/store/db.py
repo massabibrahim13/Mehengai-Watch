@@ -134,6 +134,34 @@ def report_date_of(manifest_date: str) -> tuple[str, int]:
     return pd.read_csv(interim, usecols=["report_date"], nrows=1)["report_date"].iat[0], 1
 
 
+EXPLANATIONS_CSV = DATA_DIR / "explanations.csv"
+EXPLANATION_COLUMNS = ["item_id", "week_date", "method", "text", "source", "model", "attempts", "facts_json", "created_at"]
+
+
+def save_explanations(conn: sqlite3.Connection, path: Path | None = None) -> int:
+    """Write the explanations cache to a CSV (committed to git), so a fresh machine — e.g. the weekly GitHub
+    Actions run, which starts with no database — reuses them instead of calling the LLM again."""
+    path = path or EXPLANATIONS_CSV
+    df = pd.read_sql_query(f"SELECT {', '.join(EXPLANATION_COLUMNS)} FROM explanations "
+                           "ORDER BY week_date, item_id, method", conn)
+    df.to_csv(path, index=False, lineterminator="\n")
+    return len(df)
+
+
+def restore_explanations(conn: sqlite3.Connection, path: Path | None = None) -> int:
+    """Load the committed explanations CSV into the cache (rows already in the database win)."""
+    path = path or EXPLANATIONS_CSV
+    if not path.exists():
+        return 0
+    df = pd.read_csv(path, dtype={"model": "string"}, keep_default_na=False)
+    rows = [tuple(None if (c == "model" and v == "") else v for c, v in zip(EXPLANATION_COLUMNS, r))
+            for r in df[EXPLANATION_COLUMNS].itertuples(index=False)]
+    before = conn.execute("SELECT COUNT(*) FROM explanations").fetchone()[0]
+    conn.executemany(f"INSERT OR IGNORE INTO explanations ({', '.join(EXPLANATION_COLUMNS)}) "
+                     f"VALUES ({', '.join('?' * len(EXPLANATION_COLUMNS))})", rows)
+    return conn.execute("SELECT COUNT(*) FROM explanations").fetchone()[0] - before
+
+
 def clear_derived(conn: sqlite3.Connection) -> None:
     """Empty the tables that are rebuilt on every load (children before parents, for the FKs).
     Anomalies are derived from prices, so they go too; the detectors rebuild them."""
@@ -222,13 +250,14 @@ def load() -> None:
         basket = basket_changes(raw, report_dates)
         conn.executemany("INSERT INTO basket (week_date, log_change, n_items) VALUES (?, ?, ?)",
                          basket.itertuples(index=False))
+        restored = restore_explanations(conn)
 
         summary = conn.execute("""
             SELECT item_id, COUNT(*) AS weeks, MIN(week_date), MAX(week_date)
             FROM prices WHERE city = 'National' GROUP BY item_id ORDER BY item_id
         """).fetchall()
-    log.info("loaded %d price rows, %d rejected rows, %d reports", len(accepted), len(rejected),
-             len(report_dates))
+    log.info("loaded %d price rows, %d rejected rows, %d reports; %d explanations restored from %s",
+             len(accepted), len(rejected), len(report_dates), restored, EXPLANATIONS_CSV.name)
     for item_id, weeks, first, last in summary:
         log.info("  %-12s %3d weeks  %s → %s", item_id, weeks, first, last)
 

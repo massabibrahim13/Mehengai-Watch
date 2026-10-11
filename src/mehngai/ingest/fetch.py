@@ -24,7 +24,7 @@ from urllib.parse import unquote
 
 import requests
 
-from mehngai.config import RAW_DIR, load_settings
+from mehngai.config import INTERIM_DIR, RAW_DIR, load_settings
 
 log = logging.getLogger(__name__)
 
@@ -235,8 +235,11 @@ def run(start: date, end: date, kinds: list[str], dry_run: bool = False) -> int:
     log.info("%d reports in range %s → %s", len(wanted), start, end)
     log_gaps(sorted({l.report_date for l in wanted}))
 
-    # Files that are missing or truncated on disk get downloaded again.
-    have = {key for key, row in read_manifest().items() if file_is_complete(RAW_DIR / row["file"])}
+    # Files that are missing or truncated on disk get downloaded again — unless the week is already parsed
+    # (data/interim/ is in git, the PDFs are not, so a fresh machine only fetches new weeks).
+    have = {key for key, row in read_manifest().items()
+            if file_is_complete(RAW_DIR / row["file"])
+            or (key[1] == "annex" and (INTERIM_DIR / f"{key[0]}_annex.csv").exists())}
     todo = [l for l in wanted if (l.report_date.isoformat(), l.kind) not in have]
     log.info("%d already downloaded, %d to fetch", len(wanted) - len(todo), len(todo))
     if dry_run:

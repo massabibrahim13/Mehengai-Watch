@@ -1,0 +1,97 @@
+# Keeps the public website up to date, for free, with no server:
+#   • every Friday (and again on Saturday, in case PBS publishes late): download the new weekly PBS report,
+#     run the whole pipeline (parse → check against PBS → detect → explain → report → export), commit the new
+#     week's data back to the repo, and publish the site
+#   • every hour: refresh the price news and republish (no download, no new AI calls)
+#   • on every push to main, or by hand from the Actions tab: rebuild and publish
+# The Gemini key comes from the repository secret LLM_API_KEY; without it, explanations fall back to the
+# plain template sentence. The site is published to GitHub Pages.
+name: Update and publish
+
+on:
+  schedule:
+    - cron: "30 11 * * 5"   # Fri 11:30 UTC (16:30 PKT): weekly run
+    - cron: "30 4 * * 6"    # Sat 04:30 UTC: weekly run again, if PBS was late
+    - cron: "15 * * * *"    # hourly: news refresh
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      weekly:
+        description: "Full weekly run (download new PBS reports and commit them)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # commit the new week's data
+  pages: write      # publish to GitHub Pages
+  id-token: write
+
+concurrency:
+  group: update-and-publish
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+      WEEKLY: ${{ github.event.schedule == '30 11 * * 5' || github.event.schedule == '30 4 * * 6' || inputs.weekly == true }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-pipeline.txt
+      - name: Install the pipeline
+        run: pip install -r requirements-pipeline.txt && pip install -e .
+
+      - name: Run the pipeline
+        run: |
+          if [ "$WEEKLY" = "true" ]; then
+            python -m mehngai.pipeline                 # downloads only weeks that aren't in data/interim yet
+          else
+            python -m mehngai.pipeline --skip-fetch    # news + rebuild only
+          fi
+
+      - name: Tests (a failure stops publishing)
+        run: pytest -q
+
+      - name: Commit the new week's data
+        if: env.WEEKLY == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/interim data/raw/manifest.csv data/explanations.csv reports
+          if git diff --cached --quiet; then
+            echo "No new PBS report yet."
+          else
+            git commit -m "data: weekly PBS update $(date -u +%F)"
+            git push
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Build the website
+        working-directory: web
+        run: npm ci && npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

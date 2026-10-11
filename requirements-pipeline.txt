@@ -1,0 +1,14 @@
+# What the data pipeline and its tests need (installed by the GitHub Actions run).
+# requirements.txt adds the private Streamlit tool and notebooks on top of this.
+requests
+pdfplumber
+pandas
+numpy
+pyyaml
+python-dotenv
+pytest
+matplotlib
+hijridate        # Ramazan/Eid dates
+statsmodels      # STL decomposition (L3)
+scipy            # trimmed mean for the basket
+tabulate         # markdown tables in the backtest output

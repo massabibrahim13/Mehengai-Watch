@@ -8,9 +8,13 @@ __pycache__/
 # Secrets
 .env
 
-# Data (re-downloadable / regenerable)
-data/raw/
-data/interim/
+# Data: the PDFs (870 MB) and the database are rebuilt; the parsed CSVs (data/interim/), the download
+# list (data/raw/manifest.csv) and data/explanations.csv are committed so the automatic weekly run only
+# downloads the newest report (see .github/workflows/update.yml)
+data/raw/*
+!data/raw/manifest.csv
+!data/raw/2024-06-06_annex.pdf
+# ↑ one real report kept as the parser test fixture (tests/test_ingest.py)
 data/*.db
 
 # OS / editor

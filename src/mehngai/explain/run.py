@@ -22,7 +22,7 @@ from mehngai.detect.series import load_series
 from mehngai.explain.facts import build_facts
 from mehngai.explain.guardrails import check, template
 from mehngai.explain.llm import LLMError, generate
-from mehngai.store.db import connect
+from mehngai.store.db import connect, save_explanations
 
 log = logging.getLogger(__name__)
 
@@ -101,6 +101,7 @@ def run(week: str | None = None, sample: int | None = None, force: bool = False)
                 time.sleep(cfg["request_delay_seconds"])
             results.append({"item_id": a.item_id, "week_date": key[1], "severity": a.severity,
                             "direction": a.direction, "text": text, "source": source})
+        save_explanations(conn)   # keep the cache in git (data/explanations.csv)
     log.info("explained %d: %d LLM, %d template", len(results),
              sum(r["source"] == "llm" for r in results), sum(r["source"] == "template" for r in results))
     return results

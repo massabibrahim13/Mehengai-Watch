@@ -1,0 +1,919 @@
+report_date,sl_no,item_raw,unit_raw,city,price_min,price_avg,price_max
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Islamabad,860.0,864.15,870.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Rawalpindi,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Gujranwala,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Sialkot,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Lahore,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Faisalabad,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Sargodha,860.0,860.0,860.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Islamabad,,,110.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Rawalpindi,90.0,98.54,110.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Gujranwala,80.0,80.0,80.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Sialkot,80.0,80.0,80.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Lahore,75.0,76.87,80.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Faisalabad,90.0,90.0,90.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Sargodha,90.0,90.0,90.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Islamabad,,76.52,80.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Rawalpindi,70.0,78.03,90.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Gujranwala,60.0,60.0,60.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Sialkot,0.0,0.0,0.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Lahore,60.0,60.0,60.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Faisalabad,60.0,60.0,60.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Sargodha,90.0,90.0,90.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Islamabad,,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Rawalpindi,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Gujranwala,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Sialkot,70.0,70.0,70.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Lahore,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Faisalabad,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Sargodha,60.0,60.0,60.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Islamabad,,,600.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Rawalpindi,530.0,554.5,580.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Gujranwala,500.0,500.0,500.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Sialkot,500.0,500.0,500.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Lahore,500.0,504.56,550.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Faisalabad,400.0,430.89,500.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Sargodha,450.0,450.0,450.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Islamabad,,1174.39,1250.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Rawalpindi,1150.0,1189.83,1200.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Gujranwala,1000.0,1032.28,1100.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Sialkot,1100.0,1100.0,1100.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Lahore,1000.0,1051.19,1100.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Faisalabad,1000.0,1000.0,1000.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Sargodha,1000.0,1000.0,1000.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Islamabad,,165.9,190.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Rawalpindi,160.0,162.26,175.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Gujranwala,152.0,152.0,152.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Sialkot,167.0,167.0,167.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Lahore,151.0,151.0,151.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Faisalabad,161.0,161.0,161.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Sargodha,165.0,165.0,165.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Islamabad,,120.41,125.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Rawalpindi,110.0,119.83,130.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Gujranwala,110.0,110.0,110.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Sialkot,90.0,90.0,90.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Lahore,100.0,100.0,100.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Faisalabad,100.0,103.23,110.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Sargodha,80.0,80.0,80.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Islamabad,120.0,130.74,140.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Rawalpindi,120.0,132.49,140.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Gujranwala,120.0,120.0,120.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Sialkot,100.0,100.0,100.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Lahore,120.0,120.0,120.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Faisalabad,110.0,110.0,110.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Sargodha,110.0,110.0,110.0
+2021-01-14,10,Powdered,EMailckh NIDO,Islamabad,,,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Rawalpindi,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Gujranwala,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Sialkot,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Lahore,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Faisalabad,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Sargodha,480.0,480.0,480.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Islamabad,160.0,162.46,170.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Rawalpindi,144.0,151.23,165.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Gujranwala,150.0,150.0,150.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Sialkot,170.0,173.27,180.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Lahore,146.0,146.0,146.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Faisalabad,180.0,180.0,180.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Sargodha,150.0,150.0,150.0
+2021-01-14,12,Mustard O,1il (KAgverag,Islamabad,,331.91,360.0
+2021-01-14,12,Mustard O,1il (KAgverag,Rawalpindi,280.0,316.64,350.0
+2021-01-14,12,Mustard O,1il (KAgverag,Gujranwala,220.0,220.0,220.0
+2021-01-14,12,Mustard O,1il (KAgverag,Sialkot,220.0,220.0,220.0
+2021-01-14,12,Mustard O,1il (KAgverag,Lahore,260.0,268.01,280.0
+2021-01-14,12,Mustard O,1il (KAgverag,Faisalabad,220.0,226.47,240.0
+2021-01-14,12,Mustard O,1il (KAgverag,Sargodha,280.0,280.0,280.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Islamabad,,,
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Rawalpindi,,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Gujranwala,1355.0,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Sialkot,1355.0,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Lahore,1295.0,1295.0,1295.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Faisalabad,1355.0,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Sargodha,1355.0,1355.0,1355.0
+2021-01-14,14,Vegetable,EGahcehe DA,Islamabad,,,
+2021-01-14,14,Vegetable,EGahcehe DA,Rawalpindi,690.0,690.0,690.0
+2021-01-14,14,Vegetable,EGahcehe DA,Gujranwala,690.0,690.0,690.0
+2021-01-14,14,Vegetable,EGahcehe DA,Sialkot,690.0,690.0,690.0
+2021-01-14,14,Vegetable,EGahcehe DA,Lahore,660.0,660.0,660.0
+2021-01-14,14,Vegetable,EGahcehe DA,Faisalabad,760.0,760.0,760.0
+2021-01-14,14,Vegetable,EGahcehe DA,Sargodha,680.0,680.0,680.0
+2021-01-14,15,Vegetable,EGahcehe DA,Islamabad,,,
+2021-01-14,15,Vegetable,EGahcehe DA,Rawalpindi,,,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,Gujranwala,275.0,275.0,275.0
+2021-01-14,15,Vegetable,EGahcehe DA,Sialkot,267.0,267.0,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,Lahore,267.0,267.0,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,Faisalabad,290.0,290.0,290.0
+2021-01-14,15,Vegetable,EGahcehe DA,Sargodha,267.0,267.0,267.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Islamabad,,147.44,180.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Rawalpindi,100.0,124.85,140.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Gujranwala,80.0,92.83,100.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Sialkot,90.0,93.22,100.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Lahore,70.0,74.6,80.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Faisalabad,60.0,63.16,70.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Sargodha,50.0,50.0,50.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Islamabad,,178.2,190.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Rawalpindi,150.0,161.57,170.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Gujranwala,140.0,146.59,150.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Sialkot,140.0,140.0,140.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Lahore,130.0,141.92,160.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Faisalabad,170.0,173.27,180.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Sargodha,180.0,180.0,180.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Islamabad,,258.11,280.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Rawalpindi,230.0,243.76,260.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Gujranwala,220.0,220.0,220.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Sialkot,200.0,206.46,220.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Lahore,200.0,219.12,240.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Faisalabad,230.0,233.29,240.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Sargodha,220.0,220.0,220.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Islamabad,,266.47,280.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Rawalpindi,240.0,257.11,280.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Gujranwala,250.0,253.29,260.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Sialkot,250.0,256.62,260.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Lahore,240.0,246.56,260.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Faisalabad,260.0,263.29,270.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Sargodha,260.0,260.0,260.0
+2021-01-14,20,Pulse Gra,m1 Kg,Islamabad,160.0,172.16,190.0
+2021-01-14,20,Pulse Gra,m1 Kg,Rawalpindi,150.0,153.6,160.0
+2021-01-14,20,Pulse Gra,m1 Kg,Gujranwala,130.0,130.0,130.0
+2021-01-14,20,Pulse Gra,m1 Kg,Sialkot,120.0,120.0,120.0
+2021-01-14,20,Pulse Gra,m1 Kg,Lahore,110.0,121.3,130.0
+2021-01-14,20,Pulse Gra,m1 Kg,Faisalabad,140.0,140.0,140.0
+2021-01-14,20,Pulse Gra,m1 Kg,Sargodha,120.0,120.0,120.0
+2021-01-14,21,Potatoes,1 Kg,Islamabad,50.0,59.72,70.0
+2021-01-14,21,Potatoes,1 Kg,Rawalpindi,40.0,53.15,70.0
+2021-01-14,21,Potatoes,1 Kg,Gujranwala,40.0,43.09,50.0
+2021-01-14,21,Potatoes,1 Kg,Sialkot,40.0,43.09,50.0
+2021-01-14,21,Potatoes,1 Kg,Lahore,40.0,41.74,50.0
+2021-01-14,21,Potatoes,1 Kg,Faisalabad,40.0,41.52,50.0
+2021-01-14,21,Potatoes,1 Kg,Sargodha,40.0,40.0,40.0
+2021-01-14,22,Onions,1 Kg,Islamabad,50.0,58.82,70.0
+2021-01-14,22,Onions,1 Kg,Rawalpindi,40.0,53.54,70.0
+2021-01-14,22,Onions,1 Kg,Gujranwala,40.0,43.09,50.0
+2021-01-14,22,Onions,1 Kg,Sialkot,40.0,43.09,50.0
+2021-01-14,22,Onions,1 Kg,Lahore,30.0,40.05,50.0
+2021-01-14,22,Onions,1 Kg,Faisalabad,40.0,40.0,40.0
+2021-01-14,22,Onions,1 Kg,Sargodha,35.0,35.0,35.0
+2021-01-14,23,Tomatoes,1 Kg,Islamabad,80.0,94.51,110.0
+2021-01-14,23,Tomatoes,1 Kg,Rawalpindi,80.0,88.79,110.0
+2021-01-14,23,Tomatoes,1 Kg,Gujranwala,80.0,89.63,100.0
+2021-01-14,23,Tomatoes,1 Kg,Sialkot,70.0,76.52,80.0
+2021-01-14,23,Tomatoes,1 Kg,Lahore,80.0,85.09,90.0
+2021-01-14,23,Tomatoes,1 Kg,Faisalabad,80.0,83.2,90.0
+2021-01-14,23,Tomatoes,1 Kg,Sargodha,70.0,70.0,70.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Islamabad,95.0,96.23,100.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Rawalpindi,92.0,95.69,100.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Gujranwala,94.0,94.67,95.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Sialkot,95.0,95.0,95.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Lahore,95.0,95.7,100.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Faisalabad,90.0,91.33,92.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Sargodha,90.0,90.0,90.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Islamabad,,142.44,150.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Rawalpindi,130.0,142.93,160.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Gujranwala,120.0,123.24,130.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Sialkot,140.0,140.0,140.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Lahore,120.0,124.66,130.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Faisalabad,130.0,133.25,140.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Sargodha,120.0,120.0,120.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Islamabad,,,
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Rawalpindi,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Gujranwala,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Sialkot,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Lahore,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Faisalabad,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Sargodha,30.0,30.0,30.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Islamabad,,,
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Rawalpindi,380.0,380.0,380.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Gujranwala,380.0,380.0,380.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Sialkot,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Lahore,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Faisalabad,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Sargodha,280.0,280.0,280.0
+2021-01-14,28,Garlic (Le,h1s uKng),Islamabad,240.0,257.08,280.0
+2021-01-14,28,Garlic (Le,h1s uKng),Rawalpindi,220.0,236.98,260.0
+2021-01-14,28,Garlic (Le,h1s uKng),Gujranwala,200.0,200.0,200.0
+2021-01-14,28,Garlic (Le,h1s uKng),Sialkot,200.0,213.12,220.0
+2021-01-14,28,Garlic (Le,h1s uKng),Lahore,230.0,265.88,350.0
+2021-01-14,28,Garlic (Le,h1s uKng),Faisalabad,220.0,226.47,240.0
+2021-01-14,28,Garlic (Le,h1s uKng),Sargodha,220.0,220.0,220.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Islamabad,,,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Rawalpindi,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Gujranwala,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Sialkot,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Lahore,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Faisalabad,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Sargodha,230.0,230.0,230.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Islamabad,,154.92,160.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Rawalpindi,120.0,139.5,150.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Gujranwala,180.0,186.43,200.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Sialkot,160.0,160.0,160.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Lahore,130.0,130.92,140.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Faisalabad,200.0,200.0,200.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Sargodha,140.0,140.0,140.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Islamabad,,103.98,120.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Rawalpindi,80.0,92.91,100.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Gujranwala,60.0,66.04,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Sialkot,60.0,60.0,60.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Lahore,80.0,80.0,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Faisalabad,70.0,73.19,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Sargodha,70.0,70.0,70.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Islamabad,,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Rawalpindi,25.0,29.28,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Gujranwala,30.0,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Sialkot,25.0,25.0,25.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Lahore,25.0,26.8,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Faisalabad,30.0,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Sargodha,30.0,30.0,30.0
+2021-01-14,33,Cigarettes,ECaacphstan,Islamabad,,,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Rawalpindi,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Gujranwala,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Sialkot,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Lahore,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Faisalabad,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Sargodha,80.0,80.0,80.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Islamabad,,,380.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Rawalpindi,350.0,356.64,360.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Gujranwala,220.0,220.0,220.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Sialkot,250.0,250.0,250.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Lahore,290.0,293.3,300.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Faisalabad,300.0,315.82,350.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Sargodha,400.0,400.0,400.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Islamabad,,367.2,390.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Rawalpindi,330.0,350.47,370.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Gujranwala,225.0,225.0,225.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Sialkot,270.0,270.0,270.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Lahore,160.0,163.27,170.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Faisalabad,130.0,133.25,140.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Sargodha,220.0,220.0,220.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Islamabad,,,350.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Rawalpindi,260.0,298.11,330.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Gujranwala,240.0,243.29,250.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Sialkot,300.0,300.0,300.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Lahore,325.0,333.13,350.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Faisalabad,300.0,315.82,350.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Sargodha,470.0,470.0,470.0
+2021-01-14,37,Georgette,1(A mvetrrage,Islamabad,,212.26,230.0
+2021-01-14,37,Georgette,1(A mvetrrage,Rawalpindi,200.0,205.27,210.0
+2021-01-14,37,Georgette,1(A mvetrrage,Gujranwala,200.0,200.0,200.0
+2021-01-14,37,Georgette,1(A mvetrrage,Sialkot,200.0,200.0,200.0
+2021-01-14,37,Georgette,1(A mvetrrage,Lahore,175.0,184.63,200.0
+2021-01-14,37,Georgette,1(A mvetrrage,Faisalabad,150.0,159.4,180.0
+2021-01-14,37,Georgette,1(A mvetrrage,Sargodha,200.0,200.0,200.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Islamabad,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Rawalpindi,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Gujranwala,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Sialkot,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Lahore,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Faisalabad,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Sargodha,899.0,899.0,899.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Islamabad,,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Rawalpindi,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Gujranwala,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Sialkot,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Lahore,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Faisalabad,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Sargodha,199.0,199.0,199.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Islamabad,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Rawalpindi,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Gujranwala,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Sialkot,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Lahore,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Faisalabad,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Sargodha,599.0,599.0,599.0
+2021-01-14,41,Electricity,CPhear rUgneist f,Islamabad,,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Rawalpindi,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Gujranwala,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Sialkot,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Lahore,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Faisalabad,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Sargodha,4.03,4.03,4.03
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Islamabad,,,
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Rawalpindi,,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Gujranwala,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Sialkot,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Lahore,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Faisalabad,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Sargodha,141.57,141.57,141.57
+2021-01-14,43,Firewood,W40h oKlge,Islamabad,1200.0,1274.24,1300.0
+2021-01-14,43,Firewood,W40h oKlge,Rawalpindi,900.0,994.01,1050.0
+2021-01-14,43,Firewood,W40h oKlge,Gujranwala,850.0,850.0,850.0
+2021-01-14,43,Firewood,W40h oKlge,Sialkot,750.0,750.0,750.0
+2021-01-14,43,Firewood,W40h oKlge,Lahore,850.0,906.47,1000.0
+2021-01-14,43,Firewood,W40h oKlge,Faisalabad,800.0,800.0,800.0
+2021-01-14,43,Firewood,W40h oKlge,Sargodha,650.0,650.0,650.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Islamabad,,176.6,180.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Rawalpindi,170.0,175.26,180.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Gujranwala,225.0,225.0,225.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Sialkot,220.0,220.0,220.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Lahore,210.0,210.0,210.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Faisalabad,165.0,165.0,165.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Sargodha,240.0,240.0,240.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Islamabad,,,60.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Rawalpindi,60.0,60.0,60.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Gujranwala,50.0,50.0,50.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Sialkot,50.0,50.0,50.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Lahore,52.0,52.0,52.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Faisalabad,55.0,55.0,55.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Sargodha,55.0,55.0,55.0
+2021-01-14,46,Match Bo,xEach,Islamabad,3.0,3.0,3.0
+2021-01-14,46,Match Bo,xEach,Rawalpindi,3.0,3.0,3.0
+2021-01-14,46,Match Bo,xEach,Gujranwala,3.0,3.0,3.0
+2021-01-14,46,Match Bo,xEach,Sialkot,4.0,4.0,4.0
+2021-01-14,46,Match Bo,xEach,Lahore,3.0,3.0,3.0
+2021-01-14,46,Match Bo,xEach,Faisalabad,2.0,2.29,3.0
+2021-01-14,46,Match Bo,xEach,Sargodha,3.0,3.0,3.0
+2021-01-14,47,Petrol Sup,Perer Litre,Islamabad,106.5,106.5,106.51
+2021-01-14,47,Petrol Sup,Perer Litre,Rawalpindi,106.5,106.51,106.53
+2021-01-14,47,Petrol Sup,Perer Litre,Gujranwala,106.5,106.5,106.5
+2021-01-14,47,Petrol Sup,Perer Litre,Sialkot,107.11,107.11,107.11
+2021-01-14,47,Petrol Sup,Perer Litre,Lahore,106.51,106.51,106.51
+2021-01-14,47,Petrol Sup,Perer Litre,Faisalabad,106.5,106.5,106.5
+2021-01-14,47,Petrol Sup,Perer Litre,Sargodha,106.67,106.67,106.67
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Islamabad,110.7,110.72,110.75
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Rawalpindi,110.7,110.75,110.9
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Gujranwala,110.8,110.8,110.8
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Sialkot,111.35,111.35,111.35
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Lahore,110.7,110.7,110.7
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Faisalabad,110.7,110.7,110.7
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Sargodha,110.9,110.9,110.9
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Islamabad,,1674.81,1700.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Rawalpindi,1600.0,1629.52,1700.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Gujranwala,1575.0,1575.0,1575.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Sialkot,1580.0,1580.0,1580.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Lahore,1517.1,1539.07,1575.45
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Faisalabad,1500.0,1500.0,1500.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Sargodha,1500.0,1500.0,1500.0
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Islamabad,,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Rawalpindi,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Gujranwala,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Sialkot,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Lahore,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Faisalabad,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Sargodha,1.55,1.55,1.55
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Islamabad,,51.0,51.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Rawalpindi,51.0,51.0,51.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Gujranwala,45.0,45.66,47.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Sialkot,45.0,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Lahore,43.0,45.73,46.2
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Faisalabad,45.0,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Sargodha,45.0,45.0,45.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Multan,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Bahawalpur,860.0,860.0,860.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Karachi,1200.0,1248.82,1300.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Hyderabad,840.0,1220.31,1400.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Sukkur,836.6,958.96,1260.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Larkana,836.6,927.5,1140.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Peshawar,860.0,1018.15,1280.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Multan,,,100.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Bahawalpur,80.0,80.0,80.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Karachi,90.0,99.43,110.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Hyderabad,90.0,92.4,100.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Sukkur,100.0,100.0,100.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Larkana,90.0,96.55,100.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Peshawar,80.0,81.05,90.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Multan,,65.54,70.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Bahawalpur,65.0,66.63,70.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Karachi,70.0,74.88,85.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Hyderabad,75.0,77.88,80.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Sukkur,60.0,60.0,60.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Larkana,60.0,61.33,62.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Peshawar,70.0,70.0,70.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Multan,,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Bahawalpur,40.0,40.0,40.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Karachi,40.0,40.0,40.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Hyderabad,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Sukkur,70.0,70.0,70.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Larkana,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Peshawar,60.0,60.0,60.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Multan,,,500.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Bahawalpur,400.0,416.02,450.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Karachi,550.0,587.81,650.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Hyderabad,480.0,486.58,500.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Sukkur,450.0,450.0,450.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Larkana,400.0,424.51,450.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Peshawar,400.0,400.0,400.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Multan,,1000.0,1000.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Bahawalpur,800.0,816.33,850.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Karachi,900.0,1081.51,1200.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Hyderabad,1000.0,1040.51,1100.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Sukkur,900.0,900.0,900.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Larkana,900.0,924.77,950.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Peshawar,810.0,868.94,1000.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Multan,,166.65,170.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Bahawalpur,153.0,153.0,153.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Karachi,180.0,186.85,200.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Hyderabad,180.0,181.65,185.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Sukkur,190.0,190.0,190.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Larkana,170.0,170.0,170.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Peshawar,171.0,171.0,171.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Multan,,94.31,100.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Bahawalpur,80.0,81.63,85.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Karachi,120.0,120.0,120.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Hyderabad,110.0,110.0,110.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Sukkur,110.0,110.0,110.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Larkana,110.0,114.93,120.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Peshawar,100.0,121.85,130.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Multan,110.0,114.34,120.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Bahawalpur,90.0,93.22,100.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Karachi,180.0,180.0,180.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Hyderabad,140.0,148.01,160.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Sukkur,120.0,120.0,120.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Larkana,120.0,123.24,130.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Peshawar,110.0,127.36,140.0
+2021-01-14,10,Powdered,EMailckh NIDO,Multan,,,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Bahawalpur,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Karachi,460.0,475.41,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Hyderabad,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Sukkur,470.0,473.31,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Larkana,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Peshawar,480.0,480.0,480.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Multan,140.0,144.36,150.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Bahawalpur,152.0,152.0,152.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Karachi,178.0,180.41,190.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Hyderabad,170.0,180.77,190.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Sukkur,160.0,160.0,160.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Larkana,160.0,166.6,170.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Peshawar,180.0,180.0,180.0
+2021-01-14,12,Mustard O,1il (KAgverag,Multan,,237.74,240.0
+2021-01-14,12,Mustard O,1il (KAgverag,Bahawalpur,280.0,280.0,280.0
+2021-01-14,12,Mustard O,1il (KAgverag,Karachi,260.0,263.88,280.0
+2021-01-14,12,Mustard O,1il (KAgverag,Hyderabad,270.0,274.12,280.0
+2021-01-14,12,Mustard O,1il (KAgverag,Sukkur,260.0,260.0,260.0
+2021-01-14,12,Mustard O,1il (KAgverag,Larkana,260.0,260.0,260.0
+2021-01-14,12,Mustard O,1il (KAgverag,Peshawar,260.0,266.5,280.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Multan,,,
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Bahawalpur,,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Karachi,1355.0,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Hyderabad,1295.0,1295.0,1295.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Sukkur,1355.0,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Larkana,1295.0,1295.0,1295.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Peshawar,1355.0,1355.0,1355.0
+2021-01-14,14,Vegetable,EGahcehe DA,Multan,,,
+2021-01-14,14,Vegetable,EGahcehe DA,Bahawalpur,690.0,690.0,690.0
+2021-01-14,14,Vegetable,EGahcehe DA,Karachi,690.0,690.0,690.0
+2021-01-14,14,Vegetable,EGahcehe DA,Hyderabad,660.0,660.0,660.0
+2021-01-14,14,Vegetable,EGahcehe DA,Sukkur,635.0,635.0,635.0
+2021-01-14,14,Vegetable,EGahcehe DA,Larkana,635.0,635.0,635.0
+2021-01-14,14,Vegetable,EGahcehe DA,Peshawar,690.0,690.0,690.0
+2021-01-14,15,Vegetable,EGahcehe DA,Multan,,,
+2021-01-14,15,Vegetable,EGahcehe DA,Bahawalpur,,,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,Karachi,296.0,296.0,296.0
+2021-01-14,15,Vegetable,EGahcehe DA,Hyderabad,255.0,255.0,255.0
+2021-01-14,15,Vegetable,EGahcehe DA,Sukkur,267.0,267.0,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,Larkana,255.0,255.0,255.0
+2021-01-14,15,Vegetable,EGahcehe DA,Peshawar,255.0,255.0,255.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Multan,,85.29,100.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Bahawalpur,60.0,66.49,70.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Karachi,50.0,58.85,80.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Hyderabad,50.0,55.61,60.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Sukkur,60.0,63.16,70.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Larkana,60.0,60.0,60.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Peshawar,80.0,84.3,90.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Multan,,148.71,160.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Bahawalpur,150.0,153.26,160.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Karachi,150.0,157.77,170.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Hyderabad,140.0,142.44,150.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Sukkur,140.0,143.26,150.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Larkana,130.0,130.0,130.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Peshawar,156.0,158.66,160.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Multan,,229.9,240.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Bahawalpur,220.0,226.47,240.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Karachi,230.0,244.99,260.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Hyderabad,230.0,234.95,240.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Sukkur,240.0,243.29,250.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Larkana,240.0,240.0,240.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Peshawar,200.0,200.0,200.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Multan,,233.1,250.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Bahawalpur,250.0,253.29,260.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Karachi,220.0,246.1,260.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Hyderabad,230.0,234.95,240.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Sukkur,240.0,240.0,240.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Larkana,250.0,250.0,250.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Peshawar,230.0,237.69,250.0
+2021-01-14,20,Pulse Gra,m1 Kg,Multan,130.0,131.09,135.0
+2021-01-14,20,Pulse Gra,m1 Kg,Bahawalpur,150.0,150.0,150.0
+2021-01-14,20,Pulse Gra,m1 Kg,Karachi,140.0,157.71,170.0
+2021-01-14,20,Pulse Gra,m1 Kg,Hyderabad,140.0,141.62,150.0
+2021-01-14,20,Pulse Gra,m1 Kg,Sukkur,140.0,140.0,140.0
+2021-01-14,20,Pulse Gra,m1 Kg,Larkana,120.0,126.58,130.0
+2021-01-14,20,Pulse Gra,m1 Kg,Peshawar,150.0,150.0,150.0
+2021-01-14,21,Potatoes,1 Kg,Multan,40.0,40.0,40.0
+2021-01-14,21,Potatoes,1 Kg,Bahawalpur,40.0,40.0,40.0
+2021-01-14,21,Potatoes,1 Kg,Karachi,30.0,40.58,50.0
+2021-01-14,21,Potatoes,1 Kg,Hyderabad,30.0,31.47,40.0
+2021-01-14,21,Potatoes,1 Kg,Sukkur,30.0,30.0,30.0
+2021-01-14,21,Potatoes,1 Kg,Larkana,25.0,28.23,30.0
+2021-01-14,21,Potatoes,1 Kg,Peshawar,40.0,48.78,50.0
+2021-01-14,22,Onions,1 Kg,Multan,40.0,40.0,40.0
+2021-01-14,22,Onions,1 Kg,Bahawalpur,40.0,40.0,40.0
+2021-01-14,22,Onions,1 Kg,Karachi,30.0,39.71,50.0
+2021-01-14,22,Onions,1 Kg,Hyderabad,30.0,31.47,40.0
+2021-01-14,22,Onions,1 Kg,Sukkur,30.0,30.0,30.0
+2021-01-14,22,Onions,1 Kg,Larkana,30.0,30.0,30.0
+2021-01-14,22,Onions,1 Kg,Peshawar,40.0,48.78,50.0
+2021-01-14,23,Tomatoes,1 Kg,Multan,80.0,84.18,100.0
+2021-01-14,23,Tomatoes,1 Kg,Bahawalpur,80.0,80.0,80.0
+2021-01-14,23,Tomatoes,1 Kg,Karachi,50.0,67.44,80.0
+2021-01-14,23,Tomatoes,1 Kg,Hyderabad,50.0,56.46,60.0
+2021-01-14,23,Tomatoes,1 Kg,Sukkur,50.0,53.13,60.0
+2021-01-14,23,Tomatoes,1 Kg,Larkana,70.0,73.19,80.0
+2021-01-14,23,Tomatoes,1 Kg,Peshawar,70.0,73.19,80.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Multan,90.0,90.22,92.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Bahawalpur,95.0,95.0,95.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Karachi,90.0,94.17,100.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Hyderabad,90.0,92.47,95.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Sukkur,90.0,90.0,90.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Larkana,90.0,90.0,90.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Peshawar,95.0,95.0,95.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Multan,,108.84,110.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Bahawalpur,120.0,120.0,120.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Karachi,120.0,133.96,150.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Hyderabad,120.0,131.29,140.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Sukkur,120.0,120.0,120.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Larkana,100.0,100.0,100.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Peshawar,130.0,134.35,140.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Multan,,,
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Bahawalpur,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Karachi,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Hyderabad,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Sukkur,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Larkana,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Peshawar,30.0,30.0,30.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Multan,,,
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Bahawalpur,380.0,380.0,380.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Karachi,380.0,380.0,380.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Hyderabad,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Sukkur,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Larkana,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Peshawar,280.0,280.0,280.0
+2021-01-14,28,Garlic (Le,h1s uKng),Multan,200.0,221.73,240.0
+2021-01-14,28,Garlic (Le,h1s uKng),Bahawalpur,200.0,225.85,240.0
+2021-01-14,28,Garlic (Le,h1s uKng),Karachi,320.0,363.42,400.0
+2021-01-14,28,Garlic (Le,h1s uKng),Hyderabad,360.0,383.17,400.0
+2021-01-14,28,Garlic (Le,h1s uKng),Sukkur,200.0,200.0,200.0
+2021-01-14,28,Garlic (Le,h1s uKng),Larkana,200.0,200.0,200.0
+2021-01-14,28,Garlic (Le,h1s uKng),Peshawar,200.0,224.96,250.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Multan,,,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Bahawalpur,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Karachi,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Hyderabad,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Sukkur,225.0,227.49,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Larkana,242.0,242.0,242.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Peshawar,230.0,230.0,230.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Multan,,115.24,120.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Bahawalpur,160.0,173.07,180.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Karachi,130.0,138.33,150.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Hyderabad,120.0,122.36,140.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Sukkur,140.0,140.0,140.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Larkana,150.0,165.1,200.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Peshawar,140.0,146.59,150.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Multan,,61.04,70.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Bahawalpur,80.0,80.0,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Karachi,80.0,80.0,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Hyderabad,70.0,71.58,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Sukkur,80.0,80.0,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Larkana,60.0,67.82,80.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Peshawar,70.0,73.19,80.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Multan,,27.11,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Bahawalpur,25.0,28.23,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Karachi,30.0,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Hyderabad,35.0,35.0,35.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Sukkur,30.0,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Larkana,30.0,31.58,35.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Peshawar,20.0,22.44,30.0
+2021-01-14,33,Cigarettes,ECaacphstan,Multan,,,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Bahawalpur,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Karachi,80.0,89.68,90.0
+2021-01-14,33,Cigarettes,ECaacphstan,Hyderabad,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Sukkur,80.0,80.0,80.0
+2021-01-14,33,Cigarettes,ECaacphstan,Larkana,90.0,90.0,90.0
+2021-01-14,33,Cigarettes,ECaacphstan,Peshawar,90.0,90.0,90.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Multan,,,394.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Bahawalpur,390.0,391.42,394.29
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Karachi,300.0,300.0,300.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Hyderabad,350.0,350.0,350.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Sukkur,375.0,375.0,375.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Larkana,350.0,350.0,350.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Peshawar,450.0,450.0,450.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Multan,,250.0,250.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Bahawalpur,300.0,315.82,350.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Karachi,250.0,257.0,300.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Hyderabad,170.0,173.27,180.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Sukkur,150.0,173.21,200.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Larkana,200.0,224.07,250.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Peshawar,425.0,427.71,450.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Multan,,,428.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Bahawalpur,411.0,417.24,430.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Karachi,400.0,427.73,430.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Hyderabad,350.0,350.0,350.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Sukkur,393.0,393.0,393.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Larkana,500.0,500.0,500.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Peshawar,430.0,430.0,430.0
+2021-01-14,37,Georgette,1(A mvetrrage,Multan,,141.5,150.0
+2021-01-14,37,Georgette,1(A mvetrrage,Bahawalpur,100.0,106.27,120.0
+2021-01-14,37,Georgette,1(A mvetrrage,Karachi,120.0,151.94,180.0
+2021-01-14,37,Georgette,1(A mvetrrage,Hyderabad,130.0,130.0,130.0
+2021-01-14,37,Georgette,1(A mvetrrage,Sukkur,150.0,150.0,150.0
+2021-01-14,37,Georgette,1(A mvetrrage,Larkana,200.0,200.0,200.0
+2021-01-14,37,Georgette,1(A mvetrrage,Peshawar,130.0,176.09,210.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Multan,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Bahawalpur,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Karachi,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Hyderabad,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Sukkur,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Larkana,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Peshawar,899.0,899.0,899.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Multan,,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Bahawalpur,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Karachi,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Hyderabad,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Sukkur,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Larkana,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Peshawar,199.0,199.0,199.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Multan,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Bahawalpur,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Karachi,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Hyderabad,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Sukkur,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Larkana,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Peshawar,599.0,599.0,599.0
+2021-01-14,41,Electricity,CPhear rUgneist f,Multan,,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Bahawalpur,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Karachi,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Hyderabad,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Sukkur,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Larkana,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Peshawar,4.03,4.03,4.03
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Multan,,,
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Bahawalpur,,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Karachi,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Hyderabad,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Sukkur,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Larkana,141.57,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Peshawar,141.57,141.57,141.57
+2021-01-14,43,Firewood,W40h oKlge,Multan,750.0,774.6,800.0
+2021-01-14,43,Firewood,W40h oKlge,Bahawalpur,700.0,716.28,750.0
+2021-01-14,43,Firewood,W40h oKlge,Karachi,650.0,696.86,700.0
+2021-01-14,43,Firewood,W40h oKlge,Hyderabad,650.0,666.26,700.0
+2021-01-14,43,Firewood,W40h oKlge,Sukkur,500.0,500.0,500.0
+2021-01-14,43,Firewood,W40h oKlge,Larkana,600.0,600.0,600.0
+2021-01-14,43,Firewood,W40h oKlge,Peshawar,750.0,774.09,850.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Multan,,200.0,200.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Bahawalpur,200.0,200.0,200.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Karachi,180.0,180.0,180.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Hyderabad,230.0,230.0,230.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Sukkur,160.0,160.0,160.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Larkana,230.0,230.0,230.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Peshawar,190.0,190.0,190.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Multan,,,55.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Bahawalpur,55.0,55.0,55.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Karachi,50.0,50.0,50.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Hyderabad,50.0,50.0,50.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Sukkur,55.0,55.0,55.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Larkana,50.0,50.0,50.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Peshawar,55.0,55.0,55.0
+2021-01-14,46,Match Bo,xEach,Multan,4.0,4.0,4.0
+2021-01-14,46,Match Bo,xEach,Bahawalpur,4.0,4.0,4.0
+2021-01-14,46,Match Bo,xEach,Karachi,3.0,3.0,3.0
+2021-01-14,46,Match Bo,xEach,Hyderabad,3.0,3.56,5.0
+2021-01-14,46,Match Bo,xEach,Sukkur,4.0,4.0,4.0
+2021-01-14,46,Match Bo,xEach,Larkana,4.0,4.0,4.0
+2021-01-14,46,Match Bo,xEach,Peshawar,3.0,3.0,3.0
+2021-01-14,47,Petrol Sup,Perer Litre,Multan,106.5,106.55,106.6
+2021-01-14,47,Petrol Sup,Perer Litre,Bahawalpur,106.72,107.32,107.66
+2021-01-14,47,Petrol Sup,Perer Litre,Karachi,106.53,106.53,106.53
+2021-01-14,47,Petrol Sup,Perer Litre,Hyderabad,107.3,107.38,107.6
+2021-01-14,47,Petrol Sup,Perer Litre,Sukkur,106.5,106.5,106.5
+2021-01-14,47,Petrol Sup,Perer Litre,Larkana,106.7,106.7,106.7
+2021-01-14,47,Petrol Sup,Perer Litre,Peshawar,106.5,106.51,106.51
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Multan,110.7,110.78,110.8
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Bahawalpur,111.0,111.61,112.0
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Karachi,110.76,110.76,110.76
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Hyderabad,111.55,111.57,111.6
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Sukkur,110.8,110.8,110.8
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Larkana,111.0,111.0,111.0
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Peshawar,110.7,110.71,110.71
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Multan,,1630.0,1630.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Bahawalpur,1540.0,1540.0,1540.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Karachi,1540.0,1540.0,1540.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Hyderabad,1517.1,1517.1,1517.1
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Sukkur,1633.0,1633.0,1633.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Larkana,1670.0,1670.0,1670.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Peshawar,1633.8,1710.7,1750.5
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Multan,,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Bahawalpur,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Karachi,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Hyderabad,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Sukkur,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Larkana,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Peshawar,1.55,1.55,1.55
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Multan,,46.2,46.2
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Bahawalpur,46.2,46.2,46.2
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Karachi,45.0,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Hyderabad,45.0,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Sukkur,45.0,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Larkana,45.0,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Peshawar,45.0,45.0,45.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Bannu,860.0,961.01,1200.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Quetta,960.0,960.0,960.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,Khuzdar,1250.0,1253.32,1260.0
+2021-01-14,1,Wheat Flo,u2r0 BKagg,National,836.6,949.26,1400.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Bannu,,,70.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Quetta,100.0,104.92,110.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,Khuzdar,90.0,90.0,90.0
+2021-01-14,2,Rice Bas,m1a tKi gBroke,National,60.0,89.14,110.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Bannu,,70.0,70.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Quetta,85.0,89.91,95.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,Khuzdar,80.0,80.0,80.0
+2021-01-14,3,Rice IRRI,-61/ 9K g(Sindh,National,60.0,70.63,95.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Bannu,,40.0,40.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Quetta,60.0,60.0,60.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,Khuzdar,40.0,40.0,40.0
+2021-01-14,4,Bread plai,nE a(Scmhall S,National,40.0,55.54,70.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Bannu,,,430.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Quetta,470.0,474.98,480.0
+2021-01-14,5,Beef with,B1o Knge (Ave,Khuzdar,450.0,466.08,500.0
+2021-01-14,5,Beef with,B1o Knge (Ave,National,400.0,473.3,650.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Bannu,,720.0,720.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Quetta,1000.0,1096.96,1200.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,Khuzdar,1000.0,1000.0,1000.0
+2021-01-14,6,Mutton (A,v1e rKagge Qu,National,720.0,992.19,1250.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Bannu,,185.0,185.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Quetta,170.0,174.95,180.0
+2021-01-14,7,Chicken F,a1r mKg Broile,Khuzdar,240.0,240.0,240.0
+2021-01-14,7,Chicken F,a1r mKg Broile,National,151.0,172.08,240.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Bannu,,106.56,110.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Quetta,120.0,120.0,120.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,Khuzdar,100.0,100.0,100.0
+2021-01-14,8,Milk fresh,(1U Lnt-rboiled,National,80.0,105.18,130.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Bannu,120.0,120.0,120.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Quetta,130.0,134.94,140.0
+2021-01-14,9,Curd (Dah,i1) LKogose,Khuzdar,110.0,110.0,110.0
+2021-01-14,9,Curd (Dah,i1) LKogose,National,90.0,121.84,180.0
+2021-01-14,10,Powdered,EMailckh NIDO,Bannu,,,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,Quetta,500.0,500.0,500.0
+2021-01-14,10,Powdered,EMailckh NIDO,Khuzdar,480.0,480.0,480.0
+2021-01-14,10,Powdered,EMailckh NIDO,National,460.0,480.49,500.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Bannu,180.0,186.61,190.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Quetta,190.0,194.96,200.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,Khuzdar,210.0,213.28,220.0
+2021-01-14,11,Eggs Hen,1(F Daormze)n,National,140.0,167.91,220.0
+2021-01-14,12,Mustard O,1il (KAgverag,Bannu,,240.0,240.0
+2021-01-14,12,Mustard O,1il (KAgverag,Quetta,230.0,239.86,250.0
+2021-01-14,12,Mustard O,1il (KAgverag,Khuzdar,250.0,250.0,250.0
+2021-01-14,12,Mustard O,1il (KAgverag,National,220.0,259.25,360.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Bannu,,,
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Quetta,,1355.0,1355.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,Khuzdar,1335.0,1335.0,1335.0
+2021-01-14,13,Cooking O,Eil aDcAhLDA,National,1295.0,1340.97,1355.0
+2021-01-14,14,Vegetable,EGahcehe DA,Bannu,,,
+2021-01-14,14,Vegetable,EGahcehe DA,Quetta,660.0,660.0,660.0
+2021-01-14,14,Vegetable,EGahcehe DA,Khuzdar,668.0,668.0,668.0
+2021-01-14,14,Vegetable,EGahcehe DA,National,635.0,677.55,760.0
+2021-01-14,15,Vegetable,EGahcehe DA,Bannu,,,
+2021-01-14,15,Vegetable,EGahcehe DA,Quetta,,,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,Khuzdar,267.0,267.0,267.0
+2021-01-14,15,Vegetable,EGahcehe DA,National,250.0,267.18,296.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Bannu,,63.16,70.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Quetta,60.0,69.52,80.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,Khuzdar,70.0,76.52,80.0
+2021-01-14,16,Bananas (,K1 eDlao)z Leonc,National,50.0,74.98,180.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Bannu,,146.59,150.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Quetta,160.0,164.95,170.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,Khuzdar,140.0,146.59,150.0
+2021-01-14,17,Pulse Ma,s1o oKrg (Was,National,130.0,153.15,190.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Bannu,,193.28,200.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Quetta,255.0,259.97,265.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,Khuzdar,240.0,246.62,250.0
+2021-01-14,18,Pulse Mo,o1n gK (gWash,National,190.0,229.84,280.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Bannu,,236.33,250.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Quetta,265.0,269.97,275.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,Khuzdar,240.0,240.0,240.0
+2021-01-14,19,Pulse Ma,s1h K(Wgashe,National,220.0,249.44,280.0
+2021-01-14,20,Pulse Gra,m1 Kg,Bannu,120.0,129.74,140.0
+2021-01-14,20,Pulse Gra,m1 Kg,Quetta,160.0,164.95,170.0
+2021-01-14,20,Pulse Gra,m1 Kg,Khuzdar,150.0,150.0,150.0
+2021-01-14,20,Pulse Gra,m1 Kg,National,110.0,140.27,190.0
+2021-01-14,21,Potatoes,1 Kg,Bannu,40.0,40.0,40.0
+2021-01-14,21,Potatoes,1 Kg,Quetta,45.0,49.83,55.0
+2021-01-14,21,Potatoes,1 Kg,Khuzdar,40.0,40.0,40.0
+2021-01-14,21,Potatoes,1 Kg,National,25.0,41.12,70.0
+2021-01-14,22,Onions,1 Kg,Bannu,40.0,40.0,40.0
+2021-01-14,22,Onions,1 Kg,Quetta,40.0,44.81,50.0
+2021-01-14,22,Onions,1 Kg,Khuzdar,30.0,33.02,40.0
+2021-01-14,22,Onions,1 Kg,National,30.0,39.98,70.0
+2021-01-14,23,Tomatoes,1 Kg,Bannu,60.0,60.0,60.0
+2021-01-14,23,Tomatoes,1 Kg,Quetta,60.0,64.87,70.0
+2021-01-14,23,Tomatoes,1 Kg,Khuzdar,90.0,96.55,100.0
+2021-01-14,23,Tomatoes,1 Kg,National,50.0,75.18,110.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Bannu,87.0,88.32,90.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Quetta,96.0,97.0,98.0
+2021-01-14,24,Sugar Ref,i1n eKdg,Khuzdar,90.0,90.0,90.0
+2021-01-14,24,Sugar Ref,i1n eKdg,National,87.0,92.95,100.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Bannu,,116.57,120.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Quetta,140.0,149.78,160.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,Khuzdar,130.0,136.58,140.0
+2021-01-14,25,Gur (Aver,a1g Ke gQualit,National,100.0,127.46,160.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Bannu,,,
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Quetta,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,Khuzdar,30.0,30.0,30.0
+2021-01-14,26,Salt Powd,eEraecdh (NAT,National,30.0,30.0,30.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Bannu,,,
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Quetta,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,Khuzdar,280.0,280.0,280.0
+2021-01-14,27,Chilies Po,wEdaecrh NAT,National,280.0,306.31,380.0
+2021-01-14,28,Garlic (Le,h1s uKng),Bannu,210.0,210.0,210.0
+2021-01-14,28,Garlic (Le,h1s uKng),Quetta,280.0,289.89,300.0
+2021-01-14,28,Garlic (Le,h1s uKng),Khuzdar,280.0,280.0,280.0
+2021-01-14,28,Garlic (Le,h1s uKng),National,200.0,243.34,400.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Bannu,,,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Quetta,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,Khuzdar,230.0,230.0,230.0
+2021-01-14,29,Tea Lipto,nE Yaeclhlow La,National,225.0,230.54,242.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Bannu,,110.0,110.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Quetta,170.0,174.95,180.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,Khuzdar,190.0,196.61,200.0
+2021-01-14,30,Cooked B,ePeef ra Pt lAavtee,National,100.0,150.33,200.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Bannu,,60.0,60.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Quetta,90.0,94.91,100.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,Khuzdar,90.0,90.0,90.0
+2021-01-14,31,Cooked D,aPael ra Pt lAavtee,National,60.0,75.76,120.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Bannu,,21.54,25.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Quetta,30.0,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,Khuzdar,30.0,30.0,30.0
+2021-01-14,32,Tea Prepa,Preedr OCrudpin,National,20.0,28.46,35.0
+2021-01-14,33,Cigarettes,ECaacphstan,Bannu,,,90.0
+2021-01-14,33,Cigarettes,ECaacphstan,Quetta,90.0,90.0,90.0
+2021-01-14,33,Cigarettes,ECaacphstan,Khuzdar,90.0,90.0,90.0
+2021-01-14,33,Cigarettes,ECaacphstan,National,80.0,83.38,90.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Bannu,,,460.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Quetta,500.0,548.48,600.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",Khuzdar,350.0,350.0,350.0
+2021-01-14,34,Long Clot,"h1 5 m7""t rGul A",National,220.0,354.42,600.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Bannu,,275.0,275.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Quetta,160.0,164.95,170.0
+2021-01-14,35,Shirting (A,1v emratrge Q,Khuzdar,200.0,200.0,200.0
+2021-01-14,35,Shirting (A,1v emratrge Q,National,130.0,234.64,450.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Bannu,,,520.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Quetta,450.0,498.33,550.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,Khuzdar,350.0,350.0,350.0
+2021-01-14,36,Lawn Prin,t1e dm Gtrul Ah,National,240.0,378.65,550.0
+2021-01-14,37,Georgette,1(A mvetrrage,Bannu,,120.0,120.0
+2021-01-14,37,Georgette,1(A mvetrrage,Quetta,130.0,134.94,140.0
+2021-01-14,37,Georgette,1(A mvetrrage,Khuzdar,200.0,200.0,200.0
+2021-01-14,37,Georgette,1(A mvetrrage,National,100.0,165.44,230.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Bannu,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Quetta,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,Khuzdar,899.0,899.0,899.0
+2021-01-14,38,Gents Sa,nPdaali rBata,National,899.0,899.0,899.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Bannu,,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Quetta,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,Khuzdar,199.0,199.0,199.0
+2021-01-14,39,Gents Sp,oPngaeir Chap,National,199.0,199.0,199.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Bannu,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Quetta,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,Khuzdar,599.0,599.0,599.0
+2021-01-14,40,Ladies Sa,nPdaairl Bata,National,599.0,599.0,599.0
+2021-01-14,41,Electricity,CPhear rUgneist f,Bannu,,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Quetta,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,Khuzdar,4.03,4.03,4.03
+2021-01-14,41,Electricity,CPhear rUgneist f,National,4.03,4.03,4.03
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Bannu,,,
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Quetta,,141.57,141.57
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,Khuzdar,0.0,0.0,0.0
+2021-01-14,42,Gas Char,gMesM uBpTtoU 3,National,141.57,141.57,141.57
+2021-01-14,43,Firewood,W40h oKlge,Bannu,530.0,530.0,530.0
+2021-01-14,43,Firewood,W40h oKlge,Quetta,650.0,674.69,700.0
+2021-01-14,43,Firewood,W40h oKlge,Khuzdar,750.0,750.0,750.0
+2021-01-14,43,Firewood,W40h oKlge,National,500.0,740.89,1300.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Bannu,,190.0,190.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Quetta,220.0,220.0,220.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,Khuzdar,230.0,230.0,230.0
+2021-01-14,44,Energy Sa,Evearc hPhilip,National,160.0,200.93,240.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Bannu,,,50.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Quetta,55.0,55.0,55.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,Khuzdar,55.0,55.0,55.0
+2021-01-14,45,Sufi Wash,iEnagc Shoap,National,50.0,53.55,60.0
+2021-01-14,46,Match Bo,xEach,Bannu,3.0,3.0,3.0
+2021-01-14,46,Match Bo,xEach,Quetta,3.0,3.15,4.0
+2021-01-14,46,Match Bo,xEach,Khuzdar,2.0,2.0,2.0
+2021-01-14,46,Match Bo,xEach,National,2.0,3.18,5.0
+2021-01-14,47,Petrol Sup,Perer Litre,Bannu,108.8,108.8,108.8
+2021-01-14,47,Petrol Sup,Perer Litre,Quetta,106.51,106.51,106.51
+2021-01-14,47,Petrol Sup,Perer Litre,Khuzdar,108.31,108.76,109.66
+2021-01-14,47,Petrol Sup,Perer Litre,National,106.5,106.93,109.66
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Bannu,113.4,113.4,113.4
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Quetta,108.87,109.78,110.7
+2021-01-14,48,Hi-Speed,DPieers eLlitre,Khuzdar,113.93,113.93,113.93
+2021-01-14,48,Hi-Speed,DPieers eLlitre,National,108.87,111.19,113.93
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Bannu,,1400.0,1400.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Quetta,1675.0,1699.88,1725.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,Khuzdar,1540.0,1558.12,1595.0
+2021-01-14,49,LPG 11.6,7E kagc hCylind,National,1400.0,1580.11,1750.5
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Bannu,,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Quetta,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,Khuzdar,1.55,1.55,1.55
+2021-01-14,50,Telephon,eP Cear lMl Cinhuatr,National,1.55,1.55,1.55
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Bannu,,45.0,45.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Quetta,46.2,46.2,46.2
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,Khuzdar,55.0,55.0,55.0
+2021-01-14,51,Toilet Soa,pE aLcIFhEBU,National,43.0,46.51,55.0
