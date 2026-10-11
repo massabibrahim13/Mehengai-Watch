@@ -352,3 +352,17 @@ Koyfin and TrendSpider.
 | Copy | "Know when a price rise isn't normal." · "Built for the kitchen table, not the trading floor." | Says the core question in plain words and positions the site for households, not traders. |
 | Motion | City lights switch on one by one, roads draw in, cards drift, mild mouse parallax; all off with "reduce motion" | Lively first impression; nothing moves for people who ask it not to. |
 | Phone | The planet's horizon sits a fixed distance above the hero's bottom edge, and the hero grows with its text | On phones the text is taller; a percentage horizon put the planet behind the buttons. |
+
+### Wave hero, own layout (2026-10-11)
+
+Massab: don't replicate the reference sites (layouts, slanted buttons); normal button shape; replace the orbit with
+flowing waves in the style of his reference images (silk ribbons, line waves, particle waves) — slow when idle,
+quicker and interactive when the visitor moves or clicks.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Hero backdrop | `WaveField.tsx`: two ribbons of fine lines (44 + 30 strands) on a canvas, brand green → teal → blue, additive glow at night, soft lines by day, a faint silk sheen between the outer strands | Our own take on the line-wave style, in our colours; crisp at any size, no images. |
+| Interaction | Idle drift speed 0.16; moving the pointer raises it (up to 1.5, by pointer speed) and pushes nearby strands away; a click/tap sends a ripple ring (1.8 s) and a speed burst; everything eases back after 1.6 s of stillness | Exactly the requested behaviour: calm until the visitor engages, then lively. The push grows smoothly from zero at its centre, so strands never tear. |
+| Performance / access | 60 fps measured; paused when off screen; device-pixel ratio capped at 1.75; "reduce motion" draws one still frame and ignores the pointer | Smooth without draining laptops; respects people who turn motion off. |
+| Layout | Left: headline, subtitle, buttons. Right: one "This week's moves" card (two unusual moves, a government change, the biggest fall) | Replaces the centred TradingView composition and scattered floating cards with our own composition. |
+| Removed copies | Slanted buttons, red TrendSpider-style alert bar (now a red count badge on "This week"), Koyfin-style floating pill (now a round search button whose label slides out), Koyfin-style circle icons (now line-art in the wave style), the orbit scene | Massab asked for no direct replication. |

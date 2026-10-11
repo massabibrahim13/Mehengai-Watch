@@ -3,32 +3,35 @@ import { motion } from "motion/react";
 import { dateLabel } from "../lib/format";
 import type { Summary } from "../types";
 
-// Abstract icons from overlapping circles, in the brand greens (no clip-art).
+// Line-art icons in the same flowing-line style as the hero waves.
+const stroke = { fill: "none", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 const ICONS = {
-  // a target: each item is measured against its own normal
+  // calm lines, one with a spike: an item measured against its own normal
   own: (
     <svg viewBox="0 0 80 80" className="h-20 w-20" aria-hidden="true">
-      <circle cx="40" cy="40" r="38" style={{ fill: "var(--color-brand)", opacity: 0.18 }} />
-      <circle cx="40" cy="40" r="26" style={{ fill: "var(--color-brand)", opacity: 0.4 }} />
-      <circle cx="40" cy="40" r="14" style={{ fill: "var(--color-brand)" }} />
+      {[18, 30, 54, 66].map((y, i) => (
+        <path key={y} d={`M6 ${y} C 22 ${y - 5}, 30 ${y + 5}, 44 ${y} S 64 ${y - 5}, 74 ${y}`} {...stroke} style={{ stroke: "var(--color-brand)", opacity: 0.35 + i * 0.1 }} />
+      ))}
+      <path d="M6 42 C 18 38, 24 46, 34 42 L 40 20 L 46 42 C 56 38, 62 46, 74 42" {...stroke} style={{ stroke: "var(--color-up)" }} />
     </svg>
   ),
-  // a speech bubble: explained in plain words
+  // waves that turn into lines of text: numbers explained in words
   words: (
     <svg viewBox="0 0 80 80" className="h-20 w-20" aria-hidden="true">
-      <path d="M40 4a36 36 0 1 1-24.6 62.3L4 76l4.2-17.4A36 36 0 0 1 40 4Z" style={{ fill: "var(--color-brand-2)", opacity: 0.3 }} />
-      <circle cx="26" cy="40" r="6" style={{ fill: "var(--color-brand-2)" }} />
-      <circle cx="40" cy="40" r="6" style={{ fill: "var(--color-brand-2)" }} />
-      <circle cx="54" cy="40" r="6" style={{ fill: "var(--color-brand-2)" }} />
+      {[22, 34, 46, 58].map((y, i) => (
+        <path key={y} d={`M6 ${y} C 14 ${y - 6}, 20 ${y + 6}, 30 ${y} S 40 ${y}, 44 ${y} L ${74 - i * 9} ${y}`} {...stroke} style={{ stroke: "var(--color-brand-2)", opacity: 1 - i * 0.15 }} />
+      ))}
     </svg>
   ),
-  // four circles, one set apart: policy prices kept separate
+  // a stepped bundle (set prices) kept apart from a wavy one (market prices)
   apart: (
     <svg viewBox="0 0 80 80" className="h-20 w-20" aria-hidden="true">
-      <circle cx="20" cy="20" r="17" style={{ fill: "var(--color-brand)", opacity: 0.3 }} />
-      <circle cx="58" cy="20" r="17" style={{ fill: "var(--color-brand)", opacity: 0.3 }} />
-      <circle cx="20" cy="58" r="17" style={{ fill: "var(--color-brand)", opacity: 0.3 }} />
-      <circle cx="62" cy="62" r="17" style={{ fill: "var(--color-brand)" }} />
+      {[12, 20, 28].map((y) => (
+        <path key={y} d={`M6 ${y + 4} H 30 V ${y} H 52 V ${y - 3} H 74`} {...stroke} style={{ stroke: "var(--color-brand)" }} />
+      ))}
+      {[52, 60, 68].map((y, i) => (
+        <path key={y} d={`M6 ${y} C 18 ${y - 7}, 26 ${y + 7}, 40 ${y} S 62 ${y - 7}, 74 ${y}`} {...stroke} style={{ stroke: "var(--color-brand-2)", opacity: 0.45 + i * 0.25 }} />
+      ))}
     </svg>
   ),
 };

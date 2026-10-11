@@ -1,5 +1,4 @@
-// The home page: a cinematic hero (Pakistan from orbit), then a rounded panel with this week's summary, the
-// statement, and the sections. Holds "which item is open" and "is search open". Every number comes from public/data/.
+// The home page: a hero with interactive line waves, then this week's summary, the statement, and the sections. Holds "which item is open" and "is search open". Every number comes from public/data/.
 import { useCallback, useEffect, useState } from "react";
 import { CityMap } from "./components/CityMap";
 import { FloatingFind } from "./components/FloatingFind";
@@ -27,7 +26,6 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mapItem, setMapItem] = useState<string | null>(null);
   const [overHero, setOverHero] = useState(true);
-  const [scrolled, setScrolled] = useState(false);
 
   // Ctrl/Cmd+K or "/" opens search (unless you're typing somewhere).
   useEffect(() => {
@@ -42,13 +40,11 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // The top bar is transparent over the hero and solid once the content panel (which overlaps the hero by
-  // 48px) reaches the 64px bar. The alert bar folds away as soon as the page scrolls.
+  // The top bar is transparent over the hero and solid once the hero's faded bottom reaches the 64px bar.
   useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("top");
-      setOverHero(!!hero && hero.getBoundingClientRect().bottom - 48 > 64);
-      setScrolled(window.scrollY > 24);
+      setOverHero(!!hero && hero.getBoundingClientRect().bottom - 120 > 64);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -87,10 +83,10 @@ export default function App() {
 
   return (
     <>
-      <TopBar overHero={overHero} scrolled={scrolled} summary={summary} items={items} onSearch={() => setSearchOpen(true)} />
-      <Hero summary={summary} items={items} cities={cities} geo={geo} onOpen={open} onSearch={() => setSearchOpen(true)} />
-      <main className="relative -mt-12 rounded-t-[40px] bg-bg shadow-[0_-16px_40px_-20px_rgb(0_0_0/0.35)]">
-        <div className="mx-auto max-w-7xl px-4 pt-10 md:px-8 md:pt-14">
+      <TopBar overHero={overHero} summary={summary} onSearch={() => setSearchOpen(true)} />
+      <Hero summary={summary} items={items} onOpen={open} onSearch={() => setSearchOpen(true)} />
+      <main className="relative bg-bg">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <Overview summary={summary} items={items} index={index} onOpen={open} />
         </div>
         <div className="mt-14 md:mt-20"><Ticker items={items} onOpen={open} /></div>

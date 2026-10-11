@@ -224,11 +224,10 @@ Details that matter:
 - The Ask box's AI fallback needs the Gemini key, which must never reach the browser → one tiny
   free serverless function (e.g. Cloudflare Worker) holds the key. Optional; rules work without it.
 - Design brief (agreed with Massab, revised 2026-10-11): **premium, unique and memorable**, not generic
-  "AI slop". Borrowed ideas: TradingView (cinematic full-screen hero, slanted CTA, content panel rising
-  over the hero), Koyfin (huge confident type, product shown in a window frame, floating help pill),
-  TrendSpider (alert bar, trust badge). Ours: the hero is Pakistan seen from orbit, drawn in code, with
-  the 17 survey cities lighting up (night in dark mode, day in light mode — the toggle is part of the
-  experience); Pakistan-green brand colour (never used for data); Bricolage Grotesque display font +
+  "AI slop", and **not a copy of any reference site** (no cloned layouts or button shapes; normal
+  rounded buttons). Hero: interactive canvas line-waves (`WaveField`) — slow drift when idle, faster and
+  bending around the pointer when the visitor moves, a ripple on click/tap — beside a "This week's
+  moves" card; Pakistan-green brand colour (never used for data); Bricolage Grotesque display font +
   an Urdu Nastaliq wordmark; "Built for the kitchen table, not the trading floor." The **whole page
   follows the light/dark toggle** (no always-dark sections); one clean sans font (Manrope),
   tabular numbers; the validated palette (blue accent, red = price up, blue = price down, ▲▼ always).
@@ -552,6 +551,10 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   lights, roads; day/night crossfade), alert bar, TradingView-style nav, slanted CTAs, floating price cards with
   parallax, framed "This week in prices" window, ticker band, "kitchen table" statement with stats, floating "Find a
   price" pill, slim footer. Click-through test (20 checks) and theme test pass; no console errors.
+- **Wave hero (2026-10-11):** Massab asked not to replicate the reference sites and to replace the orbit with
+  flowing line waves like his reference images. Now: two-column hero (headline + "This week's moves" card), canvas
+  waves (idle drift / pointer bend / click ripple, 60 fps, paused off-screen, still frame with reduced motion), normal
+  buttons, no red alert bar (count badge on "This week"), round floating search button, line-art icons.
 - **Next step:** Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.

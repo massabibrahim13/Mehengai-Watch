@@ -213,3 +213,19 @@ cards, a framed "This week in prices" window, a statement section and a floating
   with your own content.
 
 **Next** Phase 8b (item pages, browse, Ask in the browser, code-splitting) → 8c deploy with Phase 7.
+
+## 2026-10-11 — wave hero, own layout
+
+**Built** `WaveField.tsx`: an animated canvas of flowing line ribbons that drift slowly, speed up and bend around the
+pointer, and ripple where you click. New two-column hero with a "This week's moves" card; normal buttons; removed the
+pieces that copied the reference sites.
+
+**Key concepts**
+- *Canvas animation loop:* `requestAnimationFrame` redraws ~60 times a second; each strand is a sum of sine waves
+  whose phase moves with time.
+- *Easing toward a target:* speed and pointer strength move a few % toward their target each frame, so changes feel
+  smooth instead of jumpy.
+- *Smooth fields:* a push that flips direction suddenly tears lines apart; a push that grows from zero doesn't.
+- *Respect the device:* pause when off screen, cap the pixel ratio, and draw a still frame for "reduce motion".
+
+**Next** Phase 8b (item pages, browse, Ask in the browser, code-splitting) → 8c deploy with Phase 7.

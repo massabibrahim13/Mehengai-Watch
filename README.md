@@ -17,9 +17,9 @@ latest price news.
 
 ## The website (new, in progress)
 
-A React website is replacing the Streamlit dashboard as the public face of the project. It opens on Pakistan seen
-from orbit, drawn in code: the 17 survey cities light up along the Karachi–Peshawar corridor (night in dark mode, day
-in light mode). Below: this week's summary with our Essentials index and the unusual moves, a heatmap of all 51 items,
+A React website is replacing the Streamlit dashboard as the public face of the project. It opens on ribbons of fine
+flowing lines that drift slowly, speed up and bend around your pointer, and ripple where you click, next to this
+week's biggest price moves. Below: this week's summary with our Essentials index and the unusual moves, a heatmap of all 51 items,
 a sortable price list, a city map, and news cards that show the live price of the item they mention. The Python
 pipeline exports small JSON files; the site only displays them.
 

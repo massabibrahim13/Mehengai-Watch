@@ -105,26 +105,6 @@ body {
   &:hover { box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 14%, transparent); }
   &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-accent); }
 }
-/* a button whose right edge is cut on a slant. Set --tail to the button's background colour. */
-@utility slant {
-  position: relative;
-  isolation: isolate;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-right: 16px;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0 -14px 0 auto;
-    width: 30px;
-    z-index: -1;
-    background: var(--tail);
-    border-radius: 0 12px 12px 0;
-    transform: skewX(-14deg);
-    transform-origin: bottom;
-    transition: background-color 160ms ease;
-  }
-}
 /* gradient text for the hero's key phrase: sunrise colours */
 @utility glow-text {
   background: linear-gradient(92deg, var(--hl-a), var(--hl-b) 55%, var(--hl-c));
@@ -135,81 +115,19 @@ body {
 :root { --hl-a: #e8590c; --hl-b: #e03131; --hl-c: #c2255c; }
 [data-theme="dark"] { --hl-a: #ffd8a8; --hl-b: #ff8f5a; --hl-c: #ff5d73; }
 
-/* ── Hero scene: Pakistan seen from orbit. Night (city lights, stars) in dark mode, day (sky, sun) in light
-   mode; the two crossfade when the theme changes. Purely decorative: aria-hidden, no data claims. ── */
-/* the horizon sits a fixed distance above the hero's bottom edge, so tall phone content never covers it */
-.scene { --horizon: calc(100% - var(--below)); --below: clamp(300px, 39vh, 380px); }
-@media (max-width: 767px) { .scene { --below: 230px; } }
-.scene .night, .scene .day { transition: opacity 1100ms ease; }
-[data-theme="dark"] .scene .day,
-[data-theme="light"] .scene .night { opacity: 0; }
-
-.sky-day { background: linear-gradient(180deg, #9fc7fb 0%, #cfe3ff 34%, #eef5ff 58%, #f8fbff 100%); }
-.sky-night { background: radial-gradient(130% 85% at 50% var(--horizon), #10214a 0%, #071027 30%, #03060f 58%, #010208 100%); }
-
-.planet, .atmo {
-  position: absolute;
-  left: 50%;
-  top: var(--horizon);
-  width: max(2600px, 205vw);
-  aspect-ratio: 1;
-  translate: -50% 0;
-  border-radius: 50%;
+/* Hero backdrop behind the line waves (WaveField): deep teal-navy at night, soft mint-to-sky by day. */
+.hero-bg {
+  background:
+    radial-gradient(70% 60% at 78% 72%, rgb(14 154 167 / 0.16), transparent 70%),
+    radial-gradient(60% 50% at 10% 20%, rgb(12 143 90 / 0.10), transparent 70%),
+    linear-gradient(165deg, #f7fbff 0%, #eef8f3 48%, #e9f2ff 100%);
 }
-.planet { overflow: hidden; }
-.planet-night { background: linear-gradient(180deg, #13244a 0%, #08122a 1.6%, #040914 5%, #02040a 12%); }
-.planet-day { background: linear-gradient(180deg, #ffffff 0%, #e6f0fb 1.4%, #cfdff2 5%, #b9cfe8 12%); }
-.atmo-night { box-shadow: 0 0 0 1.5px rgb(150 200 255 / 0.9), 0 -4px 24px 4px rgb(90 150 255 / 0.65), 0 -24px 110px 24px rgb(60 120 255 / 0.28); }
-.atmo-day { box-shadow: 0 0 0 2px rgb(255 255 255 / 0.95), 0 -8px 36px 10px rgb(255 255 255 / 0.9), 0 -30px 120px 30px rgb(150 195 255 / 0.55); }
-
-.sun {
-  position: absolute;
-  left: 50%;
-  top: var(--horizon);
-  width: min(1200px, 120vw);
-  height: 460px;
-  translate: -50% -52%;
-  pointer-events: none;
+[data-theme="dark"] .hero-bg {
+  background:
+    radial-gradient(70% 60% at 78% 72%, rgb(40 180 200 / 0.20), transparent 70%),
+    radial-gradient(55% 50% at 8% 18%, rgb(63 217 154 / 0.10), transparent 70%),
+    linear-gradient(165deg, #04121a 0%, #030b13 50%, #05081a 100%);
 }
-.sun-night { background: radial-gradient(closest-side, rgb(255 214 160 / 0.95), rgb(255 160 100 / 0.45) 22%, rgb(255 120 90 / 0.14) 52%, transparent 76%); filter: blur(6px); }
-.sun-day { background: radial-gradient(closest-side, rgb(255 255 255 / 1), rgb(255 248 225 / 0.8) 24%, rgb(255 236 200 / 0.3) 55%, transparent 78%); }
-
-.land {
-  position: absolute;
-  left: 50%;
-  top: 4px;
-  width: min(780px, 90vw);
-  translate: -50% 0;
-  transform: perspective(2400px) rotateX(70deg);
-  transform-origin: 50% 0%;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
-}
-.land-shape { fill: var(--land); stroke: var(--land-edge); stroke-width: 1.4; transition: fill 1100ms ease, stroke 1100ms ease; }
-.road { fill: none; stroke: var(--road); stroke-linecap: round; stroke-linejoin: round; transition: stroke 1100ms ease; }
-.road-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) forwards; }
-.city { opacity: 0; animation: light-on 0.9s ease forwards; animation-delay: calc(var(--i) * 85ms + 1100ms); }
-.city-core { fill: var(--light-core); transition: fill 1100ms ease; animation: twinkle 5s ease-in-out infinite; animation-delay: var(--d); }
-.scene {
-  --land: rgb(120 160 255 / 0.05); --land-edge: rgb(150 190 255 / 0.32); --road: rgb(255 190 110 / 0.55);
-  --light-core: #ffe2a8; --light-halo: #ff9d4d;
-}
-[data-theme="light"] .scene {
-  --land: #f3ead6; --land-edge: rgb(120 100 60 / 0.35); --road: rgb(12 143 90 / 0.45);
-  --light-core: #0c8f5a; --light-halo: #3fd99a;
-}
-
-@keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes light-on { from { opacity: 0; } to { opacity: 1; } }
-@keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
-@keyframes star-twinkle { 0%, 100% { opacity: 0.9; } 50% { opacity: 0.25; } }
-@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-.star-twinkle { animation: star-twinkle 3.6s ease-in-out infinite; }
-.drift { animation: drift 7s ease-in-out infinite; }
-.nudge { animation: nudge 2.2s ease-in-out infinite; }
-/* mouse parallax: the hero sets --px/--py (-1…1); each layer moves by its own depth */
-.depth { transform: translate3d(calc(var(--px, 0) * var(--depth, 0) * 1px), calc(var(--py, 0) * var(--depth, 0) * 0.6px), 0); transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
