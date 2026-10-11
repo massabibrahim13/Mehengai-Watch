@@ -419,3 +419,19 @@ editorial data terminal" look (Bloomberg terminal, FT data hub); keep the intera
 | Light mode | Same design on "editorial paper" (#f7f5f0, near-black ink) | Massab's spec describes the dark terminal; the light/dark toggle he asked for earlier is kept. |
 | Motion | Removed floating/drift and scroll-triggered fade-ins | Content is always visible; a data tool shouldn't animate for show. |
 | Falls in green | Price down = green: #3fa98a (dark, passes every palette check, text 6.5:1) / #0f7350 (light, text 5.4:1, colour-blind separation ΔE 7.9 — allowed because ▲▼ always accompany the colour); heatmap and map use muted versions | Massab: red vs green is the classic profit/loss convention. Greens were chosen to stay distinguishable from the red for colour-blind readers. |
+
+---
+
+## Phase 7 / 8c — deployment (2026-10-12)
+
+Live at https://massabibrahim13.github.io/Mehengai-Watch/. Repo public (Massab); `LLM_API_KEY` added as a repository secret by Massab.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Hosting | GitHub Pages, deployed by GitHub Actions (`actions/deploy-pages`) | Free for public repos, no server; the site is static files + JSON. |
+| Fresh-machine problem | Commit `data/interim/` (parsed CSVs, 26 MB), `data/raw/manifest.csv` and one fixture PDF; the downloader skips weeks already parsed; the database is rebuilt from the CSVs (~30 s) | Every Actions run starts empty; re-downloading 870 MB of PDFs (an hour, partly from the Wayback Machine) each week would be slow and impolite. A cache could expire; files in git can't. |
+| AI explanations | Cache exported to `data/explanations.csv` after each explain step and restored on every rebuild | Otherwise each run would lose them (and call Gemini again, against a 20/day quota). |
+| Schedule | Weekly full run Fri 11:30 UTC + retry Sat 04:30 UTC (commits new data); hourly news-only rebuild; also on every push and by hand | PBS publishes the SPI on Friday; a late report is caught on Saturday. The weekly bot commits also keep GitHub from pausing the schedule (it pauses after 60 days without repo activity). |
+| Safety | `pytest` runs before every publish; a failure stops the deploy. Runs never overlap (concurrency group) | A broken parse must not reach the public site. |
+| Install | `requirements-pipeline.txt` (no Jupyter/Streamlit); Streamlit tests skip when it isn't installed | Faster runs; the Streamlit app is the private tool. |
+| Rehearsal | Before the first push: fresh clone → pipeline → JSON identical to local (56 files), 119 tests pass, downloader wants 0 PDFs, site builds | Proved the automatic run works before it went public. |

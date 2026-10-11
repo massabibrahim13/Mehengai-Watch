@@ -264,3 +264,17 @@ underlined tabs, muted brick-red / steel-blue data colours, waves muted under a 
 - *Monospace for numbers:* every digit has the same width, so prices line up in columns.
 - *Colour must still be checked:* muted colours can fail colour-blind separation; the palette checker confirmed
   the new pair.
+
+## 2026-10-12 — the site is live
+
+**Deployed** to https://massabibrahim13.github.io/Mehengai-Watch/ with GitHub Actions: a weekly run downloads the new PBS report, rebuilds everything, runs the
+tests, commits the new data and publishes; an hourly run refreshes the news.
+
+**Key concepts**
+- *CI/CD:* a workflow file tells GitHub's free machines what to run and when (cron schedule, on push, by hand).
+- *Cron syntax:* `30 11 * * 5` = minute 30, hour 11 (UTC), every Friday.
+- *Secrets:* the API key lives encrypted in the repo settings and reaches the workflow as an environment variable;
+  it never appears in the code or the logs.
+- *Fresh machines:* every run starts empty, so whatever it needs must be in git or rebuilt; we committed the small
+  parsed tables, not the large PDFs.
+- *Rehearse before going live:* running the whole thing from a fresh clone first found nothing broken — the point.

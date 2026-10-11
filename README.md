@@ -5,7 +5,7 @@ Every week it reads the government's price data for 51 essentials, works out whi
 that item*, lists government price changes separately, and explains it all in plain language, alongside the
 latest price news.
 
-![Mehngai Watch home page](docs/img/dashboard.png)
+**Live site: [https://massabibrahim13.github.io/Mehengai-Watch/](https://massabibrahim13.github.io/Mehengai-Watch/)**, updated automatically every week from the newest PBS report (news every hour).
 
 > **Week ending 8 Oct 2026:** The price of chana daal (gram) rose 4.0% to Rs 286.06 per kg this week from
 > Rs 275.08 per kg. This move is unusual, about 7.8 times its typical weekly change of 0.5%.
@@ -15,7 +15,7 @@ latest price news.
 
 ---
 
-## The website (new, in progress)
+## The website
 
 A React website is replacing the Streamlit dashboard as the public face of the project. It opens on ribbons of fine
 flowing lines that drift slowly, speed up and bend around your pointer, and ripple where you click, next to this
@@ -155,8 +155,14 @@ python -m mehngai.pipeline      # fetch → parse → store → detect → expla
 streamlit run src/mehngai/app/dashboard.py
 ```
 
-The **first run downloads about 380 PDFs** (roughly an hour, mostly from the Internet Archive, with polite
-delays). After that a weekly run takes under a minute: downloads, parsed tables and explanations are all cached.
+The parsed price tables (`data/interim/`), the download list and the saved AI explanations are in the repo, so a
+fresh clone rebuilds everything in about 30 seconds and only downloads reports newer than the repo. (To re-parse
+every PDF from scratch, delete `data/interim/`: the first run then downloads about 380 PDFs, roughly an hour.)
+
+**Automatic updates.** [`.github/workflows/update.yml`](.github/workflows/update.yml) runs on GitHub Actions for
+free: every Friday (again on Saturday if PBS is late) it downloads the new report, runs the pipeline and the tests,
+commits the new week's data and publishes the site; every hour it refreshes the news and republishes. The Gemini
+key is a repository secret (`LLM_API_KEY`).
 Without an API key, or once the free quota (20 requests/day) is used up, alerts fall back to a checked template
 sentence, so the report still works.
 

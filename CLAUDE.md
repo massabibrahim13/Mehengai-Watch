@@ -521,8 +521,8 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ → **now: 8c deploy + Phase 7**,
-  then 8b (AI chat, item links, evaluation page). Repo is public. Deadline 15 Oct 2026.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) → **now: 8b**
+  (AI chat, item links, evaluation page). Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -553,14 +553,16 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   `tests/test_data_accuracy.py` (8 tests: site JSON vs DB vs parsed PDFs vs PBS print); pipeline stage 4b checks
   each new report against PBS. Site: plain header search box, active-section nav, phone menu, 5 sections (removed
   ticker band, floating button, category cards, search pop-up). 120 tests + a 35-check browser test pass.
-- **Institutional restyle (2026-10-11, NOT committed — Massab reviews first):** whole site restyled as an
-  editorial data terminal (see the design brief in §3 stage 9). Waves kept but muted under an 85% veil; hero speed
-  now 60 fps on a 4× slowed CPU. 34-check browser test, theme test and 120 tests pass.
-- **Next step:** Massab reviews the restyle → commit → deploy (GitHub Pages + GitHub Actions weekly pipeline and news refresh; Massab adds the Gemini key
-  as a repo secret), then the AI chat bubble (Cloudflare Worker), item links, "How we tested it" page, code-split
-  charts. Deadline: **15 Oct 2026**.
-  Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
-  needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
+- **Institutional restyle (2026-10-11):** whole site restyled as an editorial data terminal (see the design brief
+  in §3 stage 9); falls in green (Massab). Reviewed and committed.
+- **DEPLOYED (2026-10-12):** https://massabibrahim13.github.io/Mehengai-Watch/ — GitHub Pages via `.github/workflows/update.yml`: weekly full run (Fri 11:30
+  UTC, retry Sat 04:30 UTC) commits the new week's data (`data/interim`, `data/raw/manifest.csv`,
+  `data/explanations.csv`, `reports/`); hourly news refresh; tests gate every publish. Key = repo secret
+  `LLM_API_KEY`. A fresh clone rebuilds in ~30 s (rehearsed: identical JSON, 119 tests pass, 0 PDFs to fetch).
+  First run green; the 34-check browser test passes on the live site.
+- **Next step:** AI chat bubble (separate from search; free Cloudflare Worker holds the Gemini key; rules first,
+  Gemini only phrases; per-visitor daily limit — Massab creates a free Cloudflare account), then shareable item
+  links, "How we tested it" page, code-split charts, README demo script. Deadline: **15 Oct 2026**.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
