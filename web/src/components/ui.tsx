@@ -79,12 +79,13 @@ export function Sparkline({ values, className = "h-10 w-24", stroke }: { values:
 }
 
 // ── layout ──
-export function SectionHead({ id, title, sub, aside }: { id?: string; title: string; sub?: string; aside?: ReactNode }) {
+export function SectionHead({ id, eyebrow, title, sub, aside }: { id?: string; eyebrow?: string; title: string; sub?: string; aside?: ReactNode }) {
   return (
-    <div id={id} className="mb-5 flex scroll-mt-24 flex-wrap items-end justify-between gap-4">
+    <div id={id} className="mb-6 flex scroll-mt-24 flex-wrap items-end justify-between gap-4">
       <div>
-        <h2 className="text-2xl font-bold tracking-tight md:text-[28px]">{title}</h2>
-        {sub && <p className="mt-1 max-w-2xl text-[15px] text-muted">{sub}</p>}
+        {eyebrow && <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-brand">{eyebrow}</p>}
+        <h2 className="font-display text-[30px] font-bold leading-tight tracking-[-0.03em] md:text-[40px]">{title}</h2>
+        {sub && <p className="mt-2 max-w-2xl text-[15px] text-muted">{sub}</p>}
       </div>
       {aside}
     </div>

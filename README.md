@@ -17,12 +17,15 @@ latest price news.
 
 ## The website (new, in progress)
 
-A React website is replacing the Streamlit dashboard as the public face of the project, styled like a market-data
-site: a price ticker and search, a market summary with our Essentials index and this week's unusual moves, a heatmap
-of all 51 items, a sortable watchlist, a Pakistan city map, and news cards that show the live price of the item they
-mention. The Python pipeline exports small JSON files; the site only displays them.
+A React website is replacing the Streamlit dashboard as the public face of the project. It opens on Pakistan seen
+from orbit, drawn in code: the 17 survey cities light up along the Karachi–Peshawar corridor (night in dark mode, day
+in light mode). Below: this week's summary with our Essentials index and the unusual moves, a heatmap of all 51 items,
+a sortable price list, a city map, and news cards that show the live price of the item they mention. The Python
+pipeline exports small JSON files; the site only displays them.
 
-![Website home page](docs/img/web_home.png)
+![Website home page, night mode](docs/img/web_home.png)
+
+![Website home page, day mode](docs/img/web_home_day.png)
 
 | Market summary | Heatmap |
 |---|---|

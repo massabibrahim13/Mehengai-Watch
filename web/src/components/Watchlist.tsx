@@ -37,7 +37,7 @@ export function Watchlist({ items, onOpen }: { items: Item[]; onOpen: (id: strin
 
   return (
     <section>
-      <SectionHead id="watchlist" title="Watchlist" sub="Every item PBS tracks. Sort by any column; click a row for the full picture." />
+      <SectionHead id="watchlist" eyebrow="All 51 items" title="Every price PBS tracks" sub="Sort by any column; click a row for the full picture." />
       <Card className="overflow-hidden">
         <div className="border-b border-line p-3">
           <Tabs value={tab} options={tabs} onChange={setTab} label="Category" />

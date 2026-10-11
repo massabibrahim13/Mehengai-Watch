@@ -336,3 +336,19 @@ light panels; one clean sans font; numbers in neat columns; small round logos be
 | Failure states | History or map files that fail to load show a message (or just the city list) instead of loading forever | A missing file must not leave a spinner on screen. |
 | Map labels | Label only the single cheapest and dearest city, none when all prices are equal; note "Same price in every city" | For nationally set prices all 17 labels piled on top of each other. |
 | Motion | `MotionConfig reducedMotion="user"` | Motion animations ignored the "reduce motion" setting (CSS ones already honoured it). |
+
+### Premium redesign (2026-10-11)
+
+Massab: make it unique, premium and memorable, avoiding generic "AI slop" layouts, taking elements from TradingView,
+Koyfin and TrendSpider.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Hero | "Pakistan from orbit", drawn in code (`OrbitScene.tsx`): a curved planet with an atmosphere glow, the Natural Earth outline laid in perspective, the 17 survey cities lighting up south → north, the Karachi–Peshawar corridor glowing | TradingView's earth-from-space drama, but specific to Pakistan and to our data (the survey cities). No stock photos: crisp at any size, tiny, themeable. The far (northern) edge fades into the horizon, so the outline reads as scenery, not a boundary claim. |
+| Day / night | Dark mode = night (stars, warm city lights); light mode = day (sky, sun, sand-coloured land, green lights); the layers crossfade in 1.1 s on toggle | Makes the theme switch a memorable moment instead of a setting. |
+| Borrowed elements | TradingView: centred huge headline, slanted white CTA, rounded panel rising over the hero. Koyfin: product shown in a window frame, floating help pill ("Find a price"), big statement band with abstract circle icons. TrendSpider: red alert bar, trust badge | Asked for by Massab; each one carries real content (this week's alerts, the 354-week badge, the live summary). |
+| Brand colour | Pakistan green (#0c8f5a light / #3fd99a dark) for logo, buttons and labels only | Local identity; kept separate from the data colours (red = up, blue = down). |
+| Type | Bricolage Grotesque for headings (characterful, 41 KB), Manrope for text, Noto Nastaliq Urdu for the "مہنگائی واچ" wordmark | Distinctive without being "techy"; the Urdu wordmark is a local touch. The Urdu font (239 KB) only downloads when Urdu text is on screen. |
+| Copy | "Know when a price rise isn't normal." · "Built for the kitchen table, not the trading floor." | Says the core question in plain words and positions the site for households, not traders. |
+| Motion | City lights switch on one by one, roads draw in, cards drift, mild mouse parallax; all off with "reduce motion" | Lively first impression; nothing moves for people who ask it not to. |
+| Phone | The planet's horizon sits a fixed distance above the hero's bottom edge, and the hero grows with its text | On phones the text is taller; a percentage horizon put the planet behind the buttons. |

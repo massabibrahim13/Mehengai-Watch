@@ -40,7 +40,7 @@ export function SetPrices({ summary, items, onOpen }: { summary: Summary; items:
   const byId = Object.fromEntries(items.map((i) => [i.item_id, i]));
   return (
     <section>
-      <SectionHead id="set-prices" title="Set prices" sub="Prices set by the government or by companies. A change is a decision, never an anomaly." />
+      <SectionHead id="set-prices" eyebrow="Decisions, not anomalies" title="Set prices" sub="Prices set by the government or by companies. A change is a decision, never an anomaly." />
       <div className="grid gap-4 md:grid-cols-2">
         <Board title="Government price changes" note={`Petrol, diesel, LPG, electricity, gas, phone · moves of ${summary.thresholds.administered}% or more`}
           rows={summary.government} empty="No government-set price changed this week." items={byId} onOpen={onOpen} />

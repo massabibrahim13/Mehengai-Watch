@@ -223,10 +223,14 @@ Details that matter:
   rule-based part of "Ask" run in the browser on the exported JSON.
 - The Ask box's AI fallback needs the Gemini key, which must never reach the browser → one tiny
   free serverless function (e.g. Cloudflare Worker) holds the key. Optional; rules work without it.
-- Design brief (agreed with Massab, revised 2026-10-11): pleasant, interactive, **professional and
-  not "tech-y"**, modelled on fintech sites (fiscal.ai, TradingView, Koyfin, TrendSpider): a hero
-  with one big headline + search, then calm rounded panels; the **whole page follows the light/dark
-  toggle** (no always-dark sections); one clean sans font (Manrope),
+- Design brief (agreed with Massab, revised 2026-10-11): **premium, unique and memorable**, not generic
+  "AI slop". Borrowed ideas: TradingView (cinematic full-screen hero, slanted CTA, content panel rising
+  over the hero), Koyfin (huge confident type, product shown in a window frame, floating help pill),
+  TrendSpider (alert bar, trust badge). Ours: the hero is Pakistan seen from orbit, drawn in code, with
+  the 17 survey cities lighting up (night in dark mode, day in light mode — the toggle is part of the
+  experience); Pakistan-green brand colour (never used for data); Bricolage Grotesque display font +
+  an Urdu Nastaliq wordmark; "Built for the kitchen table, not the trading floor." The **whole page
+  follows the light/dark toggle** (no always-dark sections); one clean sans font (Manrope),
   tabular numbers; the validated palette (blue accent, red = price up, blue = price down, ▲▼ always).
   Market summary + Essentials index chart, heatmap, sortable watchlist, city map, interactive news
   cards that show the price of the item they mention. Motion only where it carries information;
@@ -258,7 +262,7 @@ Details that matter:
 | Website | React + TypeScript, built with Vite (Node.js) | full control over look and interaction; most common front-end skill |
 | Styling / motion | Tailwind CSS · Motion (Framer Motion) | consistent design system; smooth, restrained animation |
 | Web charts / map | Apache ECharts | interactive charts + Pakistan city bubble map |
-| Fonts / icons | self-hosted via `@fontsource` (Manrope) · lucide-react icons | no Google Fonts dependency, works offline; one calm icon set |
+| Fonts / icons | self-hosted via `@fontsource`: Manrope (text), Bricolage Grotesque (headings), Noto Nastaliq Urdu (wordmark) · lucide-react icons | no Google Fonts dependency, works offline; the Urdu font only downloads when Urdu text is shown |
 | Hosting | GitHub Pages or Cloudflare Pages (static) + optional Cloudflare Worker | free; Worker keeps the Gemini key off the browser |
 | Config | YAML (`pyyaml`), `.env` (`python-dotenv`) | settings + secrets |
 | Tests | pytest | parsing + detection tests |
@@ -544,6 +548,10 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   the old text; endless loading if a history file fails; "–%" in the panel; map labels piling up when every city
   has the same price; clipped hover on news cards; reduced-motion ignored by animations; deprecated chart option.
   A click-through browser test (20 checks) passes with no console errors.
+- **Premium redesign (2026-10-11):** "Pakistan from orbit" hero (OrbitScene: code-drawn planet, outline, city
+  lights, roads; day/night crossfade), alert bar, TradingView-style nav, slanted CTAs, floating price cards with
+  parallax, framed "This week in prices" window, ticker band, "kitchen table" statement with stats, floating "Find a
+  price" pill, slim footer. Click-through test (20 checks) and theme test pass; no console errors.
 - **Next step:** Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.

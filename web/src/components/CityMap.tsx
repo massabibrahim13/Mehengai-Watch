@@ -94,7 +94,7 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
 
   return (
     <section>
-      <SectionHead id="cities" title="Where it costs more" sub="The 17 survey cities this week. Bubble size follows the price; colour shows how far it is from the national average."
+      <SectionHead id="cities" eyebrow="Across Pakistan" title="Where it costs more" sub="The 17 survey cities this week. Bubble size follows the price; colour shows how far it is from the national average."
         aside={
           <div className="flex flex-wrap items-center gap-1.5">
             {featured.map((id) => (

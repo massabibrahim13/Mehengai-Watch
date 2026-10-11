@@ -198,3 +198,18 @@ watchlist, city map, news cards with live price strips, set prices, method band,
 - *Test like a user:* a script that presses keys and clicks (Playwright) found bugs that reading the code missed.
 
 **Next** Phase 8b (item pages, browse, Ask in the browser, code-splitting) → 8c deploy with Phase 7.
+
+## 2026-10-11 — premium redesign ("Pakistan from orbit")
+
+**Built** a cinematic hero drawn entirely in code: a curved planet, Pakistan's outline tilted in 3D, the 17 survey
+cities lighting up, glowing roads, stars at night and a sun by day. Plus an alert bar, a new nav, floating price
+cards, a framed "This week in prices" window, a statement section and a floating "Find a price" button.
+
+**Key concepts**
+- *Map projection:* turning longitude/latitude into x/y (squeezed by cos(latitude) so shapes stay true).
+- *CSS 3D:* `perspective(...) rotateX(70deg)` lays a flat SVG map "on the ground", like the view from orbit.
+- *Layered scenes:* separate day and night layers whose opacity flips with the theme give a smooth sunrise/sunset.
+- *Design borrowing done well:* take the idea (cinematic hero, product window, alert bar), not the look, and fill it
+  with your own content.
+
+**Next** Phase 8b (item pages, browse, Ask in the browser, code-splitting) → 8c deploy with Phase 7.

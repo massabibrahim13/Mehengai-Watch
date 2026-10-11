@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { Chart, cssVar, useDarkMode, type EChartsOption } from "../lib/charts";
 import { dateLabel, joinNames, shortName } from "../lib/format";
 import type { IndexFile, Item, Summary } from "../types";
-import { Card, Change, ItemIcon, Price, SectionHead, Sparkline, Tabs } from "./ui";
+import { Card, Change, ItemIcon, Price, Sparkline, Tabs } from "./ui";
 
 const RANGES = ["3M", "1Y", "3Y", "All"] as const;
 const WEEKS: Record<(typeof RANGES)[number], number> = { "3M": 13, "1Y": 52, "3Y": 156, All: 10_000 };
@@ -36,7 +36,7 @@ function IndexCard({ index }: { index: IndexFile }) {
   }, [weeks, values, dark]);
 
   return (
-    <Card className="flex flex-col p-5 md:p-6">
+    <div className="flex flex-col p-5 md:p-7">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-sm font-extrabold text-white">51</span>
@@ -54,7 +54,7 @@ function IndexCard({ index }: { index: IndexFile }) {
       </div>
       <Chart option={option} className="mt-2 min-h-64 w-full flex-1" />
       <p className="text-xs text-muted">Chained typical weekly price change across all 51 items. Our calculation, not the official SPI.</p>
-    </Card>
+    </div>
   );
 }
 
@@ -62,7 +62,7 @@ function Signals({ summary, items, onOpen }: { summary: Summary; items: Record<s
   const [open, setOpen] = useState<string | null>(summary.unusual[0]?.item_id ?? null);
   const names = summary.unusual.map((u, i) => (i ? shortName(items[u.item_id].name).toLowerCase() : shortName(items[u.item_id].name)));
   return (
-    <Card className="flex flex-col p-5 md:p-6">
+    <div className="flex flex-col p-5 md:p-7">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold">This week's signals</h3>
         <span className="rounded-full bg-up/10 px-2.5 py-0.5 text-sm font-bold text-up">{summary.unusual.length} unusual</span>
@@ -118,7 +118,7 @@ function Signals({ summary, items, onOpen }: { summary: Summary; items: Record<s
           <span className="text-lg font-bold">{summary.revisions.length}</span>
         </a>
       </div>
-    </Card>
+    </div>
   );
 }
 
@@ -171,12 +171,23 @@ function GroupCard({ title, featured, list, items, onOpen }: (typeof GROUPS)[num
 export function Overview({ summary, items, index, onOpen }: { summary: Summary; items: Item[]; index: IndexFile; onOpen: (id: string) => void }) {
   const byId = Object.fromEntries(items.map((i) => [i.item_id, i]));
   return (
-    <section>
-      <SectionHead id="overview" title="Market summary" sub={`Week ending ${summary.week_label}, compared with ${summary.previous_label}.`} />
-      <div className="grid gap-4 lg:grid-cols-[1.6fr_1fr]">
-        <IndexCard index={index} />
-        <Signals summary={summary} items={byId} onOpen={onOpen} />
-      </div>
+    <section id="overview" className="scroll-mt-24">
+      {/* one framed "app window", like a product shot, rising out of the hero */}
+      <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.05 }} transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+        className="overflow-hidden rounded-[28px] border border-line bg-panel shadow-[0_40px_90px_-40px_rgb(16_24_40/0.45)]">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-line bg-soft/70 px-5 py-3.5 md:px-7">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="h-2.5 w-2.5 animate-live rounded-full bg-live" aria-hidden="true" />
+            <h2 className="font-display text-xl font-bold tracking-[-0.02em]">This week in prices</h2>
+            <span className="text-sm text-muted">Week ending {summary.week_label} · compared with {summary.previous_label}</span>
+          </div>
+          <span className="text-xs font-semibold text-muted">Official PBS data · 51 items · 17 cities</span>
+        </div>
+        <div className="grid divide-y divide-line lg:grid-cols-[1.6fr_1fr] lg:divide-x lg:divide-y-0">
+          <IndexCard index={index} />
+          <Signals summary={summary} items={byId} onOpen={onOpen} />
+        </div>
+      </motion.div>
       <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {GROUPS.map((g) => <GroupCard key={g.title} {...g} items={byId} onOpen={onOpen} />)}
       </div>

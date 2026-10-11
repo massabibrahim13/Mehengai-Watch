@@ -58,7 +58,7 @@ export function Heatmap({ items, onOpen }: { items: Item[]; onOpen: (id: string)
 
   return (
     <section>
-      <SectionHead id="heatmap" title="Heatmap" sub="All 51 items by category, coloured by this week's change. Hover for details, click to open."
+      <SectionHead id="heatmap" eyebrow="Heatmap" title="The whole basket at a glance" sub="All 51 items by category, coloured by this week's change. Hover for details, click to open."
         aside={
           <div className="flex items-center gap-2 text-xs font-semibold text-muted">
             <span>−{LIMIT}%</span>

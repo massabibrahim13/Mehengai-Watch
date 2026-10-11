@@ -1,7 +1,8 @@
-// The home page: hero, then a rounded "market summary" panel with the sections, then the method
-// band. Holds "which item is open" and "is search open". Every number comes from public/data/.
+// The home page: a cinematic hero (Pakistan from orbit), then a rounded panel with this week's summary, the
+// statement, and the sections. Holds "which item is open" and "is search open". Every number comes from public/data/.
 import { useCallback, useEffect, useState } from "react";
 import { CityMap } from "./components/CityMap";
+import { FloatingFind } from "./components/FloatingFind";
 import { Footer } from "./components/Footer";
 import { Heatmap } from "./components/Heatmap";
 import { Hero } from "./components/Hero";
@@ -10,6 +11,8 @@ import { News } from "./components/News";
 import { Overview } from "./components/Overview";
 import { SearchPalette } from "./components/SearchPalette";
 import { SetPrices } from "./components/SetPrices";
+import { Statement } from "./components/Statement";
+import { Ticker } from "./components/Ticker";
 import { TopBar } from "./components/TopBar";
 import { Skeleton } from "./components/ui";
 import { Watchlist } from "./components/Watchlist";
@@ -24,6 +27,7 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [mapItem, setMapItem] = useState<string | null>(null);
   const [overHero, setOverHero] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
 
   // Ctrl/Cmd+K or "/" opens search (unless you're typing somewhere).
   useEffect(() => {
@@ -38,12 +42,13 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // The top bar is transparent over the dark hero and solid once the light panel (which overlaps the
-  // hero by 40px) reaches the 64px bar.
+  // The top bar is transparent over the hero and solid once the content panel (which overlaps the hero by
+  // 48px) reaches the 64px bar. The alert bar folds away as soon as the page scrolls.
   useEffect(() => {
     const onScroll = () => {
       const hero = document.getElementById("top");
-      setOverHero(!!hero && hero.getBoundingClientRect().bottom - 40 > 64);
+      setOverHero(!!hero && hero.getBoundingClientRect().bottom - 48 > 64);
+      setScrolled(window.scrollY > 24);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -82,11 +87,15 @@ export default function App() {
 
   return (
     <>
-      <TopBar overHero={overHero} onSearch={() => setSearchOpen(true)} />
-      <Hero summary={summary} items={items} index={index} onOpen={open} onSearch={() => setSearchOpen(true)} />
-      <main className="relative -mt-10 rounded-t-[32px] bg-bg shadow-[0_-12px_32px_-18px_rgb(16_24_40/0.18)]">
-        <div className="mx-auto max-w-7xl space-y-16 px-4 pb-24 pt-12 md:space-y-24 md:px-8 md:pt-16">
+      <TopBar overHero={overHero} scrolled={scrolled} summary={summary} items={items} onSearch={() => setSearchOpen(true)} />
+      <Hero summary={summary} items={items} cities={cities} geo={geo} onOpen={open} onSearch={() => setSearchOpen(true)} />
+      <main className="relative -mt-12 rounded-t-[40px] bg-bg shadow-[0_-16px_40px_-20px_rgb(0_0_0/0.35)]">
+        <div className="mx-auto max-w-7xl px-4 pt-10 md:px-8 md:pt-14">
           <Overview summary={summary} items={items} index={index} onOpen={open} />
+        </div>
+        <div className="mt-14 md:mt-20"><Ticker items={items} onOpen={open} /></div>
+        <div className="mx-auto max-w-7xl space-y-24 px-4 pb-28 pt-20 md:space-y-32 md:px-8 md:pt-28">
+          <Statement summary={summary} items={items.length} cities={cities.cities.length} />
           <Heatmap items={items} onOpen={open} />
           <Watchlist items={items} onOpen={open} />
           <CityMap cities={cities} items={items} geo={geo} featured={featured} item={mapItem ?? featured[0]} setItem={setMapItem} onOpen={open} />
@@ -95,6 +104,7 @@ export default function App() {
         </div>
       </main>
       <Footer summary={summary} />
+      <FloatingFind show={!overHero && !openItem && !searchOpen} onSearch={() => setSearchOpen(true)} />
       <ItemPanel itemId={openItem} items={items} cities={cities} news={news} onClose={close} onOpen={open} />
       <SearchPalette open={searchOpen} items={items} onClose={() => setSearchOpen(false)} onOpen={open} />
     </>

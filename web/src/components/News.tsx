@@ -80,7 +80,7 @@ export function News({ news, items, onOpen }: { news: NewsItem[]; items: Item[];
 
   return (
     <section>
-      <SectionHead id="news" title="Price news" sub="Headlines from Pakistani news sites, next to the live price of what they mention."
+      <SectionHead id="news" eyebrow="In the news" title="Price news" sub="Headlines from Pakistani news sites, next to the live price of what they mention."
         aside={<Tabs value={topic} options={TOPICS} onChange={setTopic} label="News topic" />} />
       {!lead ? (
         <p className="rounded-2xl border border-line bg-panel p-6 text-muted">No headlines on this topic in the last few weeks.</p>
