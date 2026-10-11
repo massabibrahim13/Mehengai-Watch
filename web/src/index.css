@@ -129,6 +129,10 @@ body {
     linear-gradient(165deg, #04121a 0%, #030b13 50%, #05081a 100%);
 }
 
+/* the hero's cards float gently */
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+.drift { animation: drift 7s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

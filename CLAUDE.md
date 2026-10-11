@@ -226,8 +226,8 @@ Details that matter:
 - Design brief (agreed with Massab, revised 2026-10-11): **premium, unique and memorable**, not generic
   "AI slop", and **not a copy of any reference site** (no cloned layouts or button shapes; normal
   rounded buttons). Hero: interactive canvas line-waves (`WaveField`) — slow drift when idle, faster and
-  bending around the pointer when the visitor moves, a ripple on click/tap — beside a "This week's
-  moves" card; Pakistan-green brand colour (never used for data); Bricolage Grotesque display font +
+  bending around the pointer when the visitor moves, a ripple on click/tap — beside four floating
+  "this week" cards (unusual / notable rise, government price, biggest fall); Pakistan-green brand colour (never used for data); Bricolage Grotesque display font +
   an Urdu Nastaliq wordmark; "Built for the kitchen table, not the trading floor." The **whole page
   follows the light/dark toggle** (no always-dark sections); one clean sans font (Manrope),
   tabular numbers; the validated palette (blue accent, red = price up, blue = price down, ▲▼ always).
@@ -554,7 +554,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 - **Wave hero (2026-10-11):** Massab asked not to replicate the reference sites and to replace the orbit with
   flowing line waves like his reference images. Now: two-column hero (headline + "This week's moves" card), canvas
   waves (idle drift / pointer bend / click ripple, 60 fps, paused off-screen, still frame with reduced motion), normal
-  buttons, no red alert bar (count badge on "This week"), round floating search button, line-art icons.
+  buttons, the four "this week" cards back as a 2×2 floating group (Massab liked them), no red alert bar (count badge on "This week"), round floating search button, line-art icons.
 - **Next step:** Phase 8b (item pages, browse, Ask in the browser, code-split charts).
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.

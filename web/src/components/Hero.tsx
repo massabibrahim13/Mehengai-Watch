@@ -1,5 +1,5 @@
-// Hero: flowing line waves (WaveField) behind a left-aligned promise and a "This week's moves" card.
-// Every number comes from the exported JSON.
+// Hero: flowing line waves (WaveField) behind a left-aligned promise and four "this week" cards
+// (unusual / notable rise, a government price change, the biggest fall). Every number comes from the exported JSON.
 import { ArrowRight, LayoutGrid } from "lucide-react";
 import { motion } from "motion/react";
 import { dateLabel, shortName } from "../lib/format";
@@ -7,7 +7,7 @@ import type { Item, Summary } from "../types";
 import { Change, ItemIcon, Price, Sparkline } from "./ui";
 import { WaveField } from "./WaveField";
 
-interface Move { item: Item; label: string; alert: boolean }
+interface Move { item: Item; label: string; tone: "up" | "down" | "plain" }
 
 /** Up to four rows: this week's unusual moves, a government price change, the biggest fall, then big movers. */
 function pickMoves(summary: Summary, items: Item[]): Move[] {
@@ -15,52 +15,58 @@ function pickMoves(summary: Summary, items: Item[]): Move[] {
   const moves: Move[] = summary.unusual.slice(0, 2).map((u) => ({
     item: byId[u.item_id],
     label: `${u.severity_word[0].toUpperCase()}${u.severity_word.slice(1)} ${u.direction === "up" ? "rise" : "fall"}`,
-    alert: true,
+    tone: u.direction === "up" ? "up" : "down",
   }));
-  if (summary.government[0]) moves.push({ item: byId[summary.government[0].item_id], label: "Government price change", alert: false });
+  if (summary.government[0]) moves.push({ item: byId[summary.government[0].item_id], label: "Government price", tone: "plain" });
   const fall = items.filter((i) => i.price_type === "market").sort((a, b) => a.change_pct - b.change_pct)[0];
-  if (fall && fall.change_pct < 0) moves.push({ item: fall, label: "Biggest fall", alert: false });
+  if (fall && fall.change_pct < 0 && !moves.some((x) => x.item.item_id === fall.item_id)) moves.push({ item: fall, label: "Biggest fall", tone: "down" });
   for (const m of [...items].sort((a, b) => Math.abs(b.change_pct) - Math.abs(a.change_pct))) {
     if (moves.length >= 4) break;
-    if (!moves.some((x) => x.item.item_id === m.item_id)) moves.push({ item: m, label: "Big mover", alert: false });
+    if (!moves.some((x) => x.item.item_id === m.item_id)) moves.push({ item: m, label: "Big mover", tone: "plain" });
   }
   return moves.slice(0, 4);
 }
 
-function WeekCard({ summary, items, onOpen }: { summary: Summary; items: Item[]; onOpen: (id: string) => void }) {
+const TONE = { up: "text-up", down: "text-down", plain: "text-hero-muted" };
+
+/** The four cards, in a 2×2 group whose right column sits a little lower; each floats gently and opens its item. */
+function MoveCards({ summary, items, onOpen }: { summary: Summary; items: Item[]; onOpen: (id: string) => void }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.5, ease: [0.2, 0.7, 0.2, 1] }}
-      className="rounded-3xl border border-glass-line bg-glass p-5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.45)] backdrop-blur-xl md:p-6">
-      <div className="flex items-center justify-between gap-3">
+    <div>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
+        className="mb-4 flex items-center justify-between gap-3">
         <span className="flex items-center gap-2 font-display text-lg font-bold tracking-[-0.01em]">
           <span className="h-2 w-2 animate-live rounded-full bg-live" aria-hidden="true" />
           This week's moves
         </span>
-        <span className="hidden text-xs font-semibold text-hero-muted sm:inline">Week ending {dateLabel(summary.week)}</span>
-      </div>
-      <ul className="mt-3 divide-y divide-hero-line">
-        {pickMoves(summary, items).map(({ item, label, alert }, i) => (
-          <motion.li key={item.item_id} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}>
-            <button type="button" onClick={() => onOpen(item.item_id)}
-              className="group grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 py-3 text-left sm:grid-cols-[auto_1fr_5rem_auto]">
-              <ItemIcon item={item} />
-              <span className="min-w-0">
-                <span className="block truncate font-semibold group-hover:underline group-hover:underline-offset-4">{shortName(item.name)}</span>
-                <span className={`text-xs font-semibold ${alert ? "text-up" : "text-hero-muted"}`}>{label}</span>
+        <span className="text-xs font-semibold text-hero-muted">Week ending {dateLabel(summary.week)}</span>
+      </motion.div>
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
+        {pickMoves(summary, items).map(({ item, label, tone }, i) => (
+          <motion.div key={item.item_id} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 + i * 0.12, ease: [0.2, 0.7, 0.2, 1] }} className={i % 2 ? "sm:translate-y-8" : ""}>
+            <button type="button" onClick={() => onOpen(item.item_id)} style={{ animationDelay: `${i * 1.4}s` }}
+              className="drift lift block w-full rounded-2xl border border-glass-line bg-glass p-4 text-left text-hero-ink shadow-[0_24px_60px_-24px_rgb(0_0_0/0.5)] backdrop-blur-xl">
+              <span className="flex items-start justify-between gap-2">
+                <span className={`text-[11px] font-bold uppercase leading-tight tracking-[0.1em] ${TONE[tone]}`}>{label}</span>
+                <Change value={item.change_pct} className="text-xs" />
               </span>
-              <Sparkline values={item.spark} className="hidden h-8 w-20 sm:block" />
-              <span className="text-right">
-                <Price value={item.price} className="block text-[15px]" />
-                <Change value={item.change_pct} className="text-sm" />
+              <span className="mt-3 flex items-center gap-2.5">
+                <ItemIcon item={item} size="sm" />
+                <span className="min-w-0">
+                  <span className="block truncate text-[15px] font-bold">{shortName(item.name)}</span>
+                  <Price value={item.price} className="text-[13px]" />
+                </span>
               </span>
+              <Sparkline values={item.spark} className="mt-3 h-10 w-full" />
             </button>
-          </motion.li>
+          </motion.div>
         ))}
-      </ul>
-      <a href="#overview" className="mt-2 flex items-center justify-between rounded-xl px-1 pt-3 text-sm font-bold text-brand hover:underline hover:underline-offset-4">
+      </div>
+      <a href="#overview" className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-brand hover:underline hover:underline-offset-4 sm:mt-12">
         See the whole week <ArrowRight size={16} aria-hidden="true" />
       </a>
-    </motion.div>
+    </div>
   );
 }
 
@@ -110,7 +116,7 @@ export function Hero({ summary, items, onOpen, onSearch }: {
           <motion.p {...rise(0.7)} className="mt-4 text-sm text-hero-muted">Free · official PBS data · no sign-up</motion.p>
         </div>
 
-        <WeekCard summary={summary} items={items} onOpen={onOpen} />
+        <MoveCards summary={summary} items={items} onOpen={onOpen} />
       </div>
     </section>
   );
