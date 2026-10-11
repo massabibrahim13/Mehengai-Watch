@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from mehngai.detect.seasonal import ramazan_week
+from mehngai.detect.series import same_week_last_year
 
 RAMAZAN_WEEKS = (-2, 5)        # 2 weeks before 1 Ramazan … about Eid ul-Fitr (same as the L3 setting)
 SEVERITY_WORDS = {"watch": "notable", "unusual": "unusual", "extreme": "extreme"}
@@ -69,11 +70,9 @@ def build_facts(item: dict, week: pd.Timestamp, prices: pd.Series, severity: str
     if gap > 1:
         facts["weeks_since_previous_report"] = gap
 
-    # Same week last year (nearest report within 10 days of 52 weeks earlier).
-    target = week - pd.Timedelta(weeks=52)
-    nearest = prices.index[np.argmin(np.abs(prices.index - target))]
-    if abs((nearest - target).days) <= 10 and nearest < week:
-        year_ago = prices.loc[nearest]
+    # Same week last year (only if PBS has a report for that week).
+    year_ago = same_week_last_year(prices.loc[:week], week)
+    if year_ago is not None:
         facts["price_a_year_ago_rs"] = round(float(year_ago), 2)
         facts["change_vs_a_year_ago_pct"] = round(float((now / year_ago - 1) * 100), 1)
     return facts

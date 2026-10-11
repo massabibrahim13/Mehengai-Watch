@@ -8,18 +8,11 @@ import type { Item, NewsItem } from "../types";
 import { Change, ItemIcon, Price, SectionHead, Sparkline, Tabs } from "./ui";
 
 const TOPICS = ["All", "Food & goods", "Energy", "Inflation"] as const;
-const SOURCE_TINT: Record<string, string> = {
-  Dawn: "bg-[#1d4ed8]", "Business Recorder": "bg-[#0f766e]", "Express Tribune": "bg-[#b91c1c]",
-  ProPakistani: "bg-[#7c3aed]", "ARY News": "bg-[#c2410c]", APP: "bg-[#15803d]",
-};
-const initials = (s: string) => s.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
-
 function Source({ n }: { n: NewsItem }) {
   return (
     <span className="flex items-center gap-2 text-xs text-muted">
-      <span className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-extrabold text-white ${SOURCE_TINT[n.source] ?? "bg-ink"}`}>{initials(n.source)}</span>
-      <span className="font-semibold text-ink">{n.source}</span>
-      <span>· {timeAgo(n.published)}</span>
+      <span className="font-semibold uppercase tracking-[0.06em] text-ink">{n.source}</span>
+      <span className="font-mono">{timeAgo(n.published)}</span>
     </span>
   );
 }
@@ -28,7 +21,7 @@ function Source({ n }: { n: NewsItem }) {
 function PriceStrip({ item, onOpen }: { item: Item; onOpen: (id: string) => void }) {
   return (
     <button type="button" onClick={() => onOpen(item.item_id)}
-      className="chip flex w-full items-center gap-3 rounded-xl bg-soft px-3 py-2 text-left">
+      className="chip flex w-full items-center gap-3 rounded-[2px] border border-line px-3 py-2 text-left hover:bg-soft">
       <ItemIcon item={item} size="sm" />
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-semibold">{shortName(item.name)}</span>
@@ -46,19 +39,19 @@ function PriceStrip({ item, onOpen }: { item: Item; onOpen: (id: string) => void
 function NewsCard({ n, items, onOpen, featured = false }: { n: NewsItem; items: Record<string, Item>; onOpen: (id: string) => void; featured?: boolean }) {
   const linked = n.item_ids.map((id) => items[id]).filter(Boolean).slice(0, featured ? 2 : 1);
   return (
-    <article className={`lift group flex h-full flex-col rounded-2xl border border-line bg-panel p-5 ${featured ? "md:p-7" : ""}`}>
+    <article className={`panel lift group flex h-full flex-col p-5 ${featured ? "md:p-6" : ""}`}>
       <div className="flex items-center justify-between gap-2">
         <Source n={n} />
-        {n.topics[0] && <span className="rounded-md bg-soft px-2 py-0.5 text-[11px] font-semibold text-muted">{n.topics[0][0].toUpperCase() + n.topics[0].slice(1)}</span>}
+        {n.topics[0] && <span className="label">{n.topics[0]}</span>}
       </div>
       <a href={n.link} target="_blank" rel="noopener noreferrer"
-        className={`mt-3 block font-bold leading-snug tracking-tight group-hover:text-accent ${featured ? "text-2xl md:text-[28px]" : "text-[17px]"}`}>
+        className={`mt-3 block font-serif font-bold leading-snug group-hover:underline group-hover:underline-offset-4 ${featured ? "text-2xl md:text-[26px]" : "text-[16px]"}`}>
         {n.title}
-        <ArrowUpRight size={featured ? 22 : 16} className="ml-1 inline align-[-0.1em] text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+        <ArrowUpRight size={featured ? 20 : 15} className="ml-1 inline align-[-0.1em] text-muted" aria-hidden="true" />
       </a>
       {featured && linked[0] && (
         <div className="mt-5 hidden md:block">
-          <p className="text-xs font-semibold text-muted">{shortName(linked[0].name)} · national average, last 6 months</p>
+          <p className="label">{shortName(linked[0].name)} · national average, last 6 months</p>
           <Sparkline values={linked[0].spark} className="mt-1 h-28 w-full" />
         </div>
       )}
@@ -83,7 +76,7 @@ export function News({ news, items, onOpen }: { news: NewsItem[]; items: Item[];
       <SectionHead id="news" eyebrow="In the news" title="Price news" sub="Headlines from Pakistani news sites, next to the live price of what they mention."
         aside={<Tabs value={topic} options={TOPICS} onChange={setTopic} label="News topic" />} />
       {!lead ? (
-        <p className="rounded-2xl border border-line bg-panel p-6 text-muted">No headlines on this topic in the last few weeks.</p>
+        <p className="panel p-6 text-muted">No headlines on this topic in the last few weeks.</p>
       ) : (
         <>
           <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
@@ -104,8 +97,8 @@ export function News({ news, items, onOpen }: { news: NewsItem[]; items: Item[];
                 ))}
               </div>
               <div className="mt-3 flex justify-end gap-2">
-                <button type="button" aria-label="Previous headlines" onClick={() => scroll(-1)} className="chip flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel"><ChevronLeft size={18} /></button>
-                <button type="button" aria-label="More headlines" onClick={() => scroll(1)} className="chip flex h-9 w-9 items-center justify-center rounded-full border border-line bg-panel"><ChevronRight size={18} /></button>
+                <button type="button" aria-label="Previous headlines" onClick={() => scroll(-1)} className="chip flex h-9 w-9 items-center justify-center rounded-[2px] border border-line bg-panel"><ChevronLeft size={18} /></button>
+                <button type="button" aria-label="More headlines" onClick={() => scroll(1)} className="chip flex h-9 w-9 items-center justify-center rounded-[2px] border border-line bg-panel"><ChevronRight size={18} /></button>
               </div>
             </div>
           )}

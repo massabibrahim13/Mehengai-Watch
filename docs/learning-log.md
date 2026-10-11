@@ -239,3 +239,28 @@ pieces that copied the reference sites.
 - *Pixels cost time:* drawing at a lower resolution and letting the browser scale it up is a big, almost invisible win.
 - *Adaptive quality:* watch how long frames take and lower the resolution only on machines that need it.
 - *Do maths once:* values that depend only on the column (not the strand) are computed once per frame, not 58 times.
+
+## 2026-10-11 — proving the numbers are right; a simpler site
+
+**Built** `verify.py`, which compares our numbers with the figures PBS prints in its own reports, an 8-test data
+accuracy suite, and a pipeline check for every new report. Simplified the site: plain search box, clear section
+navigation (with a phone menu), five calm sections.
+
+**Key concepts**
+- *Independent verification:* check results against a source that didn't come from your own code. PBS prints its
+  own previous-week and year-ago figures, so agreement there proves parsing, storage and formulas together.
+- *Edge cases hide in gaps:* the year-ago bug only appeared in weeks after PBS skipped a report.
+- *Prefer "–" to a guess:* a blank is honest; a number from the wrong week is misleading.
+- *One rule, one place:* the year-ago logic existed twice; now it is one shared helper.
+
+## 2026-10-11 — institutional restyle
+
+**Restyled** the whole site as an editorial data terminal: serif headings, monospace numbers, sharp flat panels,
+underlined tabs, muted brick-red / steel-blue data colours, waves muted under a veil.
+
+**Key concepts**
+- *Design tokens pay off:* fonts, radii and colours live in one `@theme` block; changing them restyles every
+  component at once (e.g. all `rounded-xl` became 2px by changing one token).
+- *Monospace for numbers:* every digit has the same width, so prices line up in columns.
+- *Colour must still be checked:* muted colours can fail colour-blind separation; the palette checker confirmed
+  the new pair.

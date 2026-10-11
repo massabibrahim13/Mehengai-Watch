@@ -1,10 +1,11 @@
-"""Run the whole pipeline, stages 1 → 7, with one command:
+"""Run the whole pipeline, stages 1 → 8, with one command:
 
     python -m mehngai.pipeline
 
   1. fetch    new SPI annex PDFs (PBS live site; Wayback for history)   → data/raw/
   2. parse    Appendix-A tables                                         → data/interim/
   3–4. store  normalise, validate, rebuild the SQLite database          → data/mehngai.db
+  4b. verify the newest report against PBS's own printed figures (warnings only)
   5. detect   production detector only (seconds; the full L0–L3 backtest is detect.evaluate)
   6. explain  this week's anomalies (LLM + guardrails, cached)
   6b. news    price headlines from Pakistani news RSS feeds (context; failure is not fatal)
@@ -22,7 +23,7 @@ import logging
 import time
 from datetime import date
 
-from mehngai import export, news
+from mehngai import export, news, verify
 from mehngai.config import load_settings
 from mehngai.detect import run as detect
 from mehngai.explain import run as explain
@@ -57,6 +58,7 @@ def main() -> None:
         stage("1. fetch", fetch.run, ingest["start_date"], date.today(), ingest["kinds"])
     stage("2. parse", parse.run)
     stage("3-4. clean, validate, store", db.load)
+    stage("4b. verify against PBS", verify.check_latest)
     stage("5. detect", detect.run)
     results = stage("6. explain", explain.run)
     try:                                   # news is context only: a failure must not stop the report

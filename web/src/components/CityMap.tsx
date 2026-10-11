@@ -1,10 +1,10 @@
 // "Where it costs more": the 17 survey cities as bubbles on a map of Pakistan, for one item.
-// Bubble size = price there; colour = % above/below the national average (blue cheaper, grey ≈ average,
+// Bubble size = price there; colour = % above/below the national average (green cheaper, grey ≈ average,
 // red dearer — the validated diverging pair with a neutral midpoint). Hovering a city on the map or in
 // the ranked list highlights it in both.
 import { useMemo, useRef, useState } from "react";
 import { VisualMapComponent } from "echarts/components";
-import { Chart, cssVar, echarts, useDarkMode, type EChartsOption } from "../lib/charts";
+import { Chart, cssVar, echarts, MONO, SANS, useDarkMode, type EChartsOption } from "../lib/charts";
 import { moneyExact, pct, shortName } from "../lib/format";
 import type { CitiesFile, Item } from "../types";
 import { Card, ItemIcon, Price, SectionHead } from "./ui";
@@ -39,10 +39,10 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
     // Honest scales: colour saturates at ±10% (or the real spread if wider), so near-identical prices
     // stay grey; size follows price ÷ national average, so equal prices draw equal bubbles.
     const spread = Math.max(...rows.map((r) => Math.abs(r.dev)), 10);
-    const ink = cssVar("--color-ink"), surface = cssVar("--color-panel"), muted = cssVar("--color-muted");
+    const ink = cssVar("--color-ink"), surface = cssVar("--color-surface"), muted = cssVar("--color-muted");
     return {
       tooltip: {
-        trigger: "item", backgroundColor: surface, borderColor: cssVar("--color-line"), textStyle: { color: ink },
+        trigger: "item", backgroundColor: cssVar("--color-overlay"), borderColor: cssVar("--color-line"), borderRadius: 2, textStyle: { color: ink, fontFamily: MONO },
         formatter: (p: { name: string; value: number[] }) =>
           `<b>${p.name}</b><br/>${moneyExact(p.value[2])} ${current.unit}<br/>` +
           `<span style="color:${muted}">${Math.abs(p.value[3]) < 0.5 ? "about the national average" : `${pct(p.value[3])} vs national average`}</span>`,
@@ -50,13 +50,13 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
       geo: {
         // aspectScale ≈ cos(30°N): keeps Pakistan's shape true at its latitude; sized to fit the box
         map: "pakistan", roam: false, silent: true, aspectScale: 0.87, layoutCenter: ["50%", "47%"], layoutSize: "90%",
-        itemStyle: { areaColor: cssVar("--color-soft"), borderColor: dark ? "rgba(255,255,255,0.22)" : "rgba(19,23,34,0.22)", borderWidth: 1 },
+        itemStyle: { areaColor: cssVar("--color-soft"), borderColor: cssVar("--color-line"), borderWidth: 1 },
       },
       visualMap: {
         type: "continuous", dimension: 3, min: -spread, max: spread, calculable: false, orient: "horizontal",
         left: "left", bottom: 0, itemWidth: 10, itemHeight: 140, textStyle: { color: muted, fontSize: 11 },
         text: [`+${Math.round(spread)}% dearer`, `${Math.round(spread)}% cheaper`],
-        inRange: { color: dark ? ["#4c8fe6", "#5b6170", "#ec6766"] : ["#2a78d6", "#b9bcc4", "#e34948"] },
+        inRange: { color: dark ? ["#3fa98a", "#6b7178", "#d9534f"] : ["#0f7350", "#9aa0a6", "#b3261e"] },
       },
       series: [{
         type: "scatter", coordinateSystem: "geo", universalTransition: true,
@@ -65,9 +65,9 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
           label: { show: labelled.includes(r.city) },
         })),
         symbolSize: (v: number[]) => Math.min(44, Math.max(8, 20 * (v[2] / current.price) ** 3)),
-        itemStyle: { borderColor: surface, borderWidth: 2, opacity: 0.92 },
-        label: { formatter: "{b}", position: "right", color: ink, fontSize: 12, fontWeight: 600, fontFamily: "Manrope Variable" },
-        emphasis: { scale: 1.35, label: { show: true, fontWeight: "bold" }, itemStyle: { borderColor: ink } },
+        itemStyle: { borderColor: surface, borderWidth: 1, opacity: 0.7 },
+        label: { formatter: "{b}", position: "right", color: ink, fontSize: 11, fontWeight: 500, fontFamily: SANS },
+        emphasis: { scale: 1.2, label: { show: true, fontWeight: "bold" }, itemStyle: { borderColor: ink, opacity: 0.9 } },
         animationDurationUpdate: 600,
       }],
     };
@@ -94,17 +94,19 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
 
   return (
     <section>
-      <SectionHead id="cities" eyebrow="Across Pakistan" title="Where it costs more" sub="The 17 survey cities this week. Bubble size follows the price; colour shows how far it is from the national average."
+      <SectionHead id="cities" eyebrow="Across Pakistan" title="Where it costs more" sub="Pick an item to compare this week's price in the 17 survey cities. Red = dearer than the national average, green = cheaper; bigger bubble = higher price."
         aside={
-          <div className="flex flex-wrap items-center gap-1.5">
-            {featured.map((id) => (
-              <button key={id} type="button" onClick={() => setItem(id)}
-                className={`chip rounded-lg px-3 py-1.5 text-sm font-semibold ${id === item ? "bg-ink text-panel" : "bg-panel text-muted ring-1 ring-line hover:text-ink"}`}>
-                {shortName(byId[id].name)}
-              </button>
-            ))}
+          <div className="flex w-full min-w-0 flex-wrap items-end gap-x-5 gap-y-2 lg:w-auto">
+            <div role="tablist" aria-label="Item" className="no-scrollbar flex min-w-0 max-w-full gap-4 overflow-x-auto border-b border-line">
+              {featured.map((id) => (
+                <button key={id} type="button" role="tab" aria-selected={id === item} onClick={() => setItem(id)}
+                  className={`-mb-px whitespace-nowrap border-b-2 pb-2 pt-1 text-sm font-medium transition-colors ${id === item ? "border-accent text-ink" : "border-transparent text-muted hover:text-ink"}`}>
+                  {shortName(byId[id].name)}
+                </button>
+              ))}
+            </div>
             <select value={featured.includes(item) ? "" : item} onChange={(e) => e.target.value && setItem(e.target.value)}
-              aria-label="Choose another item" className="chip rounded-lg bg-panel px-3 py-1.5 text-sm font-semibold text-muted ring-1 ring-line">
+              aria-label="Choose another item" className="h-8 rounded-[2px] border border-line bg-overlay px-2 text-sm text-ink">
               <option value="">More items…</option>
               {others.map((i) => <option key={i.item_id} value={i.item_id}>{i.name}</option>)}
             </select>
@@ -118,16 +120,16 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
           <button type="button" onClick={() => onOpen(item)} className="flex items-center gap-3 text-left hover:text-accent">
             <ItemIcon item={current} />
             <span>
-              <span className="block text-xl font-bold">{current.name}</span>
+              <span className="block font-serif text-xl font-bold">{current.name}</span>
               <span className="text-sm text-muted">{current.unit}</span>
             </span>
           </button>
           <div className="mt-4 grid grid-cols-2 gap-2">
-            <div className="rounded-xl bg-soft px-3 py-2">
+            <div className="rounded-[2px] bg-soft px-3 py-2">
               <p className="text-xs text-muted">National average</p>
               <Price value={current.price} className="text-lg" />
             </div>
-            <div className="rounded-xl bg-soft px-3 py-2">
+            <div className="rounded-[2px] bg-soft px-3 py-2">
               <p className="text-xs text-muted">Gap between cities</p>
               <Price value={span} className="text-lg" />
             </div>
@@ -137,11 +139,11 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
               <li key={r.city}>
                 <button type="button" onMouseEnter={() => highlight(r.city)} onMouseLeave={() => highlight(null)}
                   onFocus={() => highlight(r.city)} onBlur={() => highlight(null)}
-                  className={`grid w-full grid-cols-[1.5rem_1fr_auto_4.5rem] items-center gap-2 rounded-lg px-2 py-1.5 text-left text-sm transition-colors ${hovered === r.city ? "bg-soft" : ""}`}>
-                  <span className="text-xs text-muted">{i + 1}</span>
+                  className={`grid w-full grid-cols-[1.5rem_1fr_auto_4.5rem] items-center gap-2 rounded-[2px] px-2 py-1.5 text-left text-sm transition-colors ${hovered === r.city ? "bg-soft" : ""}`}>
+                  <span className="font-mono text-xs text-muted">{i + 1}</span>
                   <span className="font-semibold">{r.city}</span>
                   <Price value={r.price} className="text-[13px]" />
-                  <span className={`text-right text-xs font-semibold ${Math.abs(r.dev) < 0.5 ? "text-muted" : r.dev > 0 ? "text-up" : "text-down"}`}>
+                  <span className={`text-right font-mono text-xs font-medium ${Math.abs(r.dev) < 0.5 ? "text-muted" : r.dev > 0 ? "text-up" : "text-down"}`}>
                     {Math.abs(r.dev) < 0.5 ? "≈ avg" : pct(r.dev)}
                   </span>
                 </button>

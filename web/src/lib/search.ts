@@ -37,3 +37,24 @@ export function findItems(query: string, items: Item[], limit = 8): Item[] {
     .slice(0, limit)
     .map((r) => r.item);
 }
+
+/** For a live search box: the scored matches above, or — for short queries like "su" — items with a word
+ *  that starts with what was typed. */
+export function liveMatches(query: string, items: Item[], limit = 8): Item[] {
+  const found = findItems(query, items, limit);
+  const q = normalise(query);
+  if (found.length || !q) return found;
+  // rank: the item's own name starts with it, then a word of its name, then a word of an alias
+  const rank = (item: Item) => {
+    const name = normalise(item.name);
+    if (name.startsWith(q)) return 0;
+    if (name.split(" ").some((w) => w.startsWith(q))) return 1;
+    return terms(item).some((t) => t.split(" ").some((w) => w.startsWith(q))) ? 2 : 3;
+  };
+  return items
+    .map((item) => ({ item, r: rank(item) }))
+    .filter((x) => x.r < 3)
+    .sort((a, b) => a.r - b.r || a.item.name.localeCompare(b.item.name))
+    .slice(0, limit)
+    .map((x) => x.item);
+}

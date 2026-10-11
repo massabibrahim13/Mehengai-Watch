@@ -25,6 +25,10 @@ export const cssVar = (name: string): string =>
 /** True while the site is in dark mode (charts re-colour when the theme changes). */
 export const useDarkMode = (): boolean => useTheme().theme === "dark";
 
+/** Charts use the monospace font for every number (axes, labels, tooltips). */
+export const MONO = '"JetBrains Mono Variable", "IBM Plex Mono", ui-monospace, monospace';
+export const SANS = '"Inter Variable", "Helvetica Neue", Arial, sans-serif';
+
 export const reducedMotion = (): boolean => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 interface ChartProps {
@@ -52,7 +56,7 @@ export function Chart({ option, className, onReady }: ChartProps) {
   }, []);
 
   useEffect(() => {
-    chart.current?.setOption({ animation: !reducedMotion(), ...option }, { notMerge: false });
+    chart.current?.setOption({ animation: !reducedMotion(), textStyle: { fontFamily: MONO }, ...option }, { notMerge: false });
   }, [option]);
 
   return <div ref={ref} className={className} />;

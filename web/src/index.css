@@ -1,65 +1,77 @@
 @import "tailwindcss";
-@import "@fontsource-variable/manrope";
-@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/merriweather";
+@import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource-variable/noto-nastaliq-urdu";
 
 /* Theme is chosen on <html data-theme="light|dark"> (toggle in the top bar, remembered per browser). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* Design tokens. Brand = Pakistan green (logo, buttons, labels) — never used for data.
-   Data: price up = red, price down = blue (validated colour-blind-safe pair); ▲▼ always accompany colour. */
+/* Institutional / editorial data-terminal look:
+   - serif headings (Merriweather), sans text and labels (Inter), monospace for EVERY number (JetBrains Mono)
+   - flat panels: 3% tint + 1px border, corners of 2px at most, no shadows, no glows, no gradient text
+   - data colours: price up = brick red, price down = green (checked for colour-blind separation; text
+     contrast ≥ 4.7:1 on both surfaces); ▲▼ always accompany colour. One muted gold accent for UI state. */
 @theme {
-  --font-sans: "Manrope Variable", "Segoe UI", system-ui, sans-serif;
-  --font-display: "Bricolage Grotesque Variable", "Manrope Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Merriweather Variable", ui-serif, Georgia, serif;
+  --font-serif: "Merriweather Variable", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", "IBM Plex Mono", ui-monospace, monospace;
   --font-urdu: "Noto Nastaliq Urdu Variable", "Noto Nastaliq Urdu", serif;
 
-  --color-bg: #f3f4f6;
-  --color-panel: #ffffff;
-  --color-soft: #f1f3f6;
-  --color-ink: #131722;
-  --color-muted: #6a6f7c;
-  --color-line: #e3e6ec;
-  --color-accent: #2a78d6;
-  --color-up: #e34948;
-  --color-down: #2a78d6;
-  --color-live: #12a150;
-  --color-brand: #0c8f5a;
-  --color-brand-2: #0e9aa7;
-  --color-alert: #d92d20;
+  /* sharp geometry everywhere */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
+  --radius-4xl: 2px;
+
+  /* light = editorial paper */
+  --color-bg: #f7f5f0;
+  --color-panel: rgb(0 0 0 / 0.02);
+  --color-surface: #f2f0eb;      /* solid colour of a panel on the page (chart gaps, tooltips) */
+  --color-overlay: #ffffff;      /* solid background for things that float above the page */
+  --color-soft: rgb(0 0 0 / 0.045);
+  --color-ink: #111111;
+  --color-muted: #5a6068;
+  --color-line: rgb(0 0 0 / 0.15);
+  --color-accent: #8a6418;
+  --color-up: #b3261e;
+  --color-down: #0f7350;
+  --color-live: #2e7d4f;
+  --color-brand: var(--color-accent);
+  --color-brand-2: var(--color-accent);
   --color-on-brand: #ffffff;
 
-  /* hero + footer: day sky in light mode, night sky in dark mode */
-  --color-hero: #f4f8ff;
-  --color-hero-ink: #0b1220;
-  --color-hero-muted: #4b5568;
-  --color-hero-line: rgb(11 18 32 / 0.1);
-  --color-glass: rgb(255 255 255 / 0.72);
-  --color-glass-line: rgb(255 255 255 / 0.95);
+  --color-hero: var(--color-bg);
+  --color-hero-ink: var(--color-ink);
+  --color-hero-muted: var(--color-muted);
+  --color-hero-line: var(--color-line);
+  --color-glass: var(--color-panel);
+  --color-glass-line: var(--color-line);
 
   --animate-ticker: ticker var(--ticker-speed, 150s) linear infinite;
-  --animate-live: live 2.2s ease-out infinite;
+  --animate-live: live 2.4s ease-in-out infinite;
 }
 
+/* dark = data terminal */
 [data-theme="dark"] {
-  --color-bg: #0b0e14;
-  --color-panel: #131722;
-  --color-soft: #1b202c;
-  --color-ink: #e2e5ec;
-  --color-muted: #8c93a3;
-  --color-line: #252b38;
-  --color-accent: #4c8fe6;
-  --color-up: #ec6766;
-  --color-down: #4c8fe6;
-  --color-brand: #3fd99a;
-  --color-brand-2: #36c8e0;
-  --color-on-brand: #03140c;
-
-  --color-hero: #03050b;
-  --color-hero-ink: #f4f6fb;
-  --color-hero-muted: #a3acbf;
-  --color-hero-line: rgb(255 255 255 / 0.1);
-  --color-glass: rgb(14 20 36 / 0.55);
-  --color-glass-line: rgb(255 255 255 / 0.12);
+  --color-bg: #121212;
+  --color-panel: rgb(255 255 255 / 0.03);
+  --color-surface: #1a1a1a;
+  --color-overlay: #1c1d1f;
+  --color-soft: rgb(255 255 255 / 0.06);
+  --color-ink: #f2f2f2;
+  --color-muted: #9aa3ad;
+  --color-line: rgb(255 255 255 / 0.15);
+  --color-accent: #cfa65a;
+  --color-up: #d9534f;
+  --color-down: #3fa98a;
+  --color-live: #6fae84;
+  --color-on-brand: #121212;
 }
 
 /* native controls (selects, scrollbars) follow the theme too */
@@ -71,11 +83,11 @@
   to { transform: translateX(-50%); }
 }
 @keyframes live {
-  0% { box-shadow: 0 0 0 0 rgb(18 161 80 / 0.55); }
-  70%, 100% { box-shadow: 0 0 0 8px rgb(18 161 80 / 0); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
-html { scroll-behavior: smooth; background: var(--color-hero); }
+html { scroll-behavior: smooth; background: var(--color-bg); }
 body {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -83,9 +95,9 @@ body {
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "tnum" 1; /* aligned numbers everywhere */
 }
+/* serif headings */
+h1, h2 { font-family: var(--font-serif); }
 
-.ticker:hover .ticker-track,
-.ticker:focus-within .ticker-track { animation-play-state: paused; }
 .fade-x {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
@@ -93,45 +105,39 @@ body {
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
-/* cards lift a little and get a soft ring on hover / keyboard focus */
+/* a flat data panel: faint tint + 1px border, sharp corners */
+@utility panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+}
+/* interactive panels: the border darkens on hover; a plain outline on keyboard focus */
 @utility lift {
-  transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
-  &:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -12px rgb(16 24 40 / 0.18), 0 0 0 4px color-mix(in srgb, var(--color-accent) 14%, transparent); }
-  &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-accent); }
+  transition: border-color 150ms ease, background-color 150ms ease;
+  &:hover { border-color: color-mix(in srgb, var(--color-ink) 45%, transparent); }
+  &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 }
-/* pill buttons / chips */
 @utility chip {
-  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 200ms ease, color 160ms ease;
-  &:hover { box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 14%, transparent); }
-  &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--color-accent); }
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  &:hover { border-color: color-mix(in srgb, var(--color-ink) 45%, transparent); }
+  &:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 }
-/* gradient text for the hero's key phrase: sunrise colours */
-@utility glow-text {
-  background: linear-gradient(92deg, var(--hl-a), var(--hl-b) 55%, var(--hl-c));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* small uppercase label, terminal style */
+@utility label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
-:root { --hl-a: #e8590c; --hl-b: #e03131; --hl-c: #c2255c; }
-[data-theme="dark"] { --hl-a: #ffd8a8; --hl-b: #ff8f5a; --hl-c: #ff5d73; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 
-/* Hero backdrop behind the line waves (WaveField): deep teal-navy at night, soft mint-to-sky by day. */
-.hero-bg {
-  background:
-    radial-gradient(70% 60% at 78% 72%, rgb(14 154 167 / 0.16), transparent 70%),
-    radial-gradient(60% 50% at 10% 20%, rgb(12 143 90 / 0.10), transparent 70%),
-    linear-gradient(165deg, #f7fbff 0%, #eef8f3 48%, #e9f2ff 100%);
-}
-[data-theme="dark"] .hero-bg {
-  background:
-    radial-gradient(70% 60% at 78% 72%, rgb(40 180 200 / 0.20), transparent 70%),
-    radial-gradient(55% 50% at 8% 18%, rgb(63 217 154 / 0.10), transparent 70%),
-    linear-gradient(165deg, #04121a 0%, #030b13 50%, #05081a 100%);
-}
-
-/* the hero's cards float gently */
-@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-.drift { animation: drift 7s ease-in-out infinite; }
+/* Hero backdrop: the line waves (WaveField) sit under a flat 85% veil of the page colour, so they read as a
+   faint watermark. The veil ignores the pointer, so the waves still react to it. */
+.hero-bg { background: var(--color-bg); }
+.wave-veil { background: rgb(247 245 240 / 0.85); }
+[data-theme="dark"] .wave-veil { background: rgb(18 18 18 / 0.85); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

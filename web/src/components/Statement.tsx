@@ -1,37 +1,35 @@
-// "How it works" as one big statement, three ideas with abstract icons, and the size of the data.
+// "How it works": one statement, three ideas with fine-line icons, and the size of the data.
 import { motion } from "motion/react";
 import { dateLabel } from "../lib/format";
 import type { Summary } from "../types";
 
-// Line-art icons in the same flowing-line style as the hero waves.
-const stroke = { fill: "none", strokeWidth: 2.2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+// Fine-line technical icons: one colour, 1.25px strokes, square ends — like figures in a statistics paper.
+const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.25, strokeLinecap: "square" as const };
 const ICONS = {
-  // calm lines, one with a spike: an item measured against its own normal
+  // a bell curve with its typical band, and one flagged point far outside it
   own: (
-    <svg viewBox="0 0 80 80" className="h-20 w-20" aria-hidden="true">
-      {[18, 30, 54, 66].map((y, i) => (
-        <path key={y} d={`M6 ${y} C 22 ${y - 5}, 30 ${y + 5}, 44 ${y} S 64 ${y - 5}, 74 ${y}`} {...stroke} style={{ stroke: "var(--color-brand)", opacity: 0.35 + i * 0.1 }} />
-      ))}
-      <path d="M6 42 C 18 38, 24 46, 34 42 L 40 20 L 46 42 C 56 38, 62 46, 74 42" {...stroke} style={{ stroke: "var(--color-up)" }} />
+    <svg viewBox="0 0 64 64" className="h-14 w-14 text-muted" aria-hidden="true">
+      <path d="M4 56 H60 M4 56 V8" {...line} />
+      <path d="M6 54 C 16 54, 18 22, 28 22 S 40 54, 50 54" {...line} />
+      <path d="M20 56 V40 M36 56 V40" {...line} strokeDasharray="2 2" />
+      <rect x="52" y="14" width="5" height="5" style={{ fill: "var(--color-up)" }} />
+      <path d="M54.5 21 V54" {...line} strokeDasharray="1 3" />
     </svg>
   ),
-  // waves that turn into lines of text: numbers explained in words
+  // a ruled page with a check mark: the numbers written up, then verified
   words: (
-    <svg viewBox="0 0 80 80" className="h-20 w-20" aria-hidden="true">
-      {[22, 34, 46, 58].map((y, i) => (
-        <path key={y} d={`M6 ${y} C 14 ${y - 6}, 20 ${y + 6}, 30 ${y} S 40 ${y}, 44 ${y} L ${74 - i * 9} ${y}`} {...stroke} style={{ stroke: "var(--color-brand-2)", opacity: 1 - i * 0.15 }} />
-      ))}
+    <svg viewBox="0 0 64 64" className="h-14 w-14 text-muted" aria-hidden="true">
+      <path d="M12 6 H44 L52 14 V58 H12 Z M44 6 V14 H52" {...line} />
+      <path d="M19 22 H45 M19 29 H45 M19 36 H38" {...line} />
+      <path d="M22 47 L28 52 L40 42" {...line} strokeWidth={1.75} />
     </svg>
   ),
-  // a stepped bundle (set prices) kept apart from a wavy one (market prices)
+  // a 3 × 3 grid with one column ruled off: set prices kept apart from market prices
   apart: (
-    <svg viewBox="0 0 80 80" className="h-20 w-20" aria-hidden="true">
-      {[12, 20, 28].map((y) => (
-        <path key={y} d={`M6 ${y + 4} H 30 V ${y} H 52 V ${y - 3} H 74`} {...stroke} style={{ stroke: "var(--color-brand)" }} />
-      ))}
-      {[52, 60, 68].map((y, i) => (
-        <path key={y} d={`M6 ${y} C 18 ${y - 7}, 26 ${y + 7}, 40 ${y} S 62 ${y - 7}, 74 ${y}`} {...stroke} style={{ stroke: "var(--color-brand-2)", opacity: 0.45 + i * 0.25 }} />
-      ))}
+    <svg viewBox="0 0 64 64" className="h-14 w-14 text-muted" aria-hidden="true">
+      {[0, 1, 2].flatMap((r) => [0, 1].map((c) => <rect key={`${r}${c}`} x={6 + c * 14} y={8 + r * 16} width="10" height="10" {...line} />))}
+      <path d="M38 4 V60" {...line} strokeDasharray="2 2" />
+      {[0, 1, 2].map((r) => <rect key={r} x={46} y={8 + r * 16} width="10" height="10" {...line} style={{ fill: "currentColor", fillOpacity: 0.25 }} />)}
     </svg>
   ),
 };
@@ -52,33 +50,33 @@ export function Statement({ summary, items, cities }: { summary: Summary; items:
     [String(cities), "cities compared"],
     [dateLabel(summary.data_start).replace(/^\d+ /, ""), "history starts"],
   ];
-  const appear = (i = 0) => ({ initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: "-80px" }, transition: { duration: 0.7, delay: i * 0.1 } });
+  const appear = (_i = 0) => ({}); // no scroll animations: content is always visible
 
   return (
-    <section id="method" className="scroll-mt-24 text-center">
-      <motion.p {...appear()} className="text-xs font-bold uppercase tracking-[0.18em] text-brand">How it works</motion.p>
-      <motion.h2 {...appear()} className="mx-auto mt-4 max-w-5xl font-display text-[clamp(38px,5.6vw,76px)] font-bold leading-[1] tracking-[-0.04em]">
+    <section id="method" className="scroll-mt-24">
+      <motion.p {...appear()} className="label border-t border-line pt-4">How it works</motion.p>
+      <motion.h2 {...appear()} className="mt-4 max-w-4xl font-serif text-[clamp(32px,4.2vw,54px)] font-bold leading-[1.1] tracking-[-0.01em]">
         Built for the kitchen table,<br /><span className="text-muted">not the trading floor.</span>
       </motion.h2>
-      <motion.p {...appear()} className="mx-auto mt-6 max-w-2xl text-lg text-muted">
+      <motion.p {...appear()} className="mt-5 max-w-2xl text-lg text-muted">
         Prices rise every week in Pakistan. Mehngai Watch tells you which rises are normal for that item, and which aren't.
       </motion.p>
 
-      <div className="mt-16 grid gap-12 text-left md:grid-cols-3 md:gap-10">
+      <div className="mt-12 grid gap-px border border-line bg-line md:grid-cols-3">
         {IDEAS.map((idea, i) => (
-          <motion.div key={idea.title} {...appear(i)}>
+          <motion.div key={idea.title} {...appear(i)} className="bg-bg p-6">
             {ICONS[idea.icon]}
-            <h3 className="mt-6 font-display text-2xl font-bold tracking-[-0.02em]">{idea.title}</h3>
-            <p className="mt-3 leading-relaxed text-muted">{idea.body}</p>
+            <h3 className="mt-5 font-serif text-xl font-bold">{idea.title}</h3>
+            <p className="mt-3 text-[15px] leading-relaxed text-muted">{idea.body}</p>
           </motion.div>
         ))}
       </div>
 
-      <motion.dl {...appear()} className="mt-16 grid grid-cols-2 overflow-hidden rounded-3xl border border-line bg-panel text-left md:grid-cols-4">
+      <motion.dl {...appear()} className="mt-6 grid grid-cols-2 border border-line text-left md:grid-cols-4">
         {stats.map(([value, label]) => (
           <div key={label} className="flex flex-col-reverse border-line p-6 odd:border-r md:border-r md:last:border-r-0 [&:nth-child(-n+2)]:border-b md:[&:nth-child(-n+2)]:border-b-0">
             <dt className="mt-1 text-sm text-muted">{label}</dt>
-            <dd className="font-display text-4xl font-bold tracking-[-0.03em] md:text-5xl">{value}</dd>
+            <dd className="font-mono text-3xl font-medium md:text-4xl">{value}</dd>
           </div>
         ))}
       </motion.dl>

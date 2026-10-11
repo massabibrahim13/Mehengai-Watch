@@ -37,6 +37,18 @@ def load_series(conn: sqlite3.Connection,
     return wide, basket.reindex(wide.index)
 
 
+def same_week_last_year(series: pd.Series, week: pd.Timestamp, tolerance_days: int = 3) -> float | None:
+    """Price in the report of the same week one year (52 weeks) earlier, or None if that week's report is
+    missing. Strict on purpose: PBS skips some weeks (e.g. Eid), and borrowing a neighbouring week would show
+    a year-on-year change that differs from PBS's own (checked against PBS's printed figures in verify.py)."""
+    target = week - pd.Timedelta(weeks=52)
+    earlier = series.loc[:week - pd.Timedelta(days=1)].dropna()
+    if earlier.empty:
+        return None
+    nearest = earlier.index[np.argmin(np.abs(earlier.index - target))]
+    return float(earlier.loc[nearest]) if abs((nearest - target).days) <= tolerance_days else None
+
+
 def gap_weeks(index: pd.DatetimeIndex) -> pd.Series:
     """How many weeks each report is after the previous one (6–8 days count as 1)."""
     days = index.to_series().diff().dt.days

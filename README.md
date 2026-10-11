@@ -19,17 +19,18 @@ latest price news.
 
 A React website is replacing the Streamlit dashboard as the public face of the project. It opens on ribbons of fine
 flowing lines that drift slowly, speed up and bend around your pointer, and ripple where you click, next to this
-week's biggest price moves. Below: this week's summary with our Essentials index and the unusual moves, a heatmap of all 51 items,
-a sortable price list, a city map, and news cards that show the live price of the item they mention. The Python
-pipeline exports small JSON files; the site only displays them.
+week's biggest price moves. Five sections follow: **This week** (our Essentials index, the alerts with plain-language
+explanations, government price changes), **Prices** (all 51 items as a sortable list or a heatmap), **Cities**,
+**News** (each headline next to the price it mentions) and **How it works**. The Python pipeline exports small JSON
+files; the site only displays them.
 
 ![Website home page, night mode](docs/img/web_home.png)
 
 ![Website home page, day mode](docs/img/web_home_day.png)
 
-| Market summary | Heatmap |
+| This week | Every price |
 |---|---|
-| ![Market summary](docs/img/web_overview.png) | ![Heatmap of all 51 items](docs/img/web_heatmap.png) |
+| ![This week](docs/img/web_overview.png) | ![All 51 prices](docs/img/web_prices.png) |
 
 | News with live prices | Where it costs more |
 |---|---|
@@ -128,6 +129,13 @@ with no look-ahead** over Sep 2021 – Oct 2026. The detector was chosen on the 
 - **Honest limitations:** only 8 known events, so recall moves in 12.5-point steps. L1 treats even big tomato
   swings as normal *for tomatoes* (it missed the two tomato events). Full details and the tuning log are in
   [`docs/decisions.md`](docs/decisions.md).
+
+### Are the numbers right? (cross-check with PBS)
+
+Each PBS report prints, next to its national average, PBS's own previous-week price, same-week-last-year price and
+% changes. The pipeline never uses those columns; it computes everything itself. So comparing the two checks
+parsing, storage and the formulas independently: **Over all 352 reports since Sep 2019, this week's price matches PBS on 17,952 of 17,952 values (100%), the previous week on 98.7% and the year-ago price on 99.7%; every difference is PBS later correcting an earlier week's figure, or a week missing from our archive.** Full table: [`docs/verification.md`](docs/verification.md);
+re-run with `python -m mehngai.verify --all`. Every weekly run also checks the newest report this way.
 
 ## Run it yourself
 

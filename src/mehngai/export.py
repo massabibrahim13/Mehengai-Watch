@@ -34,7 +34,7 @@ import yaml
 from mehngai.clean.normalize import load_items
 from mehngai.config import CONFIG_DIR, PROJECT_ROOT, load_settings
 from mehngai.detect.changes import price_changes
-from mehngai.detect.series import load_series
+from mehngai.detect.series import load_series, same_week_last_year
 from mehngai.explain.facts import SEVERITY_WORDS, build_facts, label, unit_phrase
 from mehngai.explain.guardrails import template
 from mehngai.news import read_news
@@ -70,10 +70,8 @@ def typical_move(series: pd.Series, i: int, weeks: int) -> float | None:
 
 
 def year_ago(series: pd.Series, week: pd.Timestamp) -> float | None:
-    """Price in the report nearest to 52 weeks earlier (within 10 days), else None."""
-    target = week - pd.Timedelta(weeks=52)
-    nearest = series.index[np.argmin(np.abs(series.index - target))]
-    return series.loc[nearest] if abs((nearest - target).days) <= 10 else None
+    """Price in the same week last year, or None if PBS has no report for that week (see series.py)."""
+    return same_week_last_year(series, week)
 
 
 class Exporter:

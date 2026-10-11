@@ -5,7 +5,7 @@
 // - "Reduce motion": one still frame, no reactions. Paused while off screen.
 // Speed: the canvas is drawn at a lower resolution than the screen and scaled up (fine glowing lines barely
 // change); if frames still run slow on this machine, the resolution steps down further by itself.
-// Purely decorative (aria-hidden); colours follow the light/dark theme.
+// Purely decorative (aria-hidden); muted slate colours that follow the light/dark theme.
 import { useEffect, useRef } from "react";
 import { useTheme, type Theme } from "../lib/theme";
 
@@ -28,10 +28,11 @@ const RIBBONS: Ribbon[] = [
   { lines: 22, y0: 0.12, y1: 0.3, amp: 0.09, spread: 0.12, waves: 1.1, twist: -2.6, speed: 0.7, alpha: 0.36, sheen: 0.04, phase: 2.1 },
 ];
 
-// left → middle → right colours of each ribbon, per theme (brand greens into teal and blue)
+// left → middle → right colours of each ribbon, per theme: desaturated slate greys, so the waves read as a
+// watermark under the hero's veil (see .wave-veil in index.css)
 const PALETTE: Record<Theme, { colors: [string, string, string][]; blend: GlobalCompositeOperation; boost: number }> = {
-  dark: { colors: [["#3fd99a", "#36c8e0", "#5b7cfa"], ["#2bb3a3", "#4c8fe6", "#8b6cf6"]], blend: "lighter", boost: 1 },
-  light: { colors: [["#0c8f5a", "#0e9aa7", "#2a78d6"], ["#0e9aa7", "#2a78d6", "#6d5bd0"]], blend: "source-over", boost: 0.66 },
+  dark: { colors: [["#8d96a1", "#a9b1ba", "#7f8994"], ["#7c8590", "#98a0aa", "#868e98"]], blend: "lighter", boost: 1 },
+  light: { colors: [["#4b525a", "#5f666e", "#4f565e"], ["#5a6068", "#6b7179", "#565c64"]], blend: "source-over", boost: 0.8 },
 };
 
 const IDLE = 0.16; // drift speed when nobody is interacting

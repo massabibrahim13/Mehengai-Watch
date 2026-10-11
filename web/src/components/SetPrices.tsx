@@ -1,6 +1,6 @@
 // Government-set prices and packaged-goods price revisions: "before -> after" lists.
 import type { Item, PriceChange, Summary } from "../types";
-import { Card, Change, ItemIcon, Price, SectionHead } from "./ui";
+import { Card, Change, ItemIcon, Price } from "./ui";
 
 function Board({ title, note, rows, empty, items, onOpen }: {
   title: string; note: string; rows: PriceChange[]; empty: string; items: Record<string, Item>; onOpen: (id: string) => void;
@@ -8,8 +8,8 @@ function Board({ title, note, rows, empty, items, onOpen }: {
   return (
     <Card className="overflow-hidden">
       <div className="border-b border-line px-5 py-4">
-        <h3 className="text-lg font-bold">{title}</h3>
-        <p className="text-sm text-muted">{note}</p>
+        <h3 className="label text-ink">{title}</h3>
+        <p className="mt-1 text-sm text-muted">{note}</p>
       </div>
       {rows.length === 0 ? (
         <p className="px-5 py-6 text-muted">{empty}</p>
@@ -36,17 +36,19 @@ function Board({ title, note, rows, empty, items, onOpen }: {
   );
 }
 
-export function SetPrices({ summary, items, onOpen }: { summary: Summary; items: Item[]; onOpen: (id: string) => void }) {
+/** Government-set and company-set price changes this week (part of the "This week" section). */
+export function SetPriceBoards({ summary, items, onOpen }: { summary: Summary; items: Item[]; onOpen: (id: string) => void }) {
   const byId = Object.fromEntries(items.map((i) => [i.item_id, i]));
   return (
-    <section>
-      <SectionHead id="set-prices" eyebrow="Decisions, not anomalies" title="Set prices" sub="Prices set by the government or by companies. A change is a decision, never an anomaly." />
-      <div className="grid gap-4 md:grid-cols-2">
+    <div id="set-prices" className="mt-12 scroll-mt-24">
+      <h3 className="font-serif text-2xl font-bold">Prices set by the government or companies</h3>
+      <p className="mt-1 max-w-2xl text-[15px] text-muted">These change by decision, not by the market, so they are listed here rather than judged as unusual.</p>
+      <div className="mt-5 grid gap-4 md:grid-cols-2">
         <Board title="Government price changes" note={`Petrol, diesel, LPG, electricity, gas, phone · moves of ${summary.thresholds.administered}% or more`}
           rows={summary.government} empty="No government-set price changed this week." items={byId} onOpen={onOpen} />
         <Board title="Price revisions" note={`Packaged, branded and hotel prices · moves of ${summary.thresholds.fixed}% or more`}
           rows={summary.revisions} empty="No packaged or fixed-price item changed this week." items={byId} onOpen={onOpen} />
       </div>
-    </section>
+    </div>
   );
 }

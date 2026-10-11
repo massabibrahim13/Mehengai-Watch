@@ -379,3 +379,43 @@ Hiding the canvas gave 57 fps and removing the glass blur changed nothing, so th
 | Frame rate | Idle drift redrawn every other frame (30 fps); full 60 fps while the pointer moves or a ripple runs | The idle drift is too slow for the eye to notice the difference. |
 | Work per frame | 58 strands (was 74); sine/cosine computed once per column and combined per strand (sin(a+b) = sin a·cos b + cos a·sin b); pointer/ripple maths skipped far from the disturbance | Same look, a fraction of the maths. |
 | Result | ~50 fps with the CPU slowed 4× (idle and while moving); a steady 60 fps expected on a normal machine | Measured with `perf_hero.py` (Playwright + Chrome CPU throttling). |
+
+---
+
+## Accuracy check + a simpler site (2026-10-11)
+
+Massab: test that the app works and that the data is accurately calculated and displayed; make the site easier to
+navigate and less dense; keep search traditional; an AI chatbot later, separate from search.
+
+**How accuracy is checked.** Every Annex PDF prints, next to PBS's national average, PBS's own previous-week price,
+same-week-last-year price and % changes. Our pipeline never reads those columns — it computes everything from the
+weekly averages — so comparing the two is an independent check of parsing, cleaning, storage and our formulas
+(`python -m mehngai.verify`, report in `docs/verification.md`). Over all 352 reports since Sep 2019, this week's price matches PBS on 17,952 of 17,952 values (100%), the previous week on 98.7% and the year-ago price on 99.7%; every difference is PBS later correcting an earlier week's figure, or a week missing from our archive.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Year-ago price | Only the report of the same week last year (±3 days), else "–"; one shared helper `same_week_last_year` used by the export and the explanation facts | The old rule took the nearest report within 10 days. When PBS skipped a week (e.g. around Eid 2025) it borrowed a neighbour, so our yearly % differed from PBS's (76 mismatches in the last 52 weeks). Showing "–" is honest; a wrong number is not. |
+| Electricity, 27 Nov 2025 | Left as is, documented | PBS's own "previous week" (Rs 5.40) differs from the price PBS printed the week before (Rs 4.83): PBS revised that week's figure. We use the prices as published each week. |
+| Ongoing checks | `tests/test_data_accuracy.py` (site JSON vs database vs parsed PDF vs PBS print, 8 tests, skipped without data); pipeline stage 4b checks every new report against PBS and logs any mismatch | Accuracy is re-proven every week, not just today. |
+| Labels | Price-list tags show the real level (notable / unusual / extreme); counts are "alerts" | The list called a "notable" move "unusual", disagreeing with the cards. |
+| Search | A plain box in the header (Ctrl+K or "/" to focus) with a results list under it; no chips or pop-up | Massab: more traditional search. |
+| Navigation | Five sections in reading order (This week · Prices · Cities · News · How it works); the one on screen is underlined; ☰ menu on phones | Phones had no way to jump between sections. |
+| Less dense | Removed the ticker band, the floating button and the four category cards; heatmap and list merged into one "Prices" section with a List/Heatmap switch; set-price boards moved into "This week"; plain "how to read this" lines | Fewer, calmer blocks; each section answers one question. |
+| AI chat | Separate chat bubble for longer questions, built after deployment (needs a free Cloudflare Worker to keep the Gemini key secret) | Massab: keep search simple; AI for tricky questions. |
+
+### Institutional restyle (2026-10-11)
+
+Massab: strip the "AI/Web3 startup" look (bubbly fonts, pills, neon gradients, glows) for an "institutional fintech /
+editorial data terminal" look (Bloomberg terminal, FT data hub); keep the interactive waves but mute them.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Type | Merriweather (serif headings), Inter (text, labels), JetBrains Mono (every number: prices, %, index, table, chart axes) | Editorial credibility; monospace keeps columns of numbers aligned and reads as "data". |
+| Geometry | Radius theme tokens set to 2px; flat panels = 3% tint + 1px border at 15%; no shadows, glows or blur | Sharp, flat and quiet, like a terminal. |
+| Controls | Underlined tabs (categories, news topics, map items); sharp segmented controls (3M/1Y/3Y/All, List/Heatmap); rectangular buttons and search | Replaces pills. |
+| Data colours | Up = brick red, down = steel blue, per theme; validated with the palette checker (CVD ΔE ≥ 17, contrast ≥ 3:1 as marks, ≥ 4.7:1 as text); heatmap and map use muted versions of the same pair | Muted but still colour-blind safe; ▲▼ always shown. |
+| Charts | Index and history lines 2px in the text colour, no area fill; sparklines 1px; map bubbles 70% opaque with a 1px edge | No glows or gradients. |
+| Waves | `WaveField` logic unchanged; colours desaturated to slate greys; an 85% veil of the page colour (#121212 / #f7f5f0) on top with `pointer-events: none` | A faint watermark that still reacts to the pointer. Also faster: 60 fps on a 4× slowed CPU. |
+| Light mode | Same design on "editorial paper" (#f7f5f0, near-black ink) | Massab's spec describes the dark terminal; the light/dark toggle he asked for earlier is kept. |
+| Motion | Removed floating/drift and scroll-triggered fade-ins | Content is always visible; a data tool shouldn't animate for show. |
+| Falls in green | Price down = green: #3fa98a (dark, passes every palette check, text 6.5:1) / #0f7350 (light, text 5.4:1, colour-blind separation ΔE 7.9 — allowed because ▲▼ always accompany the colour); heatmap and map use muted versions | Massab: red vs green is the classic profit/loss convention. Greens were chosen to stay distinguishable from the red for colour-blind readers. |

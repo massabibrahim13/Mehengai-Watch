@@ -223,17 +223,26 @@ Details that matter:
   rule-based part of "Ask" run in the browser on the exported JSON.
 - The Ask box's AI fallback needs the Gemini key, which must never reach the browser → one tiny
   free serverless function (e.g. Cloudflare Worker) holds the key. Optional; rules work without it.
-- Design brief (agreed with Massab, revised 2026-10-11): **premium, unique and memorable**, not generic
-  "AI slop", and **not a copy of any reference site** (no cloned layouts or button shapes; normal
-  rounded buttons). Hero: interactive canvas line-waves (`WaveField`) — slow drift when idle, faster and
-  bending around the pointer when the visitor moves, a ripple on click/tap — beside four floating
-  "this week" cards (unusual / notable rise, government price, biggest fall); Pakistan-green brand colour (never used for data); Bricolage Grotesque display font +
-  an Urdu Nastaliq wordmark; "Built for the kitchen table, not the trading floor." The **whole page
-  follows the light/dark toggle** (no always-dark sections); one clean sans font (Manrope),
-  tabular numbers; the validated palette (blue accent, red = price up, blue = price down, ▲▼ always).
-  Market summary + Essentials index chart, heatmap, sortable watchlist, city map, interactive news
-  cards that show the price of the item they mention. Motion only where it carries information;
-  respect `prefers-reduced-motion`; light + dark mode (toggle); mobile-friendly.
+- Design brief (Massab, latest 2026-10-11): **institutional fintech / editorial data terminal** — credible
+  like a Bloomberg terminal or the FT data hub, never "AI/Web3 startup" (no pill shapes, bubbly fonts,
+  gradient text, glows or soft shadows). Serif headings (Merriweather), sans text and labels (Inter),
+  **monospace for every number** (JetBrains Mono). Corners ≤ 2px; flat panels (3% tint + 1px border);
+  underlined tabs and sharp segmented controls; 1px sparklines, 2px chart lines, no fills/glows.
+  Price up = brick red (#d9534f dark / #b3261e light), down = green (#3fa98a / #0f7350, Massab: classic
+  red vs green) — checked for colour-blind separation (▲▼ always shown too), text contrast ≥ 4.7:1; one muted gold accent for UI state. Dark = terminal
+  (#121212), light = editorial paper (#f7f5f0); the toggle switches the whole page. Hero keeps the
+  interactive canvas waves (`WaveField`: idle drift, pointer bend, click ripple) but desaturated and under
+  an 85% veil so they read as a watermark; four "this week" cards in a flat 2×2 grid; fine-line technical
+  icons; "Built for the kitchen table, not the trading floor."
+  Five sections in reading order — **This week** (index chart, alerts with explanations, set-price
+  boards) · **Prices** (sortable list ⇄ heatmap) · **Cities** (map) · **News** · **How it works** — with
+  a plain search box in the header (results list, no suggestion chips) and a ☰ menu on phones. Keep it
+  calm, not dense. Motion only where it carries information; respect `prefers-reduced-motion`;
+  light + dark mode (toggle); mobile-friendly.
+- **AI chat (Massab, 2026-10-11):** separate from search. A chat bubble for longer/tricky price questions,
+  answered by Gemini from our data only (same grounding + number-check guardrails as the explanations).
+  Needs a tiny free serverless function (Cloudflare Worker) so the key never reaches the browser.
+  Build it after deployment.
 
 **Schedule (`.github/workflows/`)**
 - GitHub Actions: weekly run of the pipeline after PBS publishes (export + rebuild + redeploy the
@@ -261,7 +270,7 @@ Details that matter:
 | Website | React + TypeScript, built with Vite (Node.js) | full control over look and interaction; most common front-end skill |
 | Styling / motion | Tailwind CSS · Motion (Framer Motion) | consistent design system; smooth, restrained animation |
 | Web charts / map | Apache ECharts | interactive charts + Pakistan city bubble map |
-| Fonts / icons | self-hosted via `@fontsource`: Manrope (text), Bricolage Grotesque (headings), Noto Nastaliq Urdu (wordmark) · lucide-react icons | no Google Fonts dependency, works offline; the Urdu font only downloads when Urdu text is shown |
+| Fonts / icons | self-hosted via `@fontsource`: Merriweather (headings), Inter (text), JetBrains Mono (numbers), Noto Nastaliq Urdu · lucide-react icons (1.4px strokes) | no Google Fonts dependency, works offline |
 | Hosting | GitHub Pages or Cloudflare Pages (static) + optional Cloudflare Worker | free; Worker keeps the Gemini key off the browser |
 | Config | YAML (`pyyaml`), `.env` (`python-dotenv`) | settings + secrets |
 | Tests | pytest | parsing + detection tests |
@@ -428,10 +437,11 @@ moves to a React website. The Python pipeline is unchanged.
 - **8a Prototype:** export JSON + a one-page interactive home in `web/` (ticker, this week's
   story, Pakistan city bubble map, movers, set-price boards, headlines, item quick-view, Ctrl+K
   search) on real data. Massab reviews the look before we continue.
-- **8b Full site:** item pages (history chart, cities, flags/changes, news), Explore/browse, Ask
-  (rules in the browser; optional serverless AI fallback), about/method page with the evaluation.
+- **8b Full site:** shareable item links, a separate AI chat bubble for longer questions (Gemini via a
+  free Cloudflare Worker, grounded in our data), "How we tested it" page with the evaluation and the
+  PBS cross-check (docs/verification.md).
 - **8c Deploy:** free static hosting + GitHub Actions (with Phase 7): weekly data + rebuild, news
-  refresh. Needs the repo to be public for free GitHub Pages — **ask Massab first**.
+  refresh. The repo is public (confirmed by Massab 2026-10-11).
 - **Learn:** components and props, state, effects, TypeScript types, CSS layout (grid/flex),
   animation, static sites vs servers, build tools, deployment, keeping secrets out of front ends.
 - **Done when:** the public URL shows this week's data, updates on its own, works on a phone,
@@ -511,8 +521,8 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ → **now: Phase 8a (website prototype, redesigned)**,
-  then 8b (full site), then 8c deploy together with Phase 7 (automation).
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ → **now: 8c deploy + Phase 7**,
+  then 8b (AI chat, item links, evaluation page). Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -532,33 +542,23 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   + 8 sourced events in `data/known_events.csv`. Phase 4: L0–L3 built + backtest; **production detector =
   L1 rolling robust z-score, 52-week window** (same recall as L0 with 60% fewer alerts; L2/L3 didn't beat it —
   see decisions.md). All layers' flags are in the `anomalies` table. 47 tests pass. All pushed to GitHub.
-- **Phase 8a done (2026-10-11):** `export.py` (stage 8) + `web/` prototype home page (React/TS/Vite/Tailwind/Motion/
-  ECharts): story headline, tickers, cards, city bubble map, movers, set prices, headlines, item quick-view, Ctrl+K
-  search. Run: `python -m mehngai.export` then `cd web && npm install && npm run dev` → http://localhost:5173.
-- **Phase 8a redesign (2026-10-11):** Massab found the first prototype too close to Streamlit → fintech-style
-  redesign: dark hero (ticker tape, headline, search, Essentials index line), Market summary (index chart with
-  3M/1Y/3Y/All, this week's signals, 4 category cards), heatmap of all 51 items, sortable watchlist, city map,
-  news cards with live price strips, set prices, method band; light/dark toggle. New export `index.json`
-  (Essentials index = chained basket change, our calculation, not the official SPI). Fixed 2 item names split by
-  unquoted YAML commas (+ test). 112 tests pass.
-- **Theme fix + bug sweep (2026-10-11):** Massab kept the interface; the light/dark toggle now switches the whole
-  page (hero and method band were hard-coded dark). Fixed: charts kept the old theme's colours after a toggle;
-  Enter in search didn't open the item; Esc in search also closed the item panel; reopening search quickly kept
-  the old text; endless loading if a history file fails; "–%" in the panel; map labels piling up when every city
-  has the same price; clipped hover on news cards; reduced-motion ignored by animations; deprecated chart option.
-  A click-through browser test (20 checks) passes with no console errors.
-- **Premium redesign (2026-10-11):** "Pakistan from orbit" hero (OrbitScene: code-drawn planet, outline, city
-  lights, roads; day/night crossfade), alert bar, TradingView-style nav, slanted CTAs, floating price cards with
-  parallax, framed "This week in prices" window, ticker band, "kitchen table" statement with stats, floating "Find a
-  price" pill, slim footer. Click-through test (20 checks) and theme test pass; no console errors.
-- **Wave hero (2026-10-11):** Massab asked not to replicate the reference sites and to replace the orbit with
-  flowing line waves like his reference images. Now: two-column hero (headline + "This week's moves" card), canvas
-  waves (idle drift / pointer bend / click ripple, 60 fps, paused off-screen, still frame with reduced motion), normal
-  buttons, the four "this week" cards back as a 2×2 floating group (Massab liked them), no red alert bar (count badge on "This week"), round floating search button, line-art icons.
-- **Hero speed fix (2026-10-11):** Massab found the hero laggy. Measured (CPU slowed 4×, 1880×1000 @1.25x): ~10 fps →
-  ~50 fps. Canvas drawn at ≤1 px per CSS px and steps down to 0.5 by itself if frames run slow; idle drift redrawn at
-  30 fps; 58 strands instead of 74; sine maths once per column; lighter blur on the hero cards.
-- **Next step:** Phase 8b (item pages, browse, Ask in the browser, code-split charts).
+- **Phase 8a done (2026-10-11):** `export.py` (stage 8) + the React site in `web/`, through several design rounds
+  with Massab (fintech look → theme fix → own design, no copied reference layouts → interactive canvas wave hero
+  with four "this week" cards → speed fix, ~10 → ~50 fps on a 4× slowed CPU). Details in decisions.md "v3".
+  Run: `python -m mehngai.export` then `cd web && npm install && npm run dev` → http://localhost:5173.
+- **Accuracy + simpler site (2026-10-11):** new `verify.py` compares our numbers with the figures PBS prints next to
+  the national average (previous week, same week last year, % changes) — independent of our pipeline. Over all 352 reports since Sep 2019, this week's price matches PBS on 17,952 of 17,952 values (100%), the previous week on 98.7% and the year-ago price on 99.7%; every difference is PBS later correcting an earlier week's figure, or a week missing from our archive.
+  Found and fixed: the year-ago price borrowed a neighbouring week when PBS skipped one (now strict: same week or
+  "–"), via one shared helper `same_week_last_year`; the list tagged "notable" moves as "unusual". New
+  `tests/test_data_accuracy.py` (8 tests: site JSON vs DB vs parsed PDFs vs PBS print); pipeline stage 4b checks
+  each new report against PBS. Site: plain header search box, active-section nav, phone menu, 5 sections (removed
+  ticker band, floating button, category cards, search pop-up). 120 tests + a 35-check browser test pass.
+- **Institutional restyle (2026-10-11, NOT committed — Massab reviews first):** whole site restyled as an
+  editorial data terminal (see the design brief in §3 stage 9). Waves kept but muted under an 85% veil; hero speed
+  now 60 fps on a 4× slowed CPU. 34-check browser test, theme test and 120 tests pass.
+- **Next step:** Massab reviews the restyle → commit → deploy (GitHub Pages + GitHub Actions weekly pipeline and news refresh; Massab adds the Gemini key
+  as a repo secret), then the AI chat bubble (Cloudflare Worker), item links, "How we tested it" page, code-split
+  charts. Deadline: **15 Oct 2026**.
   Later (Phase 7/8c): GitHub Actions weekly cron + news refresh + deploy; CI starts with no cached PDFs/DB, so it
   needs a cache strategy (e.g. actions/cache for data/raw + data/interim) or a first run of ~1 hour.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·

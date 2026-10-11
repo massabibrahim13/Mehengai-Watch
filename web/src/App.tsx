@@ -1,20 +1,16 @@
-// The home page: a hero with interactive line waves, then this week's summary, the statement, and the sections. Holds "which item is open" and "is search open". Every number comes from public/data/.
+// The home page: a hero with interactive line waves, then five sections in reading order — This week, Prices,
+// Cities, News, How it works. Holds "which item is open". Every number comes from public/data/.
 import { useCallback, useEffect, useState } from "react";
 import { CityMap } from "./components/CityMap";
-import { FloatingFind } from "./components/FloatingFind";
 import { Footer } from "./components/Footer";
-import { Heatmap } from "./components/Heatmap";
 import { Hero } from "./components/Hero";
 import { ItemPanel } from "./components/ItemPanel";
 import { News } from "./components/News";
 import { Overview } from "./components/Overview";
-import { SearchPalette } from "./components/SearchPalette";
-import { SetPrices } from "./components/SetPrices";
+import { Prices } from "./components/Prices";
 import { Statement } from "./components/Statement";
-import { Ticker } from "./components/Ticker";
 import { TopBar } from "./components/TopBar";
 import { Skeleton } from "./components/ui";
-import { Watchlist } from "./components/Watchlist";
 import { useGeo, useHomeData } from "./lib/data";
 
 const MAP_DEFAULTS = ["wheat_flour", "sugar", "tomatoes", "onions", "chicken", "milk", "petrol"];
@@ -23,17 +19,17 @@ export default function App() {
   const { data, error } = useHomeData();
   const geo = useGeo();
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [mapItem, setMapItem] = useState<string | null>(null);
   const [overHero, setOverHero] = useState(true);
+  const [focusSearch, setFocusSearch] = useState(0); // bump to put the cursor in the search box
 
-  // Ctrl/Cmd+K or "/" opens search (unless you're typing somewhere).
+  // Ctrl/Cmd+K or "/" jumps to the search box (unless you're typing somewhere).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const typing = (e.target as HTMLElement)?.closest("input, textarea, select");
       if ((e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey)) || (e.key === "/" && !typing)) {
         e.preventDefault();
-        setSearchOpen(true);
+        setFocusSearch((n) => n + 1);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -57,6 +53,7 @@ export default function App() {
 
   const open = useCallback((id: string) => setOpenItem(id), []);
   const close = useCallback(() => setOpenItem(null), []);
+  const search = useCallback(() => setFocusSearch((n) => n + 1), []);
 
   if (error) {
     return (
@@ -70,9 +67,9 @@ export default function App() {
     return (
       <div className="min-h-screen bg-hero px-4 pt-32 md:px-8" aria-busy="true">
         <div className="mx-auto max-w-7xl space-y-5">
-          <div className="h-12 w-2/3 animate-pulse rounded-2xl bg-hero-ink/5" />
-          <div className="h-6 w-1/2 animate-pulse rounded-2xl bg-hero-ink/5" />
-          <Skeleton className="h-14 w-full max-w-xl bg-hero-ink/5" />
+          <div className="h-12 w-2/3 animate-pulse bg-ink/5" />
+          <div className="h-6 w-1/2 animate-pulse bg-ink/5" />
+          <Skeleton className="h-14 w-full max-w-xl" />
         </div>
       </div>
     );
@@ -83,26 +80,19 @@ export default function App() {
 
   return (
     <>
-      <TopBar overHero={overHero} summary={summary} onSearch={() => setSearchOpen(true)} />
-      <Hero summary={summary} items={items} onOpen={open} onSearch={() => setSearchOpen(true)} />
+      <TopBar overHero={overHero} summary={summary} items={items} onOpen={open} focusSearch={focusSearch} />
+      <Hero summary={summary} items={items} onOpen={open} onSearch={search} />
       <main className="relative bg-bg">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="mx-auto max-w-7xl space-y-28 px-4 pb-32 md:space-y-36 md:px-8">
           <Overview summary={summary} items={items} index={index} onOpen={open} />
-        </div>
-        <div className="mt-14 md:mt-20"><Ticker items={items} onOpen={open} /></div>
-        <div className="mx-auto max-w-7xl space-y-24 px-4 pb-28 pt-20 md:space-y-32 md:px-8 md:pt-28">
-          <Statement summary={summary} items={items.length} cities={cities.cities.length} />
-          <Heatmap items={items} onOpen={open} />
-          <Watchlist items={items} onOpen={open} />
+          <Prices items={items} onOpen={open} />
           <CityMap cities={cities} items={items} geo={geo} featured={featured} item={mapItem ?? featured[0]} setItem={setMapItem} onOpen={open} />
           <News news={news} items={items} onOpen={open} />
-          <SetPrices summary={summary} items={items} onOpen={open} />
+          <Statement summary={summary} items={items.length} cities={cities.cities.length} />
         </div>
       </main>
       <Footer summary={summary} />
-      <FloatingFind show={!overHero && !openItem && !searchOpen} onSearch={() => setSearchOpen(true)} />
       <ItemPanel itemId={openItem} items={items} cities={cities} news={news} onClose={close} onOpen={open} />
-      <SearchPalette open={searchOpen} items={items} onClose={() => setSearchOpen(false)} onOpen={open} />
     </>
   );
 }

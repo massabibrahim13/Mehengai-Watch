@@ -40,9 +40,9 @@ export const dateLabel = (iso: string): string => {
 
 export const timeAgo = (iso: string, now = Date.now()): string => {
   const minutes = Math.max(0, (now - new Date(iso).getTime()) / 60000);
-  if (minutes < 60) return `${Math.round(minutes)} min ago`;
-  if (minutes < 48 * 60) return `${Math.round(minutes / 60)} h ago`;
-  return `${Math.round(minutes / 1440)} days ago`;
+  if (minutes < 60) return `${Math.round(minutes)}m ago`;
+  if (minutes < 48 * 60) return `${Math.round(minutes / 60)}h ago`;
+  return `${Math.round(minutes / 1440)}d ago`;
 };
 
 /** "Chana daal and wheat flour", "A, B and C" */

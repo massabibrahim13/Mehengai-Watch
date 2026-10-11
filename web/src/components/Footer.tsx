@@ -5,7 +5,7 @@ import { Logo } from "./TopBar";
 
 export function Footer({ summary }: { summary: Summary }) {
   return (
-    <footer className="border-t border-line bg-panel">
+    <footer className="border-t border-line">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[1.2fr_1fr] md:px-8">
         <div>
           <Logo className="text-ink" />
