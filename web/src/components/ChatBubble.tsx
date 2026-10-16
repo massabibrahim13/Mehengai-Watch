@@ -153,7 +153,7 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
                 className="flex h-10 w-10 items-center justify-center rounded-[2px] bg-ink text-bg disabled:opacity-40"><Send size={16} /></button>
             </form>
             <p className="border-t border-line px-4 py-2 text-[11px] leading-snug text-muted">
-              Every number comes from PBS data. An AI only helps understand hard-to-read questions; it never writes the numbers.
+              Every number comes from PBS data.{CHAT_URL && " An AI only helps understand hard-to-read questions; it never writes the numbers."}
             </p>
           </motion.div>
         )}
