@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-10-16T11:17:54+00:00",
+  "reports": 352,
+  "first_week": "2019-09-05",
+  "last_week": "2026-10-08",
+  "items": 51,
+  "checks": [
+    {
+      "check": "this week's price",
+      "compared": 17952,
+      "match": 17952,
+      "mismatch": 0,
+      "left_blank": 0,
+      "match_pct": 100.0
+    },
+    {
+      "check": "last week's price",
+      "compared": 17901,
+      "match": 17669,
+      "mismatch": 232,
+      "left_blank": 51,
+      "match_pct": 98.7
+    },
+    {
+      "check": "weekly % change",
+      "compared": 17901,
+      "match": 17670,
+      "mismatch": 231,
+      "left_blank": 51,
+      "match_pct": 98.71
+    },
+    {
+      "check": "price a year ago",
+      "compared": 14586,
+      "match": 14542,
+      "mismatch": 44,
+      "left_blank": 3366,
+      "match_pct": 99.7
+    },
+    {
+      "check": "yearly % change",
+      "compared": 14586,
+      "match": 14543,
+      "mismatch": 43,
+      "left_blank": 3366,
+      "match_pct": 99.71
+    }
+  ]
+}

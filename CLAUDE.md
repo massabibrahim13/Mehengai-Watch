@@ -348,6 +348,7 @@ mehngai-watch/
 │   ├── public/data/          ← JSON exported by the pipeline (generated, gitignored)
 │   ├── src/                  ← components, pages, styles
 │   └── package.json
+├── worker/                   ← Cloudflare Worker for the chat (holds the Gemini key; reads questions into fields)
 ├── notebooks/                ← exploration only, never imported by src/
 ├── reports/                  ← generated weekly reports
 ├── tests/
@@ -521,8 +522,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) → **now: 8b**
-  (AI chat, item links, evaluation page). Repo is public. Deadline 15 Oct 2026.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b built → **now: deploy the chat Worker**. Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -560,9 +560,15 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   `data/explanations.csv`, `reports/`); hourly news refresh; tests gate every publish. Key = repo secret
   `LLM_API_KEY`. A fresh clone rebuilds in ~30 s (rehearsed: identical JSON, 119 tests pass, 0 PDFs to fetch).
   First run green; the 34-check browser test passes on the live site.
-- **Next step:** AI chat bubble (separate from search; free Cloudflare Worker holds the Gemini key; rules first,
-  Gemini only phrases; per-visitor daily limit — Massab creates a free Cloudflare account), then shareable item
-  links, "How we tested it" page, code-split charts, README demo script. Deadline: **15 Oct 2026**.
+- **Phase 8b (2026-10-16):** shareable item links (`#/item/<id>`, Back closes, "Copy link"); **Evidence** section
+  ("How we tested it") from committed `data/evaluation.json` (`detect.evaluate --json`, 25 market items: L1 1.00
+  alerts/wk, 6 of 8 shocks, busiest item 15%) and `data/verification_summary.json` (`verify --all`); **chat**
+  ("Ask about prices") = browser port of `ask.py` (`web/src/lib/ask.ts`, answers identical to Python on 9 test
+  questions) + `worker/` (Cloudflare Worker: Gemini only reads hard questions into fields, never writes numbers;
+  CORS, 300-char cap, KV limits 3/visitor/day and 15/day overall). Chat button appears once the Worker is deployed
+  and the repo variable `VITE_CHAT_URL` is set (Massab: Cloudflare login).
+- **Next step:** deploy the Worker (Massab approves `wrangler login`), set `VITE_CHAT_URL`, test the live chat; then
+  optional: lazy-load ECharts, README demo script.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·

@@ -52,7 +52,9 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
   const closeRef = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const [copied, setCopied] = useState(false);
-  useEffect(() => setCopied(false), [itemId]);
+  useEffect(() => {
+    setCopied(false);
+  }, [itemId]);
 
   // "Copy link": the shareable address of this item (works even where the clipboard API is blocked)
   const copyLink = async () => {

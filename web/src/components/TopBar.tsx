@@ -13,6 +13,7 @@ export const SECTIONS = [
   ["Cities", "cities"],
   ["News", "news"],
   ["How it works", "method"],
+  ["Evidence", "evidence"],
 ] as const;
 
 export function Logo({ className = "" }: { className?: string }) {

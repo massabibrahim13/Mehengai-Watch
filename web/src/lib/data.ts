@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { CitiesFile, HomeData, IndexFile, Item, NewsItem, Series, Summary } from "../types";
+import type { CitiesFile, EvaluationFile, HomeData, IndexFile, Item, NewsItem, Series, Summary } from "../types";
 
 // All data comes from the JSON files the Python pipeline exports into public/data/.
 const BASE = import.meta.env.BASE_URL;
@@ -31,6 +31,15 @@ export function useHomeData(): { data: HomeData | null; error: string | null } {
 /** One item's full history, fetched only when that item is opened. Cached per session.
  *  `failed` is true if the file couldn't be loaded (so the page can say so instead of loading forever). */
 const seriesCache = new Map<string, Series>();
+
+/** One item's history as a promise (shares the cache with useSeries); used by the chat. */
+export async function fetchSeries(itemId: string): Promise<Series> {
+  const cached = seriesCache.get(itemId);
+  if (cached) return cached;
+  const s = await getJSON<Series>(`data/series/${itemId}.json`);
+  seriesCache.set(itemId, s);
+  return s;
+}
 
 export function useSeries(itemId: string | null): { series: Series | null; failed: boolean } {
   const [series, setSeries] = useState<Series | null>(itemId ? seriesCache.get(itemId) ?? null : null);
@@ -64,4 +73,15 @@ export function useGeo(): object | null {
       .catch((e: Error) => console.warn(`Map outline not loaded (${e.message}); showing the city list only.`));
   }, []);
   return geo;
+}
+
+/** "How we tested it" results; loaded after the page (small, not needed for the first screen). */
+export function useEvaluation(): EvaluationFile | null {
+  const [evaluation, setEvaluation] = useState<EvaluationFile | null>(null);
+  useEffect(() => {
+    getJSON<EvaluationFile>("data/evaluation.json")
+      .then(setEvaluation)
+      .catch(() => setEvaluation({ backtest: null, verification: null }));
+  }, []);
+  return evaluation;
 }

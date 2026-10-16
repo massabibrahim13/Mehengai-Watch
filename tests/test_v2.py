@@ -169,3 +169,11 @@ def test_government_prices_skip_the_jump_rule():
     # only the market item's ×5.8 jump is rejected (logged once, not again as "missing")
     assert rejected[["item_id", "price"]].values.tolist() == [["sugar", 580.0]]
     assert rejected["reason"].iloc[0].startswith("weekly change x5.80")
+
+
+def test_worker_uses_the_same_question_prompt():
+    # the chat Worker (worker/) bundles its own copy of the prompt that reads questions into fields
+    from mehngai.config import PROJECT_ROOT
+    python_prompt = (PROJECT_ROOT / "src" / "mehngai" / "explain" / "prompts" / "parse_question.txt").read_text(encoding="utf-8")
+    worker_prompt = (PROJECT_ROOT / "worker" / "src" / "parse_question.txt").read_text(encoding="utf-8")
+    assert worker_prompt == python_prompt

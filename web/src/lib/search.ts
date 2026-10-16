@@ -6,7 +6,7 @@ import type { Item } from "../types";
 const WORD = /[\p{L}\p{N}']+/gu;
 export const normalise = (text: string): string => (text.toLowerCase().match(WORD) ?? []).join(" ");
 
-const terms = (item: Item): string[] =>
+export const terms = (item: Item): string[] =>
   [item.item_id.replace(/_/g, " "), item.name, ...item.aliases].map(normalise).filter(Boolean);
 
 /** Similarity 0–1 from edit distance (like Python's difflib ratio, close enough for typos). */

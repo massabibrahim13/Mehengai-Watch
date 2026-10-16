@@ -170,3 +170,44 @@ def test_index_recomputed_from_the_basket(site, db):
     if base is not None:
         assert idx["change_1y_pct"] == pytest.approx((values.iloc[-1] / base - 1) * 100, abs=0.051)
     assert date.fromisoformat(idx["base_week"]) == values.index[0].date()
+
+
+# ── "How we tested it" ──
+
+def test_evaluation_file_is_the_committed_results():
+    from mehngai.config import DATA_DIR
+    site = load("evaluation.json")
+    for key, name in (("backtest", "evaluation.json"), ("verification", "verification_summary.json")):
+        path = DATA_DIR / name
+        if path.exists():
+            assert site[key] == json.loads(path.read_text(encoding="utf-8")), name
+
+
+def test_backtest_results_are_consistent():
+    from mehngai.config import DATA_DIR
+    path = DATA_DIR / "evaluation.json"
+    if not path.exists():
+        pytest.skip("backtest not run yet (python -m mehngai.detect.evaluate --json)")
+    bt = json.loads(path.read_text(encoding="utf-8"))
+    assert bt["production"] == load_settings()["detect"]["production_method"]
+    assert {m["method"] for m in bt["methods"]} >= {bt["production"], "L0_baseline"}
+    events = pd.read_csv(DATA_DIR / "known_events.csv")
+    assert [e["id"] for e in bt["events"]] == list(events["event_id"])
+    for m in bt["methods"]:
+        # recall = share of events not missed; alerts/week = alerts / weeks
+        assert m["recall"] == pytest.approx(1 - len(m["missed"]) / len(events), abs=0.006), m["method"]
+        assert m["alerts_per_week"] == pytest.approx(m["alerts"] / bt["weeks"], abs=0.006), m["method"]
+        assert set(m["missed"]) <= set(events["event_id"])
+
+
+def test_verification_summary_matches_the_report():
+    from mehngai.config import DATA_DIR
+    path = DATA_DIR / "verification_summary.json"
+    if not path.exists():
+        pytest.skip("run python -m mehngai.verify --all")
+    v = json.loads(path.read_text(encoding="utf-8"))
+    report = (PROJECT_ROOT / "docs" / "verification.md").read_text(encoding="utf-8")
+    assert f"Checked {v['reports']} weekly reports" in report
+    for c in v["checks"]:
+        assert c["match"] <= c["compared"] and c["mismatch"] == c["compared"] - c["match"]
+        assert f"| {c['check']} | {c['compared']} | {c['match']} | {c['mismatch']} |" in report, c["check"]

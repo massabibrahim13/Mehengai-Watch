@@ -435,3 +435,20 @@ Live at https://massabibrahim13.github.io/Mehengai-Watch/. Repo public (Massab);
 | Safety | `pytest` runs before every publish; a failure stops the deploy. Runs never overlap (concurrency group) | A broken parse must not reach the public site. |
 | Install | `requirements-pipeline.txt` (no Jupyter/Streamlit); Streamlit tests skip when it isn't installed | Faster runs; the Streamlit app is the private tool. |
 | Rehearsal | Before the first push: fresh clone → pipeline → JSON identical to local (56 files), 119 tests pass, downloader wants 0 PDFs, site builds | Proved the automatic run works before it went public. |
+
+---
+
+## Phase 8b — item links, evidence section, chat (2026-10-16)
+
+Massab: build the AI chat (separate from search; rules first, Gemini only for tricky questions), shareable item links
+and a "How we tested it" page.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Item links | `#/item/<id>` in the address; opening pushes a history entry, switching items replaces it, Back closes; unknown ids dropped; section anchors unchanged | Shareable without a server or a router library; Back behaves as people expect. |
+| Evidence data | Backtest (`detect.evaluate --json` → `data/evaluation.json`) and PBS cross-check (`verify --all` → `data/verification_summary.json`) made locally and committed; `export.py` merges them into `evaluation.json` | Both need the PDFs or ~10–20 minutes; GitHub Actions has neither. They only change when a detector changes. |
+| Evidence scope | Shows the 25-market-item backtest (what runs in production), not the original 8-item table in the README | Honest about what the site actually does; same conclusion (L1: same recall as L0, ~half the alerts, no item over 15%). |
+| Chat design | Same as `ask.py`: rules first; only when no item is found does the Worker ask Gemini to **read the question into fields** (items, city, dates, intent); the answer is always a fixed sentence computed from the data | The AI never writes a number, so there is nothing to hallucinate and no answer to number-check (simpler than the planned "AI phrases the reply + guardrail"). |
+| Chat code | `web/src/lib/ask.ts` is a port of `ask.py`; a browser test asks both 9 questions (English, Roman Urdu, Urdu, dates, cities) and requires identical words | Two implementations must not drift. The Python version now uses the site's strict year-ago rule too. |
+| Worker | Cloudflare Worker (free): CORS locked to the site, 300-character cap, reads the item list from the live site (cached 10 min, 6 s timeout), Gemini with a 12 s timeout and one retry on 429/503, validates every field; daily limits in Workers KV (3 per visitor via a hashed IP, 15 overall) | Keeps the key off the browser; stays inside Gemini's 20/day free tier with room for the weekly run. A busy or exhausted AI just means the chat says so and answers from the rules. |
+| Tested | Local Worker: CORS allow/deny, bad JSON, length cap, a real hard question (→ wheat flour, Lahore), prompt-injection text (no key/prompt returned), daily limit; browser: fake Worker replies (good reading, limit reached, busy, malicious ids) | Gemini was overloaded (HTTP 503) during testing — exactly the case the fallback handles. |

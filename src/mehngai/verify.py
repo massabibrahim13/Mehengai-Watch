@@ -17,8 +17,9 @@ Run:  python -m mehngai.verify [--weeks 52 | --all]   → prints a summary, writ
 from __future__ import annotations
 
 import argparse
+import json
 import logging
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pandas as pd
@@ -36,6 +37,7 @@ log = logging.getLogger(__name__)
 PRICE_TOL = 0.011   # Rs — prices are printed with 2 decimals
 PCT_TOL = 0.011     # percentage points — PBS prints % changes with 2 decimals
 REPORT = PROJECT_ROOT / "docs" / "verification.md"
+SUMMARY_JSON = PROJECT_ROOT / "data" / "verification_summary.json"   # read by export.py for the website
 
 
 def pbs_national(pdf_path: Path) -> pd.DataFrame:
@@ -174,6 +176,20 @@ def write_report(df: pd.DataFrame, path: Path = REPORT) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def write_summary_json(df: pd.DataFrame, path: Path = SUMMARY_JSON) -> None:
+    """The headline numbers for the website's "How we tested it" section. Committed to git: the PDFs needed to
+    recompute them are not available on the GitHub Actions machine."""
+    weeks = sorted(df["week"].unique())
+    summary = summarise(df)
+    path.write_text(json.dumps({
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "reports": len(weeks), "first_week": str(weeks[0]), "last_week": str(weeks[-1]),
+        "items": int(df["item_id"].nunique()),
+        "checks": [{"check": r.check, "compared": r.compared, "match": r.match, "mismatch": r.mismatch,
+                    "left_blank": r.left_blank, "match_pct": r._6} for r in summary.itertuples()],
+    }, indent=2) + "\n", encoding="utf-8")
+
+
 def check_latest() -> int:
     """Pipeline check: compare the newest report with PBS's printed figures; log every mismatch.
     Returns the number of mismatches (0 = all agree). Never raises: a check must not block publishing."""
@@ -202,6 +218,9 @@ def main() -> None:
     print(summarise(df).to_string(index=False))
     write_report(df)
     print(f"report written to {REPORT.relative_to(PROJECT_ROOT)}")
+    if args.all:   # the website shows the full-history check only
+        write_summary_json(df)
+        print(f"summary written to {SUMMARY_JSON.relative_to(PROJECT_ROOT)}")
 
 
 if __name__ == "__main__":

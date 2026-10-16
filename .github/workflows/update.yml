@@ -80,6 +80,8 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - name: Build the website
         working-directory: web
+        env:
+          VITE_CHAT_URL: ${{ vars.VITE_CHAT_URL }}   # the chat Worker's address (public); no chat button if unset
         run: npm ci && npm run build
 
       - uses: actions/upload-pages-artifact@v3

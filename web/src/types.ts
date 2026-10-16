@@ -132,3 +132,59 @@ export interface HomeData {
   news: NewsItem[];
   index: IndexFile;
 }
+
+/** "How we tested it": evaluation.json (made by detect.evaluate --json and verify --all, committed). */
+export interface BacktestMethod {
+  method: string;
+  label: string;
+  alerts: number;
+  alerts_per_week: number;
+  recall: number;
+  precision_lower_bound: number;
+  missed: string[];
+  top_item: string;
+  top_item_share: number;
+}
+
+export interface KnownEvent {
+  id: string;
+  item_id: string;
+  start: string;
+  end: string;
+  direction: "up" | "down";
+  description: string;
+  source: string;
+  url: string;
+}
+
+export interface Backtest {
+  items: number;
+  production: string;
+  weeks: number;
+  first_week: string;
+  last_week: string;
+  methods: BacktestMethod[];
+  events: KnownEvent[];
+}
+
+export interface VerificationCheck {
+  check: string;
+  compared: number;
+  match: number;
+  mismatch: number;
+  left_blank: number;
+  match_pct: number | null;
+}
+
+export interface Verification {
+  reports: number;
+  first_week: string;
+  last_week: string;
+  items: number;
+  checks: VerificationCheck[];
+}
+
+export interface EvaluationFile {
+  backtest: Backtest | null;
+  verification: Verification | null;
+}

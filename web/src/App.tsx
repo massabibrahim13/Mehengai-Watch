@@ -1,7 +1,9 @@
 // The home page: a hero with interactive line waves, then five sections in reading order — This week, Prices,
-// Cities, News, How it works. Holds "which item is open". Every number comes from public/data/.
+// Cities, News, How it works, How we tested it. Holds "which item is open". Every number comes from public/data/.
 import { useCallback, useEffect, useState } from "react";
+import { ChatBubble } from "./components/ChatBubble";
 import { CityMap } from "./components/CityMap";
+import { Evidence } from "./components/Evidence";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { ItemPanel } from "./components/ItemPanel";
@@ -11,7 +13,7 @@ import { Prices } from "./components/Prices";
 import { Statement } from "./components/Statement";
 import { TopBar } from "./components/TopBar";
 import { Skeleton } from "./components/ui";
-import { useGeo, useHomeData } from "./lib/data";
+import { useEvaluation, useGeo, useHomeData } from "./lib/data";
 
 const MAP_DEFAULTS = ["wheat_flour", "sugar", "tomatoes", "onions", "chicken", "milk", "petrol"];
 
@@ -22,6 +24,7 @@ const itemFromHash = (): string | null => window.location.hash.match(ITEM_HASH)?
 export default function App() {
   const { data, error } = useHomeData();
   const geo = useGeo();
+  const evaluation = useEvaluation();
   const [openItem, setOpenItem] = useState<string | null>(itemFromHash);
   const [mapItem, setMapItem] = useState<string | null>(null);
   const [overHero, setOverHero] = useState(true);
@@ -121,9 +124,11 @@ export default function App() {
           <CityMap cities={cities} items={items} geo={geo} featured={featured} item={mapItem ?? featured[0]} setItem={setMapItem} onOpen={open} />
           <News news={news} items={items} onOpen={open} />
           <Statement summary={summary} items={items.length} cities={cities.cities.length} />
+          <Evidence evaluation={evaluation} items={items} />
         </div>
       </main>
       <Footer summary={summary} />
+      <ChatBubble show={!overHero && !openItem} items={items} cities={cities} summary={summary} />
       <ItemPanel itemId={openItem} items={items} cities={cities} news={news} onClose={close} onOpen={open} />
     </>
   );

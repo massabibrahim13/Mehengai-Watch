@@ -11,6 +11,8 @@ is prepared here from the database, by the same code the report uses.
   news.json             latest price headlines (already filtered and item-tagged by news.py)
   index.json            "Essentials index": the weekly typical change across all 51 items (the L2 basket),
                         chained from 100 at the first report — our calculation, not the official SPI
+  evaluation.json       "How we tested it": the detector backtest (data/evaluation.json) and the check against
+                        PBS's own printed figures (data/verification_summary.json) — both made locally, committed
   series/<item>.json    full weekly history (national + 17 cities) + flagged weeks with explanations,
                         or set-price changes. One file per item, loaded only when an item is opened.
 
@@ -32,7 +34,7 @@ import pandas as pd
 import yaml
 
 from mehngai.clean.normalize import load_items
-from mehngai.config import CONFIG_DIR, PROJECT_ROOT, load_settings
+from mehngai.config import CONFIG_DIR, DATA_DIR, PROJECT_ROOT, load_settings
 from mehngai.detect.changes import price_changes
 from mehngai.detect.series import load_series, same_week_last_year
 from mehngai.explain.facts import SEVERITY_WORDS, build_facts, label, unit_phrase
@@ -208,12 +210,19 @@ class Exporter:
                  "item_ids": [i for i in r.item_ids.split(",") if i],
                  "topics": [t for t in r.topics.split(",") if t]} for r in self.news.itertuples()]
 
+    @staticmethod
+    def evaluation_file() -> dict:
+        """Combine the committed backtest and PBS cross-check results (either may be missing → null)."""
+        read = lambda name: json.loads((DATA_DIR / name).read_text(encoding="utf-8")) if (DATA_DIR / name).exists() else None
+        return {"backtest": read("evaluation.json"), "verification": read("verification_summary.json")}
+
     def write_all(self, out_dir: Path = OUT_DIR) -> dict[str, int]:
         write_json(out_dir / "summary.json", self.summary())
         write_json(out_dir / "items.json", self.items_list())
         write_json(out_dir / "cities.json", self.cities_file())
         write_json(out_dir / "news.json", self.news_list())
         write_json(out_dir / "index.json", self.index_file())
+        write_json(out_dir / "evaluation.json", self.evaluation_file())
         for item_id in self.items:
             write_json(out_dir / "series" / f"{item_id}.json", self.series_file(item_id))
         sizes = {p.relative_to(out_dir).as_posix(): p.stat().st_size for p in out_dir.rglob("*.json")}

@@ -20,6 +20,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from mehngai.detect.series import same_week_last_year
 from mehngai.explain.facts import label, unit_phrase
 from mehngai.explain.llm import LLMError, generate
 from mehngai.search import items_in_text, normalise
@@ -177,7 +178,7 @@ def rs(x: float) -> str:
 def answer(q: Question, prices: pd.DataFrame, items: dict) -> Answer:
     """`prices`: long table week_date, item_id, city, price (all cities). Numbers come only from it."""
     if not q.item_ids:
-        examples = ", ".join(items[i]["name"].lower() for i in ["wheat_flour", "sugar", "petrol", "tomatoes"])
+        examples = "wheat flour, sugar, petrol, tomatoes"   # same wording as the website's chat (web/src/lib/ask.ts)
         return Answer("I couldn't find an item PBS tracks in that question. Mehngai Watch covers the 51 "
                       f"essentials in PBS's weekly price survey (e.g. {examples}), in 17 cities, weekly "
                       "since Sep 2019. Try: “price of sugar in Lahore” or “cheapest city for aata”.",
@@ -220,10 +221,9 @@ def answer(q: Question, prices: pd.DataFrame, items: dict) -> Answer:
             parts = [f"**{item['name']}** ({place}), week ending {label(week)}: **{rs(now)} {unit}**{note}."]
             if i > 0:
                 parts.append(f"{(now / city_series.iloc[i - 1] - 1) * 100:+.1f}% vs the previous report")
-            year_ago = city_series[city_series.index <= week - pd.Timedelta(weeks=52)]
-            if len(year_ago) and (week - year_ago.index.max()).days <= 380:
-                parts.append(f"{(now / year_ago.iloc[-1] - 1) * 100:+.1f}% vs a year earlier "
-                             f"({rs(year_ago.iloc[-1])})")
+            year_ago = same_week_last_year(city_series.loc[:week], week)   # same rule as the website
+            if year_ago is not None:
+                parts.append(f"{(now / year_ago - 1) * 100:+.1f}% vs a year earlier ({rs(year_ago)})")
             lines.append(parts[0] + (" " + "; ".join(parts[1:]) + "." if len(parts) > 1 else ""))
     table = pd.concat(tables, ignore_index=True) if tables else None
     return Answer("\n\n".join(lines), table, series, q)

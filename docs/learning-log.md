@@ -278,3 +278,19 @@ tests, commits the new data and publishes; an hourly run refreshes the news.
 - *Fresh machines:* every run starts empty, so whatever it needs must be in git or rebuilt; we committed the small
   parsed tables, not the large PDFs.
 - *Rehearse before going live:* running the whole thing from a fresh clone first found nothing broken — the point.
+
+## 2026-10-16 — item links, "How we tested it", and the chat
+
+**Built** shareable links for every item, an Evidence section with the backtest and the PBS cross-check, and an
+"Ask about prices" chat backed by a tiny Cloudflare Worker that keeps the Gemini key secret.
+
+**Key concepts**
+- *Client-side routing with the URL hash:* `#/item/sugar` changes without reloading; `history.pushState` makes Back
+  close the panel.
+- *Serverless function:* a few lines of code Cloudflare runs on request — our only "backend", there to hold a secret.
+- *CORS:* the browser only lets our own site call the Worker; other sites are refused.
+- *Rate limiting:* counting requests per day (per visitor and overall) keeps a free tier free.
+- *LLM as a parser, not an author:* the AI turns a messy question into fields; code answers from data. Nothing for
+  it to invent, and prompt-injection text can only produce fields we then check.
+- *Two implementations, one behaviour:* the browser chat is tested to give word-for-word the same answers as the
+  Python version.

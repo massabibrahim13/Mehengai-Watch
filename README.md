@@ -21,8 +21,11 @@ A React website is replacing the Streamlit dashboard as the public face of the p
 flowing lines that drift slowly, speed up and bend around your pointer, and ripple where you click, next to this
 week's biggest price moves. Five sections follow: **This week** (our Essentials index, the alerts with plain-language
 explanations, government price changes), **Prices** (all 51 items as a sortable list or a heatmap), **Cities**,
-**News** (each headline next to the price it mentions) and **How it works**. The Python pipeline exports small JSON
-files; the site only displays them.
+**News** (each headline next to the price it mentions), **How it works** and **Evidence** (how we tested it: the
+detector backtest and the check against PBS's own figures). Every item has its own link (e.g. `#/item/sugar`), and an
+**"Ask about prices"** chat answers questions such as "cheapest city for aata" or "how much has petrol gone up since
+last year" from the data; when a question is hard to read, an AI helps understand it but never writes a number. The
+Python pipeline exports small JSON files; the site only displays them.
 
 ![Website home page, night mode](docs/img/web_home.png)
 
