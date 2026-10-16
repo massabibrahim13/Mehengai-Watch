@@ -21,7 +21,7 @@ from __future__ import annotations
 import argparse
 import logging
 import time
-from datetime import date
+from datetime import date, timedelta
 
 from mehngai import export, news, verify
 from mehngai.config import load_settings
@@ -51,10 +51,16 @@ def stage(name: str, fn, *args, **kwargs):
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run Mehngai Watch end to end.")
     parser.add_argument("--skip-fetch", action="store_true", help="use the PDFs already downloaded")
+    parser.add_argument("--recent", action="store_true",
+                        help="only look for reports from the last 60 days, on the live PBS site (quick; used by the "
+                             "automatic runs — the full history comes from data/interim)")
     args = parser.parse_args()
 
     ingest = load_settings()["ingest"]
-    if not args.skip_fetch:
+    if args.recent:
+        stage("1. fetch (recent, live site)", fetch.run, date.today() - timedelta(days=60), date.today(), ingest["kinds"],
+              wayback=False)
+    elif not args.skip_fetch:
         stage("1. fetch", fetch.run, ingest["start_date"], date.today(), ingest["kinds"])
     stage("2. parse", parse.run)
     stage("3-4. clean, validate, store", db.load)

@@ -1,24 +1,23 @@
-# Keeps the public website up to date, for free, with no server:
-#   • every Friday (and again on Saturday, in case PBS publishes late): download the new weekly PBS report,
-#     run the whole pipeline (parse → check against PBS → detect → explain → report → export), commit the new
-#     week's data back to the repo, and publish the site
-#   • every hour: refresh the price news and republish (no download, no new AI calls)
-#   • on every push to main, or by hand from the Actions tab: rebuild and publish
+# Keeps the public website up to date, for free, with no server. Every run (every 2 hours, on every push to main,
+# or by hand from the Actions tab):
+#   • checks the live PBS site for a new weekly report (a few small requests); if there is one, downloads it, runs the
+#     whole pipeline (parse → check against PBS → detect → explain → report → export) and commits the new week's data
+#   • refreshes the price news and republishes the site
+# Why not one Friday run: GitHub may delay or DROP scheduled runs when it is busy (it dropped our first Friday run),
+# so every run does the cheap check and whichever runs happen pick up the new report.
 # The Gemini key comes from the repository secret LLM_API_KEY; without it, explanations fall back to the
 # plain template sentence. The site is published to GitHub Pages.
 name: Update and publish
 
 on:
   schedule:
-    - cron: "30 11 * * 5"   # Fri 11:30 UTC (16:30 PKT): weekly run
-    - cron: "30 4 * * 6"    # Sat 04:30 UTC: weekly run again, if PBS was late
-    - cron: "15 * * * *"    # hourly: news refresh
+    - cron: "37 */2 * * *"  # every 2 hours, off the hour (GitHub drops fewer runs then)
   push:
     branches: [main]
   workflow_dispatch:
     inputs:
-      weekly:
-        description: "Full weekly run (download new PBS reports and commit them)"
+      full:
+        description: "Full history check (also lists the Internet Archive; slow)"
         type: boolean
         default: false
 
@@ -37,7 +36,7 @@ jobs:
     timeout-minutes: 30
     env:
       LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-      WEEKLY: ${{ github.event.schedule == '30 11 * * 5' || github.event.schedule == '30 4 * * 6' || inputs.weekly == true }}
+      FULL: ${{ inputs.full == true }}
     steps:
       - uses: actions/checkout@v4
 
@@ -51,27 +50,28 @@ jobs:
 
       - name: Run the pipeline
         run: |
-          if [ "$WEEKLY" = "true" ]; then
-            python -m mehngai.pipeline                 # downloads only weeks that aren't in data/interim yet
+          if [ "$FULL" = "true" ]; then
+            python -m mehngai.pipeline            # full history listing (live site + Internet Archive)
           else
-            python -m mehngai.pipeline --skip-fetch    # news + rebuild only
+            python -m mehngai.pipeline --recent   # live PBS site, last 60 days: new weeks only
           fi
 
       - name: Tests (a failure stops publishing)
         run: pytest -q
 
       - name: Commit the new week's data
-        if: env.WEEKLY == 'true'
         run: |
+          # only when a new PBS week arrived (a new parsed table); news-only changes are published, not committed
+          if [ -z "$(git status --porcelain data/interim data/raw/manifest.csv)" ]; then
+            echo "No new PBS report."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/interim data/raw/manifest.csv data/explanations.csv reports
-          if git diff --cached --quiet; then
-            echo "No new PBS report yet."
-          else
-            git commit -m "data: weekly PBS update $(date -u +%F)"
-            git push
-          fi
+          git commit -m "data: PBS weekly report $(ls data/interim | sort | tail -1 | cut -c1-10)"
+          git pull --rebase origin main
+          git push
 
       - uses: actions/setup-node@v4
         with:

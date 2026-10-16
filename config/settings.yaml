@@ -66,6 +66,7 @@ evaluate:
 explain:
   provider: gemini
   model: gemini-3.8-flash         # pinned (not "latest") so results are reproducible
+  fallback_model: gemini-3.5-flash-lite   # used when the main model is overloaded (HTTP 503) — same as the chat Worker
   temperature: 0.2                # low = consistent, factual wording
   timeout_seconds: 60
   request_delay_seconds: 6        # free tier allows ~10 requests/minute

@@ -55,12 +55,18 @@ def generate(prompt: str, cfg: dict, json_mode: bool = False) -> str:
     if json_mode:
         generation["responseMimeType"] = "application/json"
     body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": generation}
+    model = cfg["model"]
     for attempt in range(cfg["max_retries_on_rate_limit"] + 1):
         try:
-            resp = requests.post(GEMINI_URL.format(model=cfg["model"]), json=body,
+            resp = requests.post(GEMINI_URL.format(model=model), json=body,
                                  headers={"x-goog-api-key": api_key()}, timeout=cfg["timeout_seconds"])
         except requests.RequestException as exc:
             raise LLMError(f"network error: {exc}") from exc
+        if resp.status_code == 503 and cfg.get("fallback_model") and model != cfg["fallback_model"]:
+            # "high demand" on the main model can last hours: switch to the lighter backup model straight away
+            log.warning("%s overloaded (HTTP 503), switching to %s", model, cfg["fallback_model"])
+            model = cfg["fallback_model"]
+            continue
         if resp.status_code in (429, 503) and attempt < cfg["max_retries_on_rate_limit"]:
             wait = retry_delay(resp) or 20 * (attempt + 1)
             if wait > cfg["max_wait_seconds"]:

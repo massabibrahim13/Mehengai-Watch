@@ -209,8 +209,9 @@ def log_gaps(dates: list[date]) -> None:
         log.debug("gap: no report between %s and %s (%d days)", a, b, (b - a).days)
 
 
-def run(start: date, end: date, kinds: list[str], dry_run: bool = False) -> int:
+def run(start: date, end: date, kinds: list[str], dry_run: bool = False, wayback: bool = True) -> int:
     """Download every SPI PDF of the given kinds between start and end that we don't have yet.
+    wayback=False skips the Internet Archive listing (only needed for history): a quick, polite check for new weeks.
     Returns how many files were downloaded."""
     settings = load_settings()["ingest"]
     timeout, retries = settings["timeout_seconds"], settings["max_retries"]
@@ -220,15 +221,16 @@ def run(start: date, end: date, kinds: list[str], dry_run: bool = False) -> int:
 
     links = list_pbs_links(session, timeout, retries)
     log.info("PBS live site: %d SPI PDFs", len(links))
-    try:
-        wayback = list_wayback_links(session, timeout, retries)
-        log.info("Wayback Machine: %d SPI PDFs", len(wayback))
-    except (requests.RequestException, RuntimeError) as exc:
-        # Wayback only matters for history; a weekly run gets new reports from the live site.
-        log.warning("Wayback Machine unavailable (%s) — continuing with the live PBS site only", exc)
-        wayback = []
+    archived = []
+    if wayback:
+        try:
+            archived = list_wayback_links(session, timeout, retries)
+            log.info("Wayback Machine: %d SPI PDFs", len(archived))
+        except (requests.RequestException, RuntimeError) as exc:
+            # Wayback only matters for history; a weekly run gets new reports from the live site.
+            log.warning("Wayback Machine unavailable (%s) — continuing with the live PBS site only", exc)
 
-    chosen = pick_one_per_week(links + wayback)
+    chosen = pick_one_per_week(links + archived)
     wanted = sorted((link for (d, kind), link in chosen.items()
                      if kind in kinds and start <= d <= end),
                     key=lambda l: (l.report_date, l.kind))
