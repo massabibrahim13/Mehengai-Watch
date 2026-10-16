@@ -467,3 +467,29 @@ and a "How we tested it" page.
 | Schedule | Every run (every 2 h at :37, on push, by hand) runs `pipeline --recent`: the live PBS site only, reports from the last 60 days; commits only when a new week's table appears | GitHub dropped the first Friday-only scheduled run, so the 15 Oct report was not picked up. A frequent, cheap check (a few small requests, no Internet Archive) catches the report whichever runs happen. `inputs.full` still does the full history listing. |
 | Backup model in Python | `explain.fallback_model: gemini-3.5-flash-lite`; on HTTP 503 `llm.py` switches to it at once | Same overload the Worker hit; the main model was "high demand" for hours. |
 | Guardrail rule 6 | Every explanation must contain this week's price (2 decimals) and the % change (1 decimal; "5%" counts for 5.0); otherwise regenerate once, then use the template | The backup model wrote a correct but incomplete sentence for chana daal (no % change). The CI accuracy test caught it and stopped the publish, as designed; the check now sits where it belongs (the guardrail) so it is fixed before it reaches a test. The accuracy test compares numbers, not formatting. |
+
+---
+
+## Faster first load + demo tour (2026-10-16)
+
+Massab: make the site load faster. Measured first, on a phone-like connection (Lighthouse's mobile settings: slow 4G,
+4× slower CPU), median of 3 fresh loads, before and after, same data:
+
+| | Before | After |
+|---|---|---|
+| First paint (FCP) | 6.4 s | 0.8 s |
+| Main content (LCP) | 9.6 s | ~4.0 s |
+| JavaScript needed before the page can draw (compressed) | 375 KB | 128 KB |
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Charts on demand | `web/src/lib/echarts.ts` is loaded with `import()` by `Chart` when the first chart mounts; the map hands its outline to `Chart` (`maps` prop) | ECharts was 62% of the JavaScript (233 of 375 KB) and no chart is on the first screen. |
+| Motion's small form | `LazyMotion` + `domAnimation` + `m.` components, `strict` | The site only uses fades, slides and exits; 14 KB less, same animations. |
+| Data preload | `<link rel="preload" as="fetch">` for the 5 home-page JSON files in `index.html` | The data used to start downloading only after the code had run; now in parallel (ready at 0.5 s). |
+| Loading screen in the HTML | A static copy of the app's loading screen, with the theme set by a tiny inline script | Something meaningful paints at 0.8 s instead of a blank page for 6 s; it matches the app's own, so nothing jumps. |
+| Sections one per frame | `OneByOne`: the hero first, then each section after the previous one has painted | Building the whole page at once was a 1.2–1.5 s freeze on a slow phone, right while the hero faded in. On a fast computer everything is in place within a few frames. |
+| Price formatting | One cached `Intl.NumberFormat` per number of decimals | `toLocaleString` built a new formatter for every price on the page. |
+| Not done | Fonts (183 KB) left as they are; the hero's fade-in kept | A smaller static Merriweather would change the look; preloading fonts would compete with the code for bandwidth. The fade-in is part of the design (with "reduce motion" on, the content shows about 1 s sooner). |
+| Side fix | Links to a section (`…#evidence`) now land on it | Before, they stayed at the top: the section didn't exist yet when the browser looked for it. |
+| Checked | 30 click-through checks, 14 chat checks, theme switch, old-vs-new screenshots (≤ 0.1% of pixels differ, the moving waves) | Faster must not mean different. |
+| README demo | A 10-step "5-minute tour" of the live site, with what each step shows | For the course demo and for visitors. The chat examples were checked to take the intended path: "white sweet stuff for chai" is answered by the rules (as tea leaves), so the AI example is the hen-meat question instead. |

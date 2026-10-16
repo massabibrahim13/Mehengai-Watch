@@ -522,7 +522,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) → **now: optional polish**. Repo is public. Deadline 15 Oct 2026.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) + faster load + demo tour ✅ → **demo-ready**. Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -577,7 +577,11 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 - **Week 2026-10-15 (2026-10-16):** the CI accuracy test stopped publishing because the backup model's explanation
   left out the % change → new guardrail rule 6: every explanation must give this week's price and the % change
   (else regenerate once → template). 0 of 255 values differ from PBS; 1 flag (chana daal +5%, Rs 300.29). 125 tests pass.
-- **Next step (optional):** lazy-load ECharts (smaller first load), README demo script.
+- **Faster first load (2026-10-16):** slow-4G + 4× CPU phone test: first paint 6.4 → 0.8 s, main content 9.6 → ~4.0 s,
+  first-screen JS 375 → 128 KB (ECharts on demand via `web/src/lib/echarts.ts`, Motion `LazyMotion`, JSON preload +
+  static loading screen in `index.html`, `OneByOne` draws sections one per frame). README has a 10-step
+  "5-minute tour" (`#demo-a-5-minute-tour`). Measuring scripts were throwaway (session scratchpad).
+- **Next step:** nothing required. Optional: README screenshots refreshed from the live site.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·

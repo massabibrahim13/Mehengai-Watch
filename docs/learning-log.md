@@ -310,3 +310,20 @@ the backup AI model had written a sentence without the % change.
   regenerated or replaced before anything is published.
 - *A smaller backup model is a trade-off:* it answers when the main one is overloaded, but follows instructions less
   closely, which is why the output is checked, not trusted.
+
+## 2026-10-16 (evening) — a faster first load, and a demo tour
+
+**Built:** on a phone-like connection the site now draws something in 0.8 s instead of 6.4 s, and shows its main
+content in about 4 s instead of 9.6 s; the code needed for the first screen shrank from 375 KB to 128 KB. Plus a
+10-step demo tour in the README.
+
+**Key concepts**
+- *Measure first:* a test browser with a slowed network and CPU (the same settings Lighthouse uses) gave the
+  numbers; a CPU profile showed where the time went, so nothing was guessed.
+- *Code splitting / `import()`:* the chart library is downloaded only when the first chart appears, much like Java
+  loading a class only when it is first used.
+- *The critical path:* everything that must happen before the first screen. Preloading the data took it off that
+  path; it now downloads alongside the code.
+- *Long tasks:* the browser can't draw while JavaScript runs, so building a whole long page in one go froze the
+  screen. Building one section per frame keeps it moving.
+- *Perceived speed:* a plain loading screen at 0.8 s feels much faster than a blank page, even before the data is in.
