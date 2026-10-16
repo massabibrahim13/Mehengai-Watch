@@ -3,7 +3,7 @@
 // question is about does it ask the AI (our Cloudflare Worker → Gemini) to read the question — the AI never writes a
 // number. If the AI is busy or today's free limit is used up, the chat says so and falls back to the rules.
 import { MessageSquare, Send, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { answer, parseRules, validateAI, type Answer, type Question } from "../lib/ask";
 import { fetchSeries } from "../lib/data";
@@ -88,16 +88,16 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
     <>
       <AnimatePresence>
         {show && !open && (
-          <motion.button ref={buttonRef} type="button" onClick={() => setOpen(true)} aria-label="Ask about prices" aria-expanded={open}
+          <m.button ref={buttonRef} type="button" onClick={() => setOpen(true)} aria-label="Ask about prices" aria-expanded={open}
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 12 }}
             className="fixed bottom-5 right-5 z-30 flex h-11 items-center gap-2 rounded-[2px] border border-line bg-ink px-4 text-sm font-semibold text-bg hover:opacity-90">
             <MessageSquare size={17} aria-hidden="true" /> Ask about prices
-          </motion.button>
+          </m.button>
         )}
       </AnimatePresence>
       <AnimatePresence>
         {open && (
-          <motion.div role="dialog" aria-label="Ask about prices" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }}
+          <m.div role="dialog" aria-label="Ask about prices" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }}
             className="fixed bottom-0 right-0 z-50 flex h-[min(600px,85vh)] w-full flex-col border border-line bg-overlay sm:bottom-5 sm:right-5 sm:w-[420px] sm:rounded-[2px]">
             <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
               <div>
@@ -155,7 +155,7 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
             <p className="border-t border-line px-4 py-2 text-[11px] leading-snug text-muted">
               Every number comes from PBS data.{CHAT_URL && " An AI only helps understand hard-to-read questions; it never writes the numbers."}
             </p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

@@ -8,9 +8,34 @@
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#07090e" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a78d6'/%3E%3Cpath d='M7 22 13 13l5 5 7-9' stroke='%23ffffff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <script>
+      // The theme before anything is drawn (same rule as src/lib/theme.tsx): the visitor's saved choice, else the system's.
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("mw-theme"); } catch (e) {}
+        document.documentElement.dataset.theme =
+          t === "light" || t === "dark" ? t : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      })();
+    </script>
+    <!-- start the home page's data downloads now, alongside the code, instead of after it (src/lib/data.ts) -->
+    <link rel="preload" href="./data/summary.json" as="fetch" crossorigin />
+    <link rel="preload" href="./data/items.json" as="fetch" crossorigin />
+    <link rel="preload" href="./data/cities.json" as="fetch" crossorigin />
+    <link rel="preload" href="./data/news.json" as="fetch" crossorigin />
+    <link rel="preload" href="./data/index.json" as="fetch" crossorigin />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- shown until the app has started (React replaces it); matches the app's own loading screen in App.tsx -->
+      <div class="min-h-screen bg-hero px-4 pt-32 md:px-8" aria-busy="true">
+        <div class="mx-auto max-w-7xl space-y-5">
+          <p class="label">Mehngai Watch · loading this week's prices…</p>
+          <div class="h-12 w-2/3 animate-pulse bg-ink/5"></div>
+          <div class="h-6 w-1/2 animate-pulse bg-ink/5"></div>
+          <div class="h-14 w-full max-w-xl animate-pulse rounded-[2px] bg-ink/5"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

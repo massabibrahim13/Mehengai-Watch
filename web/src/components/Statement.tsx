@@ -1,5 +1,5 @@
 // "How it works": one statement, three ideas with fine-line icons, and the size of the data.
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { dateLabel } from "../lib/format";
 import type { Summary } from "../types";
 
@@ -54,32 +54,32 @@ export function Statement({ summary, items, cities }: { summary: Summary; items:
 
   return (
     <section id="method" className="scroll-mt-24">
-      <motion.p {...appear()} className="label border-t border-line pt-4">How it works</motion.p>
-      <motion.h2 {...appear()} className="mt-4 max-w-4xl font-serif text-[clamp(32px,4.2vw,54px)] font-bold leading-[1.1] tracking-[-0.01em]">
+      <m.p {...appear()} className="label border-t border-line pt-4">How it works</m.p>
+      <m.h2 {...appear()} className="mt-4 max-w-4xl font-serif text-[clamp(32px,4.2vw,54px)] font-bold leading-[1.1] tracking-[-0.01em]">
         Built for the kitchen table,<br /><span className="text-muted">not the trading floor.</span>
-      </motion.h2>
-      <motion.p {...appear()} className="mt-5 max-w-2xl text-lg text-muted">
+      </m.h2>
+      <m.p {...appear()} className="mt-5 max-w-2xl text-lg text-muted">
         Prices rise every week in Pakistan. Mehngai Watch tells you which rises are normal for that item, and which aren't.
-      </motion.p>
+      </m.p>
 
       <div className="mt-12 grid gap-px border border-line bg-line md:grid-cols-3">
         {IDEAS.map((idea, i) => (
-          <motion.div key={idea.title} {...appear(i)} className="bg-bg p-6">
+          <m.div key={idea.title} {...appear(i)} className="bg-bg p-6">
             {ICONS[idea.icon]}
             <h3 className="mt-5 font-serif text-xl font-bold">{idea.title}</h3>
             <p className="mt-3 text-[15px] leading-relaxed text-muted">{idea.body}</p>
-          </motion.div>
+          </m.div>
         ))}
       </div>
 
-      <motion.dl {...appear()} className="mt-6 grid grid-cols-2 border border-line text-left md:grid-cols-4">
+      <m.dl {...appear()} className="mt-6 grid grid-cols-2 border border-line text-left md:grid-cols-4">
         {stats.map(([value, label]) => (
           <div key={label} className="flex flex-col-reverse border-line p-6 odd:border-r md:border-r md:last:border-r-0 [&:nth-child(-n+2)]:border-b md:[&:nth-child(-n+2)]:border-b-0">
             <dt className="mt-1 text-sm text-muted">{label}</dt>
             <dd className="font-mono text-3xl font-medium md:text-4xl">{value}</dd>
           </div>
         ))}
-      </motion.dl>
+      </m.dl>
     </section>
   );
 }

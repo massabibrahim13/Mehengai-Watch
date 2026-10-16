@@ -1,6 +1,6 @@
 // Quick view of one item, sliding in from the right. Opened from anywhere (ticker, cards, map, tags,
 // search). Loads that item's history file on demand. Esc or the backdrop closes it.
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Chart, cssVar, useDarkMode, type EChartsOption } from "../lib/charts";
 import { useSeries } from "../lib/data";
@@ -99,8 +99,8 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
     <AnimatePresence>
       {item && (
         <>
-          <motion.div key="backdrop" className="fixed inset-0 z-40 bg-black/50" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />
-          <motion.aside key="panel" role="dialog" aria-modal="true" aria-label={item.name}
+          <m.div key="backdrop" className="fixed inset-0 z-40 bg-black/50" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />
+          <m.aside key="panel" role="dialog" aria-modal="true" aria-label={item.name}
             initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", stiffness: 320, damping: 36 }}
             className="fixed inset-y-0 right-0 z-50 w-full max-w-2xl overflow-y-auto overscroll-contain border-l border-line bg-bg">
             <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-line bg-bg px-6 py-5">
@@ -224,7 +224,7 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                 ))}
               </div>
             </div>
-          </motion.aside>
+          </m.aside>
         </>
       )}
     </AnimatePresence>

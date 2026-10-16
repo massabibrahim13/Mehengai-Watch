@@ -44,12 +44,21 @@ export function Change({ value, soft = false, className = "" }: { value: number;
   );
 }
 
+// one formatter per number of decimals, made once: toLocaleString builds a new one on every call (slow on phones)
+const priceFormats = new Map<number, Intl.NumberFormat>();
+const priceFormat = (decimals: number): Intl.NumberFormat => {
+  if (!priceFormats.has(decimals)) {
+    priceFormats.set(decimals, new Intl.NumberFormat("en-PK", { minimumFractionDigits: decimals, maximumFractionDigits: decimals }));
+  }
+  return priceFormats.get(decimals)!;
+};
+
 /** Price with a small "Rs". */
 export function Price({ value, className = "", decimals = 2 }: { value: number; className?: string; decimals?: number }) {
   return (
     <span className={`whitespace-nowrap font-mono font-medium ${className}`}>
       <span className="mr-1 font-sans text-[0.68em] font-medium text-muted">Rs</span>
-      {value.toLocaleString("en-PK", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+      {priceFormat(decimals).format(value)}
     </span>
   );
 }

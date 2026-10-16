@@ -1,7 +1,7 @@
 // Hero: flowing line waves (WaveField) behind a left-aligned promise and four "this week" cards
 // (unusual / notable rise, a government price change, the biggest fall). Every number comes from the exported JSON.
 import { ArrowRight, LayoutGrid } from "lucide-react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { dateLabel, shortName } from "../lib/format";
 import type { Item, Summary } from "../types";
 import { Change, ItemIcon, Price, Sparkline } from "./ui";
@@ -32,7 +32,7 @@ const TONE = { up: "text-up", down: "text-down", plain: "text-muted" };
 /** The four cards in a flat 2×2 grid; each opens its item. */
 function MoveCards({ summary, items, onOpen }: { summary: Summary; items: Item[]; onOpen: (id: string) => void }) {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }}>
+    <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.3 }}>
       <div className="mb-3 flex items-center justify-between gap-3 border-b border-line pb-2">
         <span className="flex items-center gap-2 text-sm font-semibold">
           <span className="h-1.5 w-1.5 animate-live bg-live" aria-hidden="true" />
@@ -62,7 +62,7 @@ function MoveCards({ summary, items, onOpen }: { summary: Summary; items: Item[]
       <a href="#overview" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline hover:underline-offset-4">
         See the whole week <ArrowRight size={15} aria-hidden="true" />
       </a>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -83,22 +83,22 @@ export function Hero({ summary, items, onOpen, onSearch }: {
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-4 pb-24 pt-28 md:px-8 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:pt-32">
         <div>
-          <motion.p {...rise(0.05)} className="label flex items-center gap-2">
+          <m.p {...rise(0.05)} className="label flex items-center gap-2">
             <LayoutGrid size={14} aria-hidden="true" />
             Pakistan · weekly essential prices · {summary.weeks_of_data} weeks of PBS data
-          </motion.p>
+          </m.p>
 
-          <motion.h1 {...rise(0.15)}
+          <m.h1 {...rise(0.15)}
             className="mt-6 font-serif text-[clamp(40px,5.2vw,72px)] font-bold leading-[1.06] tracking-[-0.015em]">
             Know when a price rise <span className="text-muted">isn't normal.</span>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p {...rise(0.25)} className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
+          <m.p {...rise(0.25)} className="mt-6 max-w-xl text-lg leading-relaxed text-muted">
             Every week we check 51 essentials in 17 cities against their own history, and flag the moves that are truly
             unusual, explained in plain words.
-          </motion.p>
+          </m.p>
 
-          <motion.div {...rise(0.35)} className="mt-8 flex flex-wrap items-center gap-3">
+          <m.div {...rise(0.35)} className="mt-8 flex flex-wrap items-center gap-3">
             <button type="button" onClick={onSearch}
               className="inline-flex h-11 items-center gap-2 rounded-[2px] bg-ink px-5 text-sm font-semibold text-bg transition-opacity hover:opacity-85">
               Check a price <ArrowRight size={16} aria-hidden="true" />
@@ -107,8 +107,8 @@ export function Hero({ summary, items, onOpen, onSearch }: {
               className="inline-flex h-11 items-center gap-2 rounded-[2px] border border-line px-5 text-sm font-semibold transition-colors hover:border-ink">
               {alerts ? `See this week's ${alerts} alert${alerts > 1 ? "s" : ""}` : "See this week"}
             </a>
-          </motion.div>
-          <motion.p {...rise(0.45)} className="mt-5 font-mono text-xs text-muted">SOURCE: PAKISTAN BUREAU OF STATISTICS, WEEKLY SPI · FREE · NO SIGN-UP</motion.p>
+          </m.div>
+          <m.p {...rise(0.45)} className="mt-5 font-mono text-xs text-muted">SOURCE: PAKISTAN BUREAU OF STATISTICS, WEEKLY SPI · FREE · NO SIGN-UP</m.p>
         </div>
 
         <MoveCards summary={summary} items={items} onOpen={onOpen} />

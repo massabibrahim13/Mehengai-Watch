@@ -8,6 +8,7 @@ import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { ItemPanel } from "./components/ItemPanel";
 import { News } from "./components/News";
+import { OneByOne } from "./components/OneByOne";
 import { Overview } from "./components/Overview";
 import { Prices } from "./components/Prices";
 import { Statement } from "./components/Statement";
@@ -83,6 +84,13 @@ export default function App() {
     else window.history.pushState({ mwItem: true }, "", url);
     setOpenItem(id);
   }, []);
+  // A link to a section ("…#evidence"): the sections are drawn after the page loads (see OneByOne below), so the
+  // browser didn't find it; go there once they are all in place.
+  const goToSection = useCallback(() => {
+    const id = window.location.hash.slice(1);
+    if (id && !ITEM_HASH.test(window.location.hash)) document.getElementById(id)?.scrollIntoView();
+  }, []);
+
   const close = useCallback(() => {
     if (window.history.state?.mwItem) window.history.back(); // we added the entry: step back off it
     else window.history.replaceState(null, "", window.location.pathname + window.location.search); // arrived by link
@@ -100,8 +108,10 @@ export default function App() {
   }
   if (!data) {
     return (
+      // same as the loading screen in index.html, so nothing jumps when the app takes over
       <div className="min-h-screen bg-hero px-4 pt-32 md:px-8" aria-busy="true">
         <div className="mx-auto max-w-7xl space-y-5">
+          <p className="label">Mehngai Watch · loading this week's prices…</p>
           <div className="h-12 w-2/3 animate-pulse bg-ink/5" />
           <div className="h-6 w-1/2 animate-pulse bg-ink/5" />
           <Skeleton className="h-14 w-full max-w-xl" />
@@ -117,14 +127,19 @@ export default function App() {
     <>
       <TopBar overHero={overHero} summary={summary} items={items} onOpen={open} focusSearch={focusSearch} />
       <Hero summary={summary} items={items} onOpen={open} onSearch={search} />
-      <main className="relative bg-bg">
+      <main className="relative min-h-screen bg-bg">
         <div className="mx-auto max-w-7xl space-y-28 px-4 pb-32 md:space-y-36 md:px-8">
-          <Overview summary={summary} items={items} index={index} onOpen={open} />
-          <Prices items={items} onOpen={open} />
-          <CityMap cities={cities} items={items} geo={geo} featured={featured} item={mapItem ?? featured[0]} setItem={setMapItem} onOpen={open} />
-          <News news={news} items={items} onOpen={open} />
-          <Statement summary={summary} items={items.length} cities={cities.cities.length} />
-          <Evidence evaluation={evaluation} items={items} />
+          {/* the hero is drawn first; these follow one per frame so slow phones aren't frozen while it appears */}
+          <OneByOne onDone={goToSection}>
+            {[
+              <Overview key="overview" summary={summary} items={items} index={index} onOpen={open} />,
+              <Prices key="prices" items={items} onOpen={open} />,
+              <CityMap key="cities" cities={cities} items={items} geo={geo} featured={featured} item={mapItem ?? featured[0]} setItem={setMapItem} onOpen={open} />,
+              <News key="news" news={news} items={items} onOpen={open} />,
+              <Statement key="how" summary={summary} items={items.length} cities={cities.cities.length} />,
+              <Evidence key="evidence" evaluation={evaluation} items={items} />,
+            ]}
+          </OneByOne>
         </div>
       </main>
       <Footer summary={summary} />

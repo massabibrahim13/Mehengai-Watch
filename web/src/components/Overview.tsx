@@ -1,6 +1,6 @@
 // "This week": the Essentials index (interactive chart), this week's alerts (expandable), and set-price boards.
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { useMemo, useState } from "react";
 import { Chart, cssVar, useDarkMode, type EChartsOption } from "../lib/charts";
 import { dateLabel, joinNames, shortName } from "../lib/format";
@@ -89,7 +89,7 @@ function Signals({ summary, items, onOpen }: { summary: Summary; items: Record<s
               </button>
               <AnimatePresence initial={false}>
                 {expanded && (
-                  <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
+                  <m.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
                     <div className="px-3 pb-3">
                       <p className="text-[15px] leading-relaxed">{u.explanation}</p>
                       <div className="mt-3 flex items-center justify-between gap-2">
@@ -99,7 +99,7 @@ function Signals({ summary, items, onOpen }: { summary: Summary; items: Record<s
                         </button>
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </li>

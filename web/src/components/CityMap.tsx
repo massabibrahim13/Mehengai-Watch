@@ -3,13 +3,10 @@
 // red dearer — the validated diverging pair with a neutral midpoint). Hovering a city on the map or in
 // the ranked list highlights it in both.
 import { useMemo, useRef, useState } from "react";
-import { VisualMapComponent } from "echarts/components";
-import { Chart, cssVar, echarts, MONO, SANS, useDarkMode, type EChartsOption } from "../lib/charts";
+import { Chart, cssVar, MONO, SANS, useDarkMode, type ECharts, type EChartsOption } from "../lib/charts";
 import { moneyExact, pct, shortName } from "../lib/format";
 import type { CitiesFile, Item } from "../types";
 import { Card, ItemIcon, Price, SectionHead } from "./ui";
-
-echarts.use([VisualMapComponent]);
 
 interface Row { city: string; price: number; dev: number; lon: number; lat: number }
 
@@ -18,7 +15,7 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
   item: string; setItem: (id: string) => void; onOpen: (id: string) => void;
 }) {
   const dark = useDarkMode();
-  const chartRef = useRef<echarts.ECharts | null>(null);
+  const chartRef = useRef<ECharts | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
   const byId = Object.fromEntries(items.map((i) => [i.item_id, i]));
   const current = byId[item];
@@ -33,7 +30,6 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
 
   const option: EChartsOption | null = useMemo(() => {
     if (!geo) return null;
-    if (!echarts.getMap("pakistan")) echarts.registerMap("pakistan", geo as never);
     // label just the cheapest and the dearest city (none if every city pays the same — labels would pile up)
     const labelled = rows.length && rows[0].price !== rows[rows.length - 1].price ? [rows[0].city, rows[rows.length - 1].city] : [];
     // Honest scales: colour saturates at ±10% (or the real spread if wider), so near-identical prices
@@ -73,7 +69,7 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
     };
   }, [geo, rows, dark, current.unit, current.price]);
 
-  const onReady = (chart: echarts.ECharts) => {
+  const onReady = (chart: ECharts) => {
     chartRef.current = chart;
     chart.on("mouseover", (e) => setHovered((e as { name: string }).name));
     chart.on("mouseout", () => setHovered(null));
@@ -114,7 +110,7 @@ export function CityMap({ cities, items, geo, featured, item, setItem, onOpen }:
         } />
       <Card className="grid gap-6 p-4 md:grid-cols-[1.35fr_1fr] md:p-6">
         <div className="relative min-h-[420px]">
-          {option ? <Chart option={option} onReady={onReady} className="h-[460px] w-full" /> : <div className="h-[460px]" />}
+          {option && geo ? <Chart option={option} maps={{ pakistan: geo }} onReady={onReady} className="h-[460px] w-full" /> : <div className="h-[460px]" />}
         </div>
         <div>
           <button type="button" onClick={() => onOpen(item)} className="flex items-center gap-3 text-left hover:text-accent">

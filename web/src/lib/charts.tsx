@@ -1,22 +1,13 @@
-// ECharts, imported piece by piece so the site only ships what it uses, plus a small React wrapper.
-import { BarChart, LineChart, ScatterChart, TreemapChart } from "echarts/charts";
-import {
-  DataZoomComponent,
-  GeoComponent,
-  GridComponent,
-  MarkLineComponent,
-  TooltipComponent,
-} from "echarts/components";
-import * as echarts from "echarts/core";
-import { SVGRenderer } from "echarts/renderers";
+// A small React wrapper around ECharts. The library itself (lib/echarts.ts) is downloaded only when the first chart
+// mounts, so the first screen doesn't wait for it; until then a chart's box is simply empty.
+import type { ECharts, EChartsCoreOption } from "echarts/core";
 import { useEffect, useRef } from "react";
 import { useTheme } from "./theme";
 
-echarts.use([BarChart, LineChart, ScatterChart, TreemapChart, GeoComponent, GridComponent, TooltipComponent,
-  DataZoomComponent, MarkLineComponent, SVGRenderer]);
+export type { ECharts };
+export type EChartsOption = EChartsCoreOption;
 
-export { echarts };
-export type EChartsOption = echarts.EChartsCoreOption;
+const loadECharts = () => import("./echarts").then((m) => m.echarts);
 
 /** Current value of a CSS colour token, e.g. cssVar("--color-ink"). Charts can't read Tailwind classes. */
 export const cssVar = (name: string): string =>
@@ -31,32 +22,48 @@ export const SANS = '"Inter Variable", "Helvetica Neue", Arial, sans-serif';
 
 export const reducedMotion = (): boolean => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const draw = (chart: ECharts, option: EChartsOption) =>
+  chart.setOption({ animation: !reducedMotion(), textStyle: { fontFamily: MONO }, ...option }, { notMerge: false });
+
 interface ChartProps {
   option: EChartsOption;
   className?: string;
-  onReady?: (chart: echarts.ECharts) => void;
+  /** Maps the option refers to by name, e.g. { pakistan: geoJson }; registered before the first draw. */
+  maps?: Record<string, object>;
+  onReady?: (chart: ECharts) => void;
 }
 
 /** Mounts one ECharts instance, updates it when `option` changes, resizes with its box. */
-export function Chart({ option, className, onReady }: ChartProps) {
+export function Chart({ option, className, maps, onReady }: ChartProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const chart = useRef<echarts.ECharts | null>(null);
+  const chart = useRef<ECharts | null>(null);
+  const latest = useRef(option); // the option to draw once the library has arrived
 
   useEffect(() => {
-    if (!ref.current) return;
-    chart.current = echarts.init(ref.current, undefined, { renderer: "svg" });
-    onReady?.(chart.current);
-    const resize = new ResizeObserver(() => chart.current?.resize());
-    resize.observe(ref.current);
+    let gone = false;
+    let resize: ResizeObserver | undefined;
+    loadECharts().then((echarts) => {
+      if (gone || !ref.current) return;
+      for (const [name, geo] of Object.entries(maps ?? {})) {
+        if (!echarts.getMap(name)) echarts.registerMap(name, geo as never);
+      }
+      chart.current = echarts.init(ref.current, undefined, { renderer: "svg" });
+      onReady?.(chart.current);
+      draw(chart.current, latest.current);
+      resize = new ResizeObserver(() => chart.current?.resize());
+      resize.observe(ref.current);
+    });
     return () => {
-      resize.disconnect();
+      gone = true;
+      resize?.disconnect();
       chart.current?.dispose();
       chart.current = null;
     };
   }, []);
 
   useEffect(() => {
-    chart.current?.setOption({ animation: !reducedMotion(), textStyle: { fontFamily: MONO }, ...option }, { notMerge: false });
+    latest.current = option;
+    if (chart.current) draw(chart.current, option);
   }, [option]);
 
   return <div ref={ref} className={className} />;
