@@ -5,19 +5,20 @@ Every week it reads the government's price data for 51 essentials, works out whi
 that item*, lists government price changes separately, and explains it all in plain language, alongside the
 latest price news.
 
-**Live site: [https://massabibrahim13.github.io/Mehengai-Watch/](https://massabibrahim13.github.io/Mehengai-Watch/)**, updated automatically every week from the newest PBS report (news every hour).
+**Live site: [https://massabibrahim13.github.io/Mehengai-Watch/](https://massabibrahim13.github.io/Mehengai-Watch/)**. It updates itself: every two hours it checks PBS for a new weekly report and refreshes the price news. For a guided look, see the [5-minute demo](#demo-a-5-minute-tour).
 
-> **Week ending 8 Oct 2026:** The price of chana daal (gram) rose 4.0% to Rs 286.06 per kg this week from
-> Rs 275.08 per kg. This move is unusual, about 7.8 times its typical weekly change of 0.5%.
-> Government price changes: petrol +2.4% (Rs 398.87 per litre), diesel −1.4%.
+> **Week ending 15 Oct 2026:** Chana daal (gram) prices rose 5% to Rs 300.29 per kg, an unusual move for this
+> item (about 9.4 times its typical weekly change of 0.5%). It is the largest weekly increase since Aug 2024.
+> No government-set price changed this week.
 >
-> — [full weekly report](reports/2026-10-08.md)
+> — [full weekly report](reports/2026-10-15.md)
 
 ---
 
 ## The website
 
-A React website is replacing the Streamlit dashboard as the public face of the project. It opens on ribbons of fine
+A React website is the public face of the project (the Streamlit dashboard further down is now a private analysis
+tool). It opens on ribbons of fine
 flowing lines that drift slowly, speed up and bend around your pointer, and ripple where you click, next to this
 week's biggest price moves. Five sections follow: **This week** (our Essentials index, the alerts with plain-language
 explanations, government price changes), **Prices** (all 51 items as a sortable list or a heatmap), **Cities**,
@@ -43,6 +44,24 @@ Python pipeline exports small JSON files; the site only displays them.
 
 Run it locally (needs Node.js): `python -m mehngai.export`, then `cd web`, `npm install`, `npm run dev`, and open
 http://localhost:5173.
+
+## Demo: a 5-minute tour
+
+Everything below happens on the live site, and works the same on a phone. Prices change every week; the examples are
+from the week ending 15 Oct 2026.
+
+| # | Do this | What it shows |
+|---|---|---|
+| 1 | Open the [live site](https://massabibrahim13.github.io/Mehengai-Watch/) and read the four **This week's moves** cards beside the waves. | The question the project answers: not "did prices go up?" but "is this move abnormal *for this item*?" (chana daal +5%, about 9 times its usual weekly move). |
+| 2 | Scroll to **This week** and read the open alert, including the small line under it. | The statistics decide what is unusual; the AI only words it, and every number it writes is checked against the data. "Standard summary" means the AI's sentence failed a check (or the free AI quota ran out), so a fixed template was used instead. |
+| 3 | Look at the **Government price changes** and **Price revisions** boards below it. | Petrol, electricity or gas prices change by government decision, so they are listed separately and never called anomalies. |
+| 4 | In **Prices**, sort by **1 week**, then switch from **List** to **Heatmap**. | All 51 items at a glance. A 10% week is ordinary for tomatoes but extreme for sugar, which is why each item is judged against its own history. |
+| 5 | Click an item (say, Sugar), drag the bar under its chart, then press **Copy link**. | Weekly prices since Sep 2019, with triangles on the weeks the detector flagged. Every item has its own shareable link (`#/item/sugar`). |
+| 6 | In **Cities**, pick an item. | This week's price in the 17 survey cities: red is dearer than the national average, green is cheaper. |
+| 7 | Type `aata`, then `ٹماٹر`, in the search box at the top. | Search understands English, Roman Urdu and Urdu names. |
+| 8 | Press **Ask about prices** (bottom right, once you scroll past the top). Ask `cheapest city for aata`, then `which city sells the hen meat for the least`. | Simple questions are answered by rules, straight from the data. A question the rules can't read goes to an AI that only turns it into fields (item, city, dates); the answer and its numbers still come from the data. The AI helper allows 3 questions per visitor a day, to stay on the free tier; when it is busy, the chat says so. |
+| 9 | Open **Evidence**. | How we know it works: a backtest against 8 documented price shocks (the detector caught 6, with about one alert a week) and a check against PBS's own printed figures (all 17,952 weekly prices match). |
+| 10 | On GitHub, open [Actions → Update and publish](https://github.com/massabibrahim13/Mehengai-Watch/actions/workflows/update.yml). | The site updates itself: every two hours it checks PBS for a new report, runs the pipeline and the tests, then publishes. A failing test stops the publish, as it did on 16 Oct 2026 when the backup AI model left the % change out of an explanation; the guardrail now requires it. |
 
 ## The problem
 
@@ -71,7 +90,7 @@ normally behaves, and if so, what happened in plain words?"**
 - **Ask** questions such as "cheapest city for sugar" or "how much has petrol gone up since last year?".
   Answers come straight from PBS data.
 - **Live price news:** headlines from Pakistani news sites, matched to the items they mention, refreshed every
-  30 minutes.
+  two hours.
 - A weekly Markdown report and a three-page dashboard (Home · Explore · Ask).
 
 | This week's sections + headlines | Dark mode |
@@ -163,9 +182,10 @@ fresh clone rebuilds everything in about 30 seconds and only downloads reports n
 every PDF from scratch, delete `data/interim/`: the first run then downloads about 380 PDFs, roughly an hour.)
 
 **Automatic updates.** [`.github/workflows/update.yml`](.github/workflows/update.yml) runs on GitHub Actions for
-free: every Friday (again on Saturday if PBS is late) it downloads the new report, runs the pipeline and the tests,
-commits the new week's data and publishes the site; every hour it refreshes the news and republishes. The Gemini
-key is a repository secret (`LLM_API_KEY`).
+free, every two hours: it checks the PBS site for a new report (a few small requests), and when one has arrived it
+runs the pipeline and the tests, commits the new week's data and publishes the site; otherwise it just refreshes the
+news and republishes. (A frequent cheap check, because GitHub may delay or skip scheduled runs.) The Gemini key is a
+repository secret (`LLM_API_KEY`).
 Without an API key, or once the free quota (20 requests/day) is used up, alerts fall back to a checked template
 sentence, so the report still works.
 
@@ -177,13 +197,14 @@ Other commands:
 | `python -m mehngai.explain --sample 10` | Explain 10 varied historical alerts (guardrail check) |
 | `python -m mehngai.news` | Fetch the latest price headlines now |
 | `python -m mehngai.report.weekly_report --week 2023-11-16` | Report for any past week |
-| `pytest` | 105 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, search, ask, news, report, dashboard pages |
+| `pytest` | 125 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, data accuracy against PBS, search, ask, news, report, dashboard pages |
 
 ## Project structure
 
 ```
 config/           items.yaml (51 items: group, unit, aliases) · settings.yaml (thresholds, model, news feeds)
-data/             known_events.csv (evaluation ground truth); raw PDFs, CSVs and the DB are generated, not committed
+data/             known_events.csv (evaluation ground truth) · interim/ (parsed price tables, committed);
+                  raw PDFs and the DB are generated, not committed
 src/mehngai/
   ingest/         fetch.py · parse.py
   clean/          normalize.py · validate.py
@@ -195,7 +216,11 @@ src/mehngai/
   search.py       item search (English / Roman Urdu / Urdu, typos)
   ask.py          question → structured lookup → answer from the database
   news.py         price headlines from Pakistani RSS feeds
+  verify.py       checks our numbers against the figures PBS prints in each report
+  export.py       writes the small JSON files the website reads (web/public/data/)
   pipeline.py     runs everything with one command
+web/              the website (React + TypeScript + Vite); reads only the JSON exported by export.py
+worker/           Cloudflare Worker for the chat: holds the Gemini key, turns hard questions into fields
 notebooks/        01_explore.ipynb (exploration, charts)
 reports/          generated weekly reports
 docs/             decisions.md (why X over Y) · learning-log.md
