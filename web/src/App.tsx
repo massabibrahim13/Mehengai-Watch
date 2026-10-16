@@ -15,10 +15,14 @@ import { useGeo, useHomeData } from "./lib/data";
 
 const MAP_DEFAULTS = ["wheat_flour", "sugar", "tomatoes", "onions", "chicken", "milk", "petrol"];
 
+// Shareable item links: "#/item/sugar" opens that item. Section anchors ("#prices") are left alone.
+const ITEM_HASH = /^#\/item\/([a-z0-9_]+)$/;
+const itemFromHash = (): string | null => window.location.hash.match(ITEM_HASH)?.[1] ?? null;
+
 export default function App() {
   const { data, error } = useHomeData();
   const geo = useGeo();
-  const [openItem, setOpenItem] = useState<string | null>(null);
+  const [openItem, setOpenItem] = useState<string | null>(itemFromHash);
   const [mapItem, setMapItem] = useState<string | null>(null);
   const [overHero, setOverHero] = useState(true);
   const [focusSearch, setFocusSearch] = useState(0); // bump to put the cursor in the search box
@@ -51,8 +55,36 @@ export default function App() {
     };
   }, [data]);
 
-  const open = useCallback((id: string) => setOpenItem(id), []);
-  const close = useCallback(() => setOpenItem(null), []);
+  // The address bar follows the open item: Back closes the panel, Forward reopens it, links open it directly.
+  useEffect(() => {
+    const sync = () => setOpenItem(itemFromHash());
+    window.addEventListener("popstate", sync);
+    window.addEventListener("hashchange", sync);
+    return () => {
+      window.removeEventListener("popstate", sync);
+      window.removeEventListener("hashchange", sync);
+    };
+  }, []);
+  // A link to an item that doesn't exist: drop it quietly.
+  useEffect(() => {
+    if (data && openItem && !data.items.some((i) => i.item_id === openItem)) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      setOpenItem(null);
+    }
+  }, [data, openItem]);
+
+  const open = useCallback((id: string) => {
+    const url = `#/item/${id}`;
+    // switching items inside the panel replaces the entry, so one Back always closes the panel
+    if (itemFromHash()) window.history.replaceState({ mwItem: true }, "", url);
+    else window.history.pushState({ mwItem: true }, "", url);
+    setOpenItem(id);
+  }, []);
+  const close = useCallback(() => {
+    if (window.history.state?.mwItem) window.history.back(); // we added the entry: step back off it
+    else window.history.replaceState(null, "", window.location.pathname + window.location.search); // arrived by link
+    setOpenItem(null);
+  }, []);
   const search = useCallback(() => setFocusSearch((n) => n + 1), []);
 
   if (error) {

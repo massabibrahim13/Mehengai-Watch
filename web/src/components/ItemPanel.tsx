@@ -1,12 +1,12 @@
 // Quick view of one item, sliding in from the right. Opened from anywhere (ticker, cards, map, tags,
 // search). Loads that item's history file on demand. Esc or the backdrop closes it.
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Chart, cssVar, useDarkMode, type EChartsOption } from "../lib/charts";
 import { useSeries } from "../lib/data";
 import { dateLabel, moneyExact, pct, timeAgo } from "../lib/format";
 import type { CitiesFile, Item, NewsItem, Series } from "../types";
-import { X } from "lucide-react";
+import { Check, Link2, X } from "lucide-react";
 import { Change, ItemIcon, Price, Skeleton } from "./ui";
 
 const GROUP = { market: "Market price", fixed: "Fixed / packaged price", administered: "Government-set price" };
@@ -51,6 +51,25 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
   const dark = useDarkMode();
   const closeRef = useRef<HTMLButtonElement>(null);
   const opener = useRef<HTMLElement | null>(null);
+  const [copied, setCopied] = useState(false);
+  useEffect(() => setCopied(false), [itemId]);
+
+  // "Copy link": the shareable address of this item (works even where the clipboard API is blocked)
+  const copyLink = async () => {
+    const url = `${window.location.origin}${window.location.pathname}#/item/${itemId}`;
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch {
+      const box = document.createElement("textarea");
+      box.value = url;
+      document.body.appendChild(box);
+      box.select();
+      document.execCommand("copy");
+      box.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  };
 
   // On open: remember what had focus, move focus into the panel, close on Esc.
   // On close: give focus back to whatever opened the panel (keyboard users stay where they were).
@@ -90,8 +109,15 @@ export function ItemPanel({ itemId, items, cities, news, onClose, onOpen }: {
                   <h2 className="mt-1 font-serif text-2xl font-bold md:text-[28px]">{item.name}</h2>
                 </div>
               </div>
-              <button ref={closeRef} type="button" onClick={onClose} aria-label="Close"
-                className="chip flex h-9 w-9 items-center justify-center rounded-[2px] border border-line text-muted hover:text-ink"><X size={18} /></button>
+              <div className="flex shrink-0 items-center gap-2">
+                <button type="button" onClick={copyLink} aria-label={copied ? "Link copied" : "Copy a link to this item"}
+                  className="chip flex h-9 items-center gap-1.5 rounded-[2px] border border-line px-2.5 text-sm text-muted hover:text-ink">
+                  {copied ? <Check size={15} aria-hidden="true" /> : <Link2 size={15} aria-hidden="true" />}
+                  <span className="hidden sm:inline" aria-live="polite">{copied ? "Copied" : "Copy link"}</span>
+                </button>
+                <button ref={closeRef} type="button" onClick={onClose} aria-label="Close"
+                  className="chip flex h-9 w-9 items-center justify-center rounded-[2px] border border-line text-muted hover:text-ink"><X size={18} /></button>
+              </div>
             </div>
 
             <div className="space-y-8 px-6 py-6">
