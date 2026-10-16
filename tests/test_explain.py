@@ -81,6 +81,14 @@ def test_bad_text_is_caught(facts, bad, problem):
     assert any(problem in p for p in problems), problems
 
 
+def test_text_must_give_price_and_change(facts):
+    price = f"Rs {facts['price_this_week_rs']:,.2f}"
+    no_change = f"The price of sugar (refined) rose this week to {price} per kg, an extreme move."
+    no_price = f"The price of sugar (refined) rose {facts['change_pct']}% this week, an extreme move."
+    assert any("% change" in p for p in check(no_change, facts, CFG["banned_phrases"], CFG["max_words"]))
+    assert any("this week's price" in p for p in check(no_price, facts, CFG["banned_phrases"], CFG["max_words"]))
+
+
 def test_number_parsing():
     assert numbers_in("Rs 2,586.37 per 20 kg bag, up 42.3%, 8, 9") == [2586.37, 20, 42.3, 8, 9]
     assert {42.3, 42.0} <= allowed_numbers({"change_pct": 42.3})   # 1- and 0-decimal rounding OK
@@ -106,7 +114,8 @@ def test_retry_then_fallback(facts, monkeypatch):
 
 
 def test_second_try_can_succeed(facts, monkeypatch):
-    good = f"The price of sugar (refined) rose {facts['change_pct']}% this week, an extreme move."
+    good = (f"The price of sugar (refined) rose {facts['change_pct']}% this week to "
+            f"Rs {facts['price_this_week_rs']:,.2f} per kg, an extreme move.")
     answers = iter(["Sugar rose 10% due to demand.", good])
     monkeypatch.setattr(explain_main, "generate", lambda prompt, cfg: next(answers))
     monkeypatch.setattr(explain_main.time, "sleep", lambda s: None)

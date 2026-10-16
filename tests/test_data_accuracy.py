@@ -12,6 +12,7 @@ import pytest
 from mehngai.clean.normalize import load_items
 from mehngai.config import INTERIM_DIR, PROJECT_ROOT, RAW_DIR, load_settings
 from mehngai.detect.series import load_series, same_week_last_year
+from mehngai.explain.guardrails import numbers_in
 
 DATA = PROJECT_ROOT / "web" / "public" / "data"
 DB = PROJECT_ROOT / "data" / "mehngai.db"
@@ -113,8 +114,9 @@ def test_government_and_revision_lists_follow_thresholds(site):
 def test_explanations_quote_the_right_numbers(site):
     for u in site["summary"]["unusual"]:
         text = u["explanation"]
-        assert f"Rs {u['price']:,.2f}" in text, text
-        assert f"{abs(u['change_pct']):.1f}%" in text, text
+        numbers = numbers_in(text)                     # "5%" and "5.0%" both count; so do "Rs 300.3" and "300.30"
+        assert round(u["price"], 2) in {round(n, 2) for n in numbers}, text
+        assert round(abs(u["change_pct"]), 1) in {round(n, 1) for n in numbers}, text
         assert ("rose" in text or "up" in text) if u["direction"] == "up" else ("fell" in text or "down" in text)
 
 

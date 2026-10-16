@@ -6,6 +6,7 @@ Checks (any failure → regenerate once → if still failing, use the template):
   3. Ramazan/Eid only mentioned if the facts say it's Ramazan season.
   4. Direction words match the facts (no "rose" for a fall).
   5. Short: at most `max_words` words.
+  6. Complete: this week's price and the % change are both in the text.
 """
 from __future__ import annotations
 
@@ -50,6 +51,11 @@ def check(text: str, facts: dict, banned_phrases: list[str], max_words: int) -> 
         problems.append(f"says '{wrong_way.search(text).group(0)}' but the price went {facts['direction']}")
     if len(text.split()) > max_words:
         problems.append(f"too long ({len(text.split())} words > {max_words})")
+    # the two numbers a reader needs most must be there (the backup model sometimes leaves the % change out)
+    if round(facts["price_this_week_rs"], 2) not in {round(n, 2) for n in numbers_in(text)}:
+        problems.append(f"doesn't give this week's price (Rs {fmt(facts['price_this_week_rs'])})")
+    if round(abs(facts["change_pct"]), 1) not in {round(n, 1) for n in numbers_in(text)}:
+        problems.append(f"doesn't give the % change ({fmt(abs(facts['change_pct']))}%)")
     return problems
 
 
