@@ -457,3 +457,13 @@ and a "How we tested it" page.
 | Chat Worker deployed | Project account (polyeyed@gmail.com): https://mehngai-watch-chat.mehngai-watch-chat.workers.dev; KV `LIMITS`; key stored with `wrangler secret put` piped from `.env` (never printed or committed) | Separate from the Brand PitStop account; the address is public (it is in the site's code), the key is not. |
 | Backup model | Worker tries `gemini-3.8-flash` (10 s), and on HTTP 503/429 falls back to `gemini-3.5-flash-lite` (18 s); both pinned | On deploy day the main Flash models answered "high demand" (503) for hours; Lite answered. Reading a question into fields is a simple task Lite handles: live test read 3 of 3 hard questions correctly (roti stuff → wheat flour/Lahore; white sweet stuff for chai → sugar/Karachi/change; hen meat → chicken/cheapest). |
 | Limits count successes only | Check the limits before the AI call, count after a successful reading | An overloaded model must not use up a visitor's 3 daily tries. |
+
+---
+
+## Reliable weekly updates (2026-10-16)
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Schedule | Every run (every 2 h at :37, on push, by hand) runs `pipeline --recent`: the live PBS site only, reports from the last 60 days; commits only when a new week's table appears | GitHub dropped the first Friday-only scheduled run, so the 15 Oct report was not picked up. A frequent, cheap check (a few small requests, no Internet Archive) catches the report whichever runs happen. `inputs.full` still does the full history listing. |
+| Backup model in Python | `explain.fallback_model: gemini-3.5-flash-lite`; on HTTP 503 `llm.py` switches to it at once | Same overload the Worker hit; the main model was "high demand" for hours. |
+| Guardrail rule 6 | Every explanation must contain this week's price (2 decimals) and the % change (1 decimal; "5%" counts for 5.0); otherwise regenerate once, then use the template | The backup model wrote a correct but incomplete sentence for chana daal (no % change). The CI accuracy test caught it and stopped the publish, as designed; the check now sits where it belongs (the guardrail) so it is fixed before it reaches a test. The accuracy test compares numbers, not formatting. |

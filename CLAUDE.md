@@ -522,7 +522,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b built → **now: deploy the chat Worker**. Repo is public. Deadline 15 Oct 2026.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) → **now: optional polish**. Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -555,9 +555,10 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   ticker band, floating button, category cards, search pop-up). 120 tests + a 35-check browser test pass.
 - **Institutional restyle (2026-10-11):** whole site restyled as an editorial data terminal (see the design brief
   in §3 stage 9); falls in green (Massab). Reviewed and committed.
-- **DEPLOYED (2026-10-12):** https://massabibrahim13.github.io/Mehengai-Watch/ — GitHub Pages via `.github/workflows/update.yml`: weekly full run (Fri 11:30
-  UTC, retry Sat 04:30 UTC) commits the new week's data (`data/interim`, `data/raw/manifest.csv`,
-  `data/explanations.csv`, `reports/`); hourly news refresh; tests gate every publish. Key = repo secret
+- **DEPLOYED (2026-10-12):** https://massabibrahim13.github.io/Mehengai-Watch/ — GitHub Pages via `.github/workflows/update.yml`: every run (every 2 h at :37,
+  on push, by hand) does `pipeline --recent` (live PBS site, last 60 days) and commits a new week's data when one
+  arrives (`data/interim`, `data/raw/manifest.csv`, `data/explanations.csv`, `reports/`) — GitHub dropped the
+  first Friday-only run, hence the frequent cheap check; news refreshes each run; tests gate every publish. Key = repo secret
   `LLM_API_KEY`. A fresh clone rebuilds in ~30 s (rehearsed: identical JSON, 119 tests pass, 0 PDFs to fetch).
   First run green; the 34-check browser test passes on the live site.
 - **Phase 8b (2026-10-16):** shareable item links (`#/item/<id>`, Back closes, "Copy link"); **Evidence** section
@@ -571,8 +572,12 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   (Brand PitStop), so the project has **its own free Cloudflare account** (polyeyed@gmail.com). The test deploy on the
   old account was deleted. Worker live at https://mehngai-watch-chat.mehngai-watch-chat.workers.dev (KV LIMITS,
   secret LLM_API_KEY piped from .env). wrangler on this machine is now logged in to the project account.
-- **Next step:** Massab adds repo variable `VITE_CHAT_URL` = the Worker address → push → test the live chat. Then
-  optional: lazy-load ECharts, README demo script.
+- **Chat live (2026-10-16):** repo variable `VITE_CHAT_URL` set; live chat tested end to end ("question read with AI
+  help"). Worker and Python both fall back to `gemini-3.5-flash-lite` when `gemini-3.8-flash` is overloaded (503).
+- **Week 2026-10-15 (2026-10-16):** the CI accuracy test stopped publishing because the backup model's explanation
+  left out the % change → new guardrail rule 6: every explanation must give this week's price and the % change
+  (else regenerate once → template). 0 of 255 values differ from PBS; 1 flag (chana daal +5%, Rs 300.29). 125 tests pass.
+- **Next step (optional):** lazy-load ECharts (smaller first load), README demo script.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·

@@ -294,3 +294,19 @@ tests, commits the new data and publishes; an hourly run refreshes the news.
   it to invent, and prompt-injection text can only produce fields we then check.
 - *Two implementations, one behaviour:* the browser chat is tested to give word-for-word the same answers as the
   Python version.
+
+## 2026-10-16 (later) — the first automatic week, and what broke
+
+**What happened:** GitHub skipped the Friday scheduled run, so the 15 Oct report wasn't picked up. The fix: every
+run (every 2 hours) cheaply checks PBS for a new report. The next run found it, but the tests stopped the publish:
+the backup AI model had written a sentence without the % change.
+
+**Key concepts**
+- *Schedules are best effort:* a cron on a shared service can be late or dropped, so make each run idempotent and
+  cheap, and run it often. Whichever run happens does the work; the others find nothing new.
+- *Tests as a gate:* a failing test stopped an incomplete explanation from reaching the public site. That is the
+  safety net working, not a crash.
+- *Move the check upstream:* the test found the problem, but the real fix is a guardrail rule, so a bad sentence is
+  regenerated or replaced before anything is published.
+- *A smaller backup model is a trade-off:* it answers when the main one is overloaded, but follows instructions less
+  closely, which is why the output is checked, not trusted.
