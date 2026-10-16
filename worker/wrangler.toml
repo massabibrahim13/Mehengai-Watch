@@ -14,7 +14,7 @@ MODEL = "gemini-3.8-flash"
 PER_VISITOR_DAILY = "3"   # AI readings per visitor per day
 GLOBAL_DAILY = "15"       # all visitors together; Gemini's free tier is 20/day and the weekly run needs a few
 
-# daily counters for the limits above (id filled in after: npx wrangler kv namespace create LIMITS)
+# daily counters for the limits above (created with: npx wrangler kv namespace create LIMITS)
 [[kv_namespaces]]
 binding = "LIMITS"
-id = "REPLACE_WITH_KV_ID"
+id = "92e39a013c73444d920a0350d54e5424"

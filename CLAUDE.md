@@ -568,10 +568,11 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   CORS, 300-char cap, KV limits 3/visitor/day and 15/day overall). Live now in **rules-only** mode (answers most
   questions); the AI helper switches on once the Worker is deployed and the repo variable `VITE_CHAT_URL` is set.
 - **Cloudflare account (Massab, 2026-10-16):** the existing account's workers.dev sub-address is "bps-connect-pk"
-  (Brand PitStop), so the project gets **its own free Cloudflare account**. A test deploy on the old account was
-  deleted (Worker + KV). On this machine wrangler is logged in to the old account: log out → log in with the new one.
-- **Next step:** Massab creates the new Cloudflare account → wrangler login with it → KV + secret (piped from .env) +
-  deploy → set `VITE_CHAT_URL` → test the live chat. Then optional: lazy-load ECharts, README demo script.
+  (Brand PitStop), so the project has **its own free Cloudflare account** (polyeyed@gmail.com). The test deploy on the
+  old account was deleted. Worker live at https://mehngai-watch-chat.mehngai-watch-chat.workers.dev (KV LIMITS,
+  secret LLM_API_KEY piped from .env). wrangler on this machine is now logged in to the project account.
+- **Next step:** Massab adds repo variable `VITE_CHAT_URL` = the Worker address → push → test the live chat. Then
+  optional: lazy-load ECharts, README demo script.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
