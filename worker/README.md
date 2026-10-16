@@ -8,6 +8,8 @@ never writes a number. It exists so the Gemini key stays secret.
 
 Safety: only the site may call it (CORS), questions ≤ 300 characters, every field checked against the real item and
 city lists, and daily limits in Workers KV (3 AI readings per visitor, 15 overall — Gemini's free tier is 20/day).
+If `gemini-3.8-flash` is overloaded (HTTP 503/429) it falls back to `gemini-3.5-flash-lite`; only successful readings
+count towards the limits.
 
 ## Deploy (once)
 

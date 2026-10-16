@@ -16,6 +16,7 @@ export interface Env {
   ALLOWED_ORIGINS: string;
   SITE_DATA: string;
   MODEL: string;
+  FALLBACK_MODEL: string;
   PER_VISITOR_DAILY: string;
   GLOBAL_DAILY: string;
 }
@@ -44,41 +45,46 @@ async function siteJSON<T>(env: Env, file: string): Promise<T> {
   return data as T;
 }
 
-/** Count one AI reading against the daily limits; false if a limit is already reached. */
-async function takeQuota(env: Env, ip: string): Promise<boolean> {
+/** The daily limits. Only successful AI readings are counted, so an overloaded model doesn't use up anyone's tries. */
+async function quota(env: Env, ip: string) {
   const day = new Date().toISOString().slice(0, 10);
   const visitor = await sha256(`${ip}|${day}`); // a hash, so no IP address is stored
   const gKey = `g:${day}`, vKey = `v:${day}:${visitor}`;
   const [g, v] = await Promise.all([env.LIMITS.get(gKey), env.LIMITS.get(vKey)]);
   const used = { all: Number(g ?? 0), visitor: Number(v ?? 0) };
-  if (used.all >= Number(env.GLOBAL_DAILY) || used.visitor >= Number(env.PER_VISITOR_DAILY)) return false;
-  await Promise.all([
-    env.LIMITS.put(gKey, String(used.all + 1), { expirationTtl: 2 * 86_400 }),
-    env.LIMITS.put(vKey, String(used.visitor + 1), { expirationTtl: 2 * 86_400 }),
-  ]);
-  return true;
+  return {
+    allowed: used.all < Number(env.GLOBAL_DAILY) && used.visitor < Number(env.PER_VISITOR_DAILY),
+    count: () => Promise.all([
+      env.LIMITS.put(gKey, String(used.all + 1), { expirationTtl: 2 * 86_400 }),
+      env.LIMITS.put(vKey, String(used.visitor + 1), { expirationTtl: 2 * 86_400 }),
+    ]),
+  };
 }
 
-/** Gemini call with one retry when it is briefly overloaded (HTTP 429/503), and a hard time limit so the chat never
- *  hangs: on timeout the browser simply shows the rules-based answer. */
+/** Gemini call with a time limit so the chat never hangs. If the main model is overloaded or rate-limited
+ *  (HTTP 503/429 — "high demand" happens for hours at a time), try the lighter backup model once. */
 async function gemini(env: Env, prompt: string): Promise<string> {
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${env.MODEL}:generateContent`, {
+  let last = 0;
+  // main model 10 s (an overload answer comes back in ~1–4 s), backup 18 s; the browser waits up to 30 s
+  for (const [model, seconds] of [[env.MODEL, 10], [env.FALLBACK_MODEL, 18]] as const) {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-goog-api-key": env.LLM_API_KEY },
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }],
         generationConfig: { temperature: 0, responseMimeType: "application/json" } }),
-      signal: AbortSignal.timeout(12_000),
+      signal: AbortSignal.timeout(seconds * 1_000),
     });
-    if ((res.status === 429 || res.status === 503) && attempt === 0) {
-      await new Promise((r) => setTimeout(r, 1_500));
+    if (res.status === 429 || res.status === 503) {
+      last = res.status;
+      console.log(`${model} busy (HTTP ${res.status})`);
       continue;
     }
     if (!res.ok) throw new Error(`Gemini HTTP ${res.status}`); // the key is never part of an error message
     const out = await res.json() as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
+    console.log(`answered by ${model}`);
     return out.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
   }
-  throw new Error("Gemini busy");
+  throw new Error(`Gemini busy (HTTP ${last})`);
 }
 
 async function readQuestion(env: Env, question: string) {
@@ -135,9 +141,12 @@ export default {
     }
     if (!question || question.length > MAX_QUESTION) return json({ error: `question must be 1–${MAX_QUESTION} characters` }, 400, cors);
 
-    if (!(await takeQuota(env, req.headers.get("CF-Connecting-IP") ?? "unknown"))) return json({ limited: true }, 429, cors);
+    const limits = await quota(env, req.headers.get("CF-Connecting-IP") ?? "unknown");
+    if (!limits.allowed) return json({ limited: true }, 429, cors);
     try {
-      return json(await readQuestion(env, question), 200, cors);
+      const reading = await readQuestion(env, question);
+      await limits.count();
+      return json(reading, 200, cors);
     } catch (err) {
       console.log("parse failed:", (err as Error).message);
       return json({ error: "the AI is unavailable right now" }, 502, cors);

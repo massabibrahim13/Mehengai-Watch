@@ -11,6 +11,7 @@ rules = [{ type = "Text", globs = ["**/*.txt"], fallthrough = true }]
 ALLOWED_ORIGINS = "https://massabibrahim13.github.io,http://localhost:5173"
 SITE_DATA = "https://massabibrahim13.github.io/Mehengai-Watch/data/"
 MODEL = "gemini-3.8-flash"
+FALLBACK_MODEL = "gemini-3.5-flash-lite"   # used when the main model is overloaded (HTTP 503/429)
 PER_VISITOR_DAILY = "3"   # AI readings per visitor per day
 GLOBAL_DAILY = "15"       # all visitors together; Gemini's free tier is 20/day and the weekly run needs a few
 
