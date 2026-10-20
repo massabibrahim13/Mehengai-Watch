@@ -6,6 +6,10 @@ the website shows it (prices to 2 decimals, % to 1): "x times its typical weekly
 average", the gap between cities, and so on. The model never has to do arithmetic of its own.
 
 Same no-look-ahead idea as the rest of the project: "typical" always means the reports *before* the one described.
+
+The arguments are a fixed set (51 items × 18 places, 4 history periods), so publish.py can compute every possible
+answer ahead of time for the website's agent, which runs in a Cloudflare Worker without Python: the live agent
+looks these answers up, so its numbers are exactly the ones these functions give.
 """
 from __future__ import annotations
 
@@ -20,6 +24,7 @@ from mehngai.export import Exporter
 from mehngai.store.db import connect
 
 NATIONAL = "National"
+PERIODS = {"3 months": 13, "1 year": 52, "2 years": 104, "since 2019": None}     # weeks back (None = all data)
 GROUPS = {
     "market": "market price: moves with supply and demand; checked every week for unusual moves",
     "administered": "set by the government or a regulator (OGRA, NEPRA): changes are official decisions, "
@@ -63,16 +68,6 @@ def r2(x: float) -> float:
 
 def r1(x: float) -> float:
     return round(float(x), 1)
-
-
-def when(day: str | None, default: pd.Timestamp) -> pd.Timestamp:
-    """'2024-06-06', '2024-06' or '2024' → a date (the model is told to use these forms)."""
-    if not day:
-        return default
-    try:
-        return pd.Timestamp(day)
-    except (ValueError, TypeError):
-        return default
 
 
 def lookup(item_id: str, city: str) -> tuple[dict | None, str, dict | None]:
@@ -156,20 +151,20 @@ def item_overview(item_id: str, city: str = NATIONAL) -> dict:
     return out
 
 
-def price_history(item_id: str, start: str, end: str | None = None, city: str = NATIONAL) -> dict:
-    """How one item's price moved over a period: start and end, low and high, biggest weeks, monthly averages."""
-    item, city, error = lookup(item_id, city)
+def price_history(item_id: str, period: str = "1 year") -> dict:
+    """How one item's national price moved over a period up to the latest report: start and end, low and high,
+    biggest weeks, average prices by month (or quarter or year for long periods), flagged weeks."""
+    item, city, error = lookup(item_id, NATIONAL)
     if error:
         return error
+    if period not in PERIODS:
+        return {"error": f"period must be one of: {', '.join(PERIODS)}"}
     d = data()
-    s = d.series.get((item_id, city), pd.Series(dtype=float))
-    w = s[when(start, d.latest - pd.Timedelta(weeks=52)):when(end, d.latest)]
-    if len(w) < 2:
-        return {"error": f"fewer than two reports in that period; data runs from {label(s.index[0])} "
-                         f"to {label(s.index[-1])}" if len(s) else f"PBS doesn't report {item['name']} for {city}"}
+    s = d.series[(item_id, city)]
+    w = s if PERIODS[period] is None else s[s.index >= d.latest - pd.Timedelta(weeks=PERIODS[period])]
     pct = w.pct_change() * 100
     out = {
-        "item": item["name"], "unit": unit_phrase(item["unit"]), "place": place(city),
+        "item": item["name"], "unit": unit_phrase(item["unit"]), "place": place(city), "period": period,
         "price_group": GROUPS[item["price_type"]], "reports_in_period": len(w),
         "from_week": label(w.index[0]), "from_price_rs": r2(w.iat[0]),
         "to_week": label(w.index[-1]), "to_price_rs": r2(w.iat[-1]),
@@ -183,7 +178,7 @@ def price_history(item_id: str, start: str, end: str | None = None, city: str = 
     for freq, key, fmt in (("MS", "average_price_by_month", "%b %Y"), ("QS", "average_price_by_quarter", "Q%q %Y"),
                            ("YS", "average_price_by_year", "%Y")):
         avg = w.resample(freq).mean().dropna()
-        if len(avg) <= 24:
+        if len(avg) <= 25:      # "2 years" spans 25 calendar months (partial ones at both ends)
             out[key] = {(f"Q{t.quarter} {t.year}" if freq == "QS" else t.strftime(fmt)): r2(v) for t, v in avg.items()}
             break
     if city == NATIONAL and item["price_type"] == "market":
@@ -193,15 +188,14 @@ def price_history(item_id: str, start: str, end: str | None = None, city: str = 
     return out
 
 
-def compare_cities(item_id: str, week: str | None = None) -> dict:
-    """One item's price in each of the 17 cities in one week, against the national average."""
+def compare_cities(item_id: str) -> dict:
+    """One item's price in each of the 17 cities in the latest report, against the national average."""
     item, _, error = lookup(item_id, NATIONAL)
     if error:
         return error
     d = data()
     national = d.series[(item_id, NATIONAL)]
-    day = national.index[national.index <= when(week, d.latest)]
-    day = day.max() if len(day) else national.index.min()
+    day = national.index.max()
     rows = sorted(({"city": c, "price_rs": r2(d.series[(item_id, c)][day])} for c in d.cities
                    if (item_id, c) in d.series and day in d.series[(item_id, c)].index), key=lambda r: r["price_rs"])
     if not rows:
@@ -260,7 +254,7 @@ def declarations() -> list[dict]:
     item = {"type": "string", "enum": sorted(d.items), "description": "Item id from the item list in your brief."}
     city = {"type": "string", "enum": [NATIONAL, *d.cities],
             "description": "A survey city, or National for the national average (the default)."}
-    day = {"type": "string", "description": "A date as YYYY-MM-DD (YYYY-MM or YYYY also work)."}
+    period = {"type": "string", "enum": list(PERIODS), "description": "How far back from the latest report."}
     obj = lambda props, required: {"type": "object", "properties": props, "required": required}
     return [
         {"name": "item_overview", "parameters": obj({"item_id": item, "city": city}, ["item_id"]),
@@ -268,15 +262,13 @@ def declarations() -> list[dict]:
                         "and a year ago, its typical weekly move (what is normal for it) and how many times that the "
                         "latest move is, its low and high of the past year, whether the detector flagged it, and what "
                         "kind of price it is (market, government-set or packaged)."},
-        {"name": "price_history", "parameters": obj({"item_id": item, "start": day, "end": day, "city": city},
-                                                    ["item_id", "start"]),
-         "description": "How an item's price moved over a period (end defaults to the latest report): start and end "
-                        "price and % change, low and high, the biggest weekly rise and fall, average price by month "
-                        "(or quarter or year for long periods) and the weeks the detector flagged."},
-        {"name": "compare_cities", "parameters": obj({"item_id": item, "week": day}, ["item_id"]),
-         "description": "An item's price in each of the 17 survey cities (latest report unless a week is given), "
-                        "cheapest first, each against the national average, plus the gap between the cheapest and "
-                        "dearest city."},
+        {"name": "price_history", "parameters": obj({"item_id": item, "period": period}, ["item_id", "period"]),
+         "description": "How an item's national average price moved over a period up to the latest report: start "
+                        "and end price and % change, low and high, the biggest weekly rise and fall, average price by "
+                        "month (or quarter or year for long periods) and the weeks the detector flagged."},
+        {"name": "compare_cities", "parameters": obj({"item_id": item}, ["item_id"]),
+         "description": "An item's price in each of the 17 survey cities in the latest report, cheapest first, each "
+                        "against the national average, plus the gap between the cheapest and dearest city."},
         {"name": "this_week",
          "description": "The latest weekly report at a glance: unusual market moves (with their alert text), "
                         "government price changes, price revisions, the biggest rises and falls, and how many of the "

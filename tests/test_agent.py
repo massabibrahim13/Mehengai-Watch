@@ -1,6 +1,9 @@
 """Price agent: the data tools are exact, the guardrail catches bad answers, the loop falls back safely.
 No network calls: the model is replaced by a scripted fake, and LangSmith tracing is off in tests."""
+import json
 import os
+import shutil
+import subprocess
 
 os.environ["LANGSMITH_TRACING"] = "false"   # before the agent loads .env: fake test runs must not reach LangSmith
 
@@ -48,20 +51,22 @@ def test_compare_cities(d):
 
 
 def test_history_over_a_period(d):
-    h = tools.price_history("tomatoes", start="2024-01-01", end="2024-12-31")
-    s = d.series[("tomatoes", "National")]["2024-01-01":"2024-12-31"]
+    h = tools.price_history("tomatoes", "1 year")
+    s = d.series[("tomatoes", "National")]
+    s = s[s.index >= d.latest - pd.Timedelta(weeks=52)]
     assert h["from_price_rs"] == round(s.iat[0], 2) and h["to_price_rs"] == round(s.iat[-1], 2)
-    assert h["highest"]["price_rs"] == round(s.max(), 2) and len(h["average_price_by_month"]) == 12
+    assert h["highest"]["price_rs"] == round(s.max(), 2) and h["to_week"] == agent.label(d.latest)
 
 
 def test_long_history_is_summarised_by_year():
-    h = tools.price_history("sugar", start="2019")
-    assert "average_price_by_year" in h
+    assert "average_price_by_year" in tools.price_history("sugar", "since 2019")
+    assert "average_price_by_month" in tools.price_history("sugar", "2 years")
 
 
 def test_bad_arguments_come_back_as_errors():
     assert "error" in tools.item_overview("iphone")
     assert "error" in tools.item_overview("sugar", city="Dubai")
+    assert "error" in tools.price_history("sugar", "10 years")
     assert "error" in agent.run_tool({"name": "item_overview", "args": {"colour": "red"}})
     assert "error" in agent.run_tool({"name": "delete_everything", "args": {}})
 
@@ -161,3 +166,43 @@ def test_brief_fills_every_placeholder():
     text = agent.brief(CFG)
     assert "{" not in text and "pulse_gram" in text and str(CFG["max_words"]) in text
     assert agent.label(pd.Timestamp(tools.data().latest)) in text
+
+
+# ── the website's Worker runs the same guardrail (worker/src/guard.ts) ──
+
+def node_version() -> tuple[int, ...] | None:
+    node = shutil.which("node")
+    if not node:
+        return None
+    out = subprocess.run([node, "--version"], capture_output=True, text=True).stdout.strip().lstrip("v")
+    return tuple(int(x) for x in out.split(".")[:2])
+
+
+@pytest.mark.skipif(not node_version() or node_version() < (22, 6), reason="needs Node 22.6+ (runs TypeScript)")
+def test_worker_guardrail_gives_the_same_verdicts():
+    o, h = tools.item_overview("sugar"), tools.price_history("tomatoes", "1 year")
+    news = {"headlines": [{"title": "Prices rise due to costly food", "source": "Dawn", "date": "1 Oct 2026",
+                           "link": "https://example.com"}]}
+    good = f"Sugar is **Rs {o['price_rs']:,.2f} {o['unit']}** in the week ending {o['latest_week']}, about " \
+           f"{round(o['change_vs_a_year_ago_pct'])}% on a year ago."
+    cases = [
+        (good, [o], "sugar?"),
+        ("Sugar is Rs 999.99 per kg.", [o], "sugar?"),                               # invented number
+        (f"Tomatoes peaked at Rs {h['highest']['price_rs']:,.2f} in 2026.", [h], "tomatoes?"),
+        ("Prices rose because of hoarding.", [o], "why?"),                            # cause + blame
+        ("Possibly related: 'Prices rise due to costly food' (Dawn).", [news], "why?"),  # quoted headline: fine
+        ("Chana daal rose 9.4 times; 51 items in 17 cities since Sep 2019.", [tools.item_overview("pulse_gram")], "q"),
+        ("Tea (Lipton 190 g) is not in the results.", [], "tea?"),                    # item names/units allowed
+        ("word " * 260, [], "q"),                                                     # too long
+        ("The price was 2,946.72 and 3,443.12 in two cities.", [tools.compare_cities("wheat_flour")], "aata?"),
+        ("Up 7 percent since 2021.", [o], "since 2021?"),                             # 2021 from the question, 7 invented
+    ]
+    setup = {"banned_phrases": CFG["banned_phrases"], "max_words": CFG["max_words"], "guard_context": agent.guard_context()}
+    payload = json.dumps({"setup": setup, "cases": [{"text": t, "results": r, "question": q} for t, r, q in cases]},
+                         ensure_ascii=False)
+    run = subprocess.run(["node", "--experimental-strip-types", "--no-warnings", "worker/test/guard_cli.mjs"],
+                         input=payload, capture_output=True, text=True, encoding="utf-8", cwd=agent.PROJECT_ROOT)
+    assert run.returncode == 0, run.stderr
+    kind = lambda problems: sorted(p.split(":")[0].split(" (")[0] for p in problems)
+    for (text, results, question), ts in zip(cases, json.loads(run.stdout)):
+        assert kind(ts) == kind(agent.check(text, results, question, CFG)), text[:60]

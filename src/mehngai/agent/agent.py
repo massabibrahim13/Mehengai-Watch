@@ -143,14 +143,18 @@ def headlines(results: list[dict]) -> list[str]:
     return [h["title"] for r in results for h in r.get("headlines", [])]
 
 
+def guard_context() -> dict:
+    """Numbers an answer may use besides the tool results and the question: facts stated in the brief
+    (51 items, 17 cities, 52 reports, Sep 2019, item names and units). Published for the Worker too."""
+    return {"brief": [51, 17, 52, "Sep 2019"],
+            "items": [f"{it['name']} {it['unit']}" for it in tools.data().items.values()]}
+
+
 @traceable(run_type="chain", name="guardrail")
 def check(text: str, results: list[dict], question: str, cfg: dict) -> list[str]:
-    """Problems with an answer (empty = it may be shown). Numbers may come from the tool results, the question,
-    or the brief (item names and units, 51 items, 17 cities, 52 reports, Sep 2019)."""
-    d = tools.data()
-    known = {"tools": results, "question": question, "brief": [51, 17, 52, "Sep 2019"],
-             "items": [f"{it['name']} {it['unit']}" for it in d.items.values()]}
-    allowed = allowed_numbers(known)
+    """Problems with an answer (empty = it may be shown). The website's Worker runs the same check
+    (worker/src/guard.ts; tests/test_agent.py keeps the two in step)."""
+    allowed = allowed_numbers({"tools": results, "question": question, **guard_context()})
     problems = []
     invented = sorted({n for n in numbers_in(text) if round(n, 2) not in allowed})
     if invented:

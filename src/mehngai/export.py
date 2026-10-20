@@ -225,7 +225,11 @@ class Exporter:
         write_json(out_dir / "evaluation.json", self.evaluation_file())
         for item_id in self.items:
             write_json(out_dir / "series" / f"{item_id}.json", self.series_file(item_id))
-        sizes = {p.relative_to(out_dir).as_posix(): p.stat().st_size for p in out_dir.rglob("*.json")}
+        # the price agent's precomputed answers, for the website chat's Worker (imported here, not at the top:
+        # the agent's tools import this module)
+        from mehngai.agent.publish import write_files
+        write_files(out_dir)
+        sizes ={p.relative_to(out_dir).as_posix(): p.stat().st_size for p in out_dir.rglob("*.json")}
         log.info("exported %d files, %.0f KB total, to %s", len(sizes), sum(sizes.values()) / 1024, out_dir)
         return sizes
 
