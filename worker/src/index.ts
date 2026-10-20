@@ -131,6 +131,7 @@ async function readQuestion(env: Env, question: string) {
 function agentModel(env: Env) {
   let model = env.MODEL;
   return async (body: unknown): Promise<Content> => {
+    let backupTries = 0;     // "busy" often clears within seconds: give the backup model a second try
     for (;;) {
       const seconds = model === env.MODEL ? 25 : 35;
       let status = 0;
@@ -149,7 +150,10 @@ function agentModel(env: Env) {
       }
       if (status && status !== 429 && status !== 503) throw new Error(`Gemini HTTP ${status}`); // never includes the key
       console.log(`${model} ${status ? `busy (HTTP ${status})` : `no answer in ${seconds}s`}`);
-      if (model === env.FALLBACK_MODEL) throw new Error("Gemini unavailable");
+      if (model === env.FALLBACK_MODEL) {
+        if (++backupTries >= 2) throw new Error("Gemini unavailable");
+        await new Promise((resolve) => setTimeout(resolve, 3_000));
+      }
       model = env.FALLBACK_MODEL;
     }
   };
