@@ -1,9 +1,9 @@
-// The chat's question answering, in the browser — a port of src/mehngai/ask.py. Same rule as the explanation
-// layer: numbers never come from an AI.
-//   1. Understand the question → {items, city, week, since, intent}. Rules first (free, instant). Only when the
-//      rules find no item is the AI asked (via our Cloudflare Worker) to read it into the same structure; its
-//      answer is checked against the known items and cities (see parseWithAI).
+// The chat's plain question answering, in the browser — a port of src/mehngai/ask.py:
+//   1. Understand the question → {items, city, week, since, intent}. Rules first (free, instant). If the AI is
+//      asked (via our Cloudflare Worker) to read it, its answer is checked against the known items and cities.
 //   2. Answer from the exported data (items.json, cities.json, series/<id>.json) with a fixed sentence.
+// Questions that want an explanation go to the price agent instead (wantsAgent, below; ChatBubble.tsx). This
+// plain answer is its fallback.
 import { dateLabel, moneyExact } from "./format";
 import { normalise, terms } from "./search";
 import type { Item, Series } from "../types";
@@ -35,6 +35,9 @@ const CHEAPEST = /\b(cheapest|lowest|least expensive|sasta|sasti)\b|سستا/i;
 const PRICIEST = /\b(most expensive|highest|costliest|dearest|mehnga|mehngi)\b|مہنگا/i;
 const ALL_CITIES = /\b(all cities|every city|which cities|compare cities|city wise|citywise)\b/i;
 const CHANGE = /\b(change[sd]?|increase[sd]?|rise[ns]?|risen|rose|gone up|went up|go up|fall(en)?|fell|drop(ped)?|decrease[sd]?|since|trend|over the (past|last))\b/i;
+// Questions that want an explanation, not just a figure: the price agent answers these (when it is available).
+const EXPLAIN = /\b(why|how come|explain|normal|usual|unusual|worr(y|ied)|should|expect(ed)?|reason|happen(ed|ing)?|going on|kyun|kyon|kyu)\b|کیوں/i;
+const LONG_QUESTION = 12; // words: longer questions usually want more than one figure
 
 // ── dates as ISO strings (no time zones involved) ──
 const iso = (y: number, m: number, d: number) => new Date(Date.UTC(y, m - 1, d)).toISOString().slice(0, 10);
@@ -120,6 +123,12 @@ export function parseRules(text: string, items: Item[], cities: string[], latest
     q.week = dates[1] ?? null;
   } else if (dates.length) q.week = dates[0];
   return q;
+}
+
+/** Should the price agent answer this, rather than the rules? Yes if the rules found no item, if it asks why or
+ *  whether something is normal, or if it is long. Short lookups ("price of sugar in Lahore") stay instant and free. */
+export function wantsAgent(q: Question): boolean {
+  return !q.itemIds.length || EXPLAIN.test(q.text) || q.text.trim().split(/\s+/).length >= LONG_QUESTION;
 }
 
 /** Check the AI's reading of a question: only known items/cities/intents, real dates. Returns null if unusable. */
