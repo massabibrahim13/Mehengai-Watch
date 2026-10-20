@@ -11,6 +11,7 @@ export interface Setup extends GuardSetup {
   tools: unknown[];
   max_steps: number;
   temperature: number;
+  rewrite: string;          // the rewrite request, with {problems} {banned} {max_words} (from the Python agent)
 }
 
 interface Call { name: string; args?: Record<string, unknown>; id?: string }
@@ -31,9 +32,6 @@ export interface Result {
   rewritten: boolean;
 }
 
-const REWRITE = "Your answer broke these rules: {problems}. Rewrite it. Use only numbers that appear in the tool " +
-  "results, copied as they are (don't calculate new ones), don't state causes or blame anyone, and stay under " +
-  "{max_words} words.";
 
 /** Model turns and tool calls until the model answers in words (on the last turn tools are switched off). */
 async function converse(contents: Content[], maxSteps: number, deps: Deps, out: Result, results: unknown[]): Promise<string> {
@@ -72,8 +70,8 @@ export async function runAgent(question: string, deps: Deps): Promise<Result> {
   let text = await converse(contents, deps.setup.max_steps, deps, out, results);
   let problems = check(text, results, question, deps.setup);
   if (problems.length) {
-    contents.push({ role: "user", parts: [{ text: REWRITE.replace("{problems}", problems.join("; "))
-      .replace("{max_words}", String(deps.setup.max_words)) }] });
+    contents.push({ role: "user", parts: [{ text: deps.setup.rewrite.replace("{problems}", problems.join("; "))
+      .replace("{banned}", deps.setup.banned_phrases.join(", ")).replace("{max_words}", String(deps.setup.max_words)) }] });
     text = await converse(contents, 2, deps, out, results);     // one more look-up at most
     problems = check(text, results, question, deps.setup);
     out.rewritten = true;

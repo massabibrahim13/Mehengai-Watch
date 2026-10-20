@@ -35,9 +35,16 @@ log = logging.getLogger(__name__)
 
 SYSTEM_FILE = Path(__file__).parent / "prompts" / "system.txt"
 GROUP_SHORT = {"market": "market", "administered": "government-set", "fixed": "packaged"}
+# Also used by the website's Worker (published in setup.json), so both agents ask for a rewrite the same way.
 REWRITE = ("Your answer broke these rules: {problems}. Rewrite it. Use only numbers that appear in the tool "
-           "results, copied as they are (don't calculate new ones), don't state causes or blame anyone, and stay "
-           "under {max_words} words.")
+           "results, copied as they are (don't calculate new ones). Don't state causes or blame anyone, and don't "
+           "use any of these words or phrases, not even in a harmless sentence: {banned}. Stay under {max_words} "
+           "words.")
+
+
+def rewrite_request(problems: list[str], cfg: dict) -> str:
+    return (REWRITE.replace("{problems}", "; ".join(problems)).replace("{banned}", ", ".join(cfg["banned_phrases"]))
+            .replace("{max_words}", str(cfg["max_words"])))
 
 
 @dataclass
@@ -193,8 +200,7 @@ def ask(question: str, cfg: dict | None = None) -> Reply:
         if problems:
             log.info("answer rejected (%s), asking for a rewrite", "; ".join(problems))
             reply.rewritten_because = problems
-            contents.append({"role": "user", "parts": [{"text": REWRITE.format(
-                problems="; ".join(problems), max_words=cfg["max_words"])}]})
+            contents.append({"role": "user", "parts": [{"text": rewrite_request(problems, cfg)}]})
             text = converse(system, contents, {**cfg, "max_steps": 2}, reply, results)   # one more look-up at most
             problems = check(text, results, question, cfg)
             reply.source = "agent, rewritten"

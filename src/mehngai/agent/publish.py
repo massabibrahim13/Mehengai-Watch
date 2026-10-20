@@ -19,7 +19,7 @@ import logging
 from pathlib import Path
 
 from mehngai.agent import tools
-from mehngai.agent.agent import brief, guard_context, settings
+from mehngai.agent.agent import REWRITE, brief, guard_context, settings
 
 log = logging.getLogger(__name__)
 
@@ -48,7 +48,7 @@ def write_files(out_dir: Path) -> int:
     size = write(root / "setup.json", {
         "latest_week": tools.label(d.latest), "brief": brief(cfg), "tools": tools.declarations(),
         "max_steps": cfg["max_steps"], "max_words": cfg["max_words"], "temperature": cfg["temperature"],
-        "banned_phrases": cfg["banned_phrases"], "guard_context": guard_context(),
+        "banned_phrases": cfg["banned_phrases"], "guard_context": guard_context(), "rewrite": REWRITE,
     })
     size += write(root / "this_week.json", tools.this_week())
     size += write(root / "news.json", tools.price_news())
