@@ -79,6 +79,18 @@ explain:
                    due to, because, caused by, driven by, as a result, owing to, amid, triggered by,
                    blamed, thanks to, fuelled by, fueled by]
 
+# The price agent (src/mehngai/agent): answers questions with explanations, using data tools. Inherits the
+# explain settings above (provider, retries, banned phrases) and overrides these.
+agent:
+  model: gemini-3.8-flash
+  fallback_model: gemini-3.5-flash-lite   # when the main model is overloaded or its daily quota is used up
+  temperature: 0.3                # a little room for natural wording; facts still come only from the tools
+  max_steps: 4                    # model turns per question (each turn = 1 request; free tier ~20/day per model)
+  max_words: 250                  # longer answers are rejected (rewritten once, then the rules answer is used)
+  show_thinking: true             # ask Gemini for a summary of its reasoning: recorded in LangSmith, never shown
+  timeout_seconds: 45             # a person is waiting: if a model hangs, try the backup model, then answer
+  max_retries_on_rate_limit: 2    # with the rules (the weekly pipeline waits longer: see explain above)
+
 news:
   refresh_minutes: 30             # re-fetch feeds when the stored headlines are older than this
   keep_days: 45                   # headlines older than this aren't shown

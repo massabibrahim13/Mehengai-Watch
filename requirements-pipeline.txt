@@ -12,3 +12,4 @@ hijridate        # Ramazan/Eid dates
 statsmodels      # STL decomposition (L3)
 scipy            # trimmed mean for the basket
 tabulate         # markdown tables in the backtest output
+langsmith        # traces + evaluations for the price agent (src/mehngai/agent); off unless LANGSMITH_* are set
