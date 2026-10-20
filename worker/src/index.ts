@@ -1,13 +1,14 @@
-// Mehngai Watch chat — Cloudflare Worker.
+// Mehngai Watch chat — Cloudflare Worker. The Gemini key lives here as a secret, so it never reaches the browser.
 //
-// One job: when the website's rules can't understand a question, read it into a structured query
-// {item_ids, city, week, since, intent} with Gemini. It never answers the question and never returns
-// free text: the browser computes the answer from PBS data. The Gemini key lives here as a secret,
-// so it never reaches the browser.
+// Two endpoints:
+//   POST /agent  the price agent (agent.ts): explains a price question from PBS data. Gemini picks tools, the
+//                answers come from files the Python export precomputed, and the guardrail checks every number.
+//   POST /parse  reads a question the browser's rules can't understand into {item_ids, city, week, since,
+//                intent}; the browser then answers from PBS data itself. Used when the agent can't help.
 //
-// Safety: only our website may call it (CORS), questions are at most 300 characters, everything the
-// model returns is checked against the real item and city lists, and daily limits (per visitor and
-// overall) keep us inside Gemini's free tier.
+// Safety: only our website may call it (CORS), questions are at most 300 characters, everything the model asks
+// for or returns is checked, and daily limits (per visitor and overall) keep us inside Gemini's free tier.
+import { runAgent, type Content, type Setup } from "./agent";
 import PROMPT from "./parse_question.txt";
 
 export interface Env {
@@ -19,6 +20,8 @@ export interface Env {
   FALLBACK_MODEL: string;
   PER_VISITOR_DAILY: string;
   GLOBAL_DAILY: string;
+  AGENT_PER_VISITOR_DAILY: string;
+  AGENT_GLOBAL_DAILY: string;
 }
 
 interface Item { item_id: string; name: string; aliases?: string[] }
@@ -45,15 +48,16 @@ async function siteJSON<T>(env: Env, file: string): Promise<T> {
   return data as T;
 }
 
-/** The daily limits. Only successful AI readings are counted, so an overloaded model doesn't use up anyone's tries. */
-async function quota(env: Env, ip: string) {
+/** The daily limits, kept separately for each endpoint ("" = /parse, "a:" = /agent). Only answers the AI actually
+ *  produced are counted, so an overloaded model doesn't use up anyone's tries. */
+async function quota(env: Env, ip: string, prefix: "" | "a:", perVisitor: string, overall: string) {
   const day = new Date().toISOString().slice(0, 10);
   const visitor = await sha256(`${ip}|${day}`); // a hash, so no IP address is stored
-  const gKey = `g:${day}`, vKey = `v:${day}:${visitor}`;
+  const gKey = `${prefix}g:${day}`, vKey = `${prefix}v:${day}:${visitor}`;
   const [g, v] = await Promise.all([env.LIMITS.get(gKey), env.LIMITS.get(vKey)]);
   const used = { all: Number(g ?? 0), visitor: Number(v ?? 0) };
   return {
-    allowed: used.all < Number(env.GLOBAL_DAILY) && used.visitor < Number(env.PER_VISITOR_DAILY),
+    allowed: used.all < Number(overall) && used.visitor < Number(perVisitor),
     count: () => Promise.all([
       env.LIMITS.put(gKey, String(used.all + 1), { expirationTtl: 2 * 86_400 }),
       env.LIMITS.put(vKey, String(used.visitor + 1), { expirationTtl: 2 * 86_400 }),
@@ -120,6 +124,76 @@ async function readQuestion(env: Env, question: string) {
   };
 }
 
+// ── the price agent ──────────────────────────────────────────────────────────────
+
+/** One model turn for the agent. Starts on the main model; if it is busy (HTTP 503/429) or slow, switches to the
+ *  backup and stays there for the rest of the question (same as the Python agent). */
+function agentModel(env: Env) {
+  let model = env.MODEL;
+  return async (body: unknown): Promise<Content> => {
+    for (;;) {
+      const seconds = model === env.MODEL ? 25 : 35;
+      let status = 0;
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+          method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.LLM_API_KEY },
+          body: JSON.stringify(body), signal: AbortSignal.timeout(seconds * 1_000),
+        });
+        if (res.ok) {
+          const out = await res.json() as { candidates?: { content?: Content }[] };
+          return out.candidates?.[0]?.content ?? { role: "model", parts: [] };
+        }
+        status = res.status;
+      } catch (err) {
+        if (!(err instanceof Error && err.name === "TimeoutError")) throw err;
+      }
+      if (status && status !== 429 && status !== 503) throw new Error(`Gemini HTTP ${status}`); // never includes the key
+      console.log(`${model} ${status ? `busy (HTTP ${status})` : `no answer in ${seconds}s`}`);
+      if (model === env.FALLBACK_MODEL) throw new Error("Gemini unavailable");
+      model = env.FALLBACK_MODEL;
+    }
+  };
+}
+
+const ITEM_ID = /^[a-z0-9_]{1,40}$/;
+type ItemFile = { overview: Record<string, unknown>; history: Record<string, unknown>; cities: unknown; news: unknown };
+
+/** A tool's answer, looked up in the files the Python export precomputed (same results as src/mehngai/agent/tools.py). */
+async function agentTool(env: Env, setup: Setup, name: string, args: Record<string, unknown>): Promise<unknown> {
+  const declared = setup.tools[0] as { parameters: { properties: { item_id: { enum: string[] } } } };
+  const id = typeof args.item_id === "string" ? args.item_id : "";
+  if (name === "this_week") return siteJSON(env, "agent/this_week.json");
+  if (name === "price_news" && !id) return siteJSON(env, "agent/news.json");
+  if (!["item_overview", "price_history", "compare_cities", "price_news"].includes(name)) {
+    return { error: `there is no tool called '${name}'` };
+  }
+  if (!ITEM_ID.test(id) || !declared.parameters.properties.item_id.enum.includes(id)) {
+    return { error: `unknown item_id '${id}'; use an id from the item list` };
+  }
+  const file = await siteJSON<ItemFile>(env, `agent/items/${id}.json`);
+  if (name === "compare_cities") return file.cities;
+  if (name === "price_news") return file.news;
+  if (name === "price_history") {
+    const period = typeof args.period === "string" ? args.period : "1 year";
+    return file.history[period] ?? { error: `period must be one of: ${Object.keys(file.history).join(", ")}` };
+  }
+  const city = typeof args.city === "string" ? args.city : "National";
+  const place = Object.keys(file.overview).find((p) => p.toLowerCase() === city.trim().toLowerCase());
+  return place ? file.overview[place]
+    : { error: `PBS has no data for that city; the 17 survey cities are: ${Object.keys(file.overview).slice(1).join(", ")}` };
+}
+
+async function answerWithAgent(env: Env, question: string) {
+  const t0 = Date.now();
+  const setup = await siteJSON<Setup>(env, "agent/setup.json");
+  const result = await runAgent(question, {
+    setup, model: agentModel(env), tool: (name, args) => agentTool(env, setup, name, args),
+  });
+  console.log(`agent: ${result.turns} turns, tools [${result.tools.join(", ")}], ${Date.now() - t0} ms, ` +
+    (result.answer ? (result.rewritten ? "passed after a rewrite" : "passed") : `rejected: ${result.problems.join("; ")}`));
+  return result;
+}
+
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const origin = req.headers.get("Origin") ?? "";
@@ -129,7 +203,8 @@ export default {
           "Access-Control-Allow-Headers": "Content-Type", "Access-Control-Max-Age": "86400", Vary: "Origin" }
       : {};
     if (req.method === "OPTIONS") return new Response(null, { status: allowed ? 204 : 403, headers: cors });
-    if (new URL(req.url).pathname !== "/parse" || req.method !== "POST") return json({ error: "not found" }, 404, cors);
+    const path = new URL(req.url).pathname;
+    if (!["/parse", "/agent"].includes(path) || req.method !== "POST") return json({ error: "not found" }, 404, cors);
     if (!allowed) return json({ error: "origin not allowed" }, 403, cors);
 
     let question = "";
@@ -141,7 +216,23 @@ export default {
     }
     if (!question || question.length > MAX_QUESTION) return json({ error: `question must be 1–${MAX_QUESTION} characters` }, 400, cors);
 
-    const limits = await quota(env, req.headers.get("CF-Connecting-IP") ?? "unknown");
+    const ip = req.headers.get("CF-Connecting-IP") ?? "unknown";
+    if (path === "/agent") {
+      const limits = await quota(env, ip, "a:", env.AGENT_PER_VISITOR_DAILY, env.AGENT_GLOBAL_DAILY);
+      if (!limits.allowed) return json({ limited: true }, 429, cors);
+      try {
+        const result = await answerWithAgent(env, question);
+        await limits.count();                                     // the AI did the work, even if it was rejected
+        return result.answer
+          ? json({ answer: result.answer, tools: result.tools, turns: result.turns }, 200, cors)
+          : json({ fallback: true }, 200, cors);                  // didn't pass the checks: the browser answers plainly
+      } catch (err) {
+        console.log("agent failed:", (err as Error).message);
+        return json({ error: "the AI is unavailable right now" }, 502, cors);
+      }
+    }
+
+    const limits = await quota(env, ip, "", env.PER_VISITOR_DAILY, env.GLOBAL_DAILY);
     if (!limits.allowed) return json({ limited: true }, 429, cors);
     try {
       const reading = await readQuestion(env, question);

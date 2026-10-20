@@ -14,6 +14,9 @@ MODEL = "gemini-3.8-flash"
 FALLBACK_MODEL = "gemini-3.5-flash-lite"   # used when the main model is overloaded (HTTP 503/429)
 PER_VISITOR_DAILY = "3"   # AI readings per visitor per day
 GLOBAL_DAILY = "15"       # all visitors together; Gemini's free tier is 20/day and the weekly run needs a few
+# The price agent (/agent) uses 1–4 Gemini requests per answer, so it gets its own, smaller limits.
+AGENT_PER_VISITOR_DAILY = "2"   # explained answers per visitor per day
+AGENT_GLOBAL_DAILY = "6"        # all visitors together (~15 requests), leaving room for the weekly run and /parse
 
 # daily counters for the limits above (created with: npx wrangler kv namespace create LIMITS)
 [[kv_namespaces]]

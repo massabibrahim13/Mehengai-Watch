@@ -1,11 +1,13 @@
 {
   "name": "mehngai-watch-chat",
   "private": true,
-  "description": "Cloudflare Worker for the Mehngai Watch chat: reads a question into a structured query with Gemini. Holds the API key so it never reaches the browser.",
+  "type": "module",
+  "description": "Cloudflare Worker for the Mehngai Watch chat: the price agent (explains price questions from PBS data, every number checked) and question reading. Holds the Gemini key so it never reaches the browser.",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types test/guard_cli.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20261006.1",
