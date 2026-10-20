@@ -368,3 +368,7 @@ Worker only looks them up and the numbers are the Python ones.
   thing: nothing went to the wrong account.
 
 **Next:** log Wrangler in to the project account, deploy the Worker, ask one real question on the live site.
+
+**Deployed (2026-10-21):** after re-logging Wrangler in to the project account. On the live site the plain answer
+shows at once and the AI explanation follows. Lesson from the live test: a guardrail that rejects is only half the
+job; the rewrite request must say exactly what to change (name the forbidden words), or the model repeats itself.

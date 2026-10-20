@@ -535,7 +535,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) + faster load + demo tour ✅ → **now: Phase 9** (price agent + LangSmith). Repo is public. Deadline 15 Oct 2026.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) + faster load + demo tour ✅ + Phase 9 agent live on the site ✅ → **now: evaluate in LangSmith**. Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -611,8 +611,11 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   length and routing checked live. Gemini (both models) was overloaded/hanging, so no live AI answer yet → Worker
   now answers within 85 s (main 15 s, backup 30 s, skip a failing main model for 10 min), and the chat shows the
   plain answer first with the AI explanation (under its own rule + label) following, or a one-line note.
-- **Next step:** ask a "why" question on the live site once Gemini responds; then the full LangSmith experiment.
-  If Gemini's free tier stays this unreliable, consider Groq's free tier for the agent (Massab creates a key).
+- **Live AI answer confirmed (2026-10-21):** "Is the chana daal price rise this week normal?" on the live site → plain
+  answer instantly, AI explanation 10 s later (main model rate-limited → backup; first draft used "because" → the
+  rewrite request now names the banned words, one wording shared via setup.json → passed). Every number grounded.
+- **Next step:** the full LangSmith experiment (`python -m mehngai.agent.evaluate`) and reviewing traces. If Gemini's
+  free tier stays unreliable, consider Groq's free tier for the agent (Massab would create a key).
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
