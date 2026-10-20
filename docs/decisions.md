@@ -493,3 +493,21 @@ Massab: make the site load faster. Measured first, on a phone-like connection (L
 | Side fix | Links to a section (`…#evidence`) now land on it | Before, they stayed at the top: the section didn't exist yet when the browser looked for it. |
 | Checked | 30 click-through checks, 14 chat checks, theme switch, old-vs-new screenshots (≤ 0.1% of pixels differ, the moving waves) | Faster must not mean different. |
 | README demo | A 10-step "5-minute tour" of the live site, with what each step shows | For the course demo and for visitors. The chat examples were checked to take the intended path: "white sweet stuff for chai" is answered by the rules (as tea leaves), so the AI example is the hen-meat question instead. |
+
+---
+
+## Phase 9 — price agent + LangSmith (2026-10-20)
+
+Massab: develop the agent in LangSmith and learn LangSmith; its answers should reason and explain, not repeat what
+a search already shows. Guide: [`docs/langsmith.md`](langsmith.md).
+
+| Decision | Choice | Reason |
+|---|---|---|
+| Agent design | Gemini function calling over 5 data tools (`item_overview`, `price_history`, `compare_cities`, `this_week`, `price_news`); the model picks the tools and writes the answer; brief in `agent/prompts/system.txt` | `ask.py` only let the AI read the question, so every answer was one templated sentence. With tools it can gather context (what is normal for the item, the year's range, other cities, news) and explain. |
+| Numbers stay grounded | The tools compute every number a reader might want (ratios, gaps, % vs national), rounded as on the site. Guardrail: every number in the answer must appear in a tool result, the question or the brief; no causes or blame (quoting a headline is allowed); ≤ 250 words; rewrite once, then the rules answer | Same rule as the weekly explanations: the AI explains, the code supplies the facts. |
+| Plain Python + `langsmith` SDK | `@traceable` on the agent, each model turn (with token use and the model that answered), each tool and the guardrail; no LangChain or LangGraph | One small dependency that works with our REST Gemini call, and it covers tracing and evaluation, the core of LangSmith. LangGraph (for LangSmith Studio) can come later. |
+| Python first, website later | Command line (`python -m mehngai.agent`) and LangSmith experiments; the website chat keeps rules + AI reading for now | Measure before showing it to visitors; the website would also need a TypeScript port in the Worker. |
+| Budget and resilience | ≤ 4 model turns (tools off on the last), rewrite ≤ 2 turns; `post()` switches to the backup model on HTTP 503, a 45 s timeout, or a used-up daily quota (quotas are per model), and the agent stays on the backup for the rest of the question | Free tier ~20 requests/day per model. On build day the main model was overloaded or hanging for hours; the backup answered. |
+| Evaluation | Dataset `mehngai-agent-questions` (7 questions: an unusual move, a trend, cities, a government-set price, a Roman Urdu "why", the weekly overview, an untracked item) + 5 code evaluators (`answered_by_ai`, `passed_first_time`, `looked_up_right_items`, `explained`, `model_turns`); `--match` runs a subset | Free checks; no LLM-as-judge yet (quota). |
+| Tests never trace | `tests/test_agent.py` sets `LANGSMITH_TRACING=false` before loading the agent | The first test run sent 11 fake conversations to the project (they expire after the plan's 14 days). |
+| First findings → brief v2 | Live answers were well explained and grounded, but both needed a rewrite (once an invented number, once the word "because"), and the petrol answer accepted a false premise ("went up" when it fell 0.7%) with a direction-less "change of 0.7%". Brief v2 adds: check the premise, always say rise or fall, never use "because". Smoke-test experiment (petrol, iPhone): 5/5 evaluators passed on both, petrol in 2 turns instead of 3 | The trace → change → experiment loop working as intended. (Answered by the backup model: the main one was hanging.) |

@@ -197,7 +197,9 @@ Other commands:
 | `python -m mehngai.explain --sample 10` | Explain 10 varied historical alerts (guardrail check) |
 | `python -m mehngai.news` | Fetch the latest price headlines now |
 | `python -m mehngai.report.weekly_report --week 2023-11-16` | Report for any past week |
-| `pytest` | 125 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, data accuracy against PBS, search, ask, news, report, dashboard pages |
+| `python -m mehngai.agent "is the chana daal rise normal?"` | Ask the price agent (in development): it looks up the data with tools and explains, every number checked. See [`docs/langsmith.md`](docs/langsmith.md) |
+| `python -m mehngai.agent.evaluate` | Run the agent on its test questions as a LangSmith experiment (needs a free LangSmith key) |
+| `pytest` | 144 tests: parsing, validation, detectors (incl. no-look-ahead), guardrails, data accuracy against PBS, search, ask, the price agent, news, report, dashboard pages |
 
 ## Project structure
 

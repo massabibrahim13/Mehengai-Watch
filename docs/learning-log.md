@@ -327,3 +327,26 @@ content in about 4 s instead of 9.6 s; the code needed for the first screen shra
 - *Long tasks:* the browser can't draw while JavaScript runs, so building a whole long page in one go froze the
   screen. Building one section per frame keeps it moving.
 - *Perceived speed:* a plain loading screen at 0.8 s feels much faster than a blank page, even before the data is in.
+
+## 2026-10-20 — a price agent that explains, and LangSmith
+
+**Built:** `src/mehngai/agent/`, an agent that answers price questions with explanations. Gemini chooses among five
+data tools, reads the exact facts they return, and writes the answer; a guardrail checks it before anyone sees it.
+LangSmith records every step and runs it on a test set of questions. Guide: `docs/langsmith.md`.
+
+**Key concepts**
+- *Tool calling (function calling):* the model doesn't get the data; it asks for it ("item_overview for chana
+  daal"), our code runs the function and sends the result back. Like an interface the model can call, with code
+  we control behind it.
+- *Agent loop:* ask the model, run the tools it asked for, repeat, until it answers in words (capped at 4 turns).
+- *Grounding by construction:* the tools compute every number; the guardrail rejects any number not in their
+  results. The model explains; it never invents a figure.
+- *Tracing:* `@traceable` wraps a function (like a Java annotation that adds logging around a method). Each
+  question becomes a tree of steps in LangSmith: model turns, tools, guardrail, tokens, time.
+- *Datasets, experiments, evaluators:* a fixed set of questions, a run of the agent over them, and code that scores
+  each answer. Change one thing, run a new experiment, compare. That's how you know a prompt change helped.
+- *The loop in action:* traces showed two answers needing rewrites and one accepting a false premise; three
+  rules in the brief fixed both in the next experiment.
+
+**Next:** run the full experiment (`python -m mehngai.agent.evaluate`), score a few answers yourself in LangSmith,
+then decide whether the website chat should use the agent.

@@ -275,6 +275,7 @@ Details that matter:
 | Config | YAML (`pyyaml`), `.env` (`python-dotenv`) | settings + secrets |
 | Tests | pytest | parsing + detection tests |
 | Automation | GitHub Actions | free weekly scheduler |
+| Agent tracing + evaluation | LangSmith (free Developer plan, no card) via the `langsmith` SDK (`@traceable`, `Client.evaluate`) | see every step of the price agent; test it on a fixed question set (Phase 9) |
 
 Don't add libraries outside this list without a one-line reason (rule §2.3).
 
@@ -340,6 +341,7 @@ mehngai-watch/
 │   ├── store/    db.py
 │   ├── detect/   baseline.py, zscore.py, relative.py, seasonal.py, evaluate.py
 │   ├── explain/  llm.py, guardrails.py, prompts/
+│   ├── agent/    tools.py, agent.py, evaluate.py, prompts/system.txt  (Phase 9: price agent + LangSmith)
 │   ├── report/   weekly_report.py
 │   ├── app/      dashboard.py … (Streamlit, private analysis tool)
 │   ├── export.py             ← stage 8: JSON for the website
@@ -448,6 +450,17 @@ moves to a React website. The Python pipeline is unchanged.
 - **Done when:** the public URL shows this week's data, updates on its own, works on a phone,
   passes a Lighthouse accessibility check, and every number on it comes from the exported JSON.
 
+### Phase 9 — Price agent + LangSmith (requested 2026-10-20)
+Massab wants the agent to reason and give well-explained answers (not what a search already shows), and to
+develop it in LangSmith while learning LangSmith. Guide: `docs/langsmith.md`.
+- Gemini function calling over data tools (`agent/tools.py`); the model picks tools and writes the answer;
+  guardrail = every number from a tool result, no causes/blame, ≤ 250 words → rewrite once → rules answer.
+- Traced with `@traceable`; LangSmith dataset `mehngai-agent-questions` + code evaluators (`agent/evaluate.py`).
+- Python first (CLI + experiments); the website chat moves to the agent only once experiments show it is reliable.
+- **Learn:** tool calling, agent loops, tracing/observability, datasets + experiments + evaluators, prompt iteration.
+- **Done when:** an experiment over the full dataset scores ≥ 6/7 on answered_by_ai and looked_up_right_items,
+  every shown answer passes the guardrail, and Massab has compared two experiments in LangSmith.
+
 ### Stretch ideas (only after v1 is done)
 News-context layer · city-level detection and "which city is most out of line" · Prophet
 forecast intervals (L4) · Urdu / Roman Urdu output · weekly email or Telegram alert.
@@ -522,7 +535,7 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
 
 ## 12. Current status
 
-- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) + faster load + demo tour ✅ → **demo-ready**. Repo is public. Deadline 15 Oct 2026.
+- **Phase:** Phases 0–6 ✅ (**v1 = course submission complete**) + v2/v2.1 ✅ + 8a ✅ + 8c/Phase 7 ✅ (deployed) + 8b ✅ (chat live) + faster load + demo tour ✅ → **now: Phase 9** (price agent + LangSmith). Repo is public. Deadline 15 Oct 2026.
 - **v3 decision (2026-10-11):** Streamlit is too dull/limited for the wanted look → React + TypeScript website
   (`web/`) fed by JSON exported from the pipeline; free static hosting; Streamlit kept as a private analysis
   tool for now. Repo must become public for free GitHub Pages — ask Massab before deploying.
@@ -581,7 +594,14 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   first-screen JS 375 → 128 KB (ECharts on demand via `web/src/lib/echarts.ts`, Motion `LazyMotion`, JSON preload +
   static loading screen in `index.html`, `OneByOne` draws sections one per frame). README has a 10-step
   "5-minute tour" (`#demo-a-5-minute-tour`). Measuring scripts were throwaway (session scratchpad).
-- **Next step:** nothing required. Optional: README screenshots refreshed from the live site.
+- **Phase 9 started (2026-10-20):** `src/mehngai/agent/` — Gemini function calling over 5 data tools, guardrail
+  (numbers from tool results only, no causes, ≤ 250 words → rewrite once → rules answer), traced in LangSmith
+  (Massab's free account, project `Mehngai-Watch`, keys in `.env`). Dataset `mehngai-agent-questions` (7 questions,
+  5 code evaluators); smoke-test experiment (2 questions) passed 5/5 on both after brief v2. `llm.post()` now also
+  switches to the backup model on timeouts and used-up daily quota. Gemini's main model was overloaded/hanging
+  all day; the backup answered. 144 tests pass. Guide: `docs/langsmith.md`.
+- **Next step:** Massab runs the full experiment and reviews traces in LangSmith; then decide whether the website
+  chat uses the agent (needs a TypeScript port in the Worker).
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·
