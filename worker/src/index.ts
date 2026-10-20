@@ -126,19 +126,29 @@ async function readQuestion(env: Env, question: string) {
 
 // ── the price agent ──────────────────────────────────────────────────────────────
 
-/** One model turn for the agent. Starts on the main model; if it is busy (HTTP 503/429) or slow, switches to the
- *  backup and stays there for the rest of the question (same as the Python agent). */
+// When the main model fails, the next questions (in this Worker instance) skip it for a while instead of waiting
+// on it again: during Gemini's "high demand" spells it can fail for hours.
+let mainSkippedUntil = 0;
+const SKIP_MAIN_MS = 10 * 60_000;
+const DEADLINE_MS = 85_000;   // the whole question; the browser gives up at 100 s
+
+/** One model turn for the agent. Starts on the main model (unless it failed recently); if it is busy (HTTP 503/429)
+ *  or slow, switches to the backup and stays there. A quick "busy" from the backup gets one more try; a hang
+ *  doesn't. Everything must finish within DEADLINE_MS of the question, so the visitor always gets an answer. */
 function agentModel(env: Env) {
-  let model = env.MODEL;
+  const deadline = Date.now() + DEADLINE_MS;
+  let model = Date.now() < mainSkippedUntil ? env.FALLBACK_MODEL : env.MODEL;
   return async (body: unknown): Promise<Content> => {
-    let backupTries = 0;     // "busy" often clears within seconds: give the backup model a second try
+    let backupTries = 0;
     for (;;) {
-      const seconds = model === env.MODEL ? 25 : 35;
+      const left = deadline - Date.now();
+      if (left < 5_000) throw new Error("out of time");
+      const ms = Math.min(model === env.MODEL ? 15_000 : 30_000, left);
       let status = 0;
       try {
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
           method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.LLM_API_KEY },
-          body: JSON.stringify(body), signal: AbortSignal.timeout(seconds * 1_000),
+          body: JSON.stringify(body), signal: AbortSignal.timeout(ms),
         });
         if (res.ok) {
           const out = await res.json() as { candidates?: { content?: Content }[] };
@@ -149,12 +159,15 @@ function agentModel(env: Env) {
         if (!(err instanceof Error && err.name === "TimeoutError")) throw err;
       }
       if (status && status !== 429 && status !== 503) throw new Error(`Gemini HTTP ${status}`); // never includes the key
-      console.log(`${model} ${status ? `busy (HTTP ${status})` : `no answer in ${seconds}s`}`);
-      if (model === env.FALLBACK_MODEL) {
-        if (++backupTries >= 2) throw new Error("Gemini unavailable");
+      console.log(`${model} ${status ? `busy (HTTP ${status})` : `no answer in ${Math.round(ms / 1000)}s`}`);
+      if (model === env.MODEL) {
+        mainSkippedUntil = Date.now() + SKIP_MAIN_MS;
+        model = env.FALLBACK_MODEL;
+      } else if (!status || ++backupTries >= 2) {
+        throw new Error("Gemini unavailable");
+      } else {
         await new Promise((resolve) => setTimeout(resolve, 3_000));
       }
-      model = env.FALLBACK_MODEL;
     }
   };
 }
