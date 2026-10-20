@@ -350,3 +350,21 @@ LangSmith records every step and runs it on a test set of questions. Guide: `doc
 
 **Next:** run the full experiment (`python -m mehngai.agent.evaluate`), score a few answers yourself in LangSmith,
 then decide whether the website chat should use the agent.
+
+## 2026-10-20 (later) — putting the agent on the website
+
+**Built:** the website chat now sends "why / is it normal" questions to the price agent in the Cloudflare Worker;
+short lookups stay instant. The Python export precomputes every answer the agent's tools can give, so the
+Worker only looks them up and the numbers are the Python ones.
+
+**Key concepts**
+- *Precompute instead of port:* when the backend can't run Python, publish the results of the Python functions
+  for every possible argument instead of rewriting the math in another language.
+- *One check, two languages, one test:* the guardrail exists in Python and TypeScript; a test runs both on the
+  same answers and fails if their verdicts differ.
+- *Graceful degradation:* busy AI, today's limit, failed check, missing endpoint: each falls back to the plain
+  answer, so the chat never gets worse than before.
+- *Deploys are tied to an account:* the deploy was refused because this PC's Cloudflare login had changed. A good
+  thing: nothing went to the wrong account.
+
+**Next:** log Wrangler in to the project account, deploy the Worker, ask one real question on the live site.

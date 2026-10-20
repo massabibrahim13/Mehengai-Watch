@@ -600,8 +600,16 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   5 code evaluators); smoke-test experiment (2 questions) passed 5/5 on both after brief v2. `llm.post()` now also
   switches to the backup model on timeouts and used-up daily quota. Gemini's main model was overloaded/hanging
   all day; the backup answered. 144 tests pass. Guide: `docs/langsmith.md`.
-- **Next step:** Massab runs the full experiment and reviews traces in LangSmith; then decide whether the website
-  chat uses the agent (needs a TypeScript port in the Worker).
+- **Agent on the website (2026-10-20, Massab: deploy):** export precomputes every tool answer
+  (`agent/publish.py` → `web/public/data/agent/`, ~860 KB); Worker `/agent` (`worker/src/agent.ts`, `guard.ts` =
+  copy of `check()`, parity test runs both via Node) looks them up; chat sends why/normal/long/unreadable
+  questions to it (`wantsAgent` in `web/src/lib/ask.ts`), lookups stay instant; limits 2/visitor, 6/day; every
+  failure falls back to the plain answer; no LangSmith tracing of visitors. Site + agent files live; 145 tests,
+  30 site checks, 16 agent + 14 chat browser checks pass. **Worker not yet deployed:** Wrangler on this PC is now
+  logged in as massabibrahim13@gmail.com (not the project account polyeyed@gmail.com) → deploy refused (auth error,
+  nothing uploaded). Gemini (both models) was overloaded all evening, so no real end-to-end answer via the Worker yet.
+- **Next step:** Massab logs Wrangler in to the project Cloudflare account (`cd worker; npx wrangler login`), then
+  `npx wrangler deploy`; ask one real "why" question on the live site. Then the full LangSmith experiment.
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·

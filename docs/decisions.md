@@ -511,3 +511,19 @@ a search already shows. Guide: [`docs/langsmith.md`](langsmith.md).
 | Evaluation | Dataset `mehngai-agent-questions` (7 questions: an unusual move, a trend, cities, a government-set price, a Roman Urdu "why", the weekly overview, an untracked item) + 5 code evaluators (`answered_by_ai`, `passed_first_time`, `looked_up_right_items`, `explained`, `model_turns`); `--match` runs a subset | Free checks; no LLM-as-judge yet (quota). |
 | Tests never trace | `tests/test_agent.py` sets `LANGSMITH_TRACING=false` before loading the agent | The first test run sent 11 fake conversations to the project (they expire after the plan's 14 days). |
 | First findings → brief v2 | Live answers were well explained and grounded, but both needed a rewrite (once an invented number, once the word "because"), and the petrol answer accepted a false premise ("went up" when it fell 0.7%) with a direction-less "change of 0.7%". Brief v2 adds: check the premise, always say rise or fall, never use "because". Smoke-test experiment (petrol, iPhone): 5/5 evaluators passed on both, petrol in 2 turns instead of 3 | The trace → change → experiment loop working as intended. (Answered by the backup model: the main one was hanging.) |
+
+### Deploying the agent to the website chat (2026-10-20)
+
+Massab: deploy the agent.
+
+| Decision | Choice | Reason |
+|---|---|---|
+| One set of numbers | The Python export precomputes every possible tool answer (`agent/publish.py` → `web/public/data/agent/`: 51 item files with the overview for national + 17 cities, 4 history periods, cities, news; plus `setup.json` with the brief, tool declarations and guardrail settings). The Worker only looks them up | Rewriting the tool math in TypeScript would mean two copies that can drift apart. Now the live agent and the Python agent in LangSmith use the same brief, tools and numbers. |
+| Tools fit what can be precomputed | `price_history(item, period)` with 3 months / 1 year / 2 years / since 2019; `compare_cities` for the latest report | A fixed set of arguments can be computed ahead. Exact past dates stay with the rules ("onions in Karachi in March 2024"). |
+| Which questions go to the agent | "why / normal / worried / happened…" (incl. Roman Urdu *kyun* and Urdu کیوں), questions of 12+ words, and ones the rules can't read; short lookups stay instant | Every agent answer costs 1–4 Gemini requests; lookups don't need it. |
+| Limits | `/agent`: 2 per visitor, 6 overall a day (KV, separate from `/parse`: 3 and 15) | ~15 requests a day for visitors leaves room for the weekly explanations and development. |
+| Fallbacks | Busy (503/timeout, after a second try on the backup model) → the plain answer with a note; today's limit → note, plain answer, still try question reading; guardrail failed twice → note, plain answer; no `/agent` on the Worker (404) → the old behaviour, no note | The chat never gets worse than before the agent. |
+| Guardrail in two languages | `worker/src/guard.ts` copies `agent.check()`; `tests/test_agent.py` runs both on the same 10 answers (Node runs the TypeScript) and requires the same verdicts; CI sets up Node before the tests | The Worker has no Python. Rounding: the TypeScript accepts both half-up and Python's half-to-even on exact halves. |
+| No tracing on the live site | Visitors' questions aren't sent to LangSmith | Privacy by default; tracing stays on the development side. Can be added later with a notice. |
+| Rendering | Bold, bullet lines and links; links only to `https://` (`javascript:` etc. stay text); never HTML | The agent may cite news links. |
+| Status | Site and agent files live (GitHub Pages); Worker `/agent` built and tested locally, **not yet deployed**: Wrangler on this PC is now logged in to a different Cloudflare account (massabibrahim13@gmail.com), which has no access to the project account, so the deploy was refused before anything was uploaded. Massab to log in to the project account, then deploy. | |

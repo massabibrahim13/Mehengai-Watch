@@ -17,7 +17,7 @@ const EXAMPLES = ["Price of sugar in Lahore", "How much has petrol gone up since
   "What happened to prices this week?", "Is the price of tomatoes normal right now?"];
 
 interface Message { from: "you" | "us"; text: string; table?: Answer["table"]; aiHelped?: boolean; agent?: boolean; note?: string }
-type Problem = "limited" | "busy" | "unchecked";
+type Problem = "limited" | "busy" | "unchecked" | "missing";   // missing: this Worker has no agent (yet)
 
 // **bold**, [title](https://…) and bare https:// links; everything else stays plain text (never injected as HTML)
 const TOKENS = /(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s)]+)/g;
@@ -41,6 +41,7 @@ async function post(path: string, question: string, seconds: number): Promise<{ 
       signal: AbortSignal.timeout(seconds * 1_000),
     });
     if (res.status === 429) return { problem: "limited" };
+    if (res.status === 404) return { problem: "missing" };
     if (!res.ok) return { problem: "busy" };
     return { data: await res.json() };
   } catch {
@@ -55,7 +56,8 @@ async function askAgent(question: string): Promise<{ text?: string; problem?: Pr
   return typeof data?.answer === "string" && data.answer.trim() ? { text: data.answer } : { problem: "unchecked" };
 }
 
-const NOTES: Record<Problem, string> = {
+const NOTES: Record<Problem, string | undefined> = {
+  missing: undefined,     // say nothing: the chat simply works as it did before the agent
   limited: "The AI analyst has given today's limit of explained answers, so here is the plain answer.",
   busy: "The AI analyst is busy right now, so here is the plain answer. Try again later.",
   unchecked: "The AI's explanation didn't pass our number check, so here is the plain answer.",
