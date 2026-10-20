@@ -605,11 +605,14 @@ Phases 0–6 done for ~8 items, national (± Lahore), with the evaluation table.
   copy of `check()`, parity test runs both via Node) looks them up; chat sends why/normal/long/unreadable
   questions to it (`wantsAgent` in `web/src/lib/ask.ts`), lookups stay instant; limits 2/visitor, 6/day; every
   failure falls back to the plain answer; no LangSmith tracing of visitors. Site + agent files live; 145 tests,
-  30 site checks, 16 agent + 14 chat browser checks pass. **Worker not yet deployed:** Wrangler on this PC is now
-  logged in as massabibrahim13@gmail.com (not the project account polyeyed@gmail.com) → deploy refused (auth error,
-  nothing uploaded). Gemini (both models) was overloaded all evening, so no real end-to-end answer via the Worker yet.
-- **Next step:** Massab logs Wrangler in to the project Cloudflare account (`cd worker; npx wrangler login`), then
-  `npx wrangler deploy`; ask one real "why" question on the live site. Then the full LangSmith experiment.
+  30 site checks, 16 agent + 14 chat browser checks pass.
+- **Worker deployed (2026-10-21):** Wrangler re-logged in to the project account (polyeyed@gmail.com, account
+  11b1f7f3…; a different login on this PC had made the first deploy fail safely). Worker `/agent` live; CORS,
+  length and routing checked live. Gemini (both models) was overloaded/hanging, so no live AI answer yet → Worker
+  now answers within 85 s (main 15 s, backup 30 s, skip a failing main model for 10 min), and the chat shows the
+  plain answer first with the AI explanation (under its own rule + label) following, or a one-line note.
+- **Next step:** ask a "why" question on the live site once Gemini responds; then the full LangSmith experiment.
+  If Gemini's free tier stays this unreliable, consider Groq's free tier for the agent (Massab creates a key).
 - **Run:** `python -m mehngai.pipeline` (everything) · `streamlit run src/mehngai/app/dashboard.py` ·
   `python -m mehngai.detect.evaluate` (full L0–L3 backtest, ~3 min).
 - **Defaults in use:** 8 items (ghee = 1 kg pouch) · national average (Lahore stored too) ·

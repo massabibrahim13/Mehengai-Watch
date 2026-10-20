@@ -1,9 +1,10 @@
 // "Ask about prices": a chat window for longer questions, separate from the plain search box.
 // Short lookups ("price of sugar in Lahore") are answered instantly in the browser from PBS data (lib/ask.ts).
-// Questions that want an explanation ("why", "is this normal", long questions, or ones the rules can't read) go to
-// the price agent in our Cloudflare Worker: Gemini looks the facts up with tools and explains them, and every
-// number it writes is checked against PBS data before it is sent. If the agent is busy, out of today's free limit,
-// or its answer fails the check, the chat says so and gives the plain answer instead.
+// Questions that want an explanation ("why", "is this normal", long questions, or ones the rules can't read) also go
+// to the price agent in our Cloudflare Worker: Gemini looks the facts up with tools and explains them, and every
+// number it writes is checked against PBS data before it is sent. When the rules can answer too, their plain answer
+// shows at once and the explanation follows (the free AI can take a minute, or be busy); otherwise the chat waits
+// for the agent. If the agent is busy, out of today's free limit, or fails the check, the chat says so.
 import { MessageSquare, Send, X } from "lucide-react";
 import { AnimatePresence, m } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -58,9 +59,9 @@ async function askAgent(question: string): Promise<{ text?: string; problem?: Pr
 
 const NOTES: Record<Problem, string | undefined> = {
   missing: undefined,     // say nothing: the chat simply works as it did before the agent
-  limited: "The AI analyst has given today's limit of explained answers, so here is the plain answer.",
-  busy: "The AI analyst is busy right now, so here is the plain answer. Try again later.",
-  unchecked: "The AI's explanation didn't pass our number check, so here is the plain answer.",
+  limited: "No AI explanation this time: today's free limit of explained answers is used up.",
+  busy: "No AI explanation this time: the AI analyst is busy right now. Try again later.",
+  unchecked: "No AI explanation this time: its answer didn't pass our number check.",
 };
 
 export function ChatBubble({ show, items, cities, summary }: { show: boolean; items: Item[]; cities: CitiesFile; summary: Summary }) {
@@ -95,6 +96,26 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
     setDraft("");
     setMessages((m) => [...m, { from: "you", text: question }]);
     let q: Question = parseRules(question, items, cityNames, summary.week);
+    const plain = async (q: Question, note?: string) => {
+      try {
+        const a = await answer(q, items, fetchSeries);
+        setMessages((m) => [...m, { from: "us", text: a.text, table: a.table, aiHelped: q.via === "ai", note }]);
+      } catch {
+        setMessages((m) => [...m, { from: "us", text: "Sorry, I couldn't load the price history just now. Please try again." }]);
+      }
+    };
+    if (CHAT_URL && wantsAgent(q) && q.itemIds.length) {
+      // the rules know the item: their plain answer now, the AI's explanation when it comes
+      setBusy("rules");
+      await plain(q);
+      setBusy("agent");
+      const agent = await askAgent(question);
+      const note = agent.problem && NOTES[agent.problem];
+      if (agent.text) setMessages((m) => [...m, { from: "us", text: agent.text!, agent: true }]);
+      else if (note) setMessages((m) => [...m, { from: "us", text: "", note }]);
+      setBusy("");
+      return;
+    }
     let note: string | undefined;
     let tryReading = !q.itemIds.length && !!CHAT_URL;     // ask the AI to read a question the rules couldn't
     if (CHAT_URL && wantsAgent(q)) {
@@ -116,12 +137,7 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
       else if (!note && ai.problem === "limited") note = "The AI helper has used up today's free limit, so I could only match item names.";
       else if (!note && ai.problem === "busy") note = "The AI helper is busy right now, so I could only match item names. Try again later or name the item.";
     }
-    try {
-      const a = await answer(q, items, fetchSeries);
-      setMessages((m) => [...m, { from: "us", text: a.text, table: a.table, aiHelped: q.via === "ai", note }]);
-    } catch {
-      setMessages((m) => [...m, { from: "us", text: "Sorry, I couldn't load the price history just now. Please try again." }]);
-    }
+    await plain(q, note);
     setBusy("");
   };
 
@@ -163,9 +179,10 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
               {messages.map((m, i) => (
                 <div key={i} data-from={m.from} className={m.from === "you" ? "ml-10 border border-line bg-soft px-3 py-2" : "mr-4"}>
                   {m.from === "you" ? m.text : (
-                    <div className="space-y-2 leading-relaxed text-ink/90">
+                    <div className={`space-y-2 leading-relaxed text-ink/90 ${m.agent ? "border-t border-line pt-3" : ""}`}>
+                      {m.agent && <p className="label">AI explanation · every number checked against PBS data</p>}
                       {m.note && <p className="text-xs text-muted">{m.note}</p>}
-                      {m.text.split("\n\n").map((para, j) => (
+                      {m.text && m.text.split("\n\n").map((para, j) => (
                         <p key={j} className="whitespace-pre-line"><Rich text={para.replace(/^[*-] /gm, "• ")} /></p>
                       ))}
                       {m.table && (
@@ -180,13 +197,12 @@ export function ChatBubble({ show, items, cities, summary }: { show: boolean; it
                           </tbody>
                         </table>
                       )}
-                      {m.agent && <p className="label">Explained by AI from PBS data · every number checked</p>}
                       {m.aiHelped && <p className="label">Question read with AI help · numbers from PBS data</p>}
                     </div>
                   )}
                 </div>
               ))}
-              {busy === "agent" && <p className="text-muted">Looking up the data and thinking it through… (can take up to a minute)</p>}
+              {busy === "agent" && <p className="text-muted">The AI analyst is looking up the data and thinking it through… (can take up to a minute)</p>}
               {busy === "rules" && <p className="text-muted">Looking it up…</p>}
             </div>
 
