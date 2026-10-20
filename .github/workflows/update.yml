@@ -56,6 +56,11 @@ jobs:
             python -m mehngai.pipeline --recent   # live PBS site, last 60 days: new weeks only
           fi
 
+      - uses: actions/setup-node@v4     # before the tests: one runs the chat Worker's guardrail (TypeScript)
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
       - name: Tests (a failure stops publishing)
         run: pytest -q
 
@@ -73,11 +78,6 @@ jobs:
           git pull --rebase origin main
           git push
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: web/package-lock.json
       - name: Build the website
         working-directory: web
         env:
