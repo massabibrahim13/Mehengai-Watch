@@ -157,12 +157,14 @@ def test_short_rate_limit_waits_then_succeeds(monkeypatch):
     assert llm.generate("hi", CFG) == "fine" and waits == [13]
 
 
-def test_daily_quota_gives_up_immediately(monkeypatch):
-    waits = []
-    post, sleep, llm = fake_post([FakeResponse(429, "23207s")], waits)
-    monkeypatch.setattr(llm.requests, "post", post)
-    monkeypatch.setattr(llm.time, "sleep", sleep)
+def test_daily_quota_tries_backup_model_then_gives_up(monkeypatch):
+    """The free tier's daily cap is per model: use the backup model's, and never wait hours."""
+    waits, urls = [], []
+    replies = iter([FakeResponse(429, "23207s"), FakeResponse(429, "23207s")])
+    from mehngai.explain import llm
+    monkeypatch.setattr(llm.requests, "post", lambda url, **k: (urls.append(url), next(replies))[1])
+    monkeypatch.setattr(llm.time, "sleep", lambda s: waits.append(s))
     monkeypatch.setattr(llm, "api_key", lambda: "test")
     with pytest.raises(LLMError, match="quota exhausted"):
         llm.generate("hi", CFG)
-    assert waits == []
+    assert waits == [] and CFG["model"] in urls[0] and CFG["fallback_model"] in urls[1]
